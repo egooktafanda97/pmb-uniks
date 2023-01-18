@@ -1,0 +1,170 @@
+{
+    "File_name": "Pimpinan",
+    "Public_name": [
+        "Pimpinan",
+        "pimpinan"
+    ],
+    "Inisial": {
+        "table": "pimpinan",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "PimpinanController",
+        "Model": "Pimpinan",
+        "Use_Model": [
+            "Pimpinan",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "nama_pimpinan": {
+            "name": "persyaratan",
+            "label": "Persyaratan",
+            "type": "string",
+            "request": true,
+            "migration": 2,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "jabatan": {
+            "name": "persyaratan",
+            "label": "Persyaratan",
+            "type": "string",
+            "request": true,
+            "migration": 2,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "keterangan": {
+            "name": "keterangan",
+            "label": "Keterangan",
+            "type": "string",
+            "request": true,
+            "validate": 6,
+            "migration": 10,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "status": {
+            "validate": 0,
+            "type": "static",
+            "value": "active",
+            "request": false,
+            "migration": 2
+        }
+    },
+    "Relation": {},
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "PimpinanController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "pimpinan",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "pimpinan",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "pimpinan",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "pimpinan",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "pimpinan",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "pimpinan",
+                "middleware": 1,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

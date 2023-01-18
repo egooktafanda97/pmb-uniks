@@ -1,0 +1,281 @@
+{
+    "File_name": "Pendaftaran",
+    "Public_name": [
+        "Pendaftaran",
+        "pendaftaran"
+    ],
+    "Inisial": {
+        "table": "pendaftaran",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "PendaftaranController",
+        "Model": "Pendaftaran",
+        "Use_Model": [
+            "Pendaftaran",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "user_id": {
+            "name": "user_id",
+            "control_insert": "before",
+            "label": "",
+            "type": "key",
+            "relation": {
+                "table": "user",
+                "function": "users",
+                "relation_index": "users",
+                "foreign": {
+                    "key": "id",
+                    "table": "users",
+                    "auto_delete_relation": true
+                }
+            },
+            "validate": 2,
+            "request": false,
+            "migration": 0
+        },
+        "no_resister": {
+            "name": "no_resister",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "migration": 5,
+            "validate": 9,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "informasi_pendaftaran_id": {
+            "name": "informasi_pendaftaran_id",
+            "control_insert": "after",
+            "label": "informasi_pendaftaran",
+            "type": "integer",
+            "migration": 0,
+            "validate": 6,
+            "request": true,
+            "relation": {
+                "table": "informasi_pendaftaran",
+                "function": "informasi_pendaftaran",
+                "relation_index": "informasi_pendaftaran_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "informasi_pendaftaran",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "nik": {
+            "name": "nik",
+            "label": "NIK",
+            "type": "string",
+            "request": true,
+            "migration": 17,
+            "validate": 14,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "prodi_id": {
+            "name": "prodi_id",
+            "control_insert": "after",
+            "label": "prodi",
+            "type": "integer",
+            "migration": 8,
+            "validate": 7,
+            "request": true,
+            "relation": {
+                "table": "prodi",
+                "function": "prodi",
+                "relation_index": "prodi_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "prodi",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "metode_pembayaran": {
+            "name": "metode_pembayaran",
+            "label": "Nama Prodi",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "bukti_pembayaran": {
+            "type": "image",
+            "path": "imags/foto",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "status": {
+            "validate": 0,
+            "type": "static",
+            "value": "pending",
+            "request": false,
+            "migration": 2
+        }
+    },
+    "Relation": {
+        "users": {
+            "hirarky": "before",
+            "model": "User",
+            "foreign": "user_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "User",
+                "file": "User"
+            },
+            "data": []
+        },
+        "prodi": {
+            "hirarky": "after",
+            "model": "Prodi",
+            "foreign": "id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "Prodi",
+                "file": "Prodi"
+            },
+            "data": []
+        },
+        "informasi_pendaftaran": {
+            "hirarky": "after",
+            "model": "InformasiPendaftaran",
+            "foreign": "informasi_pendaftaran_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "InformasiPendaftaran",
+                "file": "InformasiPendaftaran"
+            },
+            "data": []
+        }
+    },
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "PendaftaranController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

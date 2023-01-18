@@ -1,0 +1,449 @@
+{
+    "File_name": "Orangtua",
+    "Public_name": [
+        "Orangtua",
+        "orangtua"
+    ],
+    "Inisial": {
+        "table": "orangtua",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "OrangtuaController",
+        "Model": "Orangtua",
+        "Use_Model": [
+            "Orangtua",
+            "User"
+        ]
+    },
+    "Data": {
+        "calon_mahasiswa_id": {
+            "name": "calon_mahasiswa_id",
+            "control_insert": "after",
+            "label": "calon mahasiswa",
+            "type": "integer",
+            "migration": 0,
+            "validate": 8,
+            "request": true,
+            "relation": {
+                "table": "calon_mahasiswa",
+                "function": "calon_mahasiswa",
+                "relation_index": "calon_mahasiswa_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "calon_mahasiswa",
+                    "auto_delete_relation": true
+                }
+            }
+        },
+        "nama_ayah_ayah": {
+            "name": "nama_ayah",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "tempat_lahir_ayah": {
+            "name": "tempat_lahir",
+            "label": "Tempat Lahir",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "tanggal_lahir_ayah": {
+            "name": "tanggal_lahir",
+            "label": "Tanggal Lahir",
+            "type": "date",
+            "request": true,
+            "migration": 6,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "no_telepon_ayah": {
+            "name": "no_telepon",
+            "label": "No Telepon",
+            "type": "string",
+            "request": true,
+            "migration": 2,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "pekerjaan_ayah": {
+            "name": "no_telepon",
+            "label": "No Telepon",
+            "type": "string",
+            "request": true,
+            "migration": 2,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "penghasilan_ayah": {
+            "name": "no_telepon",
+            "label": "No Telepon",
+            "type": "string",
+            "request": true,
+            "migration": 2,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "alamat_lengkap_ayah": {
+            "name": "alamat_lengkap",
+            "label": "Alamat Lengkap",
+            "type": "string",
+            "request": true,
+            "migration": 10,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "nama_ibu": {
+            "name": "nama_ayah",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "tempat_lahir_ibu": {
+            "name": "tempat_lahir",
+            "label": "Tempat Lahir",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "tanggal_lahir_ibu": {
+            "name": "tanggal_lahir",
+            "label": "Tanggal Lahir",
+            "type": "date",
+            "request": true,
+            "validate": 0,
+            "migration": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "no_telepon_ibu": {
+            "name": "no_telepon",
+            "label": "No Telepon",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "pekerjaan_ibu": {
+            "name": "no_telepon",
+            "label": "No Telepon",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "penghasilan_ibu": {
+            "name": "no_telepon",
+            "label": "No Telepon",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "alamat_lengkap_ibu": {
+            "name": "alamat_lengkap",
+            "label": "Alamat Lengkap",
+            "type": "string",
+            "request": true,
+            "migration": 10,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        }
+    },
+    "Relation": {
+        "users": {
+            "hirarky": "before",
+            "model": "User",
+            "foreign": "user_id",
+            "function": {
+                "relation": "belongsTo",
+                "foreign": "user_id"
+            },
+            "file_relation": {
+                "name": "User",
+                "file": "User"
+            },
+            "data": []
+        },
+        "instansi": {
+            "hirarky": "after",
+            "model": "Instansi",
+            "foreign": "instansi_id",
+            "function": {
+                "relation": "belongsTo",
+                "foreign": "id"
+            },
+            "file_relation": {
+                "name": "Instansi",
+                "file": "Instansi"
+            },
+            "data": []
+        },
+        "siswa": {
+            "hirarky": "after",
+            "model": "Siswa",
+            "foreign": "siswa_id",
+            "function": {
+                "relation": "hasMany",
+                "foreign": "id"
+            },
+            "file_relation": {
+                "name": "Siswa",
+                "file": "Siswa"
+            },
+            "data": []
+        }
+    },
+    "Query_get": {
+        "get": {
+            "role": "Orangtua",
+            "key_where": "user_id"
+        },
+        "getById": {
+            "role": "Orangtua"
+        }
+    },
+    "Router": {
+        "config": {
+            "name_space": "App\\Http\\Controllers\\api\\",
+            "contoller": "OrangtuaController"
+        },
+        "api": {
+            "index": {
+                "method": "get",
+                "router": "/index",
+                "prefix": "Orangtua",
+                "middleware": 0,
+                "controller": ""
+            },
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "Orangtua",
+                "middleware": 0,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "Orangtua",
+                "middleware": 0,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "Orangtua",
+                "middleware": 0,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "Orangtua",
+                "middleware": 0,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "Orangtua",
+                "middleware": 0,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "Orangtua",
+                "middleware": 0,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

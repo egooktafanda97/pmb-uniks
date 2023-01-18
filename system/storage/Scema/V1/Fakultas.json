@@ -1,0 +1,332 @@
+{
+    "File_name": "Fakultas",
+    "Public_name": [
+        "Fakultas",
+        "fakultas"
+    ],
+    "Inisial": {
+        "table": "fakultas",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "FakultasController",
+        "Model": "Fakultas",
+        "Use_Model": [
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "user_id": {
+            "name": "user_id",
+            "control_insert": "before",
+            "label": "",
+            "type": "key",
+            "relation": {
+                "table": "user",
+                "function": "users",
+                "relation_index": "users",
+                "foreign": {
+                    "key": "id",
+                    "table": "users",
+                    "auto_delete_relation": true
+                }
+            },
+            "validate": 2,
+            "request": false,
+            "migration": 0
+        },
+        "nama_fakultas": {
+            "name": "nama_Fakultas",
+            "label": "Nama Fakultas",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "info_fakultas": {
+            "name": "keterangan",
+            "label": "Keterangan",
+            "type": "string",
+            "request": true,
+            "validate": 6,
+            "migration": 10,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "visi_misi": {
+            "name": "keterangan",
+            "label": "Keterangan",
+            "type": "string",
+            "request": true,
+            "validate": 6,
+            "migration": 10,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "tujuan": {
+            "name": "keterangan",
+            "label": "Keterangan",
+            "type": "string",
+            "request": true,
+            "validate": 6,
+            "migration": 10,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "struktur_management": {
+            "type": "image",
+            "path": "imags/struktur_management-fakultas",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "kepala_fakultas": {
+            "name": "nama_Fakultas",
+            "label": "Nama Fakultas",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "gambar": {
+            "type": "image",
+            "path": "imags/foto",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "situs_web": {
+            "name": "nama_Fakultas",
+            "label": "Nama Fakultas",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        }
+    },
+    "Relation": {
+        "users": {
+            "hirarky": "before",
+            "model": "User",
+            "foreign": "user_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "User",
+                "file": "User"
+            },
+            "data": []
+        },
+        "prodi": {
+            "hirarky": "after",
+            "model": "Prodi",
+            "foreign": "id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "Prodi",
+                "file": "Prodi"
+            },
+            "data": []
+        }
+    },
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "with": [
+                "users"
+            ],
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "with": [
+                "users"
+            ],
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "FakultasController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "fakultas",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "fakultas",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "fakultas",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "fakultas",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "fakultas",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "fakultas",
+                "middleware": 1,
+                "controller": ""
+            }
+        },
+        "web": {
+            "show": {
+                "method": "get",
+                "router": "/",
+                "prefix": "admin/fakultas",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\FakultasController"
+            },
+            "store": {
+                "method": "get",
+                "router": "/store",
+                "prefix": "admin/fakultas",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\FakultasController"
+            },
+            "update": {
+                "method": "get",
+                "router": "/update/{id}",
+                "prefix": "admin/fakultas",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\FakultasController"
+            }
+        }
+    }
+}

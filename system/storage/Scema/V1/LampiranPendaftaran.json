@@ -1,0 +1,219 @@
+{
+    "File_name": "LampiranPendaftaran",
+    "Public_name": [
+        "LampiranPendaftaran",
+        "lampiran_pendaftaran"
+    ],
+    "Inisial": {
+        "table": "lampiran_pendaftaran",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "LampiranPendaftaranController",
+        "Model": "LampiranPendaftaran",
+        "Use_Model": [
+            "LampiranPendaftaran",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "pendaftaran_id": {
+            "name": "pendaftaran_id",
+            "control_insert": "after",
+            "label": "pendaftaran",
+            "type": "integer",
+            "migration": 0,
+            "validate": 6,
+            "request": true,
+            "relation": {
+                "table": "pendaftaran",
+                "function": "pendaftaran",
+                "relation_index": "pendaftaran_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "pendaftaran",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "foto_formal": {
+            "type": "image",
+            "path": "imags/lampiran",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "sc_ktp": {
+            "type": "image",
+            "path": "imags/lampiran",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "sc_kk": {
+            "type": "image",
+            "path": "imags/lampiran",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "sc_ijasa_skl": {
+            "type": "image",
+            "path": "imags/lampiran",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "sc_kip_kks_pkh": {
+            "type": "image",
+            "path": "imags/lampiran",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        }
+    },
+    "Relation": {},
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "LampiranPendaftaranController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "lampiran_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "lampiran_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "lampiran_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "lampiran_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "lampiran_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "lampiran_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

@@ -1,0 +1,213 @@
+{
+    "File_name": "User",
+    "Public_name": [
+        "User",
+        "user"
+    ],
+    "Inisial": {
+        "table": "users",
+        "primary": "id",
+        "Protected": {
+            "hidden": [
+                "status",
+                "password",
+                "pin",
+                "remember_token",
+                "username"
+            ]
+        }
+    },
+    "Namespace": {
+        "Controller": "UserController",
+        "Model": "User",
+        "namespace_model": "\\App\\Models\\",
+        "Use_Model": [
+            "User"
+        ]
+    },
+    "Data": {
+        "nama": {
+            "value_parent": "nama",
+            "type": "string",
+            "request": false,
+            "migration": 3,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            }
+        },
+        "username": {
+            "validate": 3,
+            "validate_unique": {
+                "validate": 3,
+                "index_id": "users"
+            },
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            }
+        },
+        "email": {
+            "validate": 5,
+            "validate_unique": {
+                "validate": 5,
+                "index_id": "users"
+            },
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "email"
+            }
+        },
+        "password": {
+            "validate": 4,
+            "type": "ecrypt",
+            "request": true,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": false
+                },
+                "form": "password"
+            }
+        },
+        "foto": {
+            "type": "image",
+            "path": "imags/foto",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "role_scema_id": {
+            "name": "role_scema_id",
+            "label": "role_scema_id",
+            "type": "string",
+            "request": true,
+            "migration": 8,
+            "validate": 7,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "status": {
+            "validate": 0,
+            "type": "static",
+            "value": "pending",
+            "request": false,
+            "migration": 2
+        }
+    },
+    "Query": {},
+    "Router": {
+        "config": {
+            "contoller": "User"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "user",
+                "middleware": 0,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "user",
+                "middleware": 0,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "user",
+                "middleware": 0,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "user",
+                "middleware": 0,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "user",
+                "middleware": 0,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "user",
+                "middleware": 0,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

@@ -1,0 +1,42 @@
+.note-btn i {
+    font-size: .8rem !important;
+}
+
+.mb-2 {
+    margin-bottom: 1rem !important;
+}
+
+.mr-2 {
+    margin-right: 1rem !important;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.l-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.color-white {
+    color: #fff;
+}
+
+.id-hide {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.id-show {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}

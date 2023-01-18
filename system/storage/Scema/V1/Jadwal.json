@@ -1,0 +1,215 @@
+{
+    "File_name": "Jadwal",
+    "Public_name": [
+        "Jadwal",
+        "jadwal"
+    ],
+    "Inisial": {
+        "table": "jadwal",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "JadwalController",
+        "Model": "Jadwal",
+        "Use_Model": [
+            "Jadwal",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "informasi_pendaftaran_id": {
+            "name": "informasi_pendaftaran_id",
+            "control_insert": "after",
+            "label": "informasi_pendaftaran",
+            "type": "integer",
+            "migration": 0,
+            "validate": 6,
+            "request": true,
+            "relation": {
+                "table": "informasi_pendaftaran",
+                "function": "informasi_pendaftaran",
+                "relation_index": "informasi_pendaftaran_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "informasi_pendaftaran",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "kegiatan": {
+            "name": "kegiatan",
+            "label": "Nama Kegiatan",
+            "type": "string",
+            "request": true,
+            "migration": 2,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "mulai": {
+            "name": "mulai",
+            "label": "Tanggal Mulai",
+            "type": "string",
+            "request": true,
+            "migration": 6,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "selesai": {
+            "name": "selesai",
+            "label": "tanggal Selesai",
+            "type": "string",
+            "request": true,
+            "migration": 6,
+            "validate": 13,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "keterangan": {
+            "name": "keterangan",
+            "label": "Keterangan",
+            "type": "string",
+            "request": true,
+            "validate": 6,
+            "migration": 10,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        }
+    },
+    "Relation": {
+        "informasi_pendaftaran": {
+            "hirarky": "after",
+            "model": "InformasiPendaftaran",
+            "foreign": "informasi_pendaftaran_id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "InformasiPendaftaran",
+                "file": "InformasiPendaftaran"
+            },
+            "data": []
+        }
+    },
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "JadwalController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "jadwal",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "jadwal",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "jadwal",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "jadwal",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "jadwal",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "jadwal",
+                "middleware": 1,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

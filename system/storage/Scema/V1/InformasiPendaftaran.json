@@ -1,0 +1,257 @@
+{
+    "File_name": "InformasiPendaftaran",
+    "Public_name": [
+        "InformasiPendaftaran",
+        "informasi_pendaftaran"
+    ],
+    "Inisial": {
+        "table": "informasi_pendaftaran",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "InformasiPendaftaranController",
+        "Model": "InformasiPendaftaran",
+        "Use_Model": [
+            "InformasiPendaftaran",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "pendaftaran": {
+            "name": "pendaftaran",
+            "label": "pendaftaran",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "informasi_umum": {
+            "name": "latar_belakang",
+            "label": "Keterangan",
+            "type": "string",
+            "request": true,
+            "migration": 15,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "brosur": {
+            "type": "image",
+            "path": "imags/brosur",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "tahun_ajaran": {
+            "name": "tahun_ajaran",
+            "label": "Tahunn Ajaran",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "kuota": {
+            "name": "kuota",
+            "label": "Kuota",
+            "type": "integer",
+            "request": true,
+            "migration": 16,
+            "validate": 7,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "status": {
+            "validate": 0,
+            "type": "static",
+            "value": "pending",
+            "request": false,
+            "migration": 2
+        }
+    },
+    "Relation": {
+        "jadwal": {
+            "hirarky": "after",
+            "model": "Jadwal",
+            "foreign": "id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "Jadwal",
+                "file": "Jadwal"
+            },
+            "data": []
+        },
+        "informasi_pendaftaran_prodi": {
+            "hirarky": "after",
+            "model": "InformasiPendaftaranProdi",
+            "foreign": "id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "InformasiPendaftaranProdi",
+                "file": "InformasiPendaftaranProdi"
+            },
+            "data": []
+        }
+    },
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "InformasiPendaftaranController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "informasi_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "informasi_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "informasi_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "informasi_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "informasi_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "informasi_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            }
+        },
+        "web": {
+            "show": {
+                "method": "get",
+                "router": "/",
+                "prefix": "admin/info-pendaftaran",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\InformasiPendaftaran"
+            },
+            "store": {
+                "method": "get",
+                "router": "/store",
+                "prefix": "admin/info-pendaftaran",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\InformasiPendaftaran"
+            },
+            "update": {
+                "method": "get",
+                "router": "/update/{id}",
+                "prefix": "admin/info-pendaftaran",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\InformasiPendaftaran"
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}
