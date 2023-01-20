@@ -23,8 +23,12 @@
             "control_insert": "after",
             "label": "calon mahasiswa",
             "type": "integer",
-            "migration": 0,
-            "validate": 8,
+            "migration": 19,
+            "validate": 16,
+            "validate_unique": {
+                "validate": 16,
+                "index_id": "calon_mahasiswa_id"
+            },
             "request": true,
             "relation": {
                 "table": "calon_mahasiswa",
@@ -37,7 +41,7 @@
                 }
             }
         },
-        "nama_ayah_ayah": {
+        "nama_ayah": {
             "name": "nama_ayah",
             "label": "Nama Lengkap",
             "type": "string",
@@ -333,45 +337,14 @@
         }
     },
     "Relation": {
-        "users": {
-            "hirarky": "before",
-            "model": "User",
-            "foreign": "user_id",
-            "function": {
-                "relation": "belongsTo",
-                "foreign": "user_id"
-            },
-            "file_relation": {
-                "name": "User",
-                "file": "User"
-            },
-            "data": []
-        },
-        "instansi": {
+        "calon_mahasiswa": {
             "hirarky": "after",
-            "model": "Instansi",
-            "foreign": "instansi_id",
-            "function": {
-                "relation": "belongsTo",
-                "foreign": "id"
-            },
+            "model": "CalonMahasiswa",
+            "foreign": "calon_mahasiswa_id",
+            "relation": "belongsTo",
             "file_relation": {
-                "name": "Instansi",
-                "file": "Instansi"
-            },
-            "data": []
-        },
-        "siswa": {
-            "hirarky": "after",
-            "model": "Siswa",
-            "foreign": "siswa_id",
-            "function": {
-                "relation": "hasMany",
-                "foreign": "id"
-            },
-            "file_relation": {
-                "name": "Siswa",
-                "file": "Siswa"
+                "name": "CalonMahasiswa",
+                "file": "CalonMahasiswa"
             },
             "data": []
         }

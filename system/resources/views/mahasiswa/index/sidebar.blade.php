@@ -1,3 +1,8 @@
+@php
+    $pmb = \Modules\V1\Entities\Pendaftaran::whereUserId(Auth::user()->id)
+        ->with(['users', 'prodi', 'informasi_pendaftaran', 'calon_mahasiswa'])
+        ->first();
+@endphp
 <!--sidebar wrapper -->
 <div class="sidebar-wrapper"
      data-simplebar="true">
@@ -17,28 +22,57 @@
     <!--navigation-->
     <ul class="metismenu"
         id="menu">
+        @if ($pmb->calon_mahasiswa)
+            <li>
+                <a href="{{ url('mahasiswa/profile') }}">
+                    <div class="parent-icon">
+                        <i class='fadeIn animated bx bx-user'></i>
+                    </div>
+                    <div class="menu-title">PROFILE</div>
+                </a>
+            </li>
+        @endif
         <li>
             <a href="{{ url('admin') }}">
                 <div class="parent-icon">
-                    <i class='fa fa-file'></i>
+                    <i class='fadeIn animated bx bx-message-dots'></i>
                 </div>
-                <div class="menu-title">Form Pendaftaran</div>
+                <div class="menu-title">INFO KHUSUS</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('mahasiswa/form') }}">
+                <div class="parent-icon">
+                    <i class='fadeIn animated bx bx-notepad'></i>
+                </div>
+                <div class="menu-title">FORM PENDAFTARAN</div>
             </a>
         </li>
         <li>
             <a href="{{ url('admin') }}">
                 <div class="parent-icon">
-                    {{-- <i class='fa fa-file'></i> --}}
+                    <i class='fadeIn animated bx bx-info-circle'></i>
                 </div>
-                <div class="menu-title">Info Pendaftaran</div>
+                <div class="menu-title">INFO PENDAFTARAN</div>
             </a>
         </li>
         <li>
             <a href="{{ url('admin') }}">
                 <div class="parent-icon">
-                    {{-- <i class='fa fa-circle'></i> --}}
+                    <i class='fadeIn animated bx bx-home-smile'></i>
                 </div>
-                <div class="menu-title">Program Studi</div>
+                <div class="menu-title">PROGRAM STUDI</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('admin') }}">
+                <div class="parent-icon"
+                     style="display: flex;justify-content: center;align-items: center">
+                    <img alt=""
+                         src="{{ asset('assets/logo/logo.png') }}"
+                         style="width: 20px">
+                </div>
+                <div class="menu-title">UNIKS</div>
             </a>
         </li>
     </ul>

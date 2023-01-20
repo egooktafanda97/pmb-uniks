@@ -44,10 +44,61 @@ class Prodi extends Seeder
                     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 ]);
                 $s =  $data->generate_data_insert($instansi);
-                if (!$roler = $this->newRole("api", "admin-fakultas"))
+                if (empty($s['data']))
+                    dd($s);
+                if (!$roler = $this->newRole("api", "admin-prodi"))
                     return false;
                 $m = User::find($s['data']['user_id']);
                 $this->createRole($m, $roler);
+                for ($ix = 0; $ix < 3; $ix++) {
+                    // /////////////////////////////
+                    $_a = new ManagementCrud("BiayaKuliah");
+                    $_apathJson =  config('generator_crud_config.scema_path');
+                    $_a->instance($_apathJson);
+                    $_a->setNameSpaceModel("\Modules\V1\Entities\\");
+                    $_a->setTesting();
+                    $biaya_kuliah = new \Illuminate\Http\Request();
+                    $biaya_kuliah->replace([
+                        "prodi_id" => $s['data']['id'],
+                        "keterangan" => "keteragan " . $ix,
+                        "jumlah" => $faker->randomDigit,
+                        "deskripsi" => $faker->realText(200)
+                    ]);
+                    $a =  $_a->generate_data_insert($biaya_kuliah);
+                    if (empty($a['data']))
+                        dd($a);
+                    // /////////////////////////////
+                    // $_b = new ManagementCrud("GalleryProdi");
+                    // $_bpathJson =  config('generator_crud_config.scema_path');
+                    // $_b->instance($_bpathJson);
+                    // $_b->setNameSpaceModel("\Modules\V1\Entities\\");
+                    // $_b->setTesting();
+                    // $gallery = new \Illuminate\Http\Request();
+                    // $gallery->replace([
+                    //     "prodi_id" => $s['data']['id'],
+                    //     "gambar" => "default.jpg",
+                    //     "keterangan" => "keteragan " . $ix,
+                    //     "deskripsi" => $faker->realText(200)
+                    // ]);
+                    // $b =  $_b->generate_data_insert($gallery);
+                    // if (empty($b['data']))
+                    //     dd($b);
+                    // /////////////////////////////
+                    $_c = new ManagementCrud("PersyaratanProdi");
+                    $_cpathJson =  config('generator_crud_config.scema_path');
+                    $_c->instance($_cpathJson);
+                    $_c->setNameSpaceModel("\Modules\V1\Entities\\");
+                    $_c->setTesting();
+                    $persyaratan_prodi = new \Illuminate\Http\Request();
+                    $persyaratan_prodi->replace([
+                        "prodi_id" => $s['data']['id'],
+                        "persyaratan" =>  $faker->name,
+                        "keterangan" => $faker->realText(100)
+                    ]);
+                    $c =  $_c->generate_data_insert($persyaratan_prodi);
+                    if (empty($c['data']))
+                        dd($c);
+                }
             }
         }
     }

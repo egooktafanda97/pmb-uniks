@@ -62,6 +62,7 @@ trait Template
             /*10*/
             [
                 "type" => "text",
+                "param" => "nullable"
             ],
             /*11*/
             [
@@ -87,6 +88,7 @@ trait Template
             /*15*/
             [
                 "type" => "longText",
+                "param" => "nullable",
             ],
             /*16*/
             [
@@ -97,6 +99,28 @@ trait Template
             [
                 "type" => "string",
                 "size" => "16"
+            ],
+            /*18*/
+            [
+                "type" => "string",
+                "size" => "16",
+                "param" => "unique",
+            ],
+            /*19*/
+            [
+                "type" => "unsignedBigInteger",
+                "param" => "unique,unsigned,index",
+            ],
+            /*20*/
+            [
+                "type" => "boolean",
+                "param" => "default|1"
+            ],
+            /*21*/
+            [
+                "type" => "string",
+                "size" => "16",
+                "param" => "unique,nullable",
             ],
         ];
     }
@@ -133,6 +157,16 @@ trait Template
             'date|nullable',
             /*14*/
             "required|string|min:16",
+            /*15*/
+            "required|unique:calon_mahasiswa",
+            /*16*/
+            "required|unique:orangtua",
+            /*17*/
+            'required|boolean',
+            /*18*/
+            "nullable|unique:calon_mahasiswa",
+            /*19*/
+            "required|mimes:jpg,png,jpeg,ico,JPG,PNG,JPEG",
         ];
     }
     public function getTemplateMiddelware()

@@ -23,7 +23,11 @@ Route::group(['middleware' => 'api'], function ($router) {
 | end router auth
 |--------------------------------------------------------------------------
 */
-
+// ************************************************************************
+/*
+|--------------------------------------------------------------------------
+| API ROUTER WILAYAH
+*/
 Route::group([
     'middleware' => "api",
     'prefix' => 'wilayah',
@@ -32,6 +36,60 @@ Route::group([
         App\Http\Controllers\WilayahController::class, 'Wilayah'
     ]);
 });
+/*
+| END ROUTER WILAYAH
+|--------------------------------------------------------------------------
+*/
+// ************************************************************************
+/*
+|--------------------------------------------------------------------------
+| API ROUTER MAHASISWA
+*/
+Route::group([
+    'middleware' => ["api", "role:mahasiswa"],
+    'prefix' => 'mahasiswa',
+], function ($router) {
+    Route::post(
+        '/register',
+        [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'register']
+    );
+    Route::post(
+        '/register-prodi-update',
+        [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'update_prodi']
+    );
+    Route::get(
+        '/get-prodi-id/{slug?}',
+        [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'getById']
+    );
+    Route::post(
+        '/upload-bukti-biaya-pendaftaran',
+        [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'upload_bukti_biaya_pendaftaran']
+    );
+});
+/*
+| END ROUTER MAHASISWA
+|--------------------------------------------------------------------------
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*

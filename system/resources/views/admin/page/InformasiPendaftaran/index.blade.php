@@ -1,5 +1,8 @@
 @extends('admin.index.index')
 @section('style')
+    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}"
+          rel="stylesheet"
+          type="text/css">
     <style>
         .tb-title {
             width: 85%;
@@ -26,27 +29,32 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item">
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $sub_title ?? '' }}</li>
+                        <li aria-current="page"
+                            class="breadcrumb-item active">{{ $sub_title ?? '' }}</li>
                     </ol>
                 </nav>
             </div>
             <div class="ms-auto">
-                <a href="{{ url($uri['store']['prefix'] . $uri['store']['router']) }}" class="btn btn-inverse-primary"><i
-                        class="fa fa-plus"></i> Tambah Data</a>
+                <a class="btn btn-inverse-primary"
+                   href="{{ url($uri['store']['prefix'] . $uri['store']['router']) }}"><i class="fa fa-plus"></i> Tambah
+                    Data</a>
             </div>
         </div>
         <div class="col-12">
             <div class="card border-primary border-bottom border-3 border-0">
                 <div class="card-body">
-                    <h5 class="card-title text-primary">INFORMASI PENDAFTARAN</h5>
+                    <h5 class="card-title text-primary">PENDAFTARAN MAHASISWA BARU</h5>
                     <hr>
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table class="table table-striped table-bordered"
+                               id="example"
+                               style="width:100%">
                             <thead>
                                 <tr>
                                     <th>PENDAFTARAN</th>
                                     <th>TAHUN AJARAN</th>
                                     <th>STATUS</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,23 +62,31 @@
                                 @foreach ($data as $item)
                                     <tr style="padding: 10px">
                                         <td>{{ $item->pendaftaran }}</td>
-                                        <td>{{ $item->tahun }}</td>
+                                        <td>{{ $item->tahun_ajaran }}</td>
                                         <td style="width: 10%">
                                             <div class="form-check-danger form-check form-switch">
-                                                <input class="form-check-input" name="status" type="checkbox"
-                                                    checked="">
+                                                <input {{ $item->status == 'active' ? 'checked' : '' }}
+                                                       class="form-check-input checked-status"
+                                                       data-id="{{ $item->id }}"
+                                                       name="status"
+                                                       type="checkbox">
                                             </div>
                                         </td>
                                         <td class="tb-acton">
                                             <div class="div-action-container">
-                                                <div class="btn-group btn-sm" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <div aria-label="Basic example"
+                                                     class="btn-group btn-sm"
+                                                     role="group">
+                                                    <button class="btn btn-sm btn-outline-primary"
+                                                            type="button">
                                                         <i class="fa fa-eye"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-success">
+                                                    <button class="btn btn-sm btn-outline-success"
+                                                            type="button">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger">
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                            type="button">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -99,6 +115,8 @@
 @endsection
 
 @section('script')
+    <script type="text/javascript"
+            src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
@@ -107,11 +125,64 @@
                 info: false
             });
         });
+
+        function http_update_status_pendaftaran(status, id) {
+            const option_http = {
+                url: `{{ url('api/v1/informasi_pendaftaran/up-status') }}/${id}?status=${status}`,
+                header: {
+                    headers: {
+                        "Authorization": `Bearer {{ \Session::get('token')['access_token'] }}`,
+                    }
+                },
+                errors: (error) => {
+                    const {
+                        response
+                    } = error;
+                    const {
+                        request,
+                        ...errorObject
+                    } = response;
+                    if (errorObject?.status != 200) {
+                        const err = errorObject?.data?.error ?? {};
+                        if (Object.keys(err).length > 0) {
+                            for (const key in err) {
+                                if (err.hasOwnProperty(key)) {
+                                    $(`[name='${key}']`).addClass("is-invalid")
+                                    $.toast({
+                                        title: 'Opps!',
+                                        subtitle: ``,
+                                        content: `${err[key][0]}`,
+                                        type: 'error',
+                                        delay: 3000,
+                                    })
+                                }
+                            }
+                        }
+
+                    }
+                },
+                response: (res) => {
+                    $.toast({
+                        title: 'Berhasil!',
+                        subtitle: ``,
+                        content: `Status ${status}`,
+                        type: 'success',
+                        delay: 3000,
+                    })
+                }
+            }
+
+            http_get_header(option_http);
+        }
         $(document).on('change', "[name='status']", ':checkbox', function() {
             if ($(this).is(':checked')) {
-                console.log($(this).val() + ' is now checked');
+                // on
+                http_update_status_pendaftaran('active', $(this).data("id"));
+                $("[name='status']").prop('checked', false);
+                $(this).prop('checked', true);
             } else {
-                console.log($(this).val() + ' is now unchecked');
+                // off
+                http_update_status_pendaftaran('in_active', $(this).data("id"));
             }
         });
     </script>

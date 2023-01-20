@@ -42,8 +42,12 @@
             "label": "NIK",
             "type": "string",
             "request": true,
-            "migration": 17,
-            "validate": 14,
+            "migration": 18,
+            "validate": 15,
+            "validate_unique": {
+                "validate": 15,
+                "index_id": "nik"
+            },
             "view": {
                 "table": {
                     "status": true
@@ -63,8 +67,12 @@
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 1,
+            "migration": 21,
+            "validate": 18,
+            "validate_unique": {
+                "validate": 18,
+                "index_id": "nis"
+            },
             "view": {
                 "table": {
                     "status": true
@@ -84,8 +92,12 @@
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 1,
+            "migration": 21,
+            "validate": 18,
+            "validate_unique": {
+                "validate": 18,
+                "index_id": "npwp"
+            },
             "view": {
                 "table": {
                     "status": true
@@ -294,8 +306,8 @@
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 1,
+            "migration": 3,
+            "validate": 10,
             "view": {
                 "table": {
                     "status": true
@@ -315,8 +327,8 @@
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 1,
+            "migration": 3,
+            "validate": 10,
             "view": {
                 "table": {
                     "status": true
@@ -336,8 +348,8 @@
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 1,
+            "migration": 3,
+            "validate": 10,
             "view": {
                 "table": {
                     "status": true
@@ -357,8 +369,8 @@
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 1,
+            "migration": 3,
+            "validate": 10,
             "view": {
                 "table": {
                     "status": true
@@ -378,8 +390,8 @@
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 1,
+            "migration": 12,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -395,7 +407,30 @@
             "costum": {}
         }
     },
-    "Relation": {},
+    "Relation": {
+        "orangtua": {
+            "hirarky": "after",
+            "model": "OrangTua",
+            "foreign": "calon_mahasiswa_id",
+            "relation": "hasOne",
+            "file_relation": {
+                "name": "OrangTua",
+                "file": "OrangTua"
+            },
+            "data": []
+        },
+        "pendaftaran": {
+            "hirarky": "after",
+            "model": "Pendaftaran",
+            "foreign": "pendaftaran_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "Pendaftaran",
+                "file": "Pendaftaran"
+            },
+            "data": []
+        }
+    },
     "Query": {
         "get": {
             "model": "",

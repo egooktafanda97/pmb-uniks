@@ -1,6 +1,7 @@
 @extends('admin.index.index')
 @section('style')
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"
+          rel="stylesheet">
 @endsection
 @section('content')
     <!--start page wrapper -->
@@ -12,23 +13,27 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item">
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $title ?? '' }}</li>
+                        <li aria-current="page"
+                            class="breadcrumb-item active">{{ $title ?? '' }}</li>
                     </ol>
                 </nav>
             </div>
         </div>
         <div class="col-12">
             <div class="card border-primary border-bottom border-3 border-0">
-                <form id="form-save" enctype="multipart/form-data">
+                <form enctype="multipart/form-data"
+                      id="form-save">
                     <div class="card-body">
                         <div class="space-between">
                             <div class="d-flex align-items-center justify-content-center">
-                                <a href="{{ url()->previous() }}" class="mr-2"> <i class="fa fa-long-arrow-left"></i></a>
+                                <a class="mr-2"
+                                   href="{{ url()->previous() }}"> <i class="fa fa-long-arrow-left"></i></a>
                                 <h5 class="card-title text-primary m-0"> INPUT PENDAFTARAN BARU</h5>
                             </div>
 
                             <div class="d-flex align-items-center gap-2">
-                                <button type="submit" class="btn btn-outline-primary px-5">
+                                <button class="btn btn-outline-primary px-5"
+                                        type="submit">
                                     <i class="fa fa-save"></i>Simpan</button>
                             </div>
                         </div>
@@ -38,34 +43,65 @@
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label>NAMA PENDAFTARAN <span class="in-require">*</span></label>
-                                    <input type="text" name="pendaftaran"
-                                        class="form-control form-control-sm validationTooltip03" placeholder="GELOMBANG I"
-                                        required="">
+                                    <input class="form-control form-control-sm validationTooltip03"
+                                           name="pendaftaran"
+                                           placeholder="GELOMBANG I"
+                                           required=""
+                                           type="text">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label for="">BROSUR</label>
-                                    <input type="file" name="brosur" id="brosur"
-                                        class="form-control form-control-sm">
+                                    <input class="form-control form-control-sm"
+                                           id="brosur"
+                                           name="brosur"
+                                           type="file">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label>TAHUN AJARAN <span class="in-require">*</span></label>
-                                    <input type="text" name="tahun_ajaran"
-                                        class="form-control form-control-sm validationTooltip03"
-                                        placeholder="{{ date('Y') . '/' . (date('Y') + 1) }}">
+                                    <input class="form-control form-control-sm validationTooltip03"
+                                           name="tahun_ajaran"
+                                           placeholder="{{ date('Y') . '/' . (date('Y') + 1) }}"
+                                           type="text">
                                 </div>
                             </div>
+
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label>KUOTA</label>
-                                    <input type="text" name="kuota"
-                                        class="form-control form-control-sm validationTooltip03" placeholder="0"
-                                        value="0">
+                                    <input class="form-control form-control-sm validationTooltip03"
+                                           name="kuota"
+                                           placeholder="0"
+                                           type="text"
+                                           value="0">
                                 </div>
                             </div>
+                            {{-- ============= --}}
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header bg-primary text-white">
+                                        INFORMASI BIAYA PENDAFTARAN
+                                    </div>
+                                    <div class="">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <strong style="color: #9c9c9c"><i
+                                                       class="fadeIn animated bx bx-info-circle"></i> Kosongkan jika biaya
+                                                    kuliah gratis</strong>
+                                            </div>
+                                            <textarea class="biaya_pendaftaran"
+                                                      id="biaya_pendaftaran"
+                                                      name="biaya_pendaftaran">
+                                                </textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            {{-- ======= --}}
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header bg-primary text-white">
@@ -73,7 +109,9 @@
                                     </div>
                                     <div class=" mt-3">
                                         <div class="card-body">
-                                            <textarea class="informasi_umum" id="informasi_umum" name="informasi_umum">
+                                            <textarea class="informasi_umum"
+                                                      id="informasi_umum"
+                                                      name="informasi_umum">
                                                 </textarea>
                                         </div>
                                     </div>
@@ -93,13 +131,18 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script type="text/javascript">
         /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | DATA TABLE CONFIGURATION
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | DATA TABLE CONFIGURATION
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
         $(document).ready(function() {
             $('.informasi_umum').summernote({
                 height: 300,
+                tabsize: 2,
+                inheritPlaceholder: true,
+            });
+            $('.biaya_pendaftaran').summernote({
+                height: 200,
                 tabsize: 2,
                 inheritPlaceholder: true,
             });

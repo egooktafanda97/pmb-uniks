@@ -1,0 +1,215 @@
+{
+    "File_name": "BiayaKuliah",
+    "Public_name": [
+        "BiayaKuliah",
+        "biaya_kuliah"
+    ],
+    "Inisial": {
+        "table": "biaya_kuliah",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "BiayaKuliahController",
+        "Model": "BiayaKuliah",
+        "Use_Model": [
+            "BiayaKuliah",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "prodi_id": {
+            "name": "prodi_id",
+            "control_insert": "after",
+            "label": "",
+            "type": "auto",
+            "validate": 6,
+            "migration": 0,
+            "request": false,
+            "config": {
+                "case": "data_by_model",
+                "def_value": {
+                    "model_id": "Prodi",
+                    "where": "id",
+                    "role_value": "auth_id",
+                    "get": "first",
+                    "obj": "id"
+                }
+            },
+            "relation": {
+                "table": "prodi",
+                "function": "prodi",
+                "relation_index": "prodi_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "prodi",
+                    "auto_delete_relation": true
+                }
+            }
+        },
+        "keterangan": {
+            "name": "persyaratan",
+            "label": "Persyaratan",
+            "type": "string",
+            "request": true,
+            "migration": 2,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "jumlah": {
+            "name": "persyaratan",
+            "label": "Persyaratan",
+            "type": "string",
+            "request": true,
+            "migration": 2,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "deskripsi": {
+            "name": "keterangan",
+            "label": "Keterangan",
+            "type": "string",
+            "request": true,
+            "validate": 6,
+            "migration": 10,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        }
+    },
+    "Relation": {
+        "users": {
+            "hirarky": "before",
+            "model": "User",
+            "foreign": "user_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "User",
+                "file": "User"
+            },
+            "data": []
+        },
+        "fakultas": {
+            "hirarky": "after",
+            "model": "Fakultas",
+            "foreign": "id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "Instansi",
+                "file": "Instansi"
+            },
+            "data": []
+        }
+    },
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "BiayaKuliahController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "biaya_kuliah",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "biaya_kuliah",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "biaya_kuliah",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "biaya_kuliah",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "biaya_kuliah",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "biaya_kuliah",
+                "middleware": 1,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

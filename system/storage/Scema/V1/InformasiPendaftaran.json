@@ -101,6 +101,27 @@
             },
             "costum": {}
         },
+        "biaya_pendaftaran": {
+            "name": "biaya_pendaftaran",
+            "label": "Biaya Pendaftaran",
+            "type": "string",
+            "request": true,
+            "migration": 15,
+            "validate": 10,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
         "kuota": {
             "name": "kuota",
             "label": "Kuota",
@@ -214,6 +235,13 @@
             "update": {
                 "method": "post",
                 "router": "/update/{id}",
+                "prefix": "informasi_pendaftaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "up_status": {
+                "method": "get",
+                "router": "/up-status/{id}",
                 "prefix": "informasi_pendaftaran",
                 "middleware": 1,
                 "controller": ""

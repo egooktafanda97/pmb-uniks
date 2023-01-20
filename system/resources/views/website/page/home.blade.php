@@ -1,28 +1,45 @@
 @extends('website.index.index')
+@section('style')
+    <link href="{{ asset('public/node_modules/toastr/build/toastr.css') }}"
+          rel="stylesheet"
+          type="text/css">
+@endsection
 @section('content')
     <!-- PAGE -->
     <section class="page-section jumbotron-section jb1 with-overlay"
-        style="background-image: url('https://uniks.ac.id/images/slides/KAJARI-KUANSING:-GEDUNG-UNIKS-BISA-DIFUNGSIKAN-ASALKAN-ADA-IZIN-PEMDA.jpg')">
+             style="background-image: url('https://uniks.ac.id/images/slides/KAJARI-KUANSING:-GEDUNG-UNIKS-BISA-DIFUNGSIKAN-ASALKAN-ADA-IZIN-PEMDA.jpg')">
         <div class="container">
 
             <div class="div-table">
                 <div class="div-cell">
 
                     <div class="jumbotron text-center">
-                        <h5 class="jumbotron-title-sub" data-animation="fadeIn" data-animation-delay="700">
+                        <h5 class="jumbotron-title-sub"
+                            data-animation-delay="700"
+                            data-animation="fadeIn">
                             PORTAL INFORMASI</h5>
-                        <h1 class="jumbotron-title" data-animation="fadeIn" data-animation-delay="500">PENERIMAAN MAHASISWA
+                        <h1 class="jumbotron-title"
+                            data-animation-delay="500"
+                            data-animation="fadeIn">PENERIMAAN MAHASISWA
                             BARU</span>
                         </h1>
-                        <h4 class="jumbotron-title-sub" data-animation="fadeIn" data-animation-delay="700">
+                        <h4 class="jumbotron-title-sub"
+                            data-animation-delay="700"
+                            data-animation="fadeIn">
                             <span class="text-color"><strong>UNIVERSITAS ISLAM KUANTAN SINGINGI</strong></span>
                         </h4>
-                        <h4 class="jumbotron-title-sub" data-animation="fadeIn" data-animation-delay="700">
+                        <h4 class="jumbotron-title-sub"
+                            data-animation-delay="700"
+                            data-animation="fadeIn">
                             <span class="text-color">19 JANUARI 2023</span> 20 APRIL 2023
                         </h4>
                         <p class="btn-row">
-                            <a class="btn btn-theme btn-rounded btn-theme-lg" href="#" data-toggle="modal"
-                                data-target="#popup-sign-up" data-animation="fadeInLeft" data-animation-delay="400">
+                            <a class="btn btn-theme btn-rounded btn-theme-lg"
+                               data-animation-delay="400"
+                               data-animation="fadeInLeft"
+                               data-target="#popup-sign-up"
+                               data-toggle="modal"
+                               href="#">
                                 DAFTAR SEKARANG
                             </a>
                         </p>
@@ -42,8 +59,9 @@
                 <div class="featured-product-label">Featured</div>
                 <div class="row">
                     <div class="col-md-7">
-                        <a class="featured-product-image" href="#"><img
-                                src="assets/img/preview/featured-product-1.jpg" alt=""></a>
+                        <a class="featured-product-image"
+                           href="#"><img alt=""
+                                 src="assets/img/preview/featured-product-1.jpg"></a>
                     </div>
                     <div class="col-md-5">
                         <div class="overflowed">
@@ -63,8 +81,10 @@
                             </ul>
                         </div>
                         <p class="caption-buttons">
-                            <a class="btn btn-theme btn-theme-green btn-rounded" href="#">Purchase This
-                                Template</a><a class="btn btn-theme btn-theme-dark btn-rounded" href="#">Live Demo</a>
+                            <a class="btn btn-theme btn-theme-green btn-rounded"
+                               href="#">Purchase This
+                                Template</a><a class="btn btn-theme btn-theme-dark btn-rounded"
+                               href="#">Live Demo</a>
                         </p>
                     </div>
                 </div>
@@ -77,24 +97,29 @@
     <section class="page-section sm-padding-top">
         <div class="container">
 
-            <h2 class="section-title" data-animation="fadeInUp" data-animation-delay="100">
+            <h2 class="section-title"
+                data-animation-delay="100"
+                data-animation="fadeInUp">
                 <span>PROGRAM STUDI <span class="text-color">UNIKS</span></span>
                 {{-- <small>Check our latest exciting templates</small> --}}
             </h2>
 
             <div class="row thumbnails portfolio isotope isotope-items">
                 @for ($i = 0; $i < 10; $i++)
-                    <div class="col-md-4 col-sm-6 isotope-item" data-animation="fadeInUp" data-animation-delay="300">
+                    <div class="col-md-4 col-sm-6 isotope-item"
+                         data-animation-delay="300"
+                         data-animation="fadeInUp">
                         <div class="thumbnail no-border no-padding">
                             <div class="media">
-                                <img src="{{ asset(config('app.site-assets')) }}/assets/img/preview/portfolio/portfolio-x6.jpg"
-                                    alt="">
+                                <img alt=""
+                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/portfolio/portfolio-x6.jpg">
                                 <div class="caption hovered">
                                     <div class="caption-border"></div>
                                     <div class="caption-wrapper div-table">
                                         <div class="caption-inner div-cell">
                                             <p class="caption-buttons">
-                                                <a href="themes-single.html" class="btn caption-link">
+                                                <a class="btn caption-link"
+                                                   href="themes-single.html">
                                                     Lihat Prodi
                                                 </a>
                                             </p>
@@ -104,8 +129,10 @@
                             </div>
                             <div class="caption">
                                 <p class="caption-price"
-                                    style="background: #fff;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
-                                    <img src="{{ asset('assets/logo/logo.png') }}" style="width: 100%" alt="">
+                                   style="background: #fff;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                    <img alt=""
+                                         src="{{ asset('assets/logo/logo.png') }}"
+                                         style="width: 100%">
                                 </p>
                                 <h3 class="caption-title"><a href="#">Project Title</a></h3>
                                 <p class="caption-text">Personal Portfolio Template</p>
@@ -140,16 +167,18 @@
                 <div class="col-12">
                     <!-- PAGE -->
                     <section
-                        class="page-section no-padding-top md-padding-bottom featured-product featured-product-raise-above">
+                             class="page-section no-padding-top md-padding-bottom featured-product featured-product-raise-above">
                         <div class="container">
                             <div class="featured-product-wrapper">
                                 <div class="featured-product-label">Featured</div>
                                 <div class="row">
-                                    <iframe width="560" height="315"
-                                        src="https://www.youtube.com/embed/TbApNye4YoQ?start=116"
-                                        title="YouTube video player" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowfullscreen></iframe>
+                                    <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen
+                                            frameborder="0"
+                                            height="315"
+                                            src="https://www.youtube.com/embed/TbApNye4YoQ?start=116"
+                                            title="YouTube video player"
+                                            width="560"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -165,19 +194,21 @@
     <section class="page-section lg-padding-top xl-padding-bottom">
         <div class="container">
 
-            <h2 class="section-title" data-animation="fadeInUp" data-animation-delay="100">
+            <h2 class="section-title"
+                data-animation-delay="100"
+                data-animation="fadeInUp">
                 <span>PIMPINAN <span class="text-color">UNIKS</span></span>
                 <small>Rektoret Universitas Islam Kuantan Singingi</small>
             </h2>
 
             <div class="row">
                 <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail thumbnail-team no-border no-padding" data-animation="fadeInUp"
-                        data-animation-delay="200">
+                    <div class="thumbnail thumbnail-team no-border no-padding"
+                         data-animation-delay="200"
+                         data-animation="fadeInUp">
                         <div class="media">
-                            <a href="#"><img
-                                    src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x1.jpg"
-                                    alt="" /></a>
+                            <a href="#"><img alt=""
+                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x1.jpg" /></a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
@@ -188,12 +219,12 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail thumbnail-team no-border no-padding" data-animation="fadeInUp"
-                        data-animation-delay="300">
+                    <div class="thumbnail thumbnail-team no-border no-padding"
+                         data-animation-delay="300"
+                         data-animation="fadeInUp">
                         <div class="media">
-                            <a href="#"><img
-                                    src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x2.jpg"
-                                    alt="" /></a>
+                            <a href="#"><img alt=""
+                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x2.jpg" /></a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
@@ -204,12 +235,12 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail thumbnail-team no-border no-padding" data-animation="fadeInUp"
-                        data-animation-delay="400">
+                    <div class="thumbnail thumbnail-team no-border no-padding"
+                         data-animation-delay="400"
+                         data-animation="fadeInUp">
                         <div class="media">
-                            <a href="#"><img
-                                    src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x3.jpg"
-                                    alt="" /></a>
+                            <a href="#"><img alt=""
+                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x3.jpg" /></a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
@@ -220,12 +251,12 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail thumbnail-team no-border no-padding" data-animation="fadeInUp"
-                        data-animation-delay="500">
+                    <div class="thumbnail thumbnail-team no-border no-padding"
+                         data-animation-delay="500"
+                         data-animation="fadeInUp">
                         <div class="media">
-                            <a href="#"><img
-                                    src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x4.jpg"
-                                    alt="" /></a>
+                            <a href="#"><img alt=""
+                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x4.jpg" /></a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
@@ -285,4 +316,21 @@
         </div>
     </section>
     <!-- /PAGE --> --}}
+@endsection
+
+@section('script')
+    <script type="text/javascript"
+            src="{{ asset('public/node_modules/toastr/build/toastr.min.js') }}"></script>
+    @if ($errors->any())
+        <script>
+            const errors = JSON.parse(`{{ $errors->first() }}`.replace(/&quot;/g, '"'));
+            if (errors) {
+                for (var key in errors) {
+                    if (errors.hasOwnProperty(key)) {
+                        toastr.error(`${errors[key][0]}`, key)
+                    }
+                }
+            }
+        </script>
+    @endif
 @endsection

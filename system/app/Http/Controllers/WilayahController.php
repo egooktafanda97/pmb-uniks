@@ -35,8 +35,6 @@ class WilayahController extends Controller
                 $kecamatan_id =  $Query->kecamatan_id;
                 $kabupaten_id = $QueryKab->id;
                 $provinsi_id = $QueryKab->provinsi_id;
-            } else {
-                return response()->json([], 404);
             }
             /**
              * .

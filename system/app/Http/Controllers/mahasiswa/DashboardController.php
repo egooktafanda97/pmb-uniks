@@ -19,16 +19,22 @@ class DashboardController extends Controller
         $pmb = \Modules\V1\Entities\Pendaftaran::whereUserId(Auth::user()->id)->with([
             "users",
             "prodi",
-            "informasi_pendaftaran"
+            "informasi_pendaftaran",
+            "calon_mahasiswa"
         ])->first();
         return [
             "prodi" => $prodi,
             "pendaftaran" => $pmb
         ];
     }
-    public function index()
+    public function index(Request $request)
     {
         $data = $this->getter_data();
-        return view("mahasiswa.page.form_pendaftaran", $data);
+        if (!$data["pendaftaran"]->calon_mahasiswa || !empty($data["pendaftaran"]->calon_mahasiswa) && !empty($request->edit) && $request->edit == 'mhs')
+            return view("mahasiswa.page.form_pendaftaran.form_pendaftaran", $data);
+        else {
+            return view("mahasiswa.page.done.index");
+            // return view("mahasiswa.page.pembayaran.index_bukti", $data);
+        }
     }
 }

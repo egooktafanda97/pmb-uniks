@@ -3,9 +3,11 @@
 
 <head>
     @include('website.index.head')
+    @yield('style')
 </head>
 
-<body id="home" class="wide">
+<body class="wide"
+      id="home">
     <!-- PRELOADER -->
     <div id="preloader">
         <div id="preloader-status">
@@ -36,11 +38,13 @@
 
         @include('website.index.footer')
 
-        <div id="to-top" class="to-top"><i class="fa fa-angle-up"></i></div>
+        <div class="to-top"
+             id="to-top"><i class="fa fa-angle-up"></i></div>
 
     </div>
     <!-- /WRAPPER -->
     @include('website.index.script')
+    @yield('script')
 </body>
 
 </html>

@@ -1,0 +1,274 @@
+{
+    "File_name": "BuktiPembayaran",
+    "Public_name": [
+        "BuktiPembayaran",
+        "bukti_pembayaran"
+    ],
+    "Inisial": {
+        "table": "bukti_pembayaran",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "BuktiPembayaranController",
+        "Model": "BuktiPembayaran",
+        "Use_Model": [
+            "BuktiPembayaran",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "pendaftaran_id": {
+            "name": "pendaftaran_id",
+            "control_insert": "after",
+            "label": "pendaftaran",
+            "type": "integer",
+            "migration": 0,
+            "validate": 6,
+            "request": true,
+            "relation": {
+                "table": "pendaftaran",
+                "function": "pendaftaran",
+                "relation_index": "pendaftaran_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "pendaftaran",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "bukti_pembayaran": {
+            "type": "image",
+            "path": "imags/bukti_pembayaran_pendaftaran",
+            "request": true,
+            "migration": 3,
+            "validate": 19,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "nama_bank": {
+            "name": "nama_bank",
+            "label": "Nama Bank",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "atas_nama": {
+            "name": "nama_bank",
+            "label": "Nama Bank",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "waktu_bayar": {
+            "name": "nama_bank",
+            "label": "Nama Bank",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "jumlah_tf": {
+            "name": "nama_bank",
+            "label": "Nama Bank",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "keterangan": {
+            "name": "keterangan",
+            "label": "Keterangan",
+            "type": "string",
+            "request": true,
+            "migration": 10,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "status": {
+            "validate": 0,
+            "type": "static",
+            "value": "pending",
+            "request": false,
+            "migration": 2
+        }
+    },
+    "Relation": {
+        "users": {
+            "hirarky": "before",
+            "model": "User",
+            "foreign": "user_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "User",
+                "file": "User"
+            },
+            "data": []
+        },
+        "fakultas": {
+            "hirarky": "after",
+            "model": "Fakultas",
+            "foreign": "id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "Fakultas",
+                "file": "Fakultas"
+            },
+            "data": []
+        }
+    },
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "BuktiPembayaranController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "bukti_pembayaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "bukti_pembayaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "bukti_pembayaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "bukti_pembayaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "bukti_pembayaran",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "bukti_pembayaran",
+                "middleware": 1,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

@@ -19,7 +19,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 /*
 | end
@@ -38,6 +38,7 @@ class PendaftaranMahasiswa extends Controller
     use ManagementRoler;
     use ManagementControl;
     use AuthenticatesUsers;
+
     protected $redirectTo = RouteServiceProvider::HOME;
     public  $resources;
 
@@ -72,10 +73,10 @@ class PendaftaranMahasiswa extends Controller
             | end
             */
             $getUs = User::find($save['data']['user_id']);
-            Auth::login($getUs);
-            return redirect("/mahasiswa/");
+
+            return redirect("/login");
         } else {
-            return response()->json($save, $save['status'] ?? 401);
+            return redirect("/")->withErrors(['msg' => $save]);
         }
     }
 }

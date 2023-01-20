@@ -52,8 +52,8 @@
             "label": "Persyaratan",
             "type": "string",
             "request": true,
-            "migration": 2,
-            "validate": 2,
+            "migration": 3,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -73,8 +73,8 @@
             "label": "Keterangan",
             "type": "string",
             "request": true,
-            "validate": 6,
             "migration": 10,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -90,11 +90,11 @@
             "costum": {}
         },
         "status": {
+            "migration": 2,
             "validate": 0,
             "type": "static",
             "value": "active",
-            "request": false,
-            "migration": 2
+            "request": false
         }
     },
     "Relation": {

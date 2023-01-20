@@ -21,6 +21,7 @@ use Modules\V1\Providers\ManagementServiceProvider;
 | USE MODEL
 */
 // use App\Models\User;
+use Modules\V1\Providers\InformasiPendaftaranController as PendaftaranControl;
 /*
 | end
 */
@@ -29,7 +30,7 @@ class InformasiPendaftaranController extends Controller
 {
     use ManagementRoler;
     use ManagementControl;
-
+    use PendaftaranControl;
 
     public  $resources;
 

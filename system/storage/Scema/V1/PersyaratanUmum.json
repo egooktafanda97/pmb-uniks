@@ -44,8 +44,8 @@
             "label": "Keterangan",
             "type": "string",
             "request": true,
-            "validate": 6,
             "migration": 10,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true

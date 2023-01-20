@@ -29,14 +29,31 @@
 }
 
 .id-hide {
-    display: none;
-    visibility: hidden;
+    transition: all 2s linear;
     opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
+    display: none;
 }
 
 .id-show {
+    transition: all 2s linear;
     display: block;
-    visibility: visible;
-    opacity: 1;
+}
+
+.toast-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toast-header button.close {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    color: #fff;
+    background-color: red;
+    border-radius: 50%;
+    display: none;
 }

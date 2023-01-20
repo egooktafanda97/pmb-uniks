@@ -43,6 +43,27 @@ async function getById(config) {
         response(gett);
     }
 }
+async function http_get_header(config) {
+    const {
+        url,
+        header,
+        response,
+        errors
+    } = config;
+    const gett = await axios.get(url, header, response).catch((error) => {
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "fatal error result data.",
+                icon: "error",
+                button: "Oke!",
+            });
+        errors(error);
+    });
+    if (gett) {
+        response(gett);
+    }
+}
 
 async function http_get(config) {
     const {
@@ -56,4 +77,27 @@ async function http_get(config) {
     if (gett) {
         response(gett);
     }
+}
+
+
+$.fn.getType = function () {
+    return this[0].tagName == "INPUT" ? this[0].type.toLowerCase() : this[0].tagName.toLowerCase();
+}
+
+function __empty(args) {
+    if (args == 'null')
+        return true;
+    if (args == '')
+        return true;
+    if (args == " ")
+        return true;
+    if (args == 'undefined')
+        return true;
+    if (args == null)
+        return true;
+    if (args == undefined)
+        return true;
+    if (args == false)
+        return true;
+    return false;
 }

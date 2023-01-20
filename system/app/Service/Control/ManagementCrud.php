@@ -471,144 +471,150 @@ class ManagementCrud extends Controller
         $master = $this->getResource();
         $model = $this->getNameSpaceModel($master["Namespace"]["Model"]);
 
-        try {
+        // try {
+        /**
+         * .
+         * get data by id model json
+         */
+        $Q = $model::find($id);
+        if (!$Q)
+            return [
+                "status" => 401,
+                "error" => "something wrong.! data fonud",
+                "msg" => "check id data"
+            ];
+
+        /**
+         * .
+         * inisiasi compilasi data
+         */
+        $fungsi_berelasi = [];
+        /**
+         * .
+         * loop data json key fild
+         */
+
+        $data_result = [];
+
+        if (!$valids = $this->create_master_validation($master, $data))
+            return [
+                "error"  => "resource error from validation data 'create_master_validation' function",
+                "status" => 401,
+            ];
+        $x = [];
+
+        foreach ($data as $key => $value) {
             /**
              * .
-             * get data by id model json
+             * inisiasi variabel
              */
-            $Q = $model::find($id);
-            if (!$Q)
-                return [
-                    "status" => 401,
-                    "error" => "something wrong.! data fonud",
-                    "msg" => "check id data"
-                ];
+            $getTypeData = gettype($value) ?? null;
+            $type = $value['type'] ?? "string";
+            if (!empty($request->{$key}) && $request->{$key} != null && $getTypeData == "array") {
+                if (!empty($valids[$key])) {
+                    $validate = $valids[$key];
+                    if (!empty($value["validate_unique"]))
+                        $validate = $valids[$key] . ',' . $value["validate_unique"]["index_id"] . ',' . $id;
 
-            /**
-             * .
-             * inisiasi compilasi data
-             */
-            $fungsi_berelasi = [];
-            /**
-             * .
-             * loop data json key fild
-             */
-
-            $data_result = [];
-
-            if (!$valids = $this->create_master_validation($master, $data))
-                return [
-                    "error"  => "resource error from validation data 'create_master_validation' function",
-                    "status" => 401,
-                ];
-
-            foreach ($data as $key => $value) {
-                /**
-                 * .
-                 * inisiasi variabel
-                 */
-                $getTypeData = gettype($value) ?? null;
-                $type = $value['type'] ?? "string";
-                if (!empty($request->{$key}) && $request->{$key} != null && $getTypeData == "array") {
-
-                    if (!empty($valids[$key])) {
-                        $validator = Validator::make([$key => $request->{$key}], [$key => $valids[$key]]);
-                        if ($validator->fails()) {
-                            return [
-                                "error"  => $validator->errors(),
-                                "status" => 401,
-                            ];
-                        }
-
-                        $res = $this->selection_type_value_update($type, $request, $key, $value, $data);
-                        if ($res)
-                            $Q->{$key} = $res;
+                    $validator = Validator::make([$key => $request->{$key}], [$key => $validate]);
+                    if ($validator->fails()) {
+                        return [
+                            "error"  => $validator->errors(),
+                            "status" => 401,
+                        ];
                     }
+
+                    $res = $this->selection_type_value_update($type, $request, $key, $value, $data);
+                    if ($res)
+                        $Q->{$key} = $res;
                 }
-            }
-
-            if (array_key_exists('Relation',  $master)) {
-                foreach ($master['Relation'] as $keys => $r) {
-                    $getTypeData = gettype($r) ?? null;
-                    $type = $r['type'] ?? "string";
-                    if ($Q->{$keys} != null) {
-                        $relation_main = $this->getDataRelation($keys);
-
-                        if (!$_data = $this->getFileRelation($relation_main["file_relation"]['file'])) {
-                            $_data = $relation_main['data'];
-                            $_master = $this->getResource();
-                        } else {
-                            $_master = $_data;
-                            $_data = $_master["Data"];
-                        }
-
-
-                        if (!$r_valid = $this->create_master_validation($_master, $_data))
-                            return [
-                                "error"  => "resource error from validation data 'create_master_validation' function",
-                                "status" => 401,
-                            ];
-
-                        foreach ($_data as $ky => $va) {
-                            if (!empty($r_valid[$ky])) {
-                                if (!empty($request->{$ky}) && $request->{$ky}) {
-                                    $roler_validation = $r_valid[$ky];
-                                    if (!empty($va['validate_unique'])) {
-                                        $roler_validation = $roler_validation . "," . $ky . "," . $Q->{$keys}->id;
-                                    }
-                                    $validators = Validator::make([$ky => $request->{$ky}], [$ky => $roler_validation]);
-                                    if ($validators->fails()) {
-                                        return [
-                                            "error"  => $validators->errors(),
-                                            "status" => 401,
-                                        ];
-                                    }
-                                    $this->getValidationResourceUpdated($_data, $ky, $_master);
-                                    $res = $this->selection_type_value_update($type, $request, $ky, $va, $_data);
-                                    if ($res)
-                                        $Q->{$keys}->{$ky} = $res;
-                                }
-                            }
-                        }
-                        try {
-                            $Q->{$keys}->save();
-                        } catch (\Throwable $th) {
-                        }
-                    }
-                }
-            }
-
-            $saves =  $Q->save();
-            if ($saves) {
-                return [
-                    "data" => $Q,
-                    "status" => 200,
-                    "msg" => "success updated"
-                ];
-            }
-
-
-            /**
-             * .
-             * jika save gagal
-             */
-            else {
-                return [
-                    "status" => 401,
-                    "msg" => "something wrong!!!"
-                ];
             }
         }
+
+        if (array_key_exists('Relation',  $master)) {
+
+            foreach ($master['Relation'] as $keys => $r) {
+                $getTypeData = gettype($r) ?? null;
+                $type = $r['type'] ?? "string";
+                if ($Q->{$keys} != null) {
+                    $relation_main = $this->getDataRelation($keys);
+
+                    if (!$_data = $this->getFileRelation($relation_main["file_relation"]['file'])) {
+                        $_data = $relation_main['data'];
+                        $_master = $this->getResource();
+                    } else {
+                        $_master = $_data;
+                        $_data = $_master["Data"];
+                    }
+
+
+                    if (!$r_valid = $this->create_master_validation($_master, $_data))
+                        return [
+                            "error"  => "resource error from validation data 'create_master_validation' function",
+                            "status" => 401,
+                        ];
+
+                    foreach ($_data as $ky => $va) {
+                        if (!empty($r_valid[$ky])) {
+                            if (!empty($request->{$ky}) && $request->{$ky}) {
+                                $roler_validation = $r_valid[$ky];
+
+                                if (!empty($va['validate_unique'])) {
+                                    $roler_validation = $roler_validation . "," . $ky . "," . $Q->{$keys}->id;
+                                }
+                                $validators = Validator::make([$ky => $request->{$ky}], [$ky => $roler_validation]);
+                                if ($validators->fails()) {
+                                    return [
+                                        "error"  => $validators->errors(),
+                                        "status" => 401,
+                                    ];
+                                }
+                                $this->getValidationResourceUpdated($_data, $ky, $_master);
+                                $res = $this->selection_type_value_update($type, $request, $ky, $va, $_data);
+                                if ($res)
+                                    $Q->{$keys}->{$ky} = $res;
+                            }
+                        }
+                    }
+                    try {
+                        $Q->{$keys}->save();
+                    } catch (\Throwable $th) {
+                    }
+                }
+            }
+        }
+
+        $saves =  $Q->save();
+        if ($saves) {
+            return [
+                "data" => $Q,
+                "status" => 201,
+                "msg" => "success updated"
+            ];
+        }
+
+
+        /**
+         * .
+         * jika save gagal
+         */
+        else {
+            return [
+                "status" => 401,
+                "msg" => "something wrong!!!"
+            ];
+        }
+        // }
         /**
          * .
          * error server
          */
-        catch (\Exception $e) {
-            return [
-                "error"  => json_encode($e->getMessage(), true),
-                "status" => 501
-            ];
-        }
+        // catch (\Exception $e) {
+        //     return [
+        //         "error"  => json_encode($e->getMessage(), true),
+        //         "status" => 501
+        //     ];
+        // }
     }
     /**
      * .

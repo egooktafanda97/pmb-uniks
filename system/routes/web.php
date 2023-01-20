@@ -25,6 +25,7 @@ Route::group([
 
 
 
+Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'Logout']);
 Auth::routes();
 
 Route::group([
@@ -46,7 +47,10 @@ Route::group([
     'middleware' => ['web', 'role:mahasiswa'],
     'prefix' => 'mahasiswa',
 ], function ($router) {
-    Route::get('/', [App\Http\Controllers\mahasiswa\DashboardController::class, 'index']);
+    Route::get('/form', [App\Http\Controllers\mahasiswa\DashboardController::class, 'index']);
+    Route::get('/profile', [App\Http\Controllers\mahasiswa\ProfileController::class, 'index']);
+    Route::get('/upload-bukti', [App\Http\Controllers\mahasiswa\DashboardController::class, 'upload_bukti_pendaftaran']);
+    Route::get('/store', [App\Http\Controllers\mahasiswa\MhsContoller::class, 'store']);
 });
 
 

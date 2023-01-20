@@ -21,6 +21,7 @@ use Modules\V1\Providers\ManagementServiceProvider;
 | USE MODEL
 */
 // use App\Models\User;
+
 /*
 | end
 */
@@ -29,6 +30,7 @@ class InformasiPendaftaranProdiController extends Controller
 {
     use ManagementRoler;
     use ManagementControl;
+
 
 
     public  $resources;

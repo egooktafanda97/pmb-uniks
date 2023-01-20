@@ -117,47 +117,6 @@
                 }
             }
         },
-        "metode_pembayaran": {
-            "name": "metode_pembayaran",
-            "label": "Nama Prodi",
-            "type": "string",
-            "request": true,
-            "migration": 3,
-            "validate": 0,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "bukti_pembayaran": {
-            "type": "image",
-            "path": "imags/foto",
-            "request": true,
-            "migration": 3,
-            "validate": 1,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "time"
-            },
-            "costum": {}
-        },
         "status": {
             "validate": 0,
             "type": "static",
@@ -181,7 +140,7 @@
         "prodi": {
             "hirarky": "after",
             "model": "Prodi",
-            "foreign": "id",
+            "foreign": "prodi_id",
             "relation": "belongsTo",
             "file_relation": {
                 "name": "Prodi",
@@ -197,6 +156,28 @@
             "file_relation": {
                 "name": "InformasiPendaftaran",
                 "file": "InformasiPendaftaran"
+            },
+            "data": []
+        },
+        "calon_mahasiswa": {
+            "hirarky": "after",
+            "model": "CalonMahasiswa",
+            "foreign": "pendaftaran_id",
+            "relation": "hasOne",
+            "file_relation": {
+                "name": "CalonMahasiswa",
+                "file": "CalonMahasiswa"
+            },
+            "data": []
+        },
+        "bukti_pembayaran": {
+            "hirarky": "after",
+            "model": "BuktiPembayaran",
+            "foreign": "pendaftaran_id",
+            "relation": "hasOne",
+            "file_relation": {
+                "name": "BuktiPembayaran",
+                "file": "BuktiPembayaran"
             },
             "data": []
         }

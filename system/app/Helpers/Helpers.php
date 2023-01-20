@@ -101,4 +101,13 @@ class Helpers
         }
         return $arr;
     }
+    public static function convert_to_rupiah($angka)
+    {
+        return 'Rp. ' . strrev(implode('.', str_split(strrev(strval($angka)), 3)));
+    }
+
+    public static function rupiah_to_number($rupiah)
+    {
+        return intval(preg_replace('/,.*|[^0-9]/', '', $rupiah));
+    }
 }

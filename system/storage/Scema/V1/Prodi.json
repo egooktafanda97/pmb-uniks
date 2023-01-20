@@ -311,11 +311,55 @@
         "fakultas": {
             "hirarky": "after",
             "model": "Fakultas",
-            "foreign": "id",
-            "relation": "hasMany",
+            "foreign": "fakultas_id",
+            "relation": "belongsTo",
             "file_relation": {
                 "name": "Instansi",
                 "file": "Instansi"
+            },
+            "data": []
+        },
+        "informasi_pendaftaran": {
+            "hirarky": "after",
+            "model": "InformasiPendaftaran",
+            "foreign": "prodi_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "InformasiPendaftaran",
+                "file": "InformasiPendaftaran"
+            },
+            "data": []
+        },
+        "persyaratan_prodi": {
+            "hirarky": "after",
+            "model": "PersyaratanProdi",
+            "foreign": "prodi_id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "PersyaratanProdi",
+                "file": "PersyaratanProdi"
+            },
+            "data": []
+        },
+        "biaya_kuliah": {
+            "hirarky": "after",
+            "model": "BiayaKuliah",
+            "foreign": "prodi_id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "BiayaKuliah",
+                "file": "BiayaKuliah"
+            },
+            "data": []
+        },
+        "gallery_prodi": {
+            "hirarky": "after",
+            "model": "GalleryProdi",
+            "foreign": "prodi_id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "GalleryProdi",
+                "file": "GalleryProdi"
             },
             "data": []
         }

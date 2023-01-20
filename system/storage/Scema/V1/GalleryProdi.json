@@ -1,19 +1,19 @@
 {
-    "File_name": "Kelas",
+    "File_name": "GalleryProdi",
     "Public_name": [
-        "Kelas",
-        "kelas"
+        "GalleryProdi",
+        "gallery_prodi"
     ],
     "Inisial": {
-        "table": "kelas",
+        "table": "gallery_prodi",
         "primary": "id",
         "Protected": {}
     },
     "Namespace": {
-        "Controller": "KelasController",
-        "Model": "Kelas",
+        "Controller": "GalleryProdiController",
+        "Model": "GalleryProdi",
         "Use_Model": [
-            "Kelas"
+            "GalleryProdi"
         ]
     },
     "Data": {
@@ -65,6 +65,48 @@
                 "form": "time"
             },
             "costum": {}
+        },
+        "keterangan": {
+            "name": "keterangan",
+            "label": "Keterangan",
+            "type": "string",
+            "request": true,
+            "validate": 6,
+            "migration": 10,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "deskripsi": {
+            "name": "deskripsi",
+            "label": "deskripsi",
+            "type": "string",
+            "request": true,
+            "validate": 6,
+            "migration": 10,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
         }
     },
     "Relation": {
@@ -112,48 +154,48 @@
     },
     "Router": {
         "config": {
-            "contoller": "KelasController"
+            "contoller": "GalleryProdiController"
         },
         "api": {
             "get": {
                 "method": "get",
                 "router": "/",
-                "prefix": "kelas",
+                "prefix": "gallery_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "getById": {
                 "method": "get",
                 "router": "/{slug}",
-                "prefix": "kelas",
+                "prefix": "gallery_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "getByIdAndSource": {
                 "method": "get",
                 "router": "/source/{slug}",
-                "prefix": "kelas",
+                "prefix": "gallery_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "store": {
                 "method": "post",
                 "router": "/store",
-                "prefix": "kelas",
+                "prefix": "gallery_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "update": {
                 "method": "post",
                 "router": "/update/{id}",
-                "prefix": "kelas",
+                "prefix": "gallery_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "delete": {
                 "method": "delete",
                 "router": "/delete/{id}",
-                "prefix": "kelas",
+                "prefix": "gallery_prodi",
                 "middleware": 1,
                 "controller": ""
             }
