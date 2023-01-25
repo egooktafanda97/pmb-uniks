@@ -77,14 +77,15 @@
                                                 <div aria-label="Basic example"
                                                      class="btn-group btn-sm"
                                                      role="group">
-                                                    <button class="btn btn-sm btn-outline-primary"
-                                                            type="button">
+                                                    <a class="btn btn-sm btn-outline-primary"
+                                                       href="{{ url('admin/info-pendaftaran/show/' . $item->id) }}"
+                                                       type="button">
                                                         <i class="fa fa-eye"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-outline-success"
-                                                            type="button">
+                                                    </a>
+                                                    <a class="btn btn-sm btn-outline-success"
+                                                       type="button">
                                                         <i class="fa fa-edit"></i>
-                                                    </button>
+                                                    </a>
                                                     <button class="btn btn-sm btn-outline-danger"
                                                             type="button">
                                                         <i class="fa fa-trash"></i>

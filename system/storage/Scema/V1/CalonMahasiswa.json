@@ -23,13 +23,9 @@
             "control_insert": "after",
             "label": "pendaftaran",
             "type": "integer",
+            "migration": 0,
+            "validate": 6,
             "request": true,
-            "migration": 19,
-            "validate": 20,
-            "validate_unique": {
-                "validate": 20,
-                "index_id": "pendaftaran_id"
-            },
             "relation": {
                 "table": "pendaftaran",
                 "function": "pendaftaran",
@@ -247,8 +243,8 @@
             "label": "",
             "type": "string",
             "request": true,
+            "migration": 3,
             "validate": 0,
-            "migration": 2,
             "view": {
                 "table": {
                     "status": true
@@ -505,6 +501,22 @@
                 "prefix": "calon_mahasiswa",
                 "middleware": 1,
                 "controller": ""
+            }
+        },
+        "web": {
+            "show": {
+                "method": "get",
+                "router": "/",
+                "prefix": "admin/mhs",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\CalonMhsController"
+            },
+            "getById": {
+                "method": "get",
+                "router": "/getById/{slug}",
+                "prefix": "admin/mhs",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\CalonMhsController"
             }
         }
     },

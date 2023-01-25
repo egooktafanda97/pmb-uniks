@@ -12,37 +12,44 @@
 
             <div class="div-table">
                 <div class="div-cell">
-
                     <div class="jumbotron text-center">
                         <h5 class="jumbotron-title-sub"
                             data-animation-delay="700"
                             data-animation="fadeIn">
-                            PORTAL INFORMASI</h5>
+                            SISTEM INFORMASI
+                        </h5>
                         <h1 class="jumbotron-title"
                             data-animation-delay="500"
-                            data-animation="fadeIn">PENERIMAAN MAHASISWA
-                            BARU</span>
+                            data-animation="fadeIn">
+                            PENERIMAAN MAHASISWA BARU
+                            </span>
                         </h1>
                         <h4 class="jumbotron-title-sub"
                             data-animation-delay="700"
                             data-animation="fadeIn">
-                            <span class="text-color"><strong>UNIVERSITAS ISLAM KUANTAN SINGINGI</strong></span>
+                            <span class="text-color">
+                                <strong>UNIVERSITAS ISLAM KUANTAN SINGINGI</strong>
+                            </span>
                         </h4>
-                        <h4 class="jumbotron-title-sub"
-                            data-animation-delay="700"
-                            data-animation="fadeIn">
-                            <span class="text-color">19 JANUARI 2023</span> 20 APRIL 2023
-                        </h4>
-                        <p class="btn-row">
-                            <a class="btn btn-theme btn-rounded btn-theme-lg"
-                               data-animation-delay="400"
-                               data-animation="fadeInLeft"
-                               data-target="#popup-sign-up"
-                               data-toggle="modal"
-                               href="#">
-                                DAFTAR SEKARANG
-                            </a>
-                        </p>
+                        @if ($pendaftaran != null)
+                            <h4 class="jumbotron-title-sub"
+                                data-animation-delay="700"
+                                data-animation="fadeIn">
+                                <span class="text-color">
+                                    {{ tgl_i($pendaftaran->buka) ?? '- ' }}
+                                </span>- {{ tgl_i($pendaftaran->tutup) ?? ' -' }}
+                            </h4>
+                            <p class="btn-row">
+                                <a class="btn btn-theme btn-rounded btn-theme-lg"
+                                   data-animation-delay="400"
+                                   data-animation="fadeInLeft"
+                                   data-target="#popup-sign-up"
+                                   data-toggle="modal"
+                                   href="#">
+                                    DAFTAR SEKARANG
+                                </a>
+                            </p>
+                        @endif
                     </div>
 
                 </div>
@@ -65,26 +72,17 @@
                     </div>
                     <div class="col-md-5">
                         <div class="overflowed">
-                            <h3 class="caption-title"><a href="#">Gentle</a></h3>
+                            <h3 class="caption-title"><a href="#">PENGUMUMAN</a></h3>
                             <span class="caption-category"><a href="#">psd</a></span>
                         </div>
-                        <h5 class="caption-title-sub">Creative Personal vCard Template</h5>
-                        <p class="caption-text">
-                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit
-                            esse molestie consequat, vel illum dolore eu feugiat nulla facilisis...
-                        </p>
-                        <div class="caption-details">
-                            <ul>
-                                <li class="fpcd-price">Price: <span class="text-color">$12</span></li>
-                                <li class="fpcd-shop"><i class="fa fa-shopping-cart"></i>10 Sold</li>
-                                <li class="fpcd-like"><i class="fa fa-heart"></i>163</li>
-                            </ul>
-                        </div>
-                        <p class="caption-buttons">
-                            <a class="btn btn-theme btn-theme-green btn-rounded"
-                               href="#">Purchase This
-                                Template</a><a class="btn btn-theme btn-theme-dark btn-rounded"
-                               href="#">Live Demo</a>
+                        <h5 class="caption-title-sub">Lorem ipsum dolor sit amet</h5>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae laudantium aliquam
+                            provident nam, sequi cumque accusamus ducimus exercitationem, quia qui quaerat quo fuga debitis
+                            vero, a cupiditate minima fugiat expedita!
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit, expedita ullam quas hic,
+                            deleniti officia excepturi mollitia corporis recusandae omnis eum fugit aliquam placeat suscipit
+                            in nesciunt nihil totam vero!
                         </p>
                     </div>
                 </div>
@@ -321,7 +319,7 @@
 @section('script')
     <script type="text/javascript"
             src="{{ asset('public/node_modules/toastr/build/toastr.min.js') }}"></script>
-    @if ($errors->any())
+    @if ($errors->any() && $errors->first('status') == 201)
         <script>
             const errors = JSON.parse(`{{ $errors->first() }}`.replace(/&quot;/g, '"'));
             if (errors) {
@@ -331,6 +329,10 @@
                     }
                 }
             }
+        </script>
+    @elseif($errors->any() && $errors->first('status') == 501)
+        <script>
+            toastr.error(`{{ $errors->first() }}`)
         </script>
     @endif
 @endsection

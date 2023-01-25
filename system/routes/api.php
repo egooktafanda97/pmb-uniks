@@ -61,17 +61,51 @@ Route::group([
         '/get-prodi-id/{slug?}',
         [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'getById']
     );
+    Route::get(
+        '/getAgent',
+        [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'getAgent']
+    );
+    Route::post(
+        '/addReferal',
+        [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'addReferal']
+    );
+
     Route::post(
         '/upload-bukti-biaya-pendaftaran',
         [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'upload_bukti_biaya_pendaftaran']
+    );
+    Route::post(
+        '/upload-lampiran',
+        [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'upload_lampiran']
     );
 });
 /*
 | END ROUTER MAHASISWA
 |--------------------------------------------------------------------------
 */
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*
+|--------------------------------------------------------------------------
+| API ROUTER MAHASISWA
+*/
+Route::group([
+    'middleware' => ["api", "role:admin"],
+    'prefix' => 'mhs',
+], function ($router) {
+    Route::post(
+        '/verifikasi_pendaftaran/{slug}',
+        [\App\Http\Controllers\Api\admin\MahasiswaController::class, 'verifikasi_pendaftaran']
+    );
+    Route::post(
+        '/status_seleksi/{slug}',
+        [\App\Http\Controllers\Api\admin\MahasiswaController::class, 'status_seleksi']
+    );
+});
 
-
+/*
+| END ROUTER MAHASISWA
+|--------------------------------------------------------------------------
+*/
 
 
 

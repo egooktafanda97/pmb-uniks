@@ -35,7 +35,7 @@
             </a>
         </li>
         <li>
-            <a href="javascript:;">
+            <a href="{{ url('admin/mhs') }}">
                 <div class="parent-icon">
                     <i class='bx bx-circle'></i>
                 </div>

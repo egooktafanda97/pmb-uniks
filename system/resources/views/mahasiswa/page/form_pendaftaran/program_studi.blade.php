@@ -87,7 +87,7 @@
                                             <hr>
                                             <div id="card-info-syarat">
                                                 @if (!empty($pendaftaran->prodi) && count($pendaftaran->prodi->persyaratan_prodi) > 0)
-                                                    <div class="bg-info">
+                                                    <div class="x">
                                                         <ul class="list-group list-group-flush">
                                                             @foreach ($pendaftaran->prodi->persyaratan_prodi as $item)
                                                                 <li

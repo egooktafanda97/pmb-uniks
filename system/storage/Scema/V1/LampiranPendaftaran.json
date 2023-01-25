@@ -136,9 +136,41 @@
                 "form": "time"
             },
             "costum": {}
+        },
+        "lain_lain": {
+            "type": "image",
+            "path": "lampiran",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
         }
     },
-    "Relation": {},
+    "Relation": {
+        "pendaftaran": {
+            "hirarky": "after",
+            "model": "Pendaftaran",
+            "foreign": "pendaftaran_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "Pendaftaran",
+                "file": "Pendaftaran"
+            },
+            "data": []
+        }
+    },
     "Query": {
         "get": {
             "model": "",

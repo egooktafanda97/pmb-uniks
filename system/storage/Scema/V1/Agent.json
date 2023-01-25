@@ -1,0 +1,194 @@
+{
+    "File_name": "Agent",
+    "Public_name": [
+        "Agent",
+        "agent"
+    ],
+    "Inisial": {
+        "table": "agent",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "AgentController",
+        "Model": "Agent",
+        "Use_Model": [
+            "Agent",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "user_id": {
+            "name": "user_id",
+            "control_insert": "before",
+            "label": "",
+            "type": "key",
+            "relation": {
+                "table": "user",
+                "function": "users",
+                "relation_index": "users",
+                "foreign": {
+                    "key": "id",
+                    "table": "users",
+                    "auto_delete_relation": true
+                }
+            },
+            "validate": 2,
+            "request": false,
+            "migration": 0
+        },
+        "nama_lengkap": {
+            "name": "nama_lengkap",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "jenis_kelamin": {
+            "name": "jenis_kelamin",
+            "label": "Jenis Kelamin",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "referal": {
+            "name": "referal",
+            "label": "Referal",
+            "type": "string",
+            "request": true,
+            "migration": 18,
+            "validate": 21,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        }
+    },
+    "Relation": {
+        "users": {
+            "hirarky": "before",
+            "model": "User",
+            "foreign": "user_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "User",
+                "file": "User"
+            },
+            "data": []
+        }
+    },
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "AgentController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "agent",
+                "middleware": 1,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

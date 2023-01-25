@@ -20,7 +20,8 @@ class DashboardController extends Controller
             "users",
             "prodi",
             "informasi_pendaftaran",
-            "calon_mahasiswa"
+            "calon_mahasiswa",
+            "lampiran_pendaftaran"
         ])->first();
         return [
             "prodi" => $prodi,
@@ -30,11 +31,18 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $data = $this->getter_data();
-        if (!$data["pendaftaran"]->calon_mahasiswa || !empty($data["pendaftaran"]->calon_mahasiswa) && !empty($request->edit) && $request->edit == 'mhs')
+        $c_mhs = $data["pendaftaran"]->calon_mahasiswa;
+        $lampiran = $data["pendaftaran"]->lampiran_pendaftaran;
+        $biaya_pendaftaran = $data["pendaftaran"]->bukti_pembayaran;
+        $req = $request->edit ?? false;
+        if (!$c_mhs || $c_mhs != null &&  $req == 'mhs')
             return view("mahasiswa.page.form_pendaftaran.form_pendaftaran", $data);
-        else {
+        else if (!$lampiran || $lampiran != null &&  $req == 'lampiran') {
+            return view("mahasiswa.page.lampiran.index_lampiran", $data);
+        } else if (!$biaya_pendaftaran || $biaya_pendaftaran != null &&  $req == 'biaya') {
+            return view("mahasiswa.page.pembayaran.index_bukti", $data);
+        } else {
             return view("mahasiswa.page.done.index");
-            // return view("mahasiswa.page.pembayaran.index_bukti", $data);
         }
     }
 }

@@ -4,26 +4,34 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1"
+          name="viewport">
     <!--favicon-->
-    <link rel="icon" href="{{ asset('public/admin/rocker/vertical') }}/assets/images/favicon-32x32.png"
-        type="image/png" />
+    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/images/favicon-32x32.png"
+          rel="icon"
+          type="image/png" />
     <!--plugins-->
     <link href="{{ asset('public/admin/rocker/vertical') }}/assets/plugins/simplebar/css/simplebar.css"
-        rel="stylesheet" />
+          rel="stylesheet" />
     <link href="{{ asset('public/admin/rocker/vertical') }}/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
-        rel="stylesheet" />
+          rel="stylesheet" />
     <link href="{{ asset('public/admin/rocker/vertical') }}/assets/plugins/metismenu/css/metisMenu.min.css"
-        rel="stylesheet" />
+          rel="stylesheet" />
     <!-- loader-->
-    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/pace.min.css" rel="stylesheet" />
+    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/pace.min.css"
+          rel="stylesheet" />
     <script src="{{ asset('public/admin/rocker/vertical') }}/assets/js/pace.min.js"></script>
     <!-- Bootstrap CSS -->
-    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/bootstrap-extended.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/app.css" rel="stylesheet">
-    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/icons.css" rel="stylesheet">
+    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/bootstrap-extended.css"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+          rel="stylesheet">
+    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/app.css"
+          rel="stylesheet">
+    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/css/icons.css"
+          rel="stylesheet">
     <title>Login</title>
 </head>
 
@@ -35,7 +43,12 @@
                 <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
                     <div class="col mx-auto">
                         <div class="mb-4 text-center">
-                            <img src="{{ asset('assets/logo/logo.png') }}" width="100" alt="" />
+                            <a href="{{ url('/') }}">
+                                <img alt=""
+                                     src="{{ asset('assets/logo/logo.png') }}"
+                                     width="80" />
+                                <h5 style="color: #e3c300">UNIKS</h5>
+                            </a>
                         </div>
                         <div class="card">
                             <div class="card-body">
@@ -49,29 +62,41 @@
                                             <hr />
                                         </div>
                                         <div class="form-body">
-                                            <form action="{{ url('auth/login') }}" class="row g-3" method="POST">
+                                            <form action="{{ url('auth/login') }}"
+                                                  class="row g-3"
+                                                  method="POST">
                                                 @csrf
                                                 <div class="col-12">
-                                                    <label for="inputEmailAddress" class="form-label">
+                                                    <label class="form-label"
+                                                           for="inputEmailAddress">
                                                         Username
                                                     </label>
-                                                    <input type="email" name="email" class="form-control"
-                                                        id="username" placeholder="username">
+                                                    <input class="form-control"
+                                                           id="username"
+                                                           name="email"
+                                                           placeholder="username"
+                                                           type="email">
 
                                                 </div>
                                                 <div class="col-12">
-                                                    <label for="inputChoosePassword" class="form-label">
+                                                    <label class="form-label"
+                                                           for="inputChoosePassword">
                                                         Enter Password</label>
-                                                    <div class="input-group" id="show_hide_password">
-                                                        <input type="password" name="password"
-                                                            class="form-control border-end-0" id="inputChoosePassword"
-                                                            placeholder="Enter Password">
+                                                    <div class="input-group"
+                                                         id="show_hide_password">
+                                                        <input class="form-control border-end-0"
+                                                               id="inputChoosePassword"
+                                                               name="password"
+                                                               placeholder="Enter Password"
+                                                               type="password">
                                                         @error('password')
-                                                            <span class="invalid-feedback" role="alert">
+                                                            <span class="invalid-feedback"
+                                                                  role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
-                                                        <a href="javascript:;" class="input-group-text bg-transparent">
+                                                        <a class="input-group-text bg-transparent"
+                                                           href="javascript:;">
                                                             <i class='bx bx-hide'></i>
                                                         </a>
                                                     </div>
@@ -80,12 +105,13 @@
 
                                                 </div>
                                                 <div class="col-md-6 text-end"> <a
-                                                        href="authentication-forgot-password.html">Forgot Password ?</a>
+                                                       href="authentication-forgot-password.html">Forgot Password ?</a>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="d-grid">
-                                                        <button type="submit" class="btn btn-primary"><i
-                                                                class="bx bxs-lock-open"></i>Sign in</button>
+                                                        <button class="btn btn-primary"
+                                                                type="submit"><i class="bx bxs-lock-open"></i>Sign
+                                                            in</button>
                                                     </div>
                                                 </div>
                                             </form>

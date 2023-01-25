@@ -44,4 +44,15 @@ class InformasiPendaftaran extends Controller
         ];
         return view($this->view . 'input', $data);
     }
+    public function detail($id)
+    {
+        $QR = \Modules\V1\Entities\InformasiPendaftaran::whereId($id)->with("jadwal")->first();
+        $data = [
+            "queryes" => $QR,
+            "sub_title"    => "Pendaftaran",
+            "title" => "Tables",
+            "uri" => $this->data->getRouterWeb() ?? []
+        ];
+        return view($this->view . 'detail', $data);
+    }
 }

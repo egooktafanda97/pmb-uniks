@@ -8,8 +8,8 @@
         @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
         /* ------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Upload button styling
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ------------------------------ */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Upload button styling
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ------------------------------ */
         .upload {
             --color-black-softest: #485461;
             /* softer black */
@@ -189,12 +189,6 @@
                 <div class="card-body">
                     <div class="space-between">
                         <strong class="card-title text-primary">UPLOAD BUKTI BIAYA PENDAFTARAN</strong>
-                        <button class="btn btn-dark px-5"
-                                id="btn_uploads"
-                                type="button">
-                            <i class="bx bx-cloud-upload mr-1"></i>
-                            UPLOAD
-                        </button>
                     </div>
                     <hr>
                     <div class="row">
@@ -203,7 +197,7 @@
                         </div>
                         <div class="col-md-7">
                             {{-- img-show-upload id-hide --}}
-                            <div class="card ">
+                            <div class="card img-show-upload id-hide">
                                 <div class="card-header bg-primary text-white">
                                     KETERANGAN BUKTI PEMBAYARAN
                                 </div>
@@ -240,7 +234,7 @@
                                                    name="jumlah_tf"
                                                    placeholder="nama lengkap sesuai ktp / ijasa"
                                                    required
-                                                   type="text">
+                                                   type="number">
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label"
@@ -260,6 +254,16 @@
                                                       name="keterangan"
                                                       placeholder="Alamat lengkap"
                                                       rows="3"></textarea>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <div class="w-100 l-right">
+                                                <button class="btn btn-dark px-5"
+                                                        id="btn_uploads"
+                                                        type="button">
+                                                    <i class="bx bx-cloud-upload mr-1"></i>
+                                                    UPLOAD
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -323,7 +327,16 @@
                     }
                 },
                 response: (res) => {
-
+                    swal({
+                        title: "Berhasil!",
+                        text: 'bukti pembayaran berhasil dikirim!',
+                        icon: "success",
+                        button: "Oke!",
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            window.location.href = `{{ url('mahasiswa/form') }}`;
+                        }
+                    });
                 }
             }
 

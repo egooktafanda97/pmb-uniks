@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\mahasiswa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -58,10 +58,10 @@ class PendaftaranMahasiswa extends Controller
     public function register(Request $request)
     {
         if (empty($this->resources))
-            return response()->json(["error" => "resource not found"],  501);
+            return redirect("/")->withErrors(['msg' => "Resource not found", "status" => 501]);
         $info_pendaftaran = \Modules\V1\Entities\InformasiPendaftaran::whereStatus('active')->first();
         if (empty($info_pendaftaran))
-            return response()->json(["error" => "Pendaftaran belum dibuka"],  401);
+            return redirect("/")->withErrors(['msg' => "Pendaftaran belum dibuka", "status" => 501]);
         $request->merge(["no_resister" => "UNIKS:" . \Str::random(4), "informasi_pendaftaran_id" => $info_pendaftaran->id]);
         $save =  $this->resources->generate_data_insert($request);
         if (!empty($save['status']) && $save['status'] == 200) {
@@ -76,7 +76,7 @@ class PendaftaranMahasiswa extends Controller
 
             return redirect("/login");
         } else {
-            return redirect("/")->withErrors(['msg' => $save]);
+            return redirect("/")->withErrors(['msg' => $save, "status" => 201]);
         }
     }
 }

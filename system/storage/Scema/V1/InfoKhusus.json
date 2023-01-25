@@ -1,0 +1,225 @@
+{
+    "File_name": "InfoKhusus",
+    "Public_name": [
+        "InfoKhusus",
+        "info_khusus"
+    ],
+    "Inisial": {
+        "table": "info_khusus",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "InfoKhususController",
+        "Model": "InfoKhusus",
+        "Use_Model": [
+            "InfoKhusus",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "from_user_id": {
+            "name": "from_user_id",
+            "control_insert": "after",
+            "label": "from_user_id",
+            "type": "integer",
+            "migration": 0,
+            "validate": 6,
+            "request": false,
+            "config": {
+                "case": "data_by_user_auth",
+                "def_value": {
+                    "role_value": "auth_id"
+                }
+            },
+            "relation": {
+                "table": "users",
+                "function": "from_user",
+                "relation_index": "from_user_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "users",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "to_user_id": {
+            "name": "to_user_id",
+            "control_insert": "after",
+            "label": "to_user_id",
+            "type": "integer",
+            "migration": 0,
+            "validate": 6,
+            "request": true,
+            "relation": {
+                "table": "users",
+                "function": "to_user",
+                "relation_index": "to_user_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "users",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "subject": {
+            "name": "subject",
+            "label": "subject",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "message": {
+            "name": "message",
+            "label": "message",
+            "type": "string",
+            "migration": 10,
+            "validate": 6,
+            "request": true,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "visibility": {
+            "validate": 0,
+            "type": "static",
+            "value": "1",
+            "request": false,
+            "migration": 2
+        }
+    },
+    "Relation": {
+        "from_user": {
+            "hirarky": "after",
+            "model": "User",
+            "foreign": "from_user_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "User",
+                "file": "User"
+            },
+            "data": []
+        },
+        "to_user": {
+            "hirarky": "after",
+            "model": "User",
+            "foreign": "to_user",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "User",
+                "file": "User"
+            },
+            "data": []
+        }
+    },
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "InfoKhususController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "info_khusus",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "info_khusus",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "info_khusus",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "info_khusus",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "info_khusus",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "info_khusus",
+                "middleware": 1,
+                "controller": ""
+            }
+        },
+        "web": {
+            "show": {
+                "method": "get",
+                "router": "/",
+                "prefix": "mahasiswa/info_khusus",
+                "middleware": 9,
+                "controller": "\\App\\Http\\Controllers\\mahasiswa\\InfoKhususController"
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

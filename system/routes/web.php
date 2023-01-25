@@ -19,14 +19,14 @@ Route::get('/sign-up', [App\Http\Controllers\Home::class, 'index']);
 Route::group([
     'prefix' => 'pmb',
 ], function ($router) {
-    Route::post('/register', [App\Http\Controllers\PendaftaranMahasiswa::class, 'register']);
+    Route::post('/register', [App\Http\Controllers\mahasiswa\PendaftaranMahasiswa::class, 'register']);
 });
 
 
 
-
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'Logout']);
 Auth::routes();
+// Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'Logout']);
+
 
 Route::group([
     'prefix' => 'auth',
@@ -53,6 +53,12 @@ Route::group([
     Route::get('/store', [App\Http\Controllers\mahasiswa\MhsContoller::class, 'store']);
 });
 
+Route::get('send-email-queue', function () {
+    return view('emails.SendEmail');
+    // $details['email'] = 'egookt3010@gmail.com';
+    // dispatch(new App\Jobs\SendEmailJob($details));
+    // return response()->json(['message' => 'Mail Send Successfully!!']);
+});
 
 
 $namespaces = "";

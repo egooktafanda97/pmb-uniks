@@ -29,7 +29,7 @@ async function getById(config) {
         response,
         errors
     } = config;
-    const gett = await axios.post(url + id, header, response).catch((error) => {
+    const gett = await axios.get(url + id, header, response).catch((error) => {
         if (error?.response?.status == 501)
             swal({
                 title: "Ooops fatal error!",
@@ -78,6 +78,49 @@ async function http_get(config) {
         response(gett);
     }
 }
+async function request_get(config) {
+    const {
+        url,
+        header,
+        response,
+        errors
+    } = config;
+    const gett = await axios.get(url, header).catch((error) => {
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "fatal error result data.",
+                icon: "error",
+                button: "Oke!",
+            });
+        errors(error);
+    });
+    if (gett) {
+        response(gett);
+    }
+}
+async function request_post(config) {
+    const {
+        url,
+        data,
+        header,
+        response,
+        errors
+    } = config;
+    const gett = await axios.post(url, data, header).catch((error) => {
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "fatal error result data.",
+                icon: "error",
+                button: "Oke!",
+            });
+        errors(error);
+    });
+    if (gett) {
+        response(gett);
+    }
+}
 
 
 $.fn.getType = function () {
@@ -100,4 +143,52 @@ function __empty(args) {
     if (args == false)
         return true;
     return false;
+}
+
+// $(".button--loader").each(function () {
+//     $(this).click(function () {
+//         $(this).toggleClass("button--loading");
+//         $(this).attr("disabled", true);
+//     })
+// })
+
+
+function deleted(config) {
+    const {
+        url,
+        header,
+        msg = null,
+        errors,
+        result
+    } = config;
+    swal({
+            title: "Yakin?",
+            text: msg != null ? msg : "anda akan menghapus data ini!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                async function deleted() {
+                    const del = await axios.delete(url, header).catch((error) => {
+                        const {
+                            response
+                        } = error;
+                        const {
+                            request,
+                            ...errorObject
+                        } = response;
+                        if (errorObject?.status != 200) {
+                            const err = errorObject?.data?.error ?? {};
+                            errors(err);
+                        }
+                    });
+                    if (del) {
+                        result(del);
+                    }
+                }
+                deleted();
+            }
+        });
 }

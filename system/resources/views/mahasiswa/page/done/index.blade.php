@@ -14,7 +14,9 @@
                         <p>
                             Data anda berhasil di kirim tunggu pemberitahuan <strong>verifikasi</strong> dari admin
                             kampus,<br>
-                            anda bertanggung jawab penuh dengan kebenaran data yang anda isi.
+                            anda bertanggung jawab penuh dengan kebenaran data yang anda isi. <a
+                               href="{{ url('mahasiswa/profile') }}">lihat data
+                                anda</a>
                         </p>
                     </div>
                 </div>

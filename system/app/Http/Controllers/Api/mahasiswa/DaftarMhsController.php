@@ -134,4 +134,70 @@ class DaftarMhsController extends Controller
             return response()->json($m_control, $m_control["status"] ?? 400);
         }
     }
+    public function upload_lampiran(Request $request)
+    {
+        $resources = new ManagementCrud("LampiranPendaftaran");
+        $pathJson =  ManagementServiceProvider::getScemaPath();
+        $resources->instance($pathJson);
+        $resources->setNameSpaceModel("\Modules\V1\Entities\\");
+
+        $io = \Modules\V1\Entities\Pendaftaran::whereuserId(auth()->user()->id)->with("lampiran_pendaftaran")->first();
+        if (empty($io->lampiran_pendaftaran)) {
+            /*
+            | MANAGEMENT CONTROL CALON MAHASISWA
+            */
+            $m_control =  $resources->generate_data_insert($request->merge(["pendaftaran_id" => $io->id]));
+            /*
+            | end
+            */
+            try {
+                if (!empty($m_control['data']['foto_formal'])) {
+                    $user = \App\Models\User::find(auth()->user()->id);
+                    $user->foto = $m_control['data']['foto_formal'];
+                    $user->save();
+                }
+            } catch (\Throwable $th) {
+            }
+            return response()->json($m_control, $m_control["status"] ?? 400);
+        } else {
+
+            /*
+            | UPDATE MANAGEMENT CONTROL CALON MAHASISWA
+            */
+            $m_control =  $resources->generate_data_update($request, $io->lampiran_pendaftaran->id);
+            /*
+            | end
+            */
+            try {
+                if (!empty($m_control['data']['foto_formal'])) {
+                    $user = \App\Models\User::find(auth()->user()->id);
+                    $user->foto = $m_control['data']['foto_formal'];
+                    $user->save();
+                }
+            } catch (\Throwable $th) {
+            }
+            return response()->json($m_control, $m_control["status"] ?? 400);
+        }
+    }
+    public function getAgent(Request $request)
+    {
+        $agent = \Modules\V1\Entities\Agent::where('referal', $request->referal)->first();
+        if ($agent) {
+            return response()->json($agent, 200);
+        } else {
+            return response()->json([], 401);
+        }
+    }
+    public function addReferal(Request $request)
+    {
+        try {
+            $agent = \Modules\V1\Entities\Agent::where('referal', $request->referal)->first();
+            $ref = \Modules\V1\Entities\Pendaftaran::whereuserId(auth()->user()->id)->first();
+            $ref->agent_id = $agent->id;
+            $ref->save();
+            return response()->json([], 200);
+        } catch (\Throwable $th) {
+            return response()->json([], 401);
+        }
+    }
 }

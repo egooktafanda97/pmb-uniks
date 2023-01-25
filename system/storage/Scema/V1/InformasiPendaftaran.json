@@ -101,6 +101,48 @@
             },
             "costum": {}
         },
+        "buka": {
+            "name": "dibuka",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 6,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "tutup": {
+            "name": "tutup",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 6,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
         "biaya_pendaftaran": {
             "name": "biaya_pendaftaran",
             "label": "Biaya Pendaftaran",
@@ -155,8 +197,8 @@
         "jadwal": {
             "hirarky": "after",
             "model": "Jadwal",
-            "foreign": "id",
-            "relation": "belongsTo",
+            "foreign": "informasi_pendaftaran_id",
+            "relation": "hasMany",
             "file_relation": {
                 "name": "Jadwal",
                 "file": "Jadwal"
@@ -265,6 +307,13 @@
             "store": {
                 "method": "get",
                 "router": "/store",
+                "prefix": "admin/info-pendaftaran",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\InformasiPendaftaran"
+            },
+            "detail": {
+                "method": "get",
+                "router": "/show/{id}",
                 "prefix": "admin/info-pendaftaran",
                 "middleware": 1,
                 "controller": "\\App\\Http\\Controllers\\admin\\InformasiPendaftaran"

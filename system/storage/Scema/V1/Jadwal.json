@@ -63,7 +63,7 @@
             "label": "Tanggal Mulai",
             "type": "string",
             "request": true,
-            "migration": 6,
+            "migration": 22,
             "validate": 2,
             "view": {
                 "table": {
@@ -84,7 +84,7 @@
             "label": "tanggal Selesai",
             "type": "string",
             "request": true,
-            "migration": 6,
+            "migration": 22,
             "validate": 13,
             "view": {
                 "table": {
@@ -126,7 +126,7 @@
         "informasi_pendaftaran": {
             "hirarky": "after",
             "model": "InformasiPendaftaran",
-            "foreign": "informasi_pendaftaran_id",
+            "foreign": "id",
             "relation": "hasMany",
             "file_relation": {
                 "name": "InformasiPendaftaran",

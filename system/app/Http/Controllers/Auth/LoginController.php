@@ -17,6 +17,7 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
     public function __construct()
     {
+        // $this->middleware('auth:web', ['except' => ['login']]);
     }
 
     protected function login(Request $request)
@@ -56,11 +57,6 @@ class LoginController extends Controller
     {
         Auth::logout();
     }
-    protected function  ()
-    {
-        Auth::logout();
-    }
-
     protected function respondWithToken($token)
     {
         return [

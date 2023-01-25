@@ -378,7 +378,7 @@
                                     </li>`;
                 });
                 __html = `
-                                <div class="bg-info">
+                                <div class="">
                                     <ul class="list-group list-group-flush">
                                        ${__loop_html}    
                                     </ul>
@@ -495,7 +495,7 @@
                         request,
                         ...errorObject
                     } = response;
-                    if (errorObject?.status != 200) {
+                    if (errorObject?.status != 200 && errorObject?.status < 500) {
                         const err = errorObject?.data?.error ?? {};
                         if (Object.keys(err).length > 0) {
                             for (const key in err) {
@@ -511,13 +511,12 @@
                                 }
                             }
                         }
-
                     }
                 },
                 response: (res) => {
                     let msg = "";
                     if (res?.status == 200) {
-                        msg = "data berhasil di entry!";
+                        msg = "Data anda berhasil di simpan, next step!";
                     } else if (res?.status == 201) {
                         msg = "data berhasil di update!";
                     }

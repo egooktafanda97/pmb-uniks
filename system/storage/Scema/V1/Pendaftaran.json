@@ -23,6 +23,9 @@
             "control_insert": "before",
             "label": "",
             "type": "key",
+            "migration": 0,
+            "validate": 2,
+            "request": false,
             "relation": {
                 "table": "user",
                 "function": "users",
@@ -32,10 +35,7 @@
                     "table": "users",
                     "auto_delete_relation": true
                 }
-            },
-            "validate": 2,
-            "request": false,
-            "migration": 0
+            }
         },
         "no_resister": {
             "name": "no_resister",
@@ -117,6 +117,32 @@
                 }
             }
         },
+        "agent_id": {
+            "name": "agent_id",
+            "control_insert": "after",
+            "label": "agent",
+            "type": "integer",
+            "migration": 8,
+            "validate": 7,
+            "request": true,
+            "relation": {
+                "table": "agent",
+                "function": "agent",
+                "relation_index": "agent_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "agent",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "status_seleksi": {
+            "validate": 0,
+            "type": "static",
+            "value": "pending",
+            "request": false,
+            "migration": 2
+        },
         "status": {
             "validate": 0,
             "type": "static",
@@ -167,6 +193,17 @@
             "file_relation": {
                 "name": "CalonMahasiswa",
                 "file": "CalonMahasiswa"
+            },
+            "data": []
+        },
+        "lampiran_pendaftaran": {
+            "hirarky": "after",
+            "model": "LampiranPendaftaran",
+            "foreign": "pendaftaran_id",
+            "relation": "hasOne",
+            "file_relation": {
+                "name": "LampiranPendaftaran",
+                "file": "LampiranPendaftaran"
             },
             "data": []
         },

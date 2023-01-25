@@ -18,6 +18,7 @@
                                minlength="16"
                                name="nik"
                                placeholder="nik 16 digit"
+                               value={{$pendaftaran->nik}}
                                required
                                type="text">
                     </div>
