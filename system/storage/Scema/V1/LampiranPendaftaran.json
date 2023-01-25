@@ -39,7 +39,7 @@
         },
         "foto_formal": {
             "type": "image",
-            "path": "imags/lampiran",
+            "path": "lampiran",
             "request": true,
             "migration": 3,
             "validate": 1,
@@ -59,7 +59,7 @@
         },
         "sc_ktp": {
             "type": "image",
-            "path": "imags/lampiran",
+            "path": "lampiran",
             "request": true,
             "migration": 3,
             "validate": 1,
@@ -79,7 +79,7 @@
         },
         "sc_kk": {
             "type": "image",
-            "path": "imags/lampiran",
+            "path": "lampiran",
             "request": true,
             "migration": 3,
             "validate": 1,
@@ -99,7 +99,7 @@
         },
         "sc_ijasa_skl": {
             "type": "image",
-            "path": "imags/lampiran",
+            "path": "lampiran",
             "request": true,
             "migration": 3,
             "validate": 1,
@@ -119,7 +119,7 @@
         },
         "sc_kip_kks_pkh": {
             "type": "image",
-            "path": "imags/lampiran",
+            "path": "lampiran",
             "request": true,
             "migration": 3,
             "validate": 1,

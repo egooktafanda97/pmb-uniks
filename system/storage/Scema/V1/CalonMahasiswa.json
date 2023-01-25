@@ -23,9 +23,13 @@
             "control_insert": "after",
             "label": "pendaftaran",
             "type": "integer",
-            "migration": 0,
-            "validate": 6,
             "request": true,
+            "migration": 19,
+            "validate": 20,
+            "validate_unique": {
+                "validate": 20,
+                "index_id": "pendaftaran_id"
+            },
             "relation": {
                 "table": "pendaftaran",
                 "function": "pendaftaran",

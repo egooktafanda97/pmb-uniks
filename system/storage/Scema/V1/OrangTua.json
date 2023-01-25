@@ -23,13 +23,13 @@
             "control_insert": "after",
             "label": "calon mahasiswa",
             "type": "integer",
+            "request": true,
             "migration": 19,
             "validate": 16,
             "validate_unique": {
                 "validate": 16,
                 "index_id": "calon_mahasiswa_id"
             },
-            "request": true,
             "relation": {
                 "table": "calon_mahasiswa",
                 "function": "calon_mahasiswa",

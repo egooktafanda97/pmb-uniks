@@ -130,7 +130,7 @@ trait Template
             /*0*/
             "string|nullable",
             /*1*/
-            "nullable|mimes:jpg,png,jpeg,ico,JPG,PNG,JPEG",
+            "nullable|mimes:jpg,png,jpeg,JPG,PNG,JPEG,pdf,PDF",
             /*2*/
             "required",
             /*3*/
@@ -167,6 +167,8 @@ trait Template
             "nullable|unique:calon_mahasiswa",
             /*19*/
             "required|mimes:jpg,png,jpeg,ico,JPG,PNG,JPEG",
+            /*20*/
+            "required|unique:calon_mahasiswa",
         ];
     }
     public function getTemplateMiddelware()
