@@ -83,12 +83,15 @@
                         </div>
                     </div>
                     </p>
-                    <a class="btn btn-primary btn-sm w-100"
-                        href="{{ url('report/id-card?us=' . \Crypt::encryptString($pendaftaran->id)) }}" target="_blank">
-                        <i class="fa fa-print"></i>
-                        CETAK KARTU UJIAN
-                    </a>
-                    <br>
+                    @if ($pendaftaran->status == 'valid')
+                        <a class="btn btn-primary btn-sm w-100"
+                            href="{{ url('report/id-card?us=' . \Crypt::encryptString($pendaftaran->id)) }}"
+                            target="_blank">
+                            <i class="fa fa-print"></i>
+                            CETAK KARTU UJIAN
+                        </a>
+                        <br>
+                    @endif
                 </div>
             </div>
             @if (!$pendaftaran->agent_id)
@@ -117,6 +120,33 @@
                         <small class="text-success">masukkan kode referal agent anda jika ada.</small>
                     </div>
 
+                </div>
+            @else
+                <div class="card border-primary border-bottom border-3 border-0" id="form-referal">
+                    <div class="card-body">
+                        <div>
+                            <div
+                                style="display: flex;justify-content: space-between;align-items: center;margin-bottom: 10px">
+                                <strong>
+                                    Agent
+                                </strong>
+                            </div>
+                            <hr>
+                            <div>
+                                <div class="d-flex align-items-center">
+                                    <img alt="agen" class="rounded-circle p-1 border" height="90"
+                                        src="{{ asset('assets/imags/users/default.png') }}" width="90">
+                                    <div class="flex-grow-1 ms-3">
+                                        <label class="mt-0"
+                                            style="font-size: 1.1em; font-weight: bold;">{{ $pendaftaran->agent->nama_lengkap }}</label>
+                                        <p class="mb-0">
+                                            <strong class="text-primary">{{ $pendaftaran->agent->referal }}</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endif
         </div>
@@ -520,6 +550,7 @@
                     referal: $('#referal').val()
                 }, () => {
                     $(this).removeClass("btn-loader--loading");
+                    window.location.reload();
                 });
             })
         </script>

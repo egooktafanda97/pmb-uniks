@@ -1,386 +1,110 @@
 {
-    "File_name": "Prodi",
+    "File_name": "PilihanProdi",
     "Public_name": [
-        "Prodi",
-        "prodi"
+        "PilihanProdi",
+        "pilihan_prodi"
     ],
     "Inisial": {
-        "table": "prodi",
+        "table": "pilihan_prodi",
         "primary": "id",
         "Protected": {}
     },
     "Namespace": {
-        "Controller": "ProdiController",
-        "Model": "Prodi",
+        "Controller": "PilihanProdiController",
+        "Model": "PilihanProdi",
         "Use_Model": [
-            "Prodi",
+            "PilihanProdi",
             "Fakultas"
         ]
     },
     "Data": {
-        "user_id": {
-            "name": "user_id",
-            "control_insert": "before",
+        "no_pilihan": {
+            "name": "no_pilihan",
             "label": "",
-            "type": "key",
-            "relation": {
-                "table": "user",
-                "function": "users",
-                "relation_index": "users",
-                "foreign": {
-                    "key": "id",
-                    "table": "users",
-                    "auto_delete_relation": true
-                }
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
             },
-            "validate": 2,
-            "request": false,
-            "migration": 0
+            "costum": {}
         },
-        "fakultas_id": {
-            "name": "fakultas_id",
+        "pendaftaran_id": {
+            "name": "pendaftaran_id",
             "control_insert": "after",
-            "label": "",
-            "type": "auto",
-            "validate": 6,
-            "migration": 0,
-            "request": false,
-            "config": {
-                "case": "data_by_model",
-                "def_value": {
-                    "model_id": "Fakultas",
-                    "where": "id",
-                    "role_value": "auth_id",
-                    "get": "first",
-                    "obj": "id"
-                }
-            },
+            "label": "prodi",
+            "type": "integer",
+            "migration": 8,
+            "validate": 7,
+            "request": true,
             "relation": {
-                "table": "fakultas",
-                "function": "fakultas",
-                "relation_index": "fakultas_id",
+                "table": "pendaftaran",
+                "function": "pendaftaran",
+                "relation_index": "pendaftaran_id",
                 "foreign": {
                     "key": "id",
-                    "table": "fakultas",
-                    "auto_delete_relation": true
+                    "table": "pendaftaran",
+                    "auto_delete_relation": false
                 }
             }
         },
-        "nama_prodi": {
-            "name": "nama_Prodi",
-            "label": "Nama Prodi",
-            "type": "string",
+        "prodi_id": {
+            "name": "prodi_id",
+            "control_insert": "after",
+            "label": "",
+            "type": "integer",
+            "migration": 0,
+            "validate": 6,
             "request": true,
-            "migration": 1,
+            "relation": {
+                "table": "prodi",
+                "function": "prodi",
+                "relation_index": "prodi_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "prodi",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "status": {
             "validate": 0,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "nama_alias": {
-            "name": "nama_alias",
-            "label": "Nama Prodi",
-            "type": "string",
-            "request": true,
-            "migration": 1,
-            "validate": 0,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "jenjang": {
-            "name": "jenjang",
-            "label": "Nama Prodi",
-            "type": "string",
-            "request": true,
-            "migration": 2,
-            "validate": 2,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "akreditas": {
-            "name": "akreditas",
-            "label": "Nama Prodi",
-            "type": "string",
-            "request": true,
-            "migration": 2,
-            "validate": 2,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "latar_belakang": {
-            "name": "latar_belakang",
-            "label": "Keterangan",
-            "type": "string",
-            "request": true,
-            "validate": 6,
-            "migration": 10,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "visi_misi": {
-            "name": "visi_misi",
-            "label": "Keterangan",
-            "type": "string",
-            "request": true,
-            "validate": 6,
-            "migration": 10,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "tujuan": {
-            "name": "tujuan",
-            "label": "Keterangan",
-            "type": "string",
-            "request": true,
-            "validate": 6,
-            "migration": 10,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "kurikulum": {
-            "name": "kurikulum",
-            "label": "Keterangan",
-            "type": "string",
-            "request": true,
-            "validate": 6,
-            "migration": 10,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "struktur_management": {
-            "type": "image",
-            "path": "images/struktur_management",
-            "request": true,
-            "migration": 3,
-            "validate": 1,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "time"
-            },
-            "costum": {}
-        },
-        "kepala_prodi": {
-            "name": "kepala_prodi",
-            "label": "Nama Prodi",
-            "type": "string",
-            "request": true,
-            "migration": 2,
-            "validate": 2,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "gambar": {
-            "type": "image",
-            "path": "images/prodi",
-            "request": true,
-            "migration": 3,
-            "validate": 1,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "time"
-            },
-            "costum": {}
-        },
-        "situs_web": {
-            "name": "nama_Prodi",
-            "label": "Nama Prodi",
-            "type": "string",
-            "request": true,
-            "migration": 2,
-            "validate": 2,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
+            "type": "static",
+            "value": "pending",
+            "request": false,
+            "migration": 2
         }
     },
     "Relation": {
-        "users": {
-            "hirarky": "before",
-            "model": "User",
-            "foreign": "user_id",
-            "relation": "belongsTo",
-            "file_relation": {
-                "name": "User",
-                "file": "User"
-            },
-            "data": []
-        },
-        "fakultas": {
+        "prodi": {
             "hirarky": "after",
-            "model": "Fakultas",
-            "foreign": "fakultas_id",
-            "relation": "belongsTo",
-            "file_relation": {
-                "name": "Instansi",
-                "file": "Instansi"
-            },
-            "data": []
-        },
-        "informasi_pendaftaran": {
-            "hirarky": "after",
-            "model": "InformasiPendaftaran",
+            "model": "Prodi",
             "foreign": "prodi_id",
             "relation": "belongsTo",
             "file_relation": {
-                "name": "InformasiPendaftaran",
-                "file": "InformasiPendaftaran"
+                "name": "Prodi",
+                "file": "Prodi"
             },
             "data": []
         },
-        "persyaratan_prodi": {
+        "pendaftaran": {
             "hirarky": "after",
-            "model": "PersyaratanProdi",
-            "foreign": "prodi_id",
-            "relation": "hasMany",
+            "model": "Pendaftaran",
+            "foreign": "pendaftaran_id",
+            "relation": "belongsTo",
             "file_relation": {
-                "name": "PersyaratanProdi",
-                "file": "PersyaratanProdi"
-            },
-            "data": []
-        },
-        "biaya_kuliah": {
-            "hirarky": "after",
-            "model": "BiayaKuliah",
-            "foreign": "prodi_id",
-            "relation": "hasMany",
-            "file_relation": {
-                "name": "BiayaKuliah",
-                "file": "BiayaKuliah"
-            },
-            "data": []
-        },
-        "gallery_prodi": {
-            "hirarky": "after",
-            "model": "GalleryProdi",
-            "foreign": "prodi_id",
-            "relation": "hasMany",
-            "file_relation": {
-                "name": "GalleryProdi",
-                "file": "GalleryProdi"
+                "name": "Pendaftaran",
+                "file": "Pendaftaran"
             },
             "data": []
         }
@@ -411,80 +135,50 @@
     },
     "Router": {
         "config": {
-            "contoller": "ProdiController"
+            "contoller": "PilihanProdiController"
         },
         "api": {
             "get": {
                 "method": "get",
                 "router": "/",
-                "prefix": "prodi",
+                "prefix": "pilihan_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "getById": {
                 "method": "get",
                 "router": "/{slug}",
-                "prefix": "prodi",
+                "prefix": "pilihan_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "getByIdAndSource": {
                 "method": "get",
                 "router": "/source/{slug}",
-                "prefix": "prodi",
+                "prefix": "pilihan_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "store": {
                 "method": "post",
                 "router": "/store",
-                "prefix": "prodi",
+                "prefix": "pilihan_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "update": {
                 "method": "post",
                 "router": "/update/{id}",
-                "prefix": "prodi",
+                "prefix": "pilihan_prodi",
                 "middleware": 1,
                 "controller": ""
             },
             "delete": {
                 "method": "delete",
                 "router": "/delete/{id}",
-                "prefix": "prodi",
+                "prefix": "pilihan_prodi",
                 "middleware": 1,
                 "controller": ""
-            }
-        },
-        "web": {
-            "show": {
-                "method": "get",
-                "router": "/",
-                "prefix": "admin/prodi",
-                "middleware": 1,
-                "controller": "\\App\\Http\\Controllers\\admin\\ProdiController"
-            },
-            "detail": {
-                "method": "get",
-                "router": "/show/{id}",
-                "prefix": "admin/info-pendaftaran",
-                "middleware": 1,
-                "controller": "\\App\\Http\\Controllers\\admin\\ProdiController"
-            },
-            "store": {
-                "method": "get",
-                "router": "/store",
-                "prefix": "admin/prodi",
-                "middleware": 1,
-                "controller": "\\App\\Http\\Controllers\\admin\\ProdiController"
-            },
-            "update": {
-                "method": "get",
-                "router": "/update/{id}",
-                "prefix": "admin/prodi",
-                "middleware": 1,
-                "controller": "\\App\\Http\\Controllers\\admin\\ProdiController"
             }
         }
     },

@@ -1,6 +1,42 @@
 @extends('mahasiswa.index.index')
 @section('style')
     <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        .inp-date::-webkit-inner-spin-button,
+        .inp-date::-webkit-clear-button {
+            display: block;
+        }
+
+        .inp-date::-webkit-calendar-picker-indicator {
+            color: rgba(0, 0, 0, 0);
+            opacity: 1
+        }
+
+        .inp-date::-webkit-calendar-picker-indicator:hover {
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .inp-date::-webkit-calendar-picker-indicator::after {
+            content: '';
+            display: block;
+            background: url(https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-32.png) no-repeat;
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            margin-top: -16px;
+        }
+
+        .date {
+            position: relative;
+            width: 154px;
+            overflow: auto;
+            margin: 30px auto;
+            background: #000;
+        }
+    </style>
 @endsection
 @section('content')
     @include('mahasiswa.page.form_pendaftaran.info')
@@ -246,7 +282,7 @@
                 }
             });
             if (main) {
-                if (!__empty(main?.data)) {
+                if (!__empty(main?.data?.calon_mahasiswa)) {
                     const cmhs = main.data?.calon_mahasiswa;
                     const ortu = main.data?.calon_mahasiswa?.orangtua;
                     delete cmhs.orangtua;
@@ -266,13 +302,14 @@
                     if (!localStorage.hasOwnProperty("entry") || __empty(_ls)) {
                         $('input, select, textarea').each(
                             function(index) {
-                                const data_ready = main.data?.calon_mahasiswa ?? {};
-                                data_ready[$(this).attr("name")] = $(this).val();
-                                localStorage.setItem("entry", JSON.stringify(data_ready));
+                                if ($(this).val() != undefined) {
+                                    const data_ready = main.data?.calon_mahasiswa ?? {};
+                                    data_ready[$(this).attr("name")] = $(this).val();
+                                    localStorage.setItem("entry", JSON.stringify(data_ready));
+                                }
                             }
                         );
                     }
-                    _init_alamat_ready();
                 }
 
             }
@@ -298,10 +335,16 @@
         //     );
         //     _init_alamat_ready();
         // }
+        $("#person_data_next").click(function() {
+            ajax_prov();
+        })
         $("input,select,textarea").change(function() {
             const data_ready = JSON.parse(localStorage.getItem("entry"));
-            data_ready[$(this).attr("name")] = $(this).val();
-            localStorage.setItem("entry", JSON.stringify(data_ready));
+            if (!__empty($(this).val()) && !__empty(data_ready)) {
+                data_ready[$(this).attr("name")] = $(this).val();
+                localStorage.setItem("entry", JSON.stringify(data_ready));
+            }
+
         })
 
         /*
@@ -317,6 +360,9 @@
             const _prod = $(".single-select").val();
             const form_data = new FormData();
             form_data.append("prodi_id", _prod);
+            form_data.append("prodi_1", $("#p1").val());
+            form_data.append("prodi_2", $("#p2").val());
+            form_data.append("prodi_3", $("#p3").val());
             const http_configure = {
                 data: form_data,
                 url: `{{ url('api/mahasiswa/register-prodi-update') }}`,
@@ -353,6 +399,7 @@
                     }
                 },
                 response: (res) => {
+                    console.log(res);
                     $.toast({
                         title: 'Berhasil!',
                         subtitle: '',
@@ -525,6 +572,7 @@
         function store(load, response) {
             const data = JSON.parse(localStorage.getItem("entry"));
             data['pendaftaran_id'] = `{{ $pendaftaran->id ?? '' }}`;
+            data['nik'] = $("[name='nik']").val() ?? "";
             const http_configure = {
                 data: data,
                 url: `{{ url('api/mahasiswa/register') }}`,

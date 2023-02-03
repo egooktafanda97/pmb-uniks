@@ -46,6 +46,33 @@ class DaftarMhsController extends Controller
             $up_prod = \Modules\V1\Entities\Pendaftaran::whereuserId(auth()->user()->id)->first();
             $up_prod->prodi_id = $request->prodi_id;
             $up_prod->save();
+            \Modules\V1\Entities\PilihanProdi::where("pendaftaran_id", $up_prod->id)->delete();
+            $pilihan = [
+                [
+                    "no_pilihan" => "1",
+                    "pendaftaran_id" => $up_prod->id,
+                    "prodi_id" => $request->prodi_1
+                ],
+                [
+                    "no_pilihan" => "2",
+                    "pendaftaran_id" => $up_prod->id,
+                    "prodi_id" => $request->prodi_2
+                ],
+                [
+                    "no_pilihan" => "3",
+                    "pendaftaran_id" => $up_prod->id,
+                    "prodi_id" => $request->prodi_3
+                ]
+            ];
+            foreach ($pilihan as $plp) {
+                $pp = new ManagementCrud('PilihanProdi');
+                $pathJson =  ManagementServiceProvider::getScemaPath();
+                $pp->instance($pathJson);
+                $pp->setNameSpaceModel("\Modules\V1\Entities\\");
+                $data = new \Illuminate\Http\Request();
+                $data->replace($plp);
+                $pp->generate_data_insert($data);
+            }
             return response()->json($up_prod, 200);
         } catch (\Throwable $th) {
             return response()->json(["error" => $th->getMessage()], 401);

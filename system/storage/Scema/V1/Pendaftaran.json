@@ -217,6 +217,28 @@
                 "file": "BuktiPembayaran"
             },
             "data": []
+        },
+        "pilihan_prodi": {
+            "hirarky": "after",
+            "model": "PilihanProdi",
+            "foreign": "id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "PilihanProdi",
+                "file": "PilihanProdi"
+            },
+            "data": []
+        },
+        "agent": {
+            "hirarky": "after",
+            "model": "Agent",
+            "foreign": "agent_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "Agent",
+                "file": "Agent"
+            },
+            "data": []
         }
     },
     "Query": {

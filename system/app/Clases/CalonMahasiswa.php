@@ -18,7 +18,7 @@ class CalonMahasiswa
                 "NIS" =>  $daftar->nis,
                 "NPWP" =>  $daftar->npwp,
                 "NAMA LENGKAP" =>  $daftar->nama_lengkap,
-                "JENIS KELAMIN" =>  $daftar->jenis_kelamin,
+                "JENIS KELAMIN" =>  $daftar->jenis_kelamin == "L" ? "Laki-Laki" : "Perempuan" ?? "",
                 "TEMPAT LAHIR" =>  $daftar->tempat_lahir,
                 "TANGGAL LAHIR" =>  $daftar->tanggal_lahir,
                 "AGAMA" =>  $daftar->agama,

@@ -16,8 +16,8 @@
                             @include('mahasiswa.page.lampiran.form_upload')
                             <div class="col-12 mt-3">
                                 <div class="mt-3 space-between">
-                                    <a class="btn btn-primary px-5 rounded-0 btn-sm next-card"> <i
-                                            class="fa fa-long-arrow-left"></i>
+                                    <a class="btn btn-primary px-5 rounded-0 btn-sm next-card"
+                                        href="{{ url('mahasiswa/form?edit=mhs') }}"> <i class="fa fa-long-arrow-left"></i>
                                         Kembali</a>
 
                                     <button class="btn btn-primary px-5 rounded-0 btn-sm btn-loader" id="submit-lampiran"

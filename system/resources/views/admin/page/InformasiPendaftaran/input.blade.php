@@ -1,7 +1,6 @@
 @extends('admin.index.index')
 @section('style')
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 @endsection
 @section('content')
     <!--start page wrapper -->
@@ -13,31 +12,24 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item">
                         </li>
-                        <li aria-current="page"
-                            class="breadcrumb-item active">{{ $title ?? '' }}</li>
+                        <li aria-current="page" class="breadcrumb-item active">{{ $title ?? '' }}</li>
                     </ol>
                 </nav>
             </div>
         </div>
         <div class="col-12">
             <div class="card border-primary border-bottom border-3 border-0">
-                <form enctype="multipart/form-data"
-                      id="form-save">
-                    <input id="id"
-                           name="id"
-                           type="hidden"
-                           value="{{ $Quri->id ?? '' }}">
+                <form enctype="multipart/form-data" id="form-save">
+                    <input id="id" name="id" type="hidden" value="{{ $Quri->id ?? '' }}">
                     <div class="card-body">
                         <div class="space-between">
                             <div class="d-flex align-items-center justify-content-center">
-                                <a class="mr-2"
-                                   href="{{ url()->previous() }}"> <i class="fa fa-long-arrow-left"></i></a>
+                                <a class="mr-2" href="{{ url()->previous() }}"> <i class="fa fa-long-arrow-left"></i></a>
                                 <h5 class="card-title text-primary m-0"> INPUT PENDAFTARAN BARU</h5>
                             </div>
 
                             <div class="d-flex align-items-center gap-2">
-                                <button class="btn btn-outline-primary px-5"
-                                        type="submit">
+                                <button class="btn btn-outline-primary px-5" type="submit">
                                     <i class="fa fa-save"></i>Simpan</button>
                             </div>
                         </div>
@@ -47,75 +39,55 @@
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label>NAMA PENDAFTARAN <span class="in-require">*</span></label>
-                                    <input class="form-control form-control-sm validationTooltip03"
-                                           name="pendaftaran"
-                                           placeholder="GELOMBANG I"
-                                           required=""
-                                           type="text"
-                                           value="{{ $Quri->pendaftaran ?? '' }}">
+                                    <input class="form-control form-control-sm validationTooltip03" name="pendaftaran"
+                                        placeholder="GELOMBANG I" required="" type="text"
+                                        value="{{ $Quri->pendaftaran ?? '' }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label for="">BROSUR</label>
-                                    <input class="form-control form-control-sm"
-                                           id="brosur"
-                                           name="brosur"
-                                           type="file">
+                                    <input class="form-control form-control-sm" id="brosur" name="brosur"
+                                        type="file">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label>TAHUN <span class="in-require">*</span></label>
-                                    <input class="form-control form-control-sm validationTooltip03"
-                                           maxlength="4"
-                                           name="tahun_ajaran"
-                                           placeholder="{{ date('Y') }}"
-                                           type="number"
-                                           value="{{ $Quri->tahun ?? date('Y') }}">
+                                    <input class="form-control form-control-sm validationTooltip03" maxlength="4"
+                                        name="tahun_ajaran" placeholder="{{ date('Y') }}" type="number"
+                                        value="{{ $Quri->tahun ?? date('Y') }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label>TAHUN AJARAN <span class="in-require">*</span></label>
-                                    <input class="form-control form-control-sm validationTooltip03"
-                                           name="tahun_ajaran"
-                                           placeholder="{{ date('Y') . '/' . (date('Y') + 1) }}"
-                                           type="text"
-                                           value="{{ $Quri->tahun_ajaran ?? '' }}">
+                                    <input class="form-control form-control-sm validationTooltip03" name="tahun_ajaran"
+                                        placeholder="{{ date('Y') . '/' . (date('Y') + 1) }}" type="text"
+                                        value="{{ $Quri->tahun_ajaran ?? '' }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label>TANGGAL BUKA PENDAFATARAN </label>
-                                    <input class="form-control form-control-sm validationTooltip03"
-                                           name="buka"
-                                           placeholder=""
-                                           type="date"
-                                           value="{{ $Quri->buka ?? '' }}">
+                                    <input class="form-control form-control-sm validationTooltip03" name="buka"
+                                        placeholder="" type="date" value="{{ $Quri->buka ?? '' }}">
                                 </div>
                             </div>
 
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label>TANGGAL TUTUP PENDAFATARAN </label>
-                                    <input class="form-control form-control-sm validationTooltip03"
-                                           name="tutup"
-                                           placeholder=""
-                                           type="date"
-                                           value="{{ $Quri->tutup ?? '' }}">
+                                    <input class="form-control form-control-sm validationTooltip03" name="tutup"
+                                        placeholder="" type="date" value="{{ $Quri->tutup ?? '' }}">
                                 </div>
                             </div>
 
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
                                     <label>KUOTA</label>
-                                    <input class="form-control form-control-sm validationTooltip03"
-                                           name="kuota"
-                                           placeholder="0"
-                                           type="text"
-                                           value="{{ $Quri->kuota ?? '' }}"
-                                           value="0">
+                                    <input class="form-control form-control-sm validationTooltip03" name="kuota"
+                                        placeholder="0" type="text" value="{{ $Quri->kuota ?? '' }}" value="0">
                                 </div>
                             </div>
                             {{-- ============= --}}
@@ -128,12 +100,10 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <strong style="color: #9c9c9c"><i
-                                                       class="fadeIn animated bx bx-info-circle"></i> Kosongkan jika biaya
+                                                        class="fadeIn animated bx bx-info-circle"></i> Kosongkan jika biaya
                                                     kuliah gratis</strong>
                                             </div>
-                                            <textarea class="biaya_pendaftaran"
-                                                      id="biaya_pendaftaran"
-                                                      name="biaya_pendaftaran">{{ $Quri->biaya_pendaftaran ?? '' }}</textarea>
+                                            <textarea class="biaya_pendaftaran" id="biaya_pendaftaran" name="biaya_pendaftaran">{{ $Quri->biaya_pendaftaran ?? '' }}</textarea>
                                         </div>
                                     </div>
 
@@ -147,9 +117,7 @@
                                     </div>
                                     <div class=" mt-3">
                                         <div class="card-body">
-                                            <textarea class="informasi_umum"
-                                                      id="informasi_umum"
-                                                      name="informasi_umum">{{ $Quri->informasi_umum ?? '' }}</textarea>
+                                            <textarea class="informasi_umum" id="informasi_umum" name="informasi_umum">{{ $Quri->informasi_umum ?? '' }}</textarea>
                                         </div>
                                     </div>
 
@@ -168,10 +136,10 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script type="text/javascript">
         /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | DATA TABLE CONFIGURATION
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | DATA TABLE CONFIGURATION
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    */
         $(document).ready(function() {
             $('.informasi_umum').summernote({
                 height: 300,
@@ -232,7 +200,7 @@
                 response: (res) => {
                     swal({
                         title: "Selesai!",
-                        text: "data fakultas berhasil di entry!",
+                        text: "data berhasil di entry!",
                         icon: "success",
                         button: "Oke!",
                     }).then((willDelete) => {

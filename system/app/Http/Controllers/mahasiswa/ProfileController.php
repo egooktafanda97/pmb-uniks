@@ -28,7 +28,8 @@ class ProfileController extends Controller
             "users",
             "prodi",
             "informasi_pendaftaran",
-            "calon_mahasiswa"
+            "calon_mahasiswa",
+            "agent"
         ])->first();
         return [
             "prodi" => $prodi,

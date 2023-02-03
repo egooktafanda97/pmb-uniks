@@ -164,7 +164,7 @@ class Pendaftaran extends Seeder
                 array_push($id_prod, $v->id);
             }
 
-            for ($i = 0; $i < rand(50, 100); $i++) {
+            for ($i = 0; $i < rand(1, 5); $i++) {
                 $pendaftaran = new ManagementCrud("Pendaftaran");
                 $pathJson =  config('generator_crud_config.scema_path');
                 $pendaftaran->instance($pathJson);

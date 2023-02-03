@@ -35,6 +35,7 @@
                                 class="in-require">*</span></label>
                         <select class="form-select form-select-md mb-3" id="jenis_kelamin" name="jenis_kelamin"
                             required>
+                            <option value="">Pilih Jenis Kelamin</option>
                             <option value="L">Laki-Laki</option>
                             <option value="P">Perempuan</option>
                         </select>
@@ -46,13 +47,14 @@
                             required type="text">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">TANGGAL LAHIR <span
-                                class="in-require">*</span></label>
-                        <input class="form-control" name="tanggal_lahir" required type="date" />
+                        <label class="form-label" for="inputFirstName">TANGGAL LAHIR
+                            <span class="in-require">*</span></label>
+                        <input class="form-control inp-date" name="tanggal_lahir" required type="date" />
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="inputFirstName">AGAMA <span class="in-require">*</span></label>
                         <select class="form-select form-select-md mb-3" id="agama" name="agama" required>
+                            <option value="">Pilih Agama</option>
                             <option value="Islam">Islam</option>
                             <option value="Kristen">Kristen</option>
                             <option value="Katolik">Katolik</option>
@@ -88,7 +90,7 @@
                             data-next-id="card-prodi" type="button"> <i class="fa fa-long-arrow-left"></i>
                             Kembali</button>
                         <button class="btn btn-primary px-5 rounded-0 btn-sm next-card btn-loader"
-                            data-card-id="card-mhs" data-next-id="card-alamat" type="button">
+                            data-card-id="card-mhs" data-next-id="card-alamat" id="person_data_next" type="button">
                             Next <i class="fa fa-long-arrow-right"></i>
                             <span>
                                 <b></b>
