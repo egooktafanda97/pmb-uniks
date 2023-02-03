@@ -47,7 +47,7 @@
             "migration": 0
         },
         "gambar": {
-            "type": "struktur_management",
+            "type": "image",
             "path": "imags/gallery-prodi",
             "request": true,
             "migration": 3,
@@ -113,7 +113,7 @@
         "prodi": {
             "hirarky": "after",
             "model": "Prodi",
-            "foreign": "prodi_id",
+            "foreign": "id",
             "relation": "hasMany",
             "file_relation": {
                 "name": "Prodi",

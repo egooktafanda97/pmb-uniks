@@ -26,13 +26,15 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item">
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $sub_title ?? '' }}</li>
+                        <li aria-current="page"
+                            class="breadcrumb-item active">{{ $sub_title ?? '' }}</li>
                     </ol>
                 </nav>
             </div>
             <div class="ms-auto">
-                <a href="{{ url($uri['store']['prefix'] . $uri['store']['router']) }}" class="btn btn-inverse-primary"><i
-                        class="fa fa-plus"></i> Tambah Data</a>
+                <a class="btn btn-inverse-primary"
+                   href="{{ url($uri['store']['prefix'] . $uri['store']['router']) }}"><i class="fa fa-plus"></i> Tambah
+                    Data</a>
             </div>
         </div>
         <div class="col-12">
@@ -41,7 +43,9 @@
                     <h5 class="card-title text-primary">PROGRAM STUDI</h5>
                     <hr>
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table class="table table-striped table-bordered"
+                               id="example"
+                               style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Nama Fakultas</th>
@@ -55,14 +59,20 @@
                                         <td class="tb-title">{{ $item->nama_prodi }}</td>
                                         <td class="tb-acton">
                                             <div class="div-action-container">
-                                                <div class="btn-group btn-sm" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <div aria-label="Basic example"
+                                                     class="btn-group btn-sm"
+                                                     role="group">
+                                                    <a class="btn btn-sm btn-outline-primary"
+                                                       href="{{ url('admin/prodi/show/' . $item->id) }}"
+                                                       type="button">
                                                         <i class="fa fa-eye"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-success">
+                                                    </a>
+                                                    <button class="btn btn-sm btn-outline-success"
+                                                            type="button">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger">
+                                                    <button class="btn btn-sm btn-outline-danger"
+                                                            type="button">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -96,7 +106,8 @@
             $('#example').DataTable({
                 searching: false,
                 paging: false,
-                info: false
+                info: false,
+                ordering: false
             });
         });
     </script>

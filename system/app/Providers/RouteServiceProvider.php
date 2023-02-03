@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/admin/';
+    public const MHS = '/mahasiswa/form';
     protected $apiNamespace = '\App\Http\Controllers\api';
 
     /**

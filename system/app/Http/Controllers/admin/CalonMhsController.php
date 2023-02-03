@@ -12,12 +12,15 @@ use Illuminate\Support\Facades\Auth;
 | USE COSTIM BY CONTROLLER
 */
 use App\Clases\CalonMahasiswa;
+use App\Traits\ManagementControlGetData;
+
 /*
 | END USE COSTIM BY CONTROLLER
 */
 
 class CalonMhsController extends Controller
 {
+    use ManagementControlGetData;
     public $data;
     private $view = "admin.page.CalonMhs.";
     public function __construct()
@@ -29,22 +32,10 @@ class CalonMhsController extends Controller
         $data->setNameSpaceModel("\Modules\V1\Entities\\");
         $this->data = $data;
     }
-    public function getter_data()
+
+    public function show(Request $request)
     {
-        $prodi = \Modules\V1\Entities\Prodi::orderBy("id", "desc")->get();
-        $pmb = \Modules\V1\Entities\CalonMahasiswa::query()->with([
-            "orangtua",
-        ])->with("pendaftaran", function ($query) {
-            return $query->with(["prodi", "informasi_pendaftaran"]);
-        })->paginate(20);
-        return [
-            "prodi" => $prodi,
-            "mhs" => $pmb
-        ];
-    }
-    public function show()
-    {
-        $data = $this->getter_data();
+        $data = ManagementControlGetData::result_query_dump_pmb($request);
         return view($this->view . 'mhs', $data);
     }
     public function details_data($id)

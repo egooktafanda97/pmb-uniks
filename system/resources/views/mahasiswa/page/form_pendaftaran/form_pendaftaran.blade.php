@@ -1,8 +1,6 @@
 @extends('mahasiswa.index.index')
 @section('style')
-    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}"
-          rel="stylesheet"
-          type="text/css">
+    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
     @include('mahasiswa.page.form_pendaftaran.info')
@@ -13,8 +11,7 @@
 @endsection
 @section('script')
     <!--notification js -->
-    <script type="text/javascript"
-            src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
     @if (!empty($pendaftaran->prodi))
         <script>
             $("#info-prodi").addClass("id-show").removeClass("id-hide");
@@ -208,11 +205,13 @@
             $("#card-prodi").addClass("id-show").removeClass("id-hide");
         }
         $(".next-card").click(function() {
+            $(this).addClass('btn-loader--loading')
             const next = $(this).data("next-id");
             const this_card = $(this).data("card-id");
             $("#" + this_card).addClass("id-hide").removeClass("id-show");
             $(`#${next}`).addClass("id-show").removeClass("id-hide");
             sessionStorage.setItem("card-active", next);
+            $(this).removeClass('btn-loader--loading')
         });
         /*
         | 
@@ -239,29 +238,72 @@
                 });
             });
         }
-        const _ls = localStorage.getItem("entry");
-        if (!localStorage.hasOwnProperty("entry") || __empty(_ls)) {
-            $('input, select, textarea').each(
-                function(index) {
-                    const data_ready = JSON.parse(localStorage.getItem("entry")) ?? {};
-                    data_ready[$(this).attr("name")] = $(this).val();
-                    localStorage.setItem("entry", JSON.stringify(data_ready));
+
+        async function _readedCmhs() {
+            const main = await axios.get(`{{ url('api/mahasiswa/read') }}`, {
+                headers: {
+                    "Authorization": `Bearer {{ \Session::get('token')['access_token'] ?? '' }}`,
                 }
-            );
-        } else {
-            $('input, select, textarea').each(
-                function(index) {
-                    const data_ready = JSON.parse(localStorage.getItem("entry"));
-                    $(this).val(data_ready[$(this).attr("name")]);
+            });
+            if (main) {
+                if (!__empty(main?.data)) {
+                    const cmhs = main.data?.calon_mahasiswa;
+                    const ortu = main.data?.calon_mahasiswa?.orangtua;
+                    delete cmhs.orangtua;
+                    const data_ready = {
+                        ...cmhs,
+                        ...ortu
+                    };
+                    $('input, select, textarea').each(
+                        function(index) {
+                            $(this).val(data_ready[$(this).attr("name")]);
+                            localStorage.setItem("entry", JSON.stringify(data_ready));
+                        }
+                    );
+                    _init_alamat_ready();
+                } else {
+                    const _ls = localStorage.getItem("entry");
+                    if (!localStorage.hasOwnProperty("entry") || __empty(_ls)) {
+                        $('input, select, textarea').each(
+                            function(index) {
+                                const data_ready = main.data?.calon_mahasiswa ?? {};
+                                data_ready[$(this).attr("name")] = $(this).val();
+                                localStorage.setItem("entry", JSON.stringify(data_ready));
+                            }
+                        );
+                    }
+                    _init_alamat_ready();
                 }
-            );
-            _init_alamat_ready();
+
+            }
         }
+        _readedCmhs();
+
+        // const _ls = localStorage.getItem("entry");
+        // if (!localStorage.hasOwnProperty("entry") || __empty(_ls)) {
+        //     $('input, select, textarea').each(
+        //         function(index) {
+        //             const data_ready = JSON.parse(localStorage.getItem("entry")) ?? {};
+        //             data_ready[$(this).attr("name")] = $(this).val();
+        //             localStorage.setItem("entry", JSON.stringify(data_ready));
+        //         }
+        //     );
+        // } else {
+        //     $('input, select, textarea').each(
+        //         function(index) {
+        //             const data_ready = JSON.parse(localStorage.getItem("entry"));
+        //             if ($(this).attr("name") != "nik")
+        //                 $(this).val(data_ready[$(this).attr("name")]);
+        //         }
+        //     );
+        //     _init_alamat_ready();
+        // }
         $("input,select,textarea").change(function() {
             const data_ready = JSON.parse(localStorage.getItem("entry"));
             data_ready[$(this).attr("name")] = $(this).val();
             localStorage.setItem("entry", JSON.stringify(data_ready));
         })
+
         /*
         | 
         | END TAB SORAGE ENTRY HNDEL
@@ -472,11 +514,15 @@
         |
         */
         $("#form-done").click(function() {
-            store();
+            const Btn = $(this);
+            Btn.addClass("btn-loader--loading");
+            store(Btn, (r) => {
+
+            });
 
         })
 
-        function store() {
+        function store(load, response) {
             const data = JSON.parse(localStorage.getItem("entry"));
             data['pendaftaran_id'] = `{{ $pendaftaran->id ?? '' }}`;
             const http_configure = {
@@ -510,7 +556,16 @@
                                     })
                                 }
                             }
+                            load.removeClass("btn-loader--loading");
                         }
+                    } else {
+                        swal({
+                            title: "Ooops fatal error!",
+                            text: "pastikan proses dilakukan dengan benar.",
+                            icon: "error",
+                            button: "Oke!",
+                        });
+                        load.removeClass("btn-loader--loading");
                     }
                 },
                 response: (res) => {
@@ -520,6 +575,7 @@
                     } else if (res?.status == 201) {
                         msg = "data berhasil di update!";
                     }
+                    load.removeClass("btn-loader--loading");
                     swal({
                         title: "Selesai!",
                         text: msg,

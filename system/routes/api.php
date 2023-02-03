@@ -11,12 +11,33 @@ use App\Service\Control\ManagementCrud;
 | API ROUTER AUTENTICATION
 */
 
+
+
 Route::group(['middleware' => 'api'], function ($router) {
     // Route::post('/register', [JWTController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     // Route::post('/logout', [JWTController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     // Route::post('/profile', [JWTController::class, 'profile']);
+    /*
+    |--------------------------------------------------------------------------
+    | API ROUTER MAHASISWA
+    */
+    Route::get('/result_main_data', [\App\Http\Controllers\Api\admin\DashboardController::class, 'dashboard_data']);
+    /*
+    | end router auth
+    |--------------------------------------------------------------------------
+    */
+    // ************************************************************************
+    /*
+    |--------------------------------------------------------------------------
+    | API ROUTER PUBLIC
+    */
+    Route::post('/otp_check', [\App\Http\Controllers\Auth\LoginController::class, 'otp']);
+    /*
+    | END API ROUTER PUBLIC
+    |--------------------------------------------------------------------------
+    */
 });
 
 /*
@@ -78,6 +99,10 @@ Route::group([
         '/upload-lampiran',
         [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'upload_lampiran']
     );
+    Route::get(
+        '/read',
+        [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'read']
+    );
 });
 /*
 | END ROUTER MAHASISWA
@@ -86,7 +111,7 @@ Route::group([
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*
 |--------------------------------------------------------------------------
-| API ROUTER MAHASISWA
+| API ROUTER MAHASISWA ROLE ADMIN
 */
 Route::group([
     'middleware' => ["api", "role:admin"],
@@ -107,7 +132,23 @@ Route::group([
 |--------------------------------------------------------------------------
 */
 
-
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*
+|--------------------------------------------------------------------------
+| API PUBLIC
+*/
+Route::group([
+    'prefix' => 'public',
+], function ($router) {
+    Route::get(
+        '/report-mhs',
+        [\App\Http\Controllers\Api\PublicApi\DataPublicController::class, 'getReportCMhs']
+    );
+});
+/*
+| END PUBLIC
+|--------------------------------------------------------------------------
+*/
 
 
 

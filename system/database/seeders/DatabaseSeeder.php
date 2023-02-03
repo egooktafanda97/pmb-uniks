@@ -30,9 +30,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UsersTableSeeder::class,
-            Fakultas::class,
-            Agent::class,
-            Prodi::class,
+            Universitas::class,
             Pendaftaran::class
         ]);
     }

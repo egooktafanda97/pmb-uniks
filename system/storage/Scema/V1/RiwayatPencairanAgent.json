@@ -1,0 +1,203 @@
+{
+    "File_name": "RiwayatPencairanAgent",
+    "Public_name": [
+        "RiwayatPencairanAgent",
+        "riwayat_pencairan_agent"
+    ],
+    "Inisial": {
+        "table": "riwayat_pencairan_agent",
+        "primary": "id",
+        "Protected": {}
+    },
+    "Namespace": {
+        "Controller": "RiwayatPencairanAgentController",
+        "Model": "RiwayatPencairanAgent",
+        "Use_Model": [
+            "RiwayatPencairanAgent",
+            "Fakultas"
+        ]
+    },
+    "Data": {
+        "agent_id": {
+            "name": "agent_id",
+            "control_insert": "after",
+            "label": "agent_id",
+            "type": "integer",
+            "migration": 0,
+            "validate": 6,
+            "request": true,
+            "relation": {
+                "table": "agent",
+                "function": "agent",
+                "relation_index": "agent_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "agent",
+                    "auto_delete_relation": false
+                }
+            }
+        },
+        "saldo_awal": {
+            "name": "saldo",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "jumlah": {
+            "name": "saldo",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "saldo": {
+            "name": "saldo",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "catatan": {
+            "name": "catatan",
+            "label": "Catatan",
+            "type": "string",
+            "request": true,
+            "migration": 10,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        }
+    },
+    "Relation": {},
+    "Query": {
+        "get": {
+            "model": "",
+            "where": "",
+            "result": "get",
+            "pagination": {
+                "number_show": 10
+            }
+        },
+        "getById": {
+            "model": "",
+            "where": {
+                "id": "args"
+            },
+            "result": "first"
+        },
+        "getByAuth": {
+            "model": "",
+            "where": {
+                "user_id": "auth_id"
+            },
+            "result": "first"
+        }
+    },
+    "Router": {
+        "config": {
+            "contoller": "RiwayatPencairanAgentController"
+        },
+        "api": {
+            "get": {
+                "method": "get",
+                "router": "/",
+                "prefix": "riwayat_pencairan_agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getById": {
+                "method": "get",
+                "router": "/{slug}",
+                "prefix": "riwayat_pencairan_agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "getByIdAndSource": {
+                "method": "get",
+                "router": "/source/{slug}",
+                "prefix": "riwayat_pencairan_agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "store": {
+                "method": "post",
+                "router": "/store",
+                "prefix": "riwayat_pencairan_agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "update": {
+                "method": "post",
+                "router": "/update/{id}",
+                "prefix": "riwayat_pencairan_agent",
+                "middleware": 1,
+                "controller": ""
+            },
+            "delete": {
+                "method": "delete",
+                "router": "/delete/{id}",
+                "prefix": "riwayat_pencairan_agent",
+                "middleware": 1,
+                "controller": ""
+            }
+        }
+    },
+    "Url": {
+        "api": {},
+        "web": {}
+    }
+}

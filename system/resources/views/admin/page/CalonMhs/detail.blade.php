@@ -1,10 +1,7 @@
 @extends('admin.index.index')
 @section('style')
-    <link href="{{ asset('public/node_modules/croppie/croppie.css') }}"
-          rel="stylesheet" />
-    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}"
-          rel="stylesheet"
-          type="text/css">
+    <link href="{{ asset('public/node_modules/croppie/croppie.css') }}" rel="stylesheet" />
+    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}" rel="stylesheet" type="text/css">
     <style>
         #img-profile:hover {
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -20,14 +17,10 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card border-primary border-bottom border-3 border-0">
-                <input class="id-hide"
-                       id="img-update-profile"
-                       type="file">
-                <img alt=""
-                     class="card-img-top"
-                     id="img-profile"
-                     src="{{ !empty(auth()->user()->foto) ? asset('assets/' . auth()->user()->foto) : asset('assets/logo/logo.png') }}"
-                     style="max-height: 300px; cursor:pointer" />
+                <input class="id-hide" id="img-update-profile" type="file">
+                <img alt="" class="card-img-top" id="img-profile"
+                    src="{{ !empty(auth()->user()->foto) ? asset('assets/' . auth()->user()->foto) : asset('assets/logo/logo.png') }}"
+                    style="max-height: 300px; cursor:pointer" />
                 <div class="card-body">
                     <h5 class="card-title text-primary">{{ $pendaftaran->calon_mahasiswa->nama_lengkap ?? '-' }}</h5>
                     <strong>KODE PENDAFTARAN: <span class="text-danger">{{ $pendaftaran->no_resister }}</span></strong>
@@ -37,7 +30,7 @@
                             $msg = $pendaftaran->status == 'pending' ? 'Menunggu validasi admin' : ($pendaftaran->status == 'invalid' ? 'data  invalid' : 'valid');
                         @endphp
                     <div
-                         class="alert {{ $bg }} text-light border-0 border-start border-5 border-info alert-dismissible fade show py-2">
+                        class="alert {{ $bg }} text-light border-0 border-start border-5 border-info alert-dismissible fade show py-2">
                         <div class="d-flex align-items-center">
                             <div>
                                 <div>
@@ -63,10 +56,7 @@
                         seblum melakukan action pastikan anda telah melihat dengan benar.
                     </div>
                 </div>
-                <button aria-label="Close"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        type="button"></button>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
             </div>
             <div class="card ">
                 <div class="card-body">
@@ -74,28 +64,70 @@
                         <div>
                             <strong>Data Lengkap Calon Mahasiswa</strong>
                         </div>
-                        @if ($pendaftaran->status != 'diterima')
+                        @if ($pendaftaran->status == 'pending')
                             <div class="d-flex order-actions">
-                                <button class="ms-3 verifications text-success button button--wide button--primary button--loader"
-                                        data-status="valid"
-                                        href="javascript:;"><i class="fadeIn animated bx bx-check-circle"></i></button>
-                                <button class="ms-3 verifications text-danger button button--wide button--primary button--loader"
-                                        data-status="invalid"
-                                        href="javascript:;"><i class="bx bxs-trash"></i></button>
+                                <button class="validasi btn btn-success btn-loader brn-sm ml-2 mr-2" data-bgmsg="green"
+                                    data-mail="true" data-msg="Dokumen anda telah di periksa." data-status="valid"
+                                    id="valid" style="height: 35px"><i class="fadeIn animated bx bx-check-circle"></i>
+                                    Valid <span>
+                                        <b></b>
+                                        <b></b>
+                                        <b></b>
+                                    </span></button>
+                                <button class="validasi btn btn-warning btn-loader brn-sm ml-2" data-bgmsg="orange"
+                                    data-mail="true" data-msg="Dokumen anda telah di periksa." data-status="invalid"
+                                    id="invalid" style="height: 35px"><i class="fa fa-times"></i>
+                                    Invalid <span> Loading
+                                        <b></b>
+                                        <b></b>
+                                        <b></b>
+                                    </span></button>
                             </div>
-                        @elseif($pendaftaran->status == 'diterima' && $pendaftaran->status_seleksi == 'pending')
+                        @elseif($pendaftaran->status == 'valid')
                             <div class="d-flex order-actions">
-                                <button class="ms-3 seleksi text-success button button--wide button--primary button--loader"
-                                        data-status="lulus"
-                                        href="javascript:;"><i class="fadeIn animated bx bx-check-circle"></i> <span
-                                          style="margin-left: 5px">Lulus</span>
-                                </button>
-                                <button class="ms-3 seleksi text-danger button button--wide button--primary button--loader"
-                                        data-status="tidak_lulus"
-                                        href="javascript:;"
-                                        id="verifications"><i class="fa fa-times"></i> <span style="margin-left: 5px">Tidak
-                                        Lulus</span>
-                                </button>
+                                {{-- <button class="seleksi btn btn-primary btn-loader brn-sm ml-2 mr-2" data-status="lulus"
+                                    id="lulus" style="height: 35px"><i class="fadeIn animated bx bx-check-circle"></i>
+                                    Lulus <span>
+                                        <b></b>
+                                        <b></b>
+                                        <b></b>
+                                    </span></button>
+                                <button class="seleksi btn btn-danger btn-loader brn-sm ml-2" data-status="tidak_lulus"
+                                    id="tidak_lulus" style="height: 35px"><i class="fa fa-times"></i>
+                                    Tidak Lulus <span> Loading
+                                        <b></b>
+                                        <b></b>
+                                        <b></b>
+                                    </span></button> --}}
+                                <button class="validasi btn btn-primary btn-loader brn-sm ml-2 mr-2" data-bgmsg="#038cfc"
+                                    data-mail="true" data-msg="Hasil ujian anda telah kami periksa. <br> anda di nyatakan."
+                                    data-status="lulus" id="lulus" style="height: 35px"><i
+                                        class="fadeIn animated bx bx-check-circle"></i>
+                                    Lulus <span>
+                                        <b></b>
+                                        <b></b>
+                                        <b></b>
+                                    </span></button>
+                                <button class="validasi btn btn-danger btn-loader brn-sm ml-2" data-bgmsg="red"
+                                    data-mail="true" data-msg="Hasil ujian anda telah kami periksa. <br> anda di nyatakan."
+                                    data-status="tidak_lulus" id="tidak_lulus" style="height: 35px"><i
+                                        class="fa fa-times"></i>
+                                    Tidak Lulus <span> Loading
+                                        <b></b>
+                                        <b></b>
+                                        <b></b>
+                                    </span></button>
+                            </div>
+                        @elseif($pendaftaran->status == 'lulus')
+                            <div class="d-flex order-actions">
+                                <button class="validasi btn btn-primary btn-loader brn-sm ml-2 mr-2" data-bgmsg="#03a9fc"
+                                    data-mail="false" data-msg="" data-status="daftar_ulang" id="daftar_ulang"
+                                    style="height: 35px"><i class="fadeIn animated bx bx-check-circle"></i>
+                                    Daftar Ulang <span>
+                                        <b></b>
+                                        <b></b>
+                                        <b></b>
+                                    </span></button>
                             </div>
                         @endif
                     </div>
@@ -108,14 +140,11 @@
 @section('script')
     <script src="{{ asset('public/node_modules/croppie/croppie.min.js') }}"></script>
     <!--notification js -->
-    <script type="text/javascript"
-            src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script script
-            src='https://www.jsdelivr.com/package/npm/pdfjs-dist'></script>
-    <script script
-            src='https://cdnjs.com/libraries/pdf.js'></script>
+    <script script src='https://www.jsdelivr.com/package/npm/pdfjs-dist'></script>
+    <script script src='https://cdnjs.com/libraries/pdf.js'></script>
     <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
     <script>
         $("#img-profile").click(function() {
@@ -187,16 +216,29 @@
         });
 
         //  =====
-        $(".verifications").click(function() {
+        $(".validasi").click(function() {
+            $(this).addClass("btn-loader--loading")
             const clases = $(this);
             const status = $(this).data('status');
+            const status_mail = $(this).data('mail');
+            const mssg = $(this).data('msg');
+            const bgMsg = $(this).data("bgmsg") ?? "#orange";
             let pesan = ``;
             if (status == 'valid') {
                 pesan =
                     `Apakah data ini sudah benar-benar <strong class="text-success">valid?</strong><br> <small>Tinggal pesan dibawah ini jika diperlukan</small>`
-            } else {
+            } else if (status == 'invalid') {
                 pesan =
                     `Apakah data ini sudah benar-benar <strong class="text-danger">tidak valid?</strong><br> <small>Tinggal pesan dibawah ini jika diperlukan</small>`
+            } else if (status == 'lulus') {
+                pesan =
+                    `Apakah data ini sudah benar-benar <strong class="text-success">LULUS?</strong><br> <small>Tinggal pesan dibawah ini jika diperlukan</small>`
+            } else if (status == 'tidak_lulus') {
+                pesan =
+                    `Apakah data ini sudah benar-benar <strong class="text-danger">TIDAK LULUS?</strong><br> <small>Tinggal pesan dibawah ini jika diperlukan</small>`
+            } else if (status == 'daftar_ulang') {
+                pesan =
+                    `Apakah data ini sudah benar-benar <strong class="text-info">Melakukan Daftar Ulang?</strong><br> <small>Tinggal pesan dibawah ini jika diperlukan</small>`
             }
             Swal.fire({
                 title: 'Yakin?',
@@ -211,12 +253,15 @@
                     autocapitalize: 'off'
                 },
                 preConfirm: (xdata) => {
-                    clases.toggleClass("button--loading");
+
                     const option = {
                         url: `{{ url('api/mhs/verifikasi_pendaftaran/' . $pendaftaran->id) }}`,
                         data: {
                             "status": status,
                             "message": xdata,
+                            "mail": status_mail,
+                            "msg": mssg,
+                            "bgMsg": bgMsg
                         },
                         header: {
                             headers: {
@@ -224,20 +269,11 @@
                             }
                         },
                         errors: (err) => {
-                            $(".button--loader").removeClass("button--loading")
-                            swal({
-                                title: "Opps!",
-                                text: "Proses verifikasi gagal, silahkan ulangi dan periksa email pengguna!",
-                                icon: "success",
-                                button: "Oke!",
-                            }).then((willDelete) => {
-                                if (willDelete) {
-                                    window.location.href = `{{ url()->previous() }}`
-                                }
-                            });
+                            $(this).removeClass("btn-loader--loading")
+                            // Proses verifikasi gagal, silahkan ulangi dan periksa email pengguna!
                         },
                         response: (res) => {
-                            $(".button--loader").removeClass("button--loading")
+                            $(this).removeClass("btn-loader--loading")
                             Swal.fire(
                                 'Selesai!',
                                 '',
@@ -254,9 +290,84 @@
                     request_post(option)
                 },
                 allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {})
-        });
+            }).then((result) => {
+                // $(this).removeClass("btn-loader--loading")
+            })
+        })
+
+
         $(".seleksi").click(function() {
+            $(this).addClass("btn-loader--loading")
+            const clases = $(this);
+            const status = $(this).data('status');
+            let pesan = ``;
+            if (status == 'lulus') {
+                pesan =
+                    `Apakah data ini sudah benar-benar <strong class="text-success">LULUS?</strong><br> <small>Tinggal pesan dibawah ini jika diperlukan</small>`
+            } else {
+                pesan =
+                    `Apakah data ini sudah benar-benar <strong class="text-danger">TIDAK LULUS?</strong><br> <small>Tinggal pesan dibawah ini jika diperlukan</small>`
+            }
+            Swal.fire({
+                title: 'Yakin?',
+                html: `${pesan}`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oke',
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                preConfirm: (xdata) => {
+                    const option = {
+                        url: `{{ url('api/mhs/status_seleksi/' . $pendaftaran->id) }}`,
+                        data: {
+                            "status_seleksi": $status,
+                            "message": xdata,
+                        },
+                        header: {
+                            headers: {
+                                "Authorization": `Bearer {{ \Session::get('token')['access_token'] }}`,
+                            }
+                        },
+                        errors: (err) => {
+                            $(this).removeClass("btn-loader--loading")
+                            swal({
+                                title: "Opps!",
+                                text: "Proses verifikasi gagal, silahkan ulangi dan periksa email pengguna!",
+                                icon: "success",
+                                button: "Oke!",
+                            }).then((willDelete) => {
+                                if (willDelete) {
+                                    window.location.href = `{{ url()->previous() }}`
+                                }
+                            });
+                        },
+                        response: (res) => {
+                            $(this).removeClass("btn-loader--loading")
+                            Swal.fire(
+                                'Selesai!',
+                                '',
+                                'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = `{{ url()->previous() }}`
+                                }
+                            })
+                        }
+                    }
+                    request_post(option)
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                // $(this).removeClass("btn-loader--loading")
+            })
+        })
+
+        $(".seleksi").click(function() {
+            $(this).addClass("btn-loader--loading")
             $status = $(this).data('status');
             swal({
                     title: "Yakin?",
@@ -267,7 +378,7 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        $(this).toggleClass("button--loading");
+                        $(this).removeClass("btn-loader--loading")
                         const option = {
                             url: `{{ url('api/mhs/status_seleksi/' . $pendaftaran->id) }}`,
                             data: {
@@ -279,7 +390,7 @@
                                 }
                             },
                             errors: (err) => {
-                                $(".button--loader").removeClass("button--loading")
+                                $(this).removeClass("btn-loader--loading")
                                 swal({
                                     title: "Opps!",
                                     text: "Proses gagal, silahkan ulangi dan periksa email pengguna!",
@@ -292,7 +403,7 @@
                                 });
                             },
                             response: (res) => {
-                                $(".button--loader").removeClass("button--loading")
+                                $(this).removeClass("btn-loader--loading")
                                 swal({
                                     title: "Selesai!",
                                     text: "",

@@ -19,20 +19,12 @@ class ManagementCrud extends Controller
 {
     use Configure;
     private $main = [];
-    public  $seed = false;
-    public $testing = false;
+
     public function __construct($json)
     {
         parent::__construct($json);
     }
-    public function setSeed()
-    {
-        $this->seed = true;
-    }
-    public function setTesting()
-    {
-        $this->testing = true;
-    }
+
     /**
      * .
      * fungsi yang berperan untuk insert data
@@ -46,18 +38,22 @@ class ManagementCrud extends Controller
              * tipe gambar
              */
             case 'image':
-                $uploads = Helpers::Upgambar($request, $key, $value['path']);
-
-                if (!$uploads['status'])
-                    return $value['path'] . "/" . "default.jpg";
-                $_get = $uploads["full-path"] ?? $value['path'] . "/" . "default.jpg";
-                return $_get;
+                if (!$this->seed) {
+                    $uploads = Helpers::Upgambar($request, $key, $value['path']);
+                    if (!$uploads['status'])
+                        return $value['path'] . "/" . "default.jpg";
+                    $_get = $uploads["full-path"] ?? $value['path'] . "/" . "default.jpg";
+                    return $_get;
+                }
+                return $value['value'] ?? "";
                 break;
                 /**
                  * .
                  * tipe static
                  */
             case 'static':
+                if (!empty($request[$key]))
+                    return $request[$key];
                 return $value['value'] ?? "";
                 break;
                 /**
@@ -182,104 +178,103 @@ class ManagementCrud extends Controller
     {
         $data = $this->getData();
         $master = $this->getResource();
-        try {
-            // ===========================================================================
-            /**
-             * .
-             * validasi data $request dan data fild json 
-             */
-            if (!$this->create_master_validation($master, $data))
-                return [
-                    "error"  => "resource error from validation data 'create_master_validation' function",
-                    "status" => 401,
-                ];
-            // $r_validate = $request->all();
-            if ($this->seed) {
-                $r_validate = $request;
-            } else {
-                $r_validate = $request->all();
-            }
-            $validator = Validator::make($r_validate, $this->create_master_validation($master, $data));
-            if ($validator->fails()) {
-                return [
-                    "error"  => $validator->errors(),
-                    "status" => 401,
-                ];
-            }
-
-            // // =================================================================================
-
-            $result_data = $this->getControllData($request, $data);
-            if (!empty($result_data['error']))
-                return $result_data;
-            if ($insert == true) {
-                if (!empty($result_data['error']))
-                    return $result_data;
-                if (!$result_data)
-                    return [
-                        "status" => 401,
-                        "response" => $result_data,
-                        "error" => 'something wrong..!'
-                    ];
-                foreach ($result_data as $k => $d) {
-                    if (array_key_exists('type', $data[$k]) && array_key_exists('control_insert', $data[$k])) {
-                        if ($data[$k]['type'] == 'key' && $data[$k]['control_insert'] == 'before') {
-                            $index_relation = $master["Relation"][$data[$k]['relation']['relation_index']];
-                            if (!empty($index_relation['namespace']))
-                                $models = $index_relation['namespace'] . $index_relation['model'];
-                            else
-                                $models = $this->getNameSpaceModel($index_relation['model']);
-                            $id = $models::create($result_data[$k]);
-                            $result_data[$k] = $id->id;
-                        }
-                    }
-                }
-                $result_data = $this->getNameSpaceModel($master["Namespace"]["Model"])::create($result_data);
-                // return $result_data;
-
-                $gate = $this->getNameSpaceModel($master["Namespace"]["Model"])::where('id', $result_data->id);
-
-                if ($master["Relation"]) {
-                    $gate = $gate->with($this->getRelation());
-                }
-                $gate = $gate->first();
-                if ($result_data) {
-                    $dataName = $master['Public_name'][1] ?? "";
-                    return [
-                        "status" => 200,
-                        "data" => $gate,
-                        "msg" => "data " . $dataName . " successfully input."
-                    ];
-                } else {
-                    return [
-                        "status" => 403,
-                        "error" => 'something wrong insert error..! ',
-                        "data" => $result_data,
-                    ];
-                }
-            }
-
-
-
-            /**
-             * .
-             * mengembalikan hasil pada controller
-             */
+        // try {
+        // ===========================================================================
+        /**
+         * .
+         * validasi data $request dan data fild json 
+         */
+        if (!$this->create_master_validation($master, $data))
             return [
-                "status" => 200,
-                "data" => $result_data,
-                "msg" => "insert false, this data validate"
+                "error"  => "resource error from validation data 'create_master_validation' function",
+                "status" => 401,
             ];
-        } catch (\Exception $e) {
-            /**
-             * .
-             * jika gagal query
-             */
+
+        $r_validate = $request->all();
+        $arr_validate = $this->create_master_validation($master, $data);
+        $validator = Validator::make($r_validate, $arr_validate);
+
+        if ($validator->fails()) {
             return [
-                "error"  => json_encode($e->getMessage(), true),
-                "status" => 501
+                "error"  => $validator->errors(),
+                "result" => $arr_validate,
+                "status" => 401,
             ];
         }
+
+        // // =================================================================================
+
+        $result_data = $this->getControllData($request, $data);
+        if (!empty($result_data['error']))
+            return $result_data;
+        if ($insert == true) {
+            if (!empty($result_data['error']))
+                return $result_data;
+            if (!$result_data)
+                return [
+                    "status" => 401,
+                    "response" => $result_data,
+                    "error" => 'something wrong..!'
+                ];
+            foreach ($result_data as $k => $d) {
+                if (array_key_exists('type', $data[$k]) && array_key_exists('control_insert', $data[$k])) {
+                    if ($data[$k]['type'] == 'key' && $data[$k]['control_insert'] == 'before') {
+                        $index_relation = $master["Relation"][$data[$k]['relation']['relation_index']];
+                        if (!empty($index_relation['namespace']))
+                            $models = $index_relation['namespace'] . $index_relation['model'];
+                        else
+                            $models = $this->getNameSpaceModel($index_relation['model']);
+                        $id = $models::create($result_data[$k]);
+                        $result_data[$k] = $id->id;
+                    }
+                }
+            }
+            $result_data = $this->getNameSpaceModel($master["Namespace"]["Model"])::create($result_data);
+            // return $result_data;
+
+            $gate = $this->getNameSpaceModel($master["Namespace"]["Model"])::where('id', $result_data->id);
+
+            if ($master["Relation"]) {
+                $gate = $gate->with($this->getRelation());
+            }
+            $gate = $gate->first();
+            if ($result_data) {
+                $dataName = $master['Public_name'][1] ?? "";
+                return [
+                    "status" => 200,
+                    "data" => $gate,
+                    "msg" => "data " . $dataName . " successfully input."
+                ];
+            } else {
+                return [
+                    "status" => 403,
+                    "error" => 'something wrong insert error..! ',
+                    "data" => $result_data,
+                ];
+            }
+        }
+
+
+
+        /**
+         * .
+         * mengembalikan hasil pada controller
+         */
+        return [
+            "status" => 200,
+            "data" => $result_data,
+            "msg" => "insert false, this data validate"
+        ];
+        // } catch (\Exception $e) {
+        //     /**
+        //      * .
+        //      * jika gagal query
+        //      */
+        //     return [
+        //         "error"  => json_encode($e->getMessage(), true),
+        //         "status" => 501
+        //     ];
+        // }
     }
     /**
      * .
@@ -318,11 +313,9 @@ class ManagementCrud extends Controller
                 ];
             // $r_validate = $request->all();
 
-            if ($this->seed) {
-                $r_validate = $request;
-            } else {
-                $r_validate = $request->all();
-            }
+
+            $r_validate = $request->all();
+
 
             $create_scema =  $this->create_master_validation($master, $data);
             $validator = Validator::make($r_validate, $create_scema);
@@ -358,11 +351,14 @@ class ManagementCrud extends Controller
              * tipe gambar
              */
             case 'image':
-                $uploads = Helpers::Upgambar($request, $key, $value['path']);
-                if (!$uploads['status'])
-                    return $value['path'] . "/" . "default.jpg";
-                $_get = $uploads["full-path"] ?? $value['path'] . "/" . "default.jpg";
-                return $_get;
+                if (!$this->seed) {
+                    $uploads = Helpers::Upgambar($request, $key, $value['path']);
+                    if (!$uploads['status'])
+                        return $value['path'] . "/" . "default.jpg";
+                    $_get = $uploads["full-path"] ?? $value['path'] . "/" . "default.jpg";
+                    return $_get;
+                }
+                return  $request[$key];
                 break;
                 /**
                  * .
@@ -714,8 +710,9 @@ class ManagementCrud extends Controller
             if (count($relation) > 0)
                 foreach ($relation as  $func) {
                     $check = $this->getRelationByMethod($func);
-                    if (!empty($check['delete']) && $check['delete'] == true)
+                    if (!empty($check['delete']) && $check['delete'] == true) {
                         $deletes->{$func}()->delete();
+                    }
                 }
             $deleted =  $deletes->delete();
             if ($deleted) {

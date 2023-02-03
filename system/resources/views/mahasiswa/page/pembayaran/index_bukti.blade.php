@@ -1,15 +1,13 @@
 @extends('mahasiswa.index.index')
 @section('style')
-    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}"
-          rel="stylesheet"
-          type="text/css">
+    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}" rel="stylesheet" type="text/css">
 
     <style>
         @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
         /* ------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Upload button styling
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ------------------------------ */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Upload button styling
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ------------------------------ */
         .upload {
             --color-black-softest: #485461;
             /* softer black */
@@ -204,12 +202,9 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label"
-                                                   for="inputFirstName">NAMA BANK / PROVIDER <span
-                                                      class="in-require">*</span></label>
-                                            <select aria-label="nama bank"
-                                                    class="form-select nama_bank"
-                                                    id="nama_bank">
+                                            <label class="form-label" for="inputFirstName">NAMA BANK / PROVIDER <span
+                                                    class="in-require">*</span></label>
+                                            <select aria-label="nama bank" class="form-select nama_bank" id="nama_bank">
                                                 <option value="">Pilih Program Studi </option>
                                                 <option value="BRI">BRI</option>
                                                 <option value="BNI">BNI</option>
@@ -218,48 +213,30 @@
                                             </select>
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label"
-                                                   for="inputFirstName">ATAS NAMA <span class="in-require">*</span></label>
-                                            <input class="form-control"
-                                                   name="atas_nama"
-                                                   placeholder="atas nama"
-                                                   required
-                                                   type="text">
+                                            <label class="form-label" for="inputFirstName">ATAS NAMA <span
+                                                    class="in-require">*</span></label>
+                                            <input class="form-control" name="atas_nama" placeholder="atas nama" required
+                                                type="text">
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label"
-                                                   for="inputFirstName">JUMLAH BAYAR <span
-                                                      class="in-require">*</span></label>
-                                            <input class="form-control"
-                                                   name="jumlah_tf"
-                                                   placeholder="nama lengkap sesuai ktp / ijasa"
-                                                   required
-                                                   type="number">
+                                            <label class="form-label" for="inputFirstName">JUMLAH BAYAR <span
+                                                    class="in-require">*</span></label>
+                                            <input class="form-control" name="jumlah_tf"
+                                                placeholder="jumlah bayar sesuai biaya pendafataran" required
+                                                type="number">
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label"
-                                                   for="inputFirstName">WAKTU BAYAR <span
-                                                      class="in-require">*</span></label>
-                                            <input class="form-control"
-                                                   name="waktu_bayar"
-                                                   placeholder="nama lengkap sesuai ktp / ijasa"
-                                                   required
-                                                   type="datetime-local">
+                                            <label class="form-label" for="inputFirstName">WAKTU BAYAR <span
+                                                    class="in-require">*</span></label>
+                                            <input class="form-control" name="waktu_bayar" required type="datetime-local">
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label"
-                                                   for="inputFirstName">KETERANGAN </label>
-                                            <textarea class="form-control"
-                                                      id="keterangan"
-                                                      name="keterangan"
-                                                      placeholder="Alamat lengkap"
-                                                      rows="3"></textarea>
+                                            <label class="form-label" for="inputFirstName">KETERANGAN </label>
+                                            <textarea class="form-control" id="keterangan" name="keterangan" placeholder="keterangan" rows="3"></textarea>
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <div class="w-100 l-right">
-                                                <button class="btn btn-dark px-5"
-                                                        id="btn_uploads"
-                                                        type="button">
+                                                <button class="btn btn-dark px-5" id="btn_uploads" type="button">
                                                     <i class="bx bx-cloud-upload mr-1"></i>
                                                     UPLOAD
                                                 </button>
@@ -287,8 +264,7 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript"
-            src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
     <script>
         function __upSave(data) {
             const http_configure = {

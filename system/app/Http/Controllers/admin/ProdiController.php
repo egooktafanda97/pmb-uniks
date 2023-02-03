@@ -45,4 +45,17 @@ class ProdiController extends Controller
         ];
         return view($this->view . 'input', $data);
     }
+    public function get_data_detail()
+    {
+    }
+    public function detail($id)
+    {
+        $data = [
+            "title" => "Detal",
+            "sub_title" => "Detail Program Studi",
+            "prodi" => \Modules\V1\Entities\Prodi::whereId($id)->first(),
+            "uri" => $this->data->getRouterWeb() ?? []
+        ];
+        return view($this->view . 'detail', $data);
+    }
 }

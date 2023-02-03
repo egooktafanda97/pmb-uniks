@@ -14,6 +14,13 @@ async function save(config) {
                 icon: "error",
                 button: "Oke!",
             });
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "pastikan proses dilakukan dengan benar.",
+                icon: "error",
+                button: "Oke!",
+            });
         errors(error);
     });
     if (post) {
@@ -37,6 +44,13 @@ async function getById(config) {
                 icon: "error",
                 button: "Oke!",
             });
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "pastikan proses dilakukan dengan benar.",
+                icon: "error",
+                button: "Oke!",
+            });
         errors(error);
     });
     if (gett) {
@@ -55,6 +69,13 @@ async function http_get_header(config) {
             swal({
                 title: "Ooops fatal error!",
                 text: "fatal error result data.",
+                icon: "error",
+                button: "Oke!",
+            });
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "pastikan proses dilakukan dengan benar.",
                 icon: "error",
                 button: "Oke!",
             });
@@ -93,12 +114,20 @@ async function request_get(config) {
                 icon: "error",
                 button: "Oke!",
             });
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "pastikan proses dilakukan dengan benar.",
+                icon: "error",
+                button: "Oke!",
+            });
         errors(error);
     });
     if (gett) {
         response(gett);
     }
 }
+
 async function request_post(config) {
     const {
         url,
@@ -112,6 +141,13 @@ async function request_post(config) {
             swal({
                 title: "Ooops fatal error!",
                 text: "fatal error result data.",
+                icon: "error",
+                button: "Oke!",
+            });
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "pastikan proses dilakukan dengan benar.",
                 icon: "error",
                 button: "Oke!",
             });

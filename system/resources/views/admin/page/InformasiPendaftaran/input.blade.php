@@ -23,6 +23,10 @@
             <div class="card border-primary border-bottom border-3 border-0">
                 <form enctype="multipart/form-data"
                       id="form-save">
+                    <input id="id"
+                           name="id"
+                           type="hidden"
+                           value="{{ $Quri->id ?? '' }}">
                     <div class="card-body">
                         <div class="space-between">
                             <div class="d-flex align-items-center justify-content-center">
@@ -47,7 +51,8 @@
                                            name="pendaftaran"
                                            placeholder="GELOMBANG I"
                                            required=""
-                                           type="text">
+                                           type="text"
+                                           value="{{ $Quri->pendaftaran ?? '' }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
@@ -61,11 +66,23 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
+                                    <label>TAHUN <span class="in-require">*</span></label>
+                                    <input class="form-control form-control-sm validationTooltip03"
+                                           maxlength="4"
+                                           name="tahun_ajaran"
+                                           placeholder="{{ date('Y') }}"
+                                           type="number"
+                                           value="{{ $Quri->tahun ?? date('Y') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group">
                                     <label>TAHUN AJARAN <span class="in-require">*</span></label>
                                     <input class="form-control form-control-sm validationTooltip03"
                                            name="tahun_ajaran"
                                            placeholder="{{ date('Y') . '/' . (date('Y') + 1) }}"
-                                           type="text">
+                                           type="text"
+                                           value="{{ $Quri->tahun_ajaran ?? '' }}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">
@@ -74,7 +91,8 @@
                                     <input class="form-control form-control-sm validationTooltip03"
                                            name="buka"
                                            placeholder=""
-                                           type="date">
+                                           type="date"
+                                           value="{{ $Quri->buka ?? '' }}">
                                 </div>
                             </div>
 
@@ -84,7 +102,8 @@
                                     <input class="form-control form-control-sm validationTooltip03"
                                            name="tutup"
                                            placeholder=""
-                                           type="date">
+                                           type="date"
+                                           value="{{ $Quri->tutup ?? '' }}">
                                 </div>
                             </div>
 
@@ -95,6 +114,7 @@
                                            name="kuota"
                                            placeholder="0"
                                            type="text"
+                                           value="{{ $Quri->kuota ?? '' }}"
                                            value="0">
                                 </div>
                             </div>
@@ -113,8 +133,7 @@
                                             </div>
                                             <textarea class="biaya_pendaftaran"
                                                       id="biaya_pendaftaran"
-                                                      name="biaya_pendaftaran">
-                                                </textarea>
+                                                      name="biaya_pendaftaran">{{ $Quri->biaya_pendaftaran ?? '' }}</textarea>
                                         </div>
                                     </div>
 
@@ -130,8 +149,7 @@
                                         <div class="card-body">
                                             <textarea class="informasi_umum"
                                                       id="informasi_umum"
-                                                      name="informasi_umum">
-                                                </textarea>
+                                                      name="informasi_umum">{{ $Quri->informasi_umum ?? '' }}</textarea>
                                         </div>
                                     </div>
 
@@ -150,10 +168,10 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script type="text/javascript">
         /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | DATA TABLE CONFIGURATION
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | DATA TABLE CONFIGURATION
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
         $(document).ready(function() {
             $('.informasi_umum').summernote({
                 height: 300,
@@ -180,9 +198,12 @@
         $("#form-save").submit(function(e) {
             e.preventDefault();
             const form_data = new FormData(e.target);
+            const Urls = !__empty($("#id").val()) ?
+                `{{ url('api/v1/informasi_pendaftaran/update') }}/${$("#id").val()}` :
+                `{{ url('api/v1/informasi_pendaftaran/store') }}`;
             const http_configure = {
                 data: form_data,
-                url: `{{ url('api/v1/informasi_pendaftaran/store') }}`,
+                url: Urls,
                 header: {
                     headers: {
                         "Authorization": `Bearer {{ \Session::get('token')['access_token'] }}`,

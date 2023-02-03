@@ -21,6 +21,8 @@ use Modules\V1\Providers\ManagementServiceProvider;
 | USE MODEL
 */
 // use App\Models\User;
+use App\Traits\ManagementControlGetData;
+use App\Service\Control\Template;
 /*
 | end
 */
@@ -29,6 +31,7 @@ class CalonMahasiswaController extends Controller
 {
     use ManagementRoler;
     use ManagementControl;
+    use ManagementControlGetData;
 
 
     public  $resources;
@@ -103,5 +106,55 @@ class CalonMahasiswaController extends Controller
             return response()->json(["error" => "resource not found"],  501);
         $hndelAction = $this->resources->deleted($id);
         return response()->json($hndelAction, $hndelAction['status'] ?? 401);
+    }
+    /**
+     * .
+     * FUNCTION GET DATA TO CHART
+     * @return void
+     */
+    public function chart(Request $request)
+    {
+        $get = ManagementControlGetData::result_query_dump_pmb($request, false);
+        $pendaftaran_group = [
+            "id" => "pendafataran",
+            "label" => ManagementControl::map_fead($get['mhs']->groupBy("pendaftaran.informasi_pendaftaran.Combine"), function ($key, $val, $i) {
+                return $key;
+            }),
+            "map_data" => ManagementControl::map_fead($get['mhs']->groupBy("pendaftaran.informasi_pendaftaran.Combine"), function ($keys, $val, $i) {
+                $main = $val;
+                $result_data_status = $val->groupBy("pendaftaran.status");
+                return [
+                    "labels" => $keys,
+                    "data" => $main,
+                    "by_status" => [
+                        "pending" =>  $result_data_status['pending'] ?? [],
+                        "valid" => $result_data_status['valid'] ?? [],
+                        "invalid" =>  $result_data_status['invalid'] ?? []
+                    ],
+                    "count" => count($val),
+                    "color" => Template::gradientAssetColor()[$i]
+                ];
+            })
+        ];
+        $prodi_group = [];
+
+        // $chart_by_status = [
+        //     "id" => "chart_by_status",
+        //     "label" => ManagementControl::map_fead($get['mhs']->groupBy("pendaftaran.status"), function ($key, $val, $i) {
+        //         return $key;
+        //     }),
+        //     "map_data" => ManagementControl::map_fead($get['mhs']->groupBy("pendaftaran.status"), function ($key, $val, $i) {
+        //         return [
+        //             "labels" => $key,
+        //             "data" => $val,
+        //             "count" => count($val),
+        //             "color" => Template::gradientAssetColor()[$i]
+        //         ];
+        //     })
+        // ];
+        return response()->json([
+            "jumlah_data" => $get['mhs']->count(),
+            "maping_data" => ["pendaftaran" => $pendaftaran_group]
+        ]);
     }
 }

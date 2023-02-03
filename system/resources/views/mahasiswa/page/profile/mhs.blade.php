@@ -26,8 +26,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item">
                         </li>
-                        <li aria-current="page"
-                            class="breadcrumb-item active">{{ $sub_title ?? '' }}</li>
+                        <li aria-current="page" class="breadcrumb-item active">{{ $sub_title ?? '' }}</li>
                     </ol>
                 </nav>
             </div>
@@ -50,14 +49,13 @@
                                 </div>
                             </div>
                             <div class="d-flex order-actions">
-                                <a class="ms-3 bt-icon text-primary"
-                                   href="javascript:;"><i class="fadeIn animated bx bx-line-chart-down"></i></a>
-                                <a class="ms-3 bt-icon text-primary"
-                                   data-bs-target="#filter"
-                                   data-bs-toggle="modal"><i class="fadeIn animated bx bx-filter"></i></a>
+                                <a class="ms-3 bt-icon text-primary" href="javascript:;"><i
+                                        class="fadeIn animated bx bx-line-chart-down"></i></a>
+                                <a class="ms-3 bt-icon text-primary" data-bs-target="#filter" data-bs-toggle="modal"><i
+                                        class="fadeIn animated bx bx-filter"></i></a>
 
-                                <a class="ms-3 bt-icon text-secondary"
-                                   href="javascript:;"><i class="fadeIn animated bx bx-printer"></i></a>
+                                <a class="ms-3 bt-icon text-secondary" href="javascript:;"><i
+                                        class="fadeIn animated bx bx-printer"></i></a>
                             </div>
                         </div>
 
@@ -81,10 +79,8 @@
                                             <td class="">
                                                 <div class="d-flex align-items-center">
                                                     <div>
-                                                        <input aria-label="..."
-                                                               class="form-check-input me-3"
-                                                               type="checkbox"
-                                                               value="">
+                                                        <input aria-label="..." class="form-check-input me-3"
+                                                            type="checkbox" value="">
                                                     </div>
                                                     <div class="ms-2">
                                                         <h6 class="mb-0 font-14">
@@ -115,14 +111,14 @@
                                                     $msg = $items->pendaftaran->status == 'pending' ? 'Pending' : ($items->pendaftaran->status == 'invalid' ? 'invalid' : 'valid');
                                                 @endphp
                                                 <span class="badge {{ $bg }} badge-round"
-                                                      title="status pending artinya data belum di verifikasi">
+                                                    title="status pending artinya data belum di verifikasi">
                                                     {{ $msg }}
                                                 </span>
                                             </td>
                                             <td class="tb-acton">
                                                 <a class="btn btn-primary btn-sm radius-30 px-4"
-                                                   href="{{ url('admin/mhs/getById/' . $items->pendaftaran->id) }}"
-                                                   type="button">
+                                                    href="{{ url('admin/mhs/getById/' . $items->pendaftaran->id) }}"
+                                                    type="button">
                                                     Details
                                                 </a>
                                             </td>

@@ -1,14 +1,10 @@
-<!DOCTYPE html
-          PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta content="text/html; charset=UTF-8"
-          http-equiv="Content-Type" />
-    <meta content="width=device-width, initial-scale=1.0"
-          name="viewport">
-    <meta content="IE=edge,chrome=1"
-          http-equiv="X-UA-Compatible">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <title>Uniks</title>
     <style type="text/css">
         /* reset */
@@ -551,74 +547,42 @@
     <![endif]-->
 </head>
 
-<body bgcolor="#E1E1E1"
-      leftmargin="0"
-      marginheight="0"
-      marginwidth="0"
-      offset="0"
-      topmargin="0">
+<body bgcolor="#E1E1E1" leftmargin="0" marginheight="0" marginwidth="0" offset="0" topmargin="0">
     <center style="background-color:#E1E1E1;">
-        <table border="0"
-               cellpadding="0"
-               cellspacing="0"
-               height="100%"
-               id="bodyTbl"
-               style="table-layout: fixed;max-width:100% !important;width: 100% !important;min-width: 100% !important;"
-               width="100%">
+        <table border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTbl"
+            style="table-layout: fixed;max-width:100% !important;width: 100% !important;min-width: 100% !important;"
+            width="100%">
             <tr>
-                <td align="center"
-                    id="bodyCell"
-                    valign="top">
+                <td align="center" id="bodyCell" valign="top">
 
-                    <table bgcolor="#E1E1E1"
-                           border="0"
-                           cellpadding="0"
-                           cellspacing="0"
-                           id="emailHeader"
-                           width="500">
+                    <table bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" id="emailHeader"
+                        width="500">
                         <tr>
-                            <td align="center"
-                                valign="top">
+                            <td align="center" valign="top">
 
-                                <table border="0"
-                                       cellpadding="0"
-                                       cellspacing="0"
-                                       width="100%">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
-                                        <td align="center"
-                                            valign="top">
+                                        <td align="center" valign="top">
 
-                                            <table border="0"
-                                                   cellpadding="10"
-                                                   cellspacing="0"
-                                                   class="flexibleContainer"
-                                                   width="500">
+                                            <table border="0" cellpadding="10" cellspacing="0"
+                                                class="flexibleContainer" width="500">
                                                 <tr>
-                                                    <td class="flexibleContainerCell"
-                                                        valign="top"
-                                                        width="500">
+                                                    <td class="flexibleContainerCell" valign="top" width="500">
 
-                                                        <table align="left"
-                                                               border="0"
-                                                               cellpadding="0"
-                                                               cellspacing="0"
-                                                               width="100%">
+                                                        <table align="left" border="0" cellpadding="0"
+                                                            cellspacing="0" width="100%">
                                                             <tr>
-                                                                <td align="left"
-                                                                    class="flexibleContainerBox"
+                                                                <td align="left" class="flexibleContainerBox"
                                                                     id="invisibleIntroduction"
                                                                     style="display:none;display:none !important;"
                                                                     valign="middle">
-                                                                    <table border="0"
-                                                                           cellpadding="0"
-                                                                           cellspacing="0"
-                                                                           style="max-width:100%;"
-                                                                           width="100%">
+                                                                    <table border="0" cellpadding="0"
+                                                                        cellspacing="0" style="max-width:100%;"
+                                                                        width="100%">
                                                                         <tr>
-                                                                            <td align="left"
-                                                                                class="textContent">
+                                                                            <td align="left" class="textContent">
                                                                                 <div
-                                                                                     style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
+                                                                                    style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
 
                                                                                 </div>
                                                                             </td>
@@ -639,48 +603,29 @@
                         </tr>
                     </table>
 
-                    <table bgcolor="#FFFFFF"
-                           border="0"
-                           cellpadding="0"
-                           cellspacing="0"
-                           id="emailBody"
-                           width="500">
+                    <table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" id="emailBody"
+                        width="500">
 
                         <tr>
-                            <td align="center"
-                                valign="top">
-                                <table bgcolor="#fff"
-                                       border="0"
-                                       cellpadding="0"
-                                       cellspacing="0"
-                                       style="color:#FFFFFF;"
-                                       width="100%">
+                            <td align="center" valign="top">
+                                <table bgcolor="#fff" border="0" cellpadding="0" cellspacing="0"
+                                    style="color:#FFFFFF;" width="100%">
                                     <tr>
-                                        <td align="center"
-                                            valign="top">
-                                            <table border="0"
-                                                   cellpadding="0"
-                                                   cellspacing="0"
-                                                   class="flexibleContainer"
-                                                   width="500">
+                                        <td align="center" valign="top">
+                                            <table border="0" cellpadding="0" cellspacing="0"
+                                                class="flexibleContainer" width="500">
                                                 <tr>
-                                                    <td align="center"
-                                                        class="flexibleContainerCell"
-                                                        valign="top"
+                                                    <td align="center" class="flexibleContainerCell" valign="top"
                                                         width="500">
-                                                        <table border="0"
-                                                               cellpadding="30"
-                                                               cellspacing="0"
-                                                               width="100%">
+                                                        <table border="0" cellpadding="30" cellspacing="0"
+                                                            width="100%">
                                                             <tr>
-                                                                <td align="center"
-                                                                    class="textContent"
+                                                                <td align="center" class="textContent"
                                                                     valign="top">
 
                                                                     <img alt="logo"
-                                                                         src="https://uniks.ac.id/images/logo-header.png"
-                                                                         style="width: 50%"
-                                                                         style="">
+                                                                        src="https://uniks.ac.id/images/logo-header.png"
+                                                                        style="width: 50%" style="">
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -693,30 +638,18 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center"
-                                valign="top">
-                                <table bgcolor="#F8F8F8"
-                                       border="0"
-                                       cellpadding="0"
-                                       cellspacing="0"
-                                       width="100%">
+                            <td align="center" valign="top">
+                                <table bgcolor="#F8F8F8" border="0" cellpadding="0" cellspacing="0"
+                                    width="100%">
                                     <tr>
-                                        <td align="center"
-                                            valign="top">
-                                            <table border="0"
-                                                   cellpadding="0"
-                                                   cellspacing="0"
-                                                   class="flexibleContainer"
-                                                   width="500">
+                                        <td align="center" valign="top">
+                                            <table border="0" cellpadding="0" cellspacing="0"
+                                                class="flexibleContainer" width="500">
                                                 <tr>
-                                                    <td align="center"
-                                                        class="flexibleContainerCell"
-                                                        valign="top"
+                                                    <td align="center" class="flexibleContainerCell" valign="top"
                                                         width="500">
-                                                        <table border="0"
-                                                               cellpadding="30"
-                                                               cellspacing="0"
-                                                               width="100%">
+                                                        <table border="0" cellpadding="30" cellspacing="0"
+                                                            width="100%">
                                                             <tr>
                                                                 <td align="left">
                                                                     {!! $pesan ?? '-' !!}
@@ -724,17 +657,13 @@
                                                             </tr>
                                                             <tr>
 
-                                                                <td align="center"
-                                                                    valign="top">
-                                                                    <table border="0"
-                                                                           cellpadding="0"
-                                                                           cellspacing="0"
-                                                                           class="emailButton"
-                                                                           style="background-color: #fff;"
-                                                                           width="50%">
+                                                                <td align="center" valign="top">
+                                                                    <table border="0" cellpadding="0"
+                                                                        cellspacing="0" class="emailButton"
+                                                                        style="background-color: #fff;"
+                                                                        width="50%">
                                                                         <tr>
-                                                                            <td align="center"
-                                                                                class="buttonContent"
+                                                                            <td align="center" class="buttonContent"
                                                                                 style="color:#000;padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;"
                                                                                 valign="middle">
                                                                                 <strong>{!! str_replace(' ', '_', $status ?? '_') !!}</strong>
@@ -760,42 +689,25 @@
                     </table>
 
                     <!-- footer -->
-                    <table bgcolor="#E1E1E1"
-                           border="0"
-                           cellpadding="0"
-                           cellspacing="0"
-                           id="emailFooter"
-                           width="500">
+                    <table bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" id="emailFooter"
+                        width="500">
                         <tr>
-                            <td align="center"
-                                valign="top">
-                                <table border="0"
-                                       cellpadding="0"
-                                       cellspacing="0"
-                                       width="100%">
+                            <td align="center" valign="top">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
-                                        <td align="center"
-                                            valign="top">
-                                            <table border="0"
-                                                   cellpadding="0"
-                                                   cellspacing="0"
-                                                   class="flexibleContainer"
-                                                   width="500">
+                                        <td align="center" valign="top">
+                                            <table border="0" cellpadding="0" cellspacing="0"
+                                                class="flexibleContainer" width="500">
                                                 <tr>
-                                                    <td align="center"
-                                                        class="flexibleContainerCell"
-                                                        valign="top"
+                                                    <td align="center" class="flexibleContainerCell" valign="top"
                                                         width="500">
-                                                        <table border="0"
-                                                               cellpadding="30"
-                                                               cellspacing="0"
-                                                               width="100%">
+                                                        <table border="0" cellpadding="30" cellspacing="0"
+                                                            width="100%">
                                                             <tr>
-                                                                <td bgcolor="#E1E1E1"
-                                                                    valign="top">
+                                                                <td bgcolor="#E1E1E1" valign="top">
 
                                                                     <div
-                                                                         style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
+                                                                        style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
                                                                         <div>Copyright &#169; {{ date('Y') }}.
                                                                             Kapten Code.
                                                                             {{-- </div>

@@ -467,6 +467,13 @@
                 "middleware": 1,
                 "controller": ""
             },
+            "chart": {
+                "method": "get",
+                "router": "/chart",
+                "prefix": "calon_mahasiswa",
+                "middleware": 1,
+                "controller": ""
+            },
             "getById": {
                 "method": "get",
                 "router": "/{slug}",

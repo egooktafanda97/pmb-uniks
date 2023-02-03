@@ -12,6 +12,7 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware('auth:web', ['except' => []]);
+        $this->middleware('is_verify_email')->except('login');
     }
     public function getter_data()
     {

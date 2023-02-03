@@ -6,28 +6,28 @@
       <div class="switcher-body">
           <div class="d-flex align-items-center">
               <h5 class="mb-0 text-uppercase">Theme Customizer</h5>
-              <button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
+              <button aria-label="Close" class="btn-close ms-auto close-switcher" type="button"></button>
           </div>
           <hr />
           <h6 class="mb-0">Theme Styles</h6>
           <hr />
           <div class="d-flex align-items-center justify-content-between">
               <div class="form-check">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="lightmode" checked>
+                  <input checked class="form-check-input" id="lightmode" name="flexRadioDefault" type="radio">
                   <label class="form-check-label" for="lightmode">Light</label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="darkmode">
+                  <input class="form-check-input" id="darkmode" name="flexRadioDefault" type="radio">
                   <label class="form-check-label" for="darkmode">Dark</label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="semidark">
+                  <input class="form-check-input" id="semidark" name="flexRadioDefault" type="radio">
                   <label class="form-check-label" for="semidark">Semi Dark</label>
               </div>
           </div>
           <hr />
           <div class="form-check">
-              <input class="form-check-input" type="radio" id="minimaltheme" name="flexRadioDefault">
+              <input class="form-check-input" id="minimaltheme" name="flexRadioDefault" type="radio">
               <label class="form-check-label" for="minimaltheme">Minimal Theme</label>
           </div>
           <hr />
@@ -109,6 +109,7 @@
   <script src="{{ asset('public/node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="{{ asset(config('app.adm-assets')) }}/assets/plugins/select2/js/select2.min.js"></script>
+  <script src="{{ asset('public/js/site.js') }}"></script>
   @yield('script')
   <!--app JS-->
   <script src="{{ asset(config('app.adm-assets')) }}/assets/js/app.js"></script>

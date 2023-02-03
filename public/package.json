@@ -4,6 +4,7 @@
     "aksfileupload": "^1.0.0",
     "axios": "^1.2.2",
     "bootstrap-select": "^1.13.18",
+    "busy-load": "^0.1.2",
     "croppie": "^2.6.5",
     "sweetalert": "^2.1.2",
     "toastr": "^2.1.4",

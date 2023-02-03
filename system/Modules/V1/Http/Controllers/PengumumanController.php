@@ -21,6 +21,7 @@ use Modules\V1\Providers\ManagementServiceProvider;
 | USE MODEL
 */
 // use App\Models\User;
+use Modules\V1\Providers\Fungsi_masal;
 /*
 | end
 */
@@ -29,6 +30,7 @@ class PengumumanController extends Controller
 {
     use ManagementRoler;
     use ManagementControl;
+    use Fungsi_masal;
 
 
     public  $resources;

@@ -4,24 +4,19 @@
         ->first();
 @endphp
 <!--sidebar wrapper -->
-<div class="sidebar-wrapper"
-     data-simplebar="true">
+<div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
         <div>
-            <img alt="logo icon"
-                 class="logo-icon"
-                 src="{{ asset('assets/logo/logo.png') }}" />
+            <img alt="logo icon" class="logo-icon" src="{{ asset('assets/logo/logo.png') }}" />
         </div>
         <div>
-            <h4 class="logo-text"
-                style="color: orange">UNIKS</h4>
+            <h4 class="logo-text" style="color: orange">UNIKS</h4>
         </div>
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
         </div>
     </div>
     <!--navigation-->
-    <ul class="metismenu"
-        id="menu">
+    <ul class="metismenu" id="menu">
         <li>
             <a href="{{ url('mahasiswa/form') }}">
                 <div class="parent-icon">
@@ -41,7 +36,7 @@
             </li>
         @endif
         <li>
-            <a href="{{ url('admin') }}">
+            <a href="{{ url('mahasiswa/info_khusus') }}">
                 <div class="parent-icon">
                     <i class='fadeIn animated bx bx-message-dots'></i>
                 </div>
@@ -50,28 +45,33 @@
         </li>
 
         <li>
-            <a href="{{ url('admin') }}">
+            <a href="{{ url('mahasiswa/info') }}">
                 <div class="parent-icon">
                     <i class='fadeIn animated bx bx-info-circle'></i>
                 </div>
                 <div class="menu-title">INFO PENDAFTARAN</div>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ url('admin') }}">
                 <div class="parent-icon">
                     <i class='fadeIn animated bx bx-home-smile'></i>
                 </div>
                 <div class="menu-title">PROGRAM STUDI</div>
             </a>
+        </li> --}}
+        <li>
+            <a href="{{ url('mahasiswa/faq') }}">
+                <div class="parent-icon">
+                    <i class='fadeIn animated bx bx-info-circle'></i>
+                </div>
+                <div class="menu-title text-warning">CARA DAFTAR</div>
+            </a>
         </li>
         <li>
             <a href="{{ url('admin') }}">
-                <div class="parent-icon"
-                     style="display: flex;justify-content: center;align-items: center">
-                    <img alt=""
-                         src="{{ asset('assets/logo/logo.png') }}"
-                         style="width: 20px">
+                <div class="parent-icon" style="display: flex;justify-content: center;align-items: center">
+                    <img alt="" src="{{ asset('assets/logo/logo.png') }}" style="width: 20px">
                 </div>
                 <div class="menu-title">UNIKS</div>
             </a>

@@ -52,4 +52,8 @@ class MhsContoller extends Controller
             return response()->json($calon_mhs_update, $calon_mhs_update["status"] ?? 400);
         }
     }
+    public function faq()
+    {
+        return view("mahasiswa.page.FAQ.index");
+    }
 }

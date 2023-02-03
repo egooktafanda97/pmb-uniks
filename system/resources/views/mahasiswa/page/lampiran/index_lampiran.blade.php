@@ -1,8 +1,6 @@
 @extends('mahasiswa.index.index')
 @section('style')
-    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}"
-          rel="stylesheet"
-          type="text/css">
+    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
     <div class="row">
@@ -19,11 +17,18 @@
                             <div class="col-12 mt-3">
                                 <div class="mt-3 space-between">
                                     <a class="btn btn-primary px-5 rounded-0 btn-sm next-card"> <i
-                                           class="fa fa-long-arrow-left"></i>
+                                            class="fa fa-long-arrow-left"></i>
                                         Kembali</a>
-                                    <button class="btn btn-primary px-5 rounded-0 btn-sm"
-                                            type="submit"
-                                            type="button">Next <i class="fa fa-long-arrow-right"></i></button>
+
+                                    <button class="btn btn-primary px-5 rounded-0 btn-sm btn-loader" id="submit-lampiran"
+                                        type="submit" type="button">
+                                        Next <i class="fa fa-long-arrow-right"></i>
+                                        <span>
+                                            <b></b>
+                                            <b></b>
+                                            <b></b>
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -34,10 +39,10 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript"
-            src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
     <script>
         function __upSave(data) {
+            $("#submit-lampiran").addClass("btn-loader--loading")
             const http_configure = {
                 data: data,
                 url: `{{ url('api/mahasiswa/upload-lampiran') }}`,
@@ -47,6 +52,7 @@
                     }
                 },
                 errors: (error) => {
+                    $("#submit-lampiran").removeClass("btn-loader--loading")
                     const {
                         response
                     } = error;
@@ -70,10 +76,17 @@
                                 }
                             }
                         }
-
+                    } else {
+                        swal({
+                            title: "Ooops fatal error!",
+                            text: "pastikan proses dilakukan dengan benar.",
+                            icon: "error",
+                            button: "Oke!",
+                        });
                     }
                 },
                 response: (res) => {
+                    $("#submit-lampiran").removeClass("btn-loader--loading")
                     swal({
                         title: "Berhasil!",
                         text: 'lampiran berhasil disimpan',

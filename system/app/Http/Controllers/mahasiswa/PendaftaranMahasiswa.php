@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\mahasiswa;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -39,7 +41,7 @@ class PendaftaranMahasiswa extends Controller
     use ManagementControl;
     use AuthenticatesUsers;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::MHS;
     public  $resources;
 
     public function __construct()
@@ -73,10 +75,40 @@ class PendaftaranMahasiswa extends Controller
             | end
             */
             $getUs = User::find($save['data']['user_id']);
+            $getUs->nama = $request->email;
+            $getUs->save();
 
-            return redirect("/login");
+            $getUs = User::find($save['data']['user_id']);
+            $kode = "";
+            do {
+                $kode = Helpers::generatePin(4);
+                $cek = \App\Models\Verify::where("key_reference", $kode)->first();
+            } while (!empty($cek));
+
+            $created_otp = \App\Models\Verify::create([
+                "user_id" => $getUs->id,
+                "key_reference" => $kode,
+                "key_for" => "verifikai"
+            ]);
+
+            $details = [
+                "email" => $getUs->email,
+                "nama" => $getUs->nama,
+                "kode" => $created_otp->key_reference
+            ];
+            dispatch(new \App\Jobs\SendEmailVerify($details));
+            $enc = Crypt::encrypt($getUs->email);
+            return redirect('auth/verify?s=' . $enc);
         } else {
             return redirect("/")->withErrors(['msg' => $save, "status" => 201]);
         }
+    }
+    protected function respondWithToken($token)
+    {
+        return [
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => 1000000000000
+        ];
     }
 }

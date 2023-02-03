@@ -21,7 +21,7 @@ class InformasiPendaftaran extends Controller
     }
     public function getData()
     {
-        $QR = \Modules\V1\Entities\InformasiPendaftaran::orderBy('id', 'desc')->paginate(10);
+        $QR = \Modules\V1\Entities\InformasiPendaftaran::orderBy('created_at', 'DESC')->paginate(10);
         return [
             "data" => $QR,
             "sub_title"    => "Pendaftaran",
@@ -41,6 +41,17 @@ class InformasiPendaftaran extends Controller
             "sub_title" => "Buat Pendaftran Baru",
             "fakultas" => \Modules\V1\Entities\Fakultas::all(),
             "uri" => $this->data->getRouterWeb() ?? []
+        ];
+        return view($this->view . 'input', $data);
+    }
+    public function update($id)
+    {
+        $data = [
+            "title" => "Input",
+            "sub_title" => "Buat Pendaftran Baru",
+            "fakultas" => \Modules\V1\Entities\Fakultas::all(),
+            "uri" => $this->data->getRouterWeb() ?? [],
+            "Quri" => \Modules\V1\Entities\InformasiPendaftaran::whereId($id)->with("jadwal")->first()
         ];
         return view($this->view . 'input', $data);
     }

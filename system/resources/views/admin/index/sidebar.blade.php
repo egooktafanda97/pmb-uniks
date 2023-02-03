@@ -1,22 +1,17 @@
 <!--sidebar wrapper -->
-<div class="sidebar-wrapper"
-     data-simplebar="true">
+<div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
         <div>
-            <img alt="logo icon"
-                 class="logo-icon"
-                 src="{{ asset('assets/logo/logo.png') }}" />
+            <img alt="logo icon" class="logo-icon" src="{{ asset('assets/logo/logo.png') }}" />
         </div>
         <div>
-            <h4 class="logo-text"
-                style="color: orange">UNIKS</h4>
+            <h4 class="logo-text" style="color: orange">UNIKS</h4>
         </div>
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
         </div>
     </div>
     <!--navigation-->
-    <ul class="metismenu"
-        id="menu">
+    <ul class="metismenu" id="menu">
         <li>
             <a href="{{ url('admin') }}">
                 <div class="parent-icon">
@@ -42,22 +37,14 @@
                 <div class="menu-title">Calon Mahasiswa</div>
             </a>
         </li>
-        <li>
-            <a href="javascript:;">
-                <div class="parent-icon">
-                    <i class='bx bx-circle'></i>
-                </div>
-                <div class="menu-title">Pembayaran</div>
-            </a>
-        </li>
-        <li>
+        {{-- <li>
             <a href="javascript:;">
                 <div class="parent-icon">
                     <i class='bx bx-circle'></i>
                 </div>
                 <div class="menu-title">Export</div>
             </a>
-        </li>
+        </li> --}}
         <li class="menu-label">Studi</li>
         <li>
             <a href="{{ url('admin/fakultas') }}">
@@ -77,11 +64,19 @@
         </li>
         <li class="menu-label">Setup</li>
         <li>
-            <a href="javascript:;">
+            <a href="{{ url('admin/pengumuman') }}">
                 <div class="parent-icon">
                     <i class='bx bx-circle'></i>
                 </div>
-                <div class="menu-title">Kontak</div>
+                <div class="menu-title">Pengumuman</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('admin/agent') }}">
+                <div class="parent-icon">
+                    <i class='bx bx-circle'></i>
+                </div>
+                <div class="menu-title">Agen</div>
             </a>
         </li>
         <li>

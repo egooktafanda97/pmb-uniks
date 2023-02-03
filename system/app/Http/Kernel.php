@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'api_version' => \App\Http\Middleware\APIversion::class,
         'auth_check' => \App\Http\Middleware\AuthCheckWebApi::class,
+        'is_verify_email' => \App\Http\Middleware\IsVerifyEmail::class,
     ];
 
     /**

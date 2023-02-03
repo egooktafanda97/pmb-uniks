@@ -192,12 +192,25 @@ class DaftarMhsController extends Controller
     {
         try {
             $agent = \Modules\V1\Entities\Agent::where('referal', $request->referal)->first();
-            $ref = \Modules\V1\Entities\Pendaftaran::whereuserId(auth()->user()->id)->first();
+            $ref = \Modules\V1\Entities\Pendaftaran::whereuserId(auth()->user()->id)->with("calon_mahasiswa")->first();
             $ref->agent_id = $agent->id;
             $ref->save();
+            if (!empty($ref->calon_mahasiswa)) {
+                $data = [
+                    "email" => User::whereId($agent->user_id)->first()->email,
+                    'pesan' => "Calon mahasiswa baru atas nama " . $ref->calon_mahasiswa->nama_lengkap . " telah menambahkan referal anda.",
+                ];
+                dispatch(new \App\Jobs\JobMessage($data));
+            }
+
             return response()->json([], 200);
         } catch (\Throwable $th) {
             return response()->json([], 401);
         }
+    }
+    public function read()
+    {
+        $cmhs = \Modules\V1\Entities\Pendaftaran::where("user_id", auth()->user()->id)->with(["calon_mahasiswa", "calon_mahasiswa.orangtua"])->first();
+        return response()->json($cmhs);
     }
 }

@@ -68,6 +68,18 @@ trait ManagementControl
         }
     }
 
+    public static function map_fead($data, $result, $i = null)
+    {
+        $x = [];
+        $i = $i == null ? 0 : $i;
+        foreach ($data as $key => $value) {
+            $r =  $result($key, $value, $i);
+            array_push($x, $r);
+            $i++;
+        }
+        return $x;
+    }
+
     // public function get()
     // {
     //     if ($Query = $this->source->getQuery(__FUNCTION__)) {

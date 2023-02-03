@@ -31,6 +31,11 @@ bootstrap-select@^1.13.18:
   resolved "https://registry.yarnpkg.com/bootstrap-select/-/bootstrap-select-1.13.18.tgz#4557119d58dc1159189977161c803962220e4dda"
   integrity sha512-V1IzK4rxBq5FrJtkzSH6RmFLFBsjx50byFbfAf8jYyXROWs7ZpprGjdHeoyq2HSsHyjJhMMwjsQhRoYAfxCGow==
 
+busy-load@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/busy-load/-/busy-load-0.1.2.tgz#e0eaf6a9936982d45a471561c593b3b8ed0360a5"
+  integrity sha512-fBKpyzeTXzEY7znRHvroA2RbEz2qwQAGwWnEjQwT+trAGt+36NCB7wdj3oUevYuACUFeyXUjClGXuPglb0BGJg==
+
 combined-stream@^1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"

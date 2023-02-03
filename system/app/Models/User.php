@@ -15,17 +15,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
 use Rocky\Eloquent\HasDynamicRelation;
-
 use App\Service\Control\Controller as ControllerSource;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
     use HasDynamicRelation;
 
     // use SoftDeletes;
-
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
     public function __construct(array $attributes = [])
     {
 
@@ -93,6 +94,10 @@ class User extends Authenticatable implements JWTSubject
                 }
             }
         }
+    }
+    public function verify()
+    {
+        return $this->hasOne(Verify::class);
     }
 
     public function getJWTIdentifier()

@@ -25,6 +25,10 @@ class InformasiPendaftaran extends Model
 
     use ManagementModel;
     // use SoftDeletes;
+
+    protected $appends = ["Combine"];
+
+
     public function __construct(array $attributes = [])
     {
         /*
@@ -47,6 +51,7 @@ class InformasiPendaftaran extends Model
         $this->fillable = array_merge($instace->getFild());
         $this->table = $instace->table;
         $this->primaryKey = $instace->primary;
+
         /*
         | end
         |--------------------------------------------------------------------------
@@ -73,4 +78,17 @@ class InformasiPendaftaran extends Model
 
         Model::__construct($attributes);
     }
+    /*
+    |--------------------------------------------------------------------------
+    | CREATE RELATION FUNCTION
+    */
+    public function getCombineAttribute()
+    {
+        $th = explode("-", $this->attributes['tahun_ajaran']);
+        return $this->attributes['pendaftaran'] . ' - ' . $th[0] . '/' . $th[1];
+    }
+    /*
+    | end
+    |--------------------------------------------------------------------------
+    */
 }

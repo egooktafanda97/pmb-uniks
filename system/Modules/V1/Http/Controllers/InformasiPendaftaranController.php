@@ -21,7 +21,7 @@ use Modules\V1\Providers\ManagementServiceProvider;
 | USE MODEL
 */
 // use App\Models\User;
-use Modules\V1\Providers\InformasiPendaftaranController as PendaftaranControl;
+use Modules\V1\Providers\Fungsi_masal;
 /*
 | end
 */
@@ -30,7 +30,7 @@ class InformasiPendaftaranController extends Controller
 {
     use ManagementRoler;
     use ManagementControl;
-    use PendaftaranControl;
+    use Fungsi_masal;
 
     public  $resources;
 
@@ -103,6 +103,7 @@ class InformasiPendaftaranController extends Controller
         if (empty($this->resources))
             return response()->json(["error" => "resource not found"],  501);
         $hndelAction = $this->resources->deleted($id);
+        // return response()->json($hndelAction);
         return response()->json($hndelAction, $hndelAction['status'] ?? 401);
     }
 }

@@ -19,15 +19,29 @@ class MahasiswaController extends Controller
             $upMhs->status = $request->status;
             $message = $request->message;
             $upMhs->save();
-            $msg = 'data pendaftaran anda telah diperiksa pihak kampus';
+            $msg = $request->msg;
             if ($message)
                 $msg .= '<br> <strong>' . $message . '</strong>';
+
+            $bgMsg = $request->bgMsg;
             $data = [
                 "email" => $upMhs->users->email,
                 'pesan' => $msg,
-                'status' => $request->status
+                'info' => '
+                <a href=""
+                    style="color:#fff;padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px; background:' . $bgMsg . ';">
+                    <strong>' . $request->status . '</strong>
+                </a>'
             ];
-            dispatch(new \App\Jobs\SendEmailJob($data));
+            \Modules\V1\Entities\InfoKhusus::create([
+                "from_user_id" => auth()->user()->id,
+                "to_user_id" => $upMhs->users->id,
+                "subject" => "Info Validasi Data",
+                "message" => $msg . "<br/> Data anda " . $request->status,
+                "visibility" => true
+            ]);
+            if ($request->mail == 'true' || $request->mail == true)
+                dispatch(new \App\Jobs\JobMessage($data));
             return response()->json(true, 200);
         } catch (\Throwable $th) {
             return response()->json(false, 401);
@@ -39,16 +53,29 @@ class MahasiswaController extends Controller
         $upMhs = \Modules\V1\Entities\Pendaftaran::find($id);
         $upMhs->status_seleksi = $request->status_seleksi;
         $upMhs->save();
+        $message = $request->message;
         $msg = 'dengan pertimbangan dari pihak kampus, atas nama ' . $upMhs->calon_mahasiswa->nama_lengkap . ' dinyatakan';
+        $msg = 'data pendaftaran anda telah diperiksa pihak kampus.';
+        if ($message)
+            $msg .= '<br> <strong>' . $message . '</strong>';
         $data = [
             "email" => $upMhs->users->email,
             'pesan' => $msg,
-            'status' => $upMhs->status_seleksi
+            'info' => '
+                <a href=""
+                    style="color:#fff;padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px; background: #349eeb">
+                    <strong>' . $request->status_seleksi . '</strong>
+                </a>'
         ];
-        dispatch(new \App\Jobs\SendEmailJob($data));
+        $addInfoKhusus = \Modules\V1\Entities\InfoKhusus::create([
+            "from_user_id" => auth()->user()->id,
+            "to_user_id" => $upMhs->users->id,
+            "subject" => "Info Validasi Data",
+            "message" => $msg . "<br/> anda di nyatakan " . $request->status_seleksi,
+            "visibility" => true
+        ]);
+
+        dispatch(new \App\Jobs\JobMessage($data));
         return response()->json(true, 200);
-        // } catch (\Throwable $th) {
-        //     return response()->json(false, 401);
-        // }
     }
 }

@@ -80,6 +80,27 @@
             },
             "costum": {}
         },
+        "tahun": {
+            "name": "tahun",
+            "label": "Tahunn Ajaran",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
         "tahun_ajaran": {
             "name": "tahun_ajaran",
             "label": "Tahunn Ajaran",
@@ -199,6 +220,7 @@
             "model": "Jadwal",
             "foreign": "informasi_pendaftaran_id",
             "relation": "hasMany",
+            "delete": true,
             "file_relation": {
                 "name": "Jadwal",
                 "file": "Jadwal"
@@ -208,11 +230,24 @@
         "informasi_pendaftaran_prodi": {
             "hirarky": "after",
             "model": "InformasiPendaftaranProdi",
+            "delete": true,
             "foreign": "id",
             "relation": "belongsTo",
             "file_relation": {
                 "name": "InformasiPendaftaranProdi",
                 "file": "InformasiPendaftaranProdi"
+            },
+            "data": []
+        },
+        "pendaftar": {
+            "hirarky": "after",
+            "model": "Pendaftaran",
+            "delete": true,
+            "foreign": "informasi_pendaftaran_id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "Pendaftaran",
+                "file": "Pendaftaran"
             },
             "data": []
         }
@@ -324,6 +359,13 @@
                 "prefix": "admin/info-pendaftaran",
                 "middleware": 1,
                 "controller": "\\App\\Http\\Controllers\\admin\\InformasiPendaftaran"
+            },
+            "info": {
+                "method": "get",
+                "router": "/",
+                "prefix": "mahasiswa/info",
+                "middleware": 8,
+                "controller": "\\App\\Http\\Controllers\\mahasiswa\\InfoPendaftaran"
             }
         }
     },

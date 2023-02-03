@@ -25,9 +25,25 @@ class Controller
     public $model_name_space;
     public $controller_name_space;
     public $jsonName = "";
+    public  $seed = false;
+    public $testing = false;
+
     public function __construct($json)
     {
         $this->jsonName = $json;
+    }
+
+    public function setSeed()
+    {
+        $this->seed = true;
+    }
+    public function setTesting()
+    {
+        $this->testing = true;
+    }
+    public function getTesting()
+    {
+        return $this->testing;
     }
     public function instance($path)
     {
@@ -287,13 +303,19 @@ class Controller
                 $key => $value['validate']
             ];
         } else if ($data_tipe == "integer" && $value['request'] == true) {
+            $indexs = $value['validate'];
+            if ($this->seed || $this->testing)
+                $indexs = $value["type"] == 'image' ? 0 : $value['validate'];
             $va = [
-                $key => $this->getTemplateValidation()[$value['validate']]
+                $key => $this->getTemplateValidation()[$indexs]
             ];
         } else if ($data_tipe == "integer" && $value['request'] == false) {
             if ($auto_data == true) {
+                $indexs = $value['validate'];
+                if ($this->seed || $this->testing)
+                    $indexs = $value["type"] == 'image' ? 0 : $value['validate'];
                 $va = [
-                    $key => $this->getTemplateValidation()[$value['validate']]
+                    $key => $this->getTemplateValidation()[$indexs]
                 ];
             } else {
                 if (array_key_exists('type',  $value)) {
@@ -309,6 +331,7 @@ class Controller
                 $key => $value
             ];
         }
+
         return $va;
     }
     public function getValidationResourceUpdated($data, $key, $master, $auto_data = false)
@@ -321,13 +344,19 @@ class Controller
                 $key => $value['validate']
             ];
         } else if ($data_tipe == "integer" && $value['request'] == true) {
+            $indexs = $value['validate'];
+            if ($this->seed || $this->testing)
+                $indexs = $value["type"] == 'image' ? 0 : $value['validate'];
             $va = [
-                $key => $this->getTemplateValidation()[$value['validate']]
+                $key => $this->getTemplateValidation()[$indexs]
             ];
         } else if ($data_tipe == "integer" && $value['request'] == false) {
             if ($auto_data == true) {
+                $indexs = $value['validate'];
+                if ($this->seed || $this->testing)
+                    $indexs = $value["type"] == 'image' ? 0 : $value['validate'];
                 $va = [
-                    $key => $this->getTemplateValidation()[$value['validate']]
+                    $key => $this->getTemplateValidation()[$indexs]
                 ];
             } else {
                 if (array_key_exists('type',  $value)) {

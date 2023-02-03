@@ -23,7 +23,7 @@
             "label": "Hal",
             "type": "string",
             "request": true,
-            "migration": 2,
+            "migration": 3,
             "validate": 2,
             "view": {
                 "table": {
@@ -153,12 +153,49 @@
                 "middleware": 1,
                 "controller": ""
             },
+            "up_status": {
+                "method": "get",
+                "router": "/up-status/{id}",
+                "prefix": "pengumuman",
+                "middleware": 1,
+                "controller": ""
+            },
             "delete": {
                 "method": "delete",
                 "router": "/delete/{id}",
                 "prefix": "pengumuman",
                 "middleware": 1,
                 "controller": ""
+            }
+        },
+        "web": {
+            "show": {
+                "method": "get",
+                "router": "/",
+                "prefix": "admin/pengumuman",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\PengumumanController"
+            },
+            "store": {
+                "method": "get",
+                "router": "/store",
+                "prefix": "admin/pengumuman",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\PengumumanController"
+            },
+            "detail": {
+                "method": "get",
+                "router": "/show/{id}",
+                "prefix": "admin/pengumuman",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\PengumumanController"
+            },
+            "update": {
+                "method": "get",
+                "router": "/update/{id}",
+                "prefix": "admin/pengumuman",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\PengumumanController"
             }
         }
     },

@@ -52,6 +52,7 @@
                             <thead>
                                 <tr>
                                     <th>PENDAFTARAN</th>
+                                    <th>TAHUN</th>
                                     <th>TAHUN AJARAN</th>
                                     <th>STATUS</th>
                                     <th></th>
@@ -62,6 +63,7 @@
                                 @foreach ($data as $item)
                                     <tr style="padding: 10px">
                                         <td>{{ $item->pendaftaran }}</td>
+                                        <td>{{ $item->tahun }}</td>
                                         <td>{{ $item->tahun_ajaran }}</td>
                                         <td style="width: 10%">
                                             <div class="form-check-danger form-check form-switch">
@@ -83,10 +85,12 @@
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     <a class="btn btn-sm btn-outline-success"
+                                                       href="{{ url('admin/info-pendaftaran/update/' . $item->id) }}"
                                                        type="button">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <button class="btn btn-sm btn-outline-danger"
+                                                    <button class="btn btn-sm btn-outline-danger delete"
+                                                            data-id="{{ $item->id }}"
                                                             type="button">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
@@ -123,7 +127,8 @@
             $('#example').DataTable({
                 searching: false,
                 paging: false,
-                info: false
+                info: false,
+                ordering: false
             });
         });
 
@@ -183,8 +188,38 @@
                 $(this).prop('checked', true);
             } else {
                 // off
-                http_update_status_pendaftaran('in_active', $(this).data("id"));
+                http_update_status_pendaftaran('inactive', $(this).data("id"));
             }
         });
+        $(".delete").click(function() {
+            const Id = $(this).data('id')
+            deleted({
+                url: `{{ url('api/v1/informasi_pendaftaran/delete') }}/${Id}`,
+                header: headers,
+                msg: null,
+                errors: (res) => {
+                    console.log(res);
+                    $.toast({
+                        title: 'Opps!',
+                        subtitle: '',
+                        content: 'gagal menghapus!',
+                        type: 'error',
+                        delay: 2000,
+                    })
+                },
+                result: (response) => {
+                    swal({
+                        title: "Berhasil!",
+                        text: "Jadwal berhasil dihapus",
+                        icon: "success",
+                        button: "Oke!",
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            })
+        })
     </script>
 @endsection

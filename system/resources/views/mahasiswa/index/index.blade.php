@@ -3,7 +3,7 @@
 
 <head>
     @include('mahasiswa.index.head')
-
+    <link href="{{ asset('public/css/site.css') }}" rel="stylesheet" />
     @yield('style')
     <title>Admisi</title>
 </head>
@@ -25,10 +25,10 @@
         <div class="overlay toggle-icon"></div>
         <!--end overlay-->
         <!--Start Back To Top Button-->
-        <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+        <a class="back-to-top" href="javaScript:;"><i class='bx bxs-up-arrow-alt'></i></a>
         <!--End Back To Top Button-->
         <footer class="page-footer">
-            <p class="mb-0">kaptenCode.com</p>
+            <p class="mb-0">uniks.ac.id</p>
         </footer>
     </div>
     @include('mahasiswa.index.footer')

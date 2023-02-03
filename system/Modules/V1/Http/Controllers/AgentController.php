@@ -3,6 +3,7 @@
 namespace Modules\V1\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -65,7 +66,31 @@ class AgentController extends Controller
             /*
             | AKTIFKAN JIKA AKAN MEMBUAT ROLE PADA USER
             */
-            // $this->create_role_users($save);
+            try {
+                // /*
+                // | AKTIFKAN JIKA AKAN MEMBUAT ROLE PADA USER
+                // */
+                if (!$roler = $this->newRole("api", 'agent'))
+                    return ["error" => "role instansi could not be created"];
+                $m = \App\Models\User::find($save['data']['user_id']);
+                $this->createRole($m, $roler);
+                $data = [
+                    "email" => $m->email,
+                    'pesan' => "Anda telah di daftarkan sebagai agent penerimaan mahasiswa baru, 
+                                <br>
+                                <div><strong>Username : " . $request->username . "</strong></div>
+                                <div><strong>Password : " . $request->password . "</strong></div>
+                                <div><strong>Referal  : " . $request->referal . "</strong></div>
+                                <p>Berikan kode referal anda kepada calon mahasiswa baru.</p>",
+                ];
+                dispatch(new \App\Jobs\JobMessage($data));
+                // /*
+                // | end
+                // */
+                return response()->json($save, 200);
+            } catch (\Throwable $th) {
+                return response()->json(["error" => $th->getMessage()], 501);
+            }
             /*
             | end
             */

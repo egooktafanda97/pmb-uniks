@@ -27,9 +27,10 @@ class Prodi extends Seeder
         foreach ($fakultas as $key => $value) {
             for ($i = 0; $i < 2; $i++) {
                 $instansi = new \Illuminate\Http\Request();
+                $names = $faker->name;
                 $instansi->replace([
                     'fakultas_id'  => $value->id,
-                    "nama_prodi" => $faker->name,
+                    "nama_prodi" => $names,
                     'jenjang' => "S-1",
                     'akreditas' => "A",
                     "latar_belakang" => $faker->realText(500),
@@ -38,10 +39,10 @@ class Prodi extends Seeder
                     'kurikulum' => "lorem",
                     'kepala_prodi' => "I",
                     'situs_web' => "http:://testing.com",
-                    'nama' => $faker->name,
+                    'nama' => $names,
                     'username'    => $faker->userName,
                     'email' => $faker->unique()->safeEmail(),
-                    'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                    'password' => 'password' // password
                 ]);
                 $s =  $data->generate_data_insert($instansi);
                 if (empty($s['data']))

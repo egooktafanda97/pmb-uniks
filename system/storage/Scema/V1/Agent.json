@@ -37,6 +37,31 @@
             "request": false,
             "migration": 0
         },
+        "nik": {
+            "name": "nik",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "migration": 21,
+            "validate": 18,
+            "validate_unique": {
+                "validate": 18,
+                "index_id": "nis"
+            },
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
         "nama_lengkap": {
             "name": "nama_lengkap",
             "label": "Nama Lengkap",
@@ -79,6 +104,69 @@
             },
             "costum": {}
         },
+        "no_rekening": {
+            "name": "no_rekening",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "nama_bank": {
+            "name": "nama_bank",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "status_area": {
+            "name": "status_area",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
         "referal": {
             "name": "referal",
             "label": "Referal",
@@ -86,6 +174,27 @@
             "request": true,
             "migration": 18,
             "validate": 21,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "saldo": {
+            "name": "saldo",
+            "label": "Nama Lengkap",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 0,
             "view": {
                 "table": {
                     "status": true
@@ -184,6 +293,36 @@
                 "prefix": "agent",
                 "middleware": 1,
                 "controller": ""
+            }
+        },
+        "web": {
+            "show": {
+                "method": "get",
+                "router": "/",
+                "prefix": "admin/agent",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\AgentController"
+            },
+            "store": {
+                "method": "get",
+                "router": "/store",
+                "prefix": "admin/agent",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\AgentController"
+            },
+            "detail": {
+                "method": "get",
+                "router": "/show/{id}",
+                "prefix": "admin/agent",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\AgentController"
+            },
+            "update": {
+                "method": "get",
+                "router": "/update/{id}",
+                "prefix": "admin/agent",
+                "middleware": 1,
+                "controller": "\\App\\Http\\Controllers\\admin\\AgentController"
             }
         }
     },

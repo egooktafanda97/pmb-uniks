@@ -1,11 +1,11 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="width=device-width, initial-scale=1" name="viewport">
 <title>Pendaftaran Mahasiswa Baru</title>
 
 <!-- Favicon -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144"
-    href="{{ asset(config('app.site-assets')) }}/assets/ico/apple-touch-icon-144-precomposed.png">
-<link rel="shortcut icon" href="{{ asset(config('app.site-assets')) }}/assets/ico/favicon.ico">
+<link href="{{ asset(config('app.site-assets')) }}/assets/ico/apple-touch-icon-144-precomposed.png"
+    rel="apple-touch-icon-precomposed" sizes="144x144">
+<link href="{{ asset('assets/logo/logo.ico') }}" rel="shortcut icon">
 
 <!-- CSS Global -->
 <link href="{{ asset(config('app.site-assets')) }}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,15 +20,20 @@
     rel="stylesheet">
 <link href="{{ asset(config('app.site-assets')) }}/assets/plugins/animate/animate.min.css" rel="stylesheet">
 
+
+
 <!-- Theme CSS -->
-<link href="{{ asset(config('app.site-assets')) }}/assets/css/theme.css" rel="stylesheet">
+{{-- <link href="{{ asset(config('app.site-assets')) }}/assets/css/theme.css"
+      rel="stylesheet"> --}}
+<link href="{{ asset(config('app.site-assets')) }}/assets/css/theme-yellow-2.css" rel="stylesheet">
 
 <!-- Head Libs -->
 <script src="{{ asset(config('app.site-assets')) }}/assets/plugins/modernizr.custom.js"></script>
 
+
 <!--[if lt IE 9]>
-    <script src="assets/plugins/iesupport/html5shiv.js"></script>
-    <script src="assets/plugins/iesupport/respond.min.js"></script>
+    <blade ___scripts_1___/>
+    <blade ___scripts_2___/>
     <![endif]-->
 
 <style>
@@ -119,5 +124,20 @@
 
     .closebtn:hover {
         transform: scale(1.3);
+    }
+
+    /* teheme */
+    .jumbotron-section.with-overlay.jb1:before {
+        background-color: transparent !important;
+    }
+
+    .jumbotron-section.with-overlay:before {
+        content: '';
+        display: block;
+        background-color: transparent !important;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
     }
 </style>
