@@ -1,51 +1,54 @@
 @extends('website.index.index')
 @section('style')
-    <link href="{{ asset('public/node_modules/toastr/build/toastr.css') }}"
-          rel="stylesheet"
-          type="text/css">
+    <link href="{{ asset('public/node_modules/toastr/build/toastr.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        .jumbotron-section.jb1 {
+            /* margin-top: -110px; */
+        }
+
+        .sticky-wrapper {
+            height: 50px;
+            position: absolute;
+            width: 100%;
+            top: 50px
+        }
+
+        .header .top-bg {
+            background: transparent !important;
+        }
+    </style>
 @endsection
 @section('content')
     <!-- PAGE -->
-    <section class="page-section jumbotron-section jb1 with-overlay"
-             style="background-image: url('https://uniks.ac.id/images/slides/KAJARI-KUANSING:-GEDUNG-UNIKS-BISA-DIFUNGSIKAN-ASALKAN-ADA-IZIN-PEMDA.jpg')">
+    <section class="page-section jumbotron-section jb1 with-overlay bg-home-page"
+        style="background-image: url('{{ asset('assets/images/website/bg.jpg') }}')">
         <div class="container">
 
             <div class="div-table">
                 <div class="div-cell">
                     <div class="jumbotron text-center">
-                        <h5 class="jumbotron-title-sub"
-                            data-animation-delay="700"
-                            data-animation="fadeIn">
+                        <h5 class="jumbotron-title-sub" data-animation-delay="700" data-animation="fadeIn">
                             SISTEM INFORMASI
                         </h5>
-                        <h1 class="jumbotron-title"
-                            data-animation-delay="500"
-                            data-animation="fadeIn">
+                        <h1 class="jumbotron-title" data-animation-delay="500" data-animation="fadeIn">
                             PENERIMAAN MAHASISWA BARU
                             </span>
                         </h1>
-                        <h4 class="jumbotron-title-sub"
-                            data-animation-delay="700"
-                            data-animation="fadeIn">
+                        <h4 class="jumbotron-title-sub" data-animation-delay="700" data-animation="fadeIn">
                             <span class="text-color">
                                 <strong>UNIVERSITAS ISLAM KUANTAN SINGINGI</strong>
                             </span>
                         </h4>
                         @if ($pendaftaran != null)
-                            <h4 class="jumbotron-title-sub"
-                                data-animation-delay="700"
-                                data-animation="fadeIn">
+                            <h4 class="jumbotron-title-sub" data-animation-delay="700" data-animation="fadeIn">
                                 <span class="text-color">
                                     {{ tgl_i($pendaftaran->buka) ?? '- ' }}
                                 </span>- {{ tgl_i($pendaftaran->tutup) ?? ' -' }}
                             </h4>
                             <p class="btn-row">
-                                <a class="btn btn-theme btn-rounded btn-theme-lg"
-                                   data-animation-delay="400"
-                                   data-animation="fadeInLeft"
-                                   data-target="#popup-sign-up"
-                                   data-toggle="modal"
-                                   href="#">
+                                <a class="btn btn-theme btn-rounded btn-theme-lg" data-animation-delay="400"
+                                    data-animation="fadeInLeft" data-target="#popup-sign-up" data-toggle="modal"
+                                    href="#">
                                     DAFTAR SEKARANG
                                 </a>
                             </p>
@@ -60,64 +63,55 @@
     <!-- /PAGE -->
 
     <!-- PAGE -->
-    <section class="page-section no-padding-top md-padding-bottom featured-product featured-product-raise-above">
-        <div class="container">
-            <div class="featured-product-wrapper">
-                <div class="featured-product-label">Featured</div>
-                <div class="row">
-                    <div class="col-md-7">
-                        <a class="featured-product-image"
-                           href="#"><img alt=""
-                                 src="assets/img/preview/featured-product-1.jpg"></a>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="overflowed">
-                            <h3 class="caption-title"><a href="#">PENGUMUMAN</a></h3>
-                            <span class="caption-category"><a href="#">psd</a></span>
+    @if ($pengumuman)
+        <section class="page-section no-padding-top md-padding-bottom featured-product featured-product-raise-above">
+            <div class="container">
+                <div class="featured-product-wrapper">
+                    <div class="featured-product-label">PENGUMUMAN</div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <a class="featured-product-image" href="#"><img alt=""
+                                    src="{{ asset('assets/' . $pengumuman->poster) }}"></a>
                         </div>
-                        <h5 class="caption-title-sub">Lorem ipsum dolor sit amet</h5>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae laudantium aliquam
-                            provident nam, sequi cumque accusamus ducimus exercitationem, quia qui quaerat quo fuga debitis
-                            vero, a cupiditate minima fugiat expedita!
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit, expedita ullam quas hic,
-                            deleniti officia excepturi mollitia corporis recusandae omnis eum fugit aliquam placeat suscipit
-                            in nesciunt nihil totam vero!
-                        </p>
+                        <div class="col-md-5">
+                            <div class="overflowed">
+                                <h3 class="caption-title"><a href="#">{{ $pengumuman->hal }}</a></h3>
+                                {{-- <span class="caption-category"><a href="#">psd</a></span> --}}
+                            </div>
+                            <h5 class="caption-title-sub">{{ $pengumuman->created_at }}</h5>
+                            <br>
+                            {!! $pengumuman->keterangan !!}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
+
     <!-- /PAGE -->
 
     <!-- PAGE -->
     <section class="page-section sm-padding-top">
         <div class="container">
 
-            <h2 class="section-title"
-                data-animation-delay="100"
-                data-animation="fadeInUp">
+            <h2 class="section-title" data-animation-delay="100" data-animation="fadeInUp">
                 <span>PROGRAM STUDI <span class="text-color">UNIKS</span></span>
                 {{-- <small>Check our latest exciting templates</small> --}}
             </h2>
 
             <div class="row thumbnails portfolio isotope isotope-items">
-                @for ($i = 0; $i < 10; $i++)
-                    <div class="col-md-4 col-sm-6 isotope-item"
-                         data-animation-delay="300"
-                         data-animation="fadeInUp">
+                @foreach ($prodi as $item)
+                    <div class="col-md-4 col-sm-6 isotope-item" data-animation-delay="300" data-animation="fadeInUp">
                         <div class="thumbnail no-border no-padding">
                             <div class="media">
                                 <img alt=""
-                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/portfolio/portfolio-x6.jpg">
+                                    src="{{ asset(config('app.site-assets')) }}/assets/img/preview/portfolio/portfolio-x6.jpg">
                                 <div class="caption hovered">
                                     <div class="caption-border"></div>
                                     <div class="caption-wrapper div-table">
                                         <div class="caption-inner div-cell">
                                             <p class="caption-buttons">
-                                                <a class="btn caption-link"
-                                                   href="themes-single.html">
+                                                <a class="btn caption-link" href="themes-single.html">
                                                     Lihat Prodi
                                                 </a>
                                             </p>
@@ -127,26 +121,24 @@
                             </div>
                             <div class="caption">
                                 <p class="caption-price"
-                                   style="background: #fff;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
-                                    <img alt=""
-                                         src="{{ asset('assets/logo/logo.png') }}"
-                                         style="width: 100%">
+                                    style="background: #fff;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                    <img alt="" src="{{ asset('assets/logo/logo.png') }}" style="width: 100%">
                                 </p>
-                                <h3 class="caption-title"><a href="#">Project Title</a></h3>
-                                <p class="caption-text">Personal Portfolio Template</p>
+                                <h3 class="caption-title"><a href="#">{{ $item->nama_prodi }}</a></h3>
+                                <p class="caption-text">Terakreditas {{ $item->akreditas }}</p>
                             </div>
                             <div class="caption-details">
                                 <div class="row">
                                     <div class="col-xs-12 pcd-shop text-left">
                                         <div style="padding-left: 10px">
-                                            <i class="fa fa-users"></i>104 Mahasiswa
+                                            <i class="fa fa-users"></i>-- Mahasiswa
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
 
             {{-- <div class="loading">
@@ -165,21 +157,9 @@
                 <div class="col-12">
                     <!-- PAGE -->
                     <section
-                             class="page-section no-padding-top md-padding-bottom featured-product featured-product-raise-above">
-                        <div class="container">
-                            <div class="featured-product-wrapper">
-                                <div class="featured-product-label">Featured</div>
-                                <div class="row">
-                                    <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            allowfullscreen
-                                            frameborder="0"
-                                            height="315"
-                                            src="https://www.youtube.com/embed/TbApNye4YoQ?start=116"
-                                            title="YouTube video player"
-                                            width="560"></iframe>
-                                </div>
-                            </div>
-                        </div>
+                        class="page-section no-padding-top md-padding-bottom featured-product featured-product-raise-above"
+                        style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+                        <img alt="" src="{{ asset('assets/imags/banner/1.jpg') }}" width="100%">
                     </section>
                     <!-- /PAGE -->
                 </div>
@@ -192,74 +172,72 @@
     <section class="page-section lg-padding-top xl-padding-bottom">
         <div class="container">
 
-            <h2 class="section-title"
-                data-animation-delay="100"
-                data-animation="fadeInUp">
+            <h2 class="section-title" data-animation-delay="100" data-animation="fadeInUp">
                 <span>PIMPINAN <span class="text-color">UNIKS</span></span>
                 <small>Rektoret Universitas Islam Kuantan Singingi</small>
             </h2>
 
             <div class="row">
                 <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail thumbnail-team no-border no-padding"
-                         data-animation-delay="200"
-                         data-animation="fadeInUp">
+                    <div class="thumbnail thumbnail-team no-border no-padding" data-animation-delay="200"
+                        data-animation="fadeInUp">
                         <div class="media">
-                            <a href="#"><img alt=""
-                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x1.jpg" /></a>
+                            <a href="#">
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/rektor.jpg') }}" />
+                            </a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
-                                <a href="#">David Ramon</a>
-                                <small>Design Director</small>
+                                <a href="#">Dr. H. Nopriadi, S.K.M.,M.Kes</a>
+                                <small>REKTOR</small>
                             </h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail thumbnail-team no-border no-padding"
-                         data-animation-delay="300"
-                         data-animation="fadeInUp">
+                    <div class="thumbnail thumbnail-team no-border no-padding" data-animation-delay="300"
+                        data-animation="fadeInUp">
                         <div class="media">
-                            <a href="#"><img alt=""
-                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x2.jpg" /></a>
+                            <a href="#">
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr1.jpg') }}" />
+                            </a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
-                                <a href="#">Mark Jason</a>
-                                <small>Coding Guru</small>
+                                <a href="#">-</a>
+                                <small>Wakil Rektor I</small>
                             </h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail thumbnail-team no-border no-padding"
-                         data-animation-delay="400"
-                         data-animation="fadeInUp">
+                    <div class="thumbnail thumbnail-team no-border no-padding" data-animation-delay="400"
+                        data-animation="fadeInUp">
                         <div class="media">
-                            <a href="#"><img alt=""
-                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x3.jpg" /></a>
+                            <a href="#">
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr2.jpg') }}" />
+                            </a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
-                                <a href="#">Jasica Arther</a>
-                                <small>Product Designer</small>
+                                <a href="#">-</a>
+                                <small>Wakil Rektor II</small>
                             </h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail thumbnail-team no-border no-padding"
-                         data-animation-delay="500"
-                         data-animation="fadeInUp">
+                    <div class="thumbnail thumbnail-team no-border no-padding" data-animation-delay="500"
+                        data-animation="fadeInUp">
                         <div class="media">
-                            <a href="#"><img alt=""
-                                     src="{{ asset(config('app.site-assets')) }}/assets/img/preview/team/team-270x345x4.jpg" /></a>
+                            <a href="#">
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr3.jpg') }}" />
+                            </a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
-                                <a href="#">John Diggle</a>
-                                <small>Wordpress Ninja</small>
+                                <a href="#">-</a>
+                                <small>Wakil Rektor III</small>
                             </h4>
                         </div>
                     </div>
@@ -317,8 +295,7 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript"
-            src="{{ asset('public/node_modules/toastr/build/toastr.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/node_modules/toastr/build/toastr.min.js') }}"></script>
     @if ($errors->any() && $errors->first('status') == 201)
         <script>
             const errors = JSON.parse(`{{ $errors->first() }}`.replace(/&quot;/g, '"'));
@@ -332,7 +309,26 @@
         </script>
     @elseif($errors->any() && $errors->first('status') == 501)
         <script>
-            toastr.error(`{{ $errors->first() }}`)
+            toastr.error(`{{ $errors->first() }}`);
         </script>
     @endif
+    <script>
+        $("#logo-header").attr("src", `{{ asset('assets/logo/logo-header2.png') }}`)
+        $(".nav>li>a").css("color", "#fff")
+        $(".sticky-wrapper").css("position", "absolute");
+        $(window).on("scroll", function() {
+            var scroll = $(window).scrollTop();
+            if (scroll > 50) {
+                $(".nav>li>a").css("color", "#000")
+                $("#logo-header").attr("src", `{{ asset('assets/logo/logo-header.png') }}`)
+                $(".header-wrapper").removeClass("top-bg");
+                // $(".sticky-wrapper").css("position", "fixed");
+            } else {
+                $("#logo-header").attr("src", `{{ asset('assets/logo/logo-header2.png') }}`)
+                $(".header-wrapper").addClass("top-bg");
+                $(".nav>li>a").css("color", "#fff")
+                // $(".sticky-wrapper").css("position", "absolute");
+            }
+        });
+    </script>
 @endsection
