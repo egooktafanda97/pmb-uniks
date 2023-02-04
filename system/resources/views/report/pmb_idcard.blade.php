@@ -144,7 +144,7 @@
         <table class="tb">
             <tr>
                 <td style="width: 60%">
-                    <img alt="" src="http://127.0.0.1/pmb-uniks/assets/lampiran/88iSwXO5ywb4dTjC1675279102.jpg"
+                    <img alt="" src="https://pmb.kaptencode.com/assets/lampiran/88iSwXO5ywb4dTjC1675279102.jpg"
                         style="width:50px; height: 70px; margin-top: 10px; margin-left: 15px;">
                 </td>
                 <td align="right">
