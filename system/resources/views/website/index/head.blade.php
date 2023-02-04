@@ -3,9 +3,8 @@
 <title>Pendaftaran Mahasiswa Baru</title>
 
 <!-- Favicon -->
-<link href="{{ asset(config('app.site-assets')) }}/assets/ico/apple-touch-icon-144-precomposed.png"
-    rel="apple-touch-icon-precomposed" sizes="144x144">
-<link href="{{ asset('assets/logo/logo.ico') }}" rel="shortcut icon">
+
+<link href="{{ asset('assets/logo/logo.ico') }}" rel="shortcut icon" rel="apple-touch-icon-precomposed" sizes="144x144">
 
 <!-- CSS Global -->
 <link href="{{ asset(config('app.site-assets')) }}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">

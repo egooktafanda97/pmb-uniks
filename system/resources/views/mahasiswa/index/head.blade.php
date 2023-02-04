@@ -2,13 +2,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <!--favicon-->
-    <link href="{{ asset(config('app.adm-assets')) }}/assets/images/favicon-32x32.png" rel="icon" type="image/png" />
+    {{-- <link href="{{ asset(config('app.adm-assets')) }}/assets/images/favicon-32x32.png" rel="icon" type="image/png" /> --}}
     <!--plugins-->
     <link href="{{ asset(config('app.adm-assets')) }}/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
     <link href="{{ asset(config('app.adm-assets')) }}/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
         rel="stylesheet" />
-    <link href="{{ asset(config('app.adm-assets')) }}/assets/plugins/metismenu/css/metisMenu.min.css"
-        rel="stylesheet" />
+    <link href="{{ asset(config('app.adm-assets')) }}/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
     <link href="{{ asset(config('app.adm-assets')) }}/assets/plugins/datatable/css/dataTables.bootstrap5.min.css"
         rel="stylesheet" />
     <!-- loader-->
