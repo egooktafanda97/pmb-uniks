@@ -191,14 +191,18 @@
                             <div class="card border-primary border-bottom border-3 border-0 mb-3">
                                 <div class="card-body">
                                     <strong>PROGRAM STUDI</strong>
-                                    <div class="space-between">
-                                        <h6 class="text-primary" style="margin: 0">
-                                            {{ $pendaftaran->prodi->nama_prodi ?? '' }}
-                                        </h6>
-                                        <a class="text-primary" style="font-size: 1rem" type="button"><i
-                                                class="fadeIn animated bx bx-navigation"></i>
-                                        </a>
-                                    </div>
+                                    <hr>
+                                    @if ($pendaftaran->pilihan_prodi)
+                                        @foreach ($pendaftaran->pilihan_prodi as $plp)
+                                            <div class="space-between" style="margin-bottom: 5px">
+                                                <h6 class="text-primary" style="margin: 0;">
+                                                    {{ $plp->no_pilihan }} {{ $plp->prodi->nama_prodi }}
+                                                </h6>
+
+                                            </div>
+                                        @endforeach
+                                    @endif
+
                                 </div>
                             </div>
 

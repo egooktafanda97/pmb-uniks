@@ -221,7 +221,7 @@
         "pilihan_prodi": {
             "hirarky": "after",
             "model": "PilihanProdi",
-            "foreign": "id",
+            "foreign": "pendaftaran_id",
             "relation": "hasMany",
             "file_relation": {
                 "name": "PilihanProdi",
