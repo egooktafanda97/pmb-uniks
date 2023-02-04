@@ -10,6 +10,7 @@
                 <h2 class="section-title animated fadeInUp visible" data-animation-delay="100" data-animation="fadeInUp">
                     <span>Verifikasi <span class="text-color">Email</span></span>
                     <small>Cek email anda dan masukkan kode verifikasi dibawah ini</small>
+
                 </h2>
 
                 <div class="row price-tables">

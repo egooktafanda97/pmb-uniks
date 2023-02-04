@@ -67,12 +67,8 @@
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "migration": 21,
-            "validate": 18,
-            "validate_unique": {
-                "validate": 18,
-                "index_id": "nis"
-            },
+            "migration": 2,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -92,8 +88,8 @@
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "migration": 21,
-            "validate": 18,
+            "migration": 2,
+            "validate": 6,
             "validate_unique": {
                 "validate": 18,
                 "index_id": "npwp"

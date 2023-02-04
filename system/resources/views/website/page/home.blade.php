@@ -16,9 +16,72 @@
         .header .top-bg {
             background: transparent !important;
         }
+
+        .loader-page {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 99999999999999999999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loader-page-loader {
+            position: relative;
+            width: 400px;
+            height: 10px;
+            background: #333;
+            border-radius: 50px;
+        }
+
+        .loader-page-loader::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 100px;
+            transform-origin: left;
+            box-shadow: 0 0 30px 4px #7371fc;
+            animation: animate-loader-page 8s linear infinite;
+        }
+
+        @keyframes animate-loader-page {
+
+            0%,
+            20% {
+                transform: scaleX(0);
+            }
+
+            40% {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+
+            40.00001%,
+            60% {
+                transform: scaleX(1);
+                transform-origin: right;
+            }
+
+            70%,
+            100% {
+                transform: scaleX(0);
+                transform-origin: left;
+            }
+        }
     </style>
 @endsection
 @section('content')
+    <div class="loader-page">
+        <div class="loader-page-loader"></div>
+    </div>
     <!-- PAGE -->
     <section class="page-section jumbotron-section jb1 with-overlay bg-home-page"
         style="background-image: url('{{ asset('assets/images/website/bg.jpg') }}')">
@@ -330,5 +393,9 @@
                 // $(".sticky-wrapper").css("position", "absolute");
             }
         });
+        $(".btn-reg").click(function() {
+            $("#reg-closed").click();
+            $(".loader-page").css("display", "flex");
+        })
     </script>
 @endsection

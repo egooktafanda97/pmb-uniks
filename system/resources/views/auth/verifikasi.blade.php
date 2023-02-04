@@ -7,11 +7,20 @@
         <!-- PAGE PRICE -->
         <section class="page-section" id="price" style="min-height: 500px">
             <div class="container">
-                <h2 class="section-title animated fadeInUp visible" data-animation-delay="100" data-animation="fadeInUp">
+                <h2 class="section-title animated fadeInUp visible" data-animation-delay="100" data-animation="fadeInUp"
+                    style="margin-bottom: 15px">
                     <span>Verifikasi <span class="text-color">Email</span></span>
                     <small>Cek email anda dan masukkan kode verifikasi dibawah ini</small>
                     <small>Tidak mendapatkan email, <button class="btn btn-sm btn-info" id="kirim-ulang">kirim
-                            ulang</button></small>
+                            ulang</button>
+                        <br>
+
+                        <label
+                            style="padding: 5px; border-left:2px solid orange; margin-top:5px;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; background: #f5f5f5;">jika
+                            tidak menerima email,
+                            coba
+                            cek <strong class="text-danger">spam.</strong></label>
+                    </small>
                 </h2>
 
                 <div class="row price-tables">
@@ -20,8 +29,8 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <input class="form-control inp-verify" id="verifikasi" maxlength="4" placeholder="0000"
-                                type="text">
+                            <input class="form-control inp-verify" id="verifikasi" maxlength="4"
+                                placeholder="kode verifikasi email" style="border-color: #000;" type="text">
                             <div class="loader" style="display: none">
                                 <small class="font_loads">LOADING <span class="bullets">.</span></small>
                             </div>

@@ -56,6 +56,7 @@ trait ManagementControlGetData
         $prodi = \Modules\V1\Entities\Prodi::orderBy("id", "desc")->get();
         $search = $request->search;
         $pendaftaran_active = \Modules\V1\Entities\InformasiPendaftaran::whereStatus("active")->first();
+
         $pmb = \Modules\V1\Entities\CalonMahasiswa::query()
             ->orderBy("created_at", "DESC")
             ->where(function ($q) use ($search) {
@@ -86,7 +87,7 @@ trait ManagementControlGetData
                     $Q = $Q->where("tahun_ajaran", $request->tahun_ajaran);
                 }
             });
-        if (!empty($pendaftaran_active) && empty($request)) {
+        if (!empty($pendaftaran_active) && empty($request->all())) {
             $pmb =   $pmb->whereHas('pendaftaran.informasi_pendaftaran', function ($query) use ($pendaftaran_active) {
                 $query->where("id", $pendaftaran_active->id);
             });

@@ -6,8 +6,8 @@
         @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
         /* ------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Upload button styling
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ------------------------------ */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Upload button styling
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ------------------------------ */
         .upload {
             --color-black-softest: #485461;
             /* softer black */
@@ -236,9 +236,15 @@
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <div class="w-100 l-right">
-                                                <button class="btn btn-dark px-5" id="btn_uploads" type="button">
+                                                <button class="btn btn-dark px-5 btn-sm btn-loader" id="btn_uploads"
+                                                    style="height: 50px;" type="button">
                                                     <i class="bx bx-cloud-upload mr-1"></i>
                                                     UPLOAD
+                                                    <span>
+                                                        <b></b>
+                                                        <b></b>
+                                                        <b></b>
+                                                    </span>
                                                 </button>
                                             </div>
                                         </div>
@@ -267,6 +273,7 @@
     <script type="text/javascript" src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
     <script>
         function __upSave(data) {
+            $(".btn-loader").addClass("btn-loader--loading");
             const http_configure = {
                 data: data,
                 url: `{{ url('api/mahasiswa/upload-bukti-biaya-pendaftaran') }}`,
@@ -276,6 +283,7 @@
                     }
                 },
                 errors: (error) => {
+                    $(".btn-loader").removeClass("btn-loader--loading");
                     const {
                         response
                     } = error;
@@ -303,6 +311,7 @@
                     }
                 },
                 response: (res) => {
+                    $(".btn-loader").removeClass("btn-loader--loading");
                     swal({
                         title: "Berhasil!",
                         text: 'bukti pembayaran berhasil dikirim!',

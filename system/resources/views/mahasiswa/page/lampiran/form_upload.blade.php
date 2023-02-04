@@ -45,7 +45,7 @@
     <input class="form-control form-control-sm" name="sc_kip_kks_pkh" type="file">
 </div>
 
-<div class="col-md-6 mb-5">
+{{-- <div class="col-md-6 mb-5">
     <label class="form-label">
         <strong>
             <i class="lni lni-paperclip"></i>
@@ -53,4 +53,4 @@
         </strong>
     </label>
     <input class="form-control form-control-sm" name="lain_lain" type="file">
-</div>
+</div> --}}
