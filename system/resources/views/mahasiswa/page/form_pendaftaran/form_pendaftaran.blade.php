@@ -347,6 +347,21 @@
 
         })
 
+        // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        function alr(el, msg) {
+            if (el) {
+                $.toast({
+                    title: 'Opps!',
+                    subtitle: ``,
+                    content: `${msg}`,
+                    type: 'error',
+                    delay: 3000,
+                })
+                return true;
+            } else {
+                return false;
+            }
+        }
         /*
         | 
         | END TAB SORAGE ENTRY HNDEL
@@ -357,12 +372,27 @@
         |
         */
         $("#card-program-studi").click(function() {
+            $(this).addClass('btn-loader--loading')
             const _prod = $(".single-select").val();
             const form_data = new FormData();
+            if (__empty(_prod)) {
+                $.toast({
+                    title: 'Opps!',
+                    subtitle: '',
+                    content: 'Paling tidak pilih 1 program studi!',
+                    type: 'error',
+                    delay: 2000,
+                })
+                return;
+            }
+            if (!__empty($("#p1").val()))
+                form_data.append("prodi_1", $("#p1").val());
+            if (!__empty($("#p2").val()))
+                form_data.append("prodi_1", $("#p2").val());
+            if (!__empty($("#p3").val()))
+                form_data.append("prodi_1", $("#p3").val());
+
             form_data.append("prodi_id", _prod);
-            form_data.append("prodi_1", $("#p1").val());
-            form_data.append("prodi_2", $("#p2").val());
-            form_data.append("prodi_3", $("#p3").val());
             const http_configure = {
                 data: form_data,
                 url: `{{ url('api/mahasiswa/register-prodi-update') }}`,
@@ -391,7 +421,7 @@
                         $.toast({
                             title: 'Opps!',
                             subtitle: '',
-                            content: 'Progrm studi gagal di ubah!',
+                            content: 'Proses gagal !',
                             type: 'error',
                             delay: 2000,
                         })
@@ -399,7 +429,12 @@
                     }
                 },
                 response: (res) => {
-                    console.log(res);
+                    const next = $(this).data("next-id");
+                    const this_card = $(this).data("card-id");
+                    $("#" + this_card).addClass("id-hide").removeClass("id-show");
+                    $(`#${next}`).addClass("id-show").removeClass("id-hide");
+                    sessionStorage.setItem("card-active", next);
+                    $(this).removeClass('btn-loader--loading')
                     $.toast({
                         title: 'Berhasil!',
                         subtitle: '',
@@ -415,6 +450,26 @@
             else
                 $("#info-prodi").show();
         });
+        /*
+        | 
+        | END SIMPAN PEMBAHARUAN PRODI 
+        */
+        //    ************************************************************
+        /*
+        | DATA PERSONAL
+        |
+        */
+        $("#data-personal").click(function() {
+            if (alr($("[name='nik']").val().length != 16, "nik harus 16 digit")) {
+                return;
+            }
+            const next = $(this).data("next-id");
+            const this_card = $(this).data("card-id");
+            $("#" + this_card).addClass("id-hide").removeClass("id-show");
+            $(`#${next}`).addClass("id-show").removeClass("id-hide");
+            sessionStorage.setItem("card-active", next);
+            $(this).removeClass('btn-loader--loading')
+        })
         /*
         | 
         | END SIMPAN PEMBAHARUAN PRODI 
@@ -438,6 +493,30 @@
                 component_prodi_biaya_kuliah(biaya, data);
             });
         });
+        $("#data-address").click(function() {
+            if (alr(__empty($("[name='provinsi']").val()), "provinsi harus di isi")) {
+                return;
+            }
+            if (alr(__empty($("[name='kabupaten']").val()), "kabupaten harus di isi")) {
+                return;
+            }
+            if (alr(__empty($("[name='kecamatan']").val()), "kecamatan harus di isi")) {
+                return;
+            }
+            if (alr(__empty($("[name='kelurahan']").val()), "kelurahan harus di isi")) {
+                return;
+            }
+            if (alr(__empty($("[name='alamat_lengkap']").val()), "alamat lengkap harus di isi")) {
+                return;
+            }
+
+            const next = $(this).data("next-id");
+            const this_card = $(this).data("card-id");
+            $("#" + this_card).addClass("id-hide").removeClass("id-show");
+            $(`#${next}`).addClass("id-show").removeClass("id-hide");
+            sessionStorage.setItem("card-active", next);
+            $(this).removeClass('btn-loader--loading')
+        })
         /*
         | 
         | END SIMPAN PEMBAHARUAN PRODI 
@@ -561,15 +640,35 @@
         |
         */
         $("#form-done").click(function() {
+            if (alr(__empty($("[name='nama_ayah']").val()), "nama ayah harus di isi")) {
+                return;
+            }
+            if (alr(__empty($("[name='tempat_lahir_ayah']").val()), "tempat lahir ayah harus di isi")) {
+                return;
+            }
+            if (alr(__empty($("[name='tanggal_lahir_ayah']").val()), "tanggal lahir ayah harus di isi")) {
+                return;
+            }
+
+            if (alr(__empty($("[name='nama_ibu']").val()), "nama ibu harus di isi")) {
+                return;
+            }
+            if (alr(__empty($("[name='tempat_lahir_ibu']").val()), "tempat lahir ibu harus di isi")) {
+                return;
+            }
+            if (alr(__empty($("[name='tanggal_lahir_ibu']").val()), "tanggal lahir ibu harus di isi")) {
+                return;
+            }
+
             const Btn = $(this);
             Btn.addClass("btn-loader--loading");
             store(Btn, (r) => {
-
+                localStorage.removeItem('entry');
             });
 
         })
 
-        function store(load, response) {
+        function store(load, callback) {
             const data = JSON.parse(localStorage.getItem("entry"));
             data['pendaftaran_id'] = `{{ $pendaftaran->id ?? '' }}`;
             data['nik'] = $("[name='nik']").val() ?? "";
@@ -617,6 +716,7 @@
                     }
                 },
                 response: (res) => {
+                    callback(res);
                     let msg = "";
                     if (res?.status == 200) {
                         msg = "Data anda berhasil di simpan, next step!";

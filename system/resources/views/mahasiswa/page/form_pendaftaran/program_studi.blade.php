@@ -201,9 +201,10 @@
                 </div>
 
                 <div class="mt-3 l-right">
-                    <button class="btn btn-primary px-5 rounded-0 btn-sm next-card" data-card-id="card-prodi"
-                        data-next-id="card-mhs" id="card-program-studi" type="button">Next <i
-                            class="fa fa-long-arrow-right"></i></button>
+                    <button class="btn btn-primary px-5 rounded-0 btn-sm" data-card-id="card-prodi"
+                        data-next-id="card-mhs" id="card-program-studi" type="button">
+                        Next <i class="fa fa-long-arrow-right"></i>
+                    </button>
                 </div>
             </div>
         </div>

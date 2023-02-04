@@ -28,7 +28,7 @@
 
 <!-- Head Libs -->
 <script src="{{ asset(config('app.site-assets')) }}/assets/plugins/modernizr.custom.js"></script>
-
+<link href="{{ asset('public/css/site.css') }}" rel="stylesheet" />
 
 <!--[if lt IE 9]>
     <blade ___scripts_1___/>

@@ -358,6 +358,12 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('public/node_modules/axios/dist/axios.js') }}"></script>
+    <script src="{{ asset('public/js/main.js') }}"></script>
+    <script src="{{ asset('public/node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{{ asset(config('app.adm-assets')) }}/assets/plugins/select2/js/select2.min.js"></script>
+    <script src="{{ asset('public/js/site.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/node_modules/toastr/build/toastr.min.js') }}"></script>
     @if ($errors->any() && $errors->first('status') == 201)
         <script>
@@ -393,9 +399,55 @@
                 // $(".sticky-wrapper").css("position", "absolute");
             }
         });
-        $(".btn-reg").click(function() {
-            $("#reg-closed").click();
-            $(".loader-page").css("display", "flex");
-        })
+        $("#formRegSub").submit(function(e) {
+            e.preventDefault();
+
+            const form_data = new FormData(e.target);
+            __upSave(form_data);
+
+            function __upSave(data) {
+                $(".btn-loader").addClass("btn-loader--loading")
+
+                const http_configure = {
+                    data: data,
+                    url: `{{ url('api/register') }}`,
+                    errors: (error) => {
+                        $(".btn-loader").removeClass("btn-loader--loading")
+                        const {
+                            response
+                        } = error;
+                        const {
+                            request,
+                            ...errorObject
+                        } = response;
+                        if (errorObject?.status != 200 && errorObject?.status < 500) {
+                            const err = errorObject?.data?.error ?? {};
+                            if (Object.keys(err).length > 0) {
+                                for (const key in err) {
+                                    if (err.hasOwnProperty(key)) {
+                                        $(`[name='${key}']`).addClass("is-invalid")
+                                        toastr.error(`${err[key][0]}`);
+                                    }
+                                }
+                            }
+                        } else {
+                            swal({
+                                title: "Ooops fatal error!",
+                                text: "pastikan proses dilakukan dengan benar.",
+                                icon: "error",
+                                button: "Oke!",
+                            });
+                        }
+                    },
+                    response: (res) => {
+                        if (res?.data?.result) {
+                            window.location.href = `{{ url('auth/verify?s=') }}${res?.data?.result}`
+                        }
+                    }
+                }
+
+                save_inheader(http_configure);
+            }
+        });
     </script>
 @endsection

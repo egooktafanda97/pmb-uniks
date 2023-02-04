@@ -47,13 +47,22 @@
                     </div>
                     <hr>
                     <div class="mt-3 space-between">
-                        <button class="btn btn-primary px-5 rounded-0 btn-sm next-card" data-card-id="card-alamat"
-                            data-next-id="card-mhs" type="button"> <i class="fa fa-long-arrow-left"></i>
-                            Kembali</button>
-                        <button class="btn btn-primary px-5 rounded-0 btn-sm next-card" data-card-id="card-alamat"
-                            data-next-id="card-orangtua" type="button">
-                            Next <i class="fa fa-long-arrow-right"></i>
+
+                        <button class="btn btn-secondary rounded-0 btn-sm next-card" data-card-id="card-alamat"
+                            data-next-id="card-mhs"
+                            style="height: 30px; width: 100px; display: flex; justify-content: center; align-items: center"
+                            type="button"> <i class="fa fa-long-arrow-left"></i>
                         </button>
+                        <button class="btn btn-primary  rounded-0 btn-sm btn-loader" data-card-id="card-alamat"
+                            data-next-id="card-orangtua" id="data-address"
+                            style="height: 30px; width: 100px; display: flex; justify-content: center; align-items: center"
+                            type="button">
+                            <i class="fa fa-long-arrow-right"></i>
+                            <span>
+                                <b></b>
+                                <b></b>
+                                <b></b>
+                            </span></button>
                     </div>
                 </div>
             </div>

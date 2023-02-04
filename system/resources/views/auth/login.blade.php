@@ -104,6 +104,10 @@
                                                             in</button>
                                                     </div>
                                                 </div>
+                                                <div>
+                                                    Belum punya akun? <a href="{{ url('/') }}"
+                                                        style="color: blue;">Daftar</a>
+                                                </div>
                                             </form>
 
                                         </div>

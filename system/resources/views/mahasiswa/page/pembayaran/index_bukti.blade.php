@@ -6,8 +6,8 @@
         @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
         /* ------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Upload button styling
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ------------------------------ */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Upload button styling
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ------------------------------ */
         .upload {
             --color-black-softest: #485461;
             /* softer black */
@@ -186,14 +186,14 @@
             <div class="card border-primary border-bottom border-3 border-0">
                 <div class="card-body">
                     <div class="space-between">
-                        <strong class="card-title text-primary">UPLOAD BUKTI BIAYA PENDAFTARAN</strong>
+                        <strong class="card-title text-primary">BUKTI BIAYA PENDAFTARAN</strong>
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-5 mb-3">
                             @include('mahasiswa.page.pembayaran.form_upload')
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-7 mb-3">
                             {{-- img-show-upload id-hide --}}
                             <div class="card img-show-upload id-hide">
                                 <div class="card-header bg-primary text-white">
@@ -219,11 +219,10 @@
                                                 type="text">
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label" for="inputFirstName">JUMLAH BAYAR <span
-                                                    class="in-require">*</span></label>
-                                            <input class="form-control" name="jumlah_tf"
-                                                placeholder="jumlah bayar sesuai biaya pendafataran" required
-                                                type="number">
+                                            <label class="form-label" data-type='currency' for="inputFirstName">JUMLAH BAYAR
+                                                <span class="in-require">*</span></label>
+                                            <input class="form-control" id="tanpa-rupiah" name="jumlah_tf"
+                                                placeholder="Rp.300.000" required type="text" value="">
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="inputFirstName">WAKTU BAYAR <span
@@ -236,8 +235,8 @@
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <div class="w-100 l-right">
-                                                <button class="btn btn-dark px-5 btn-sm btn-loader" id="btn_uploads"
-                                                    style="height: 50px;" type="button">
+                                                <button class="btn btn-dark  btn-sm btn-loader" id="btn_uploads"
+                                                    style="height: 35px;" type="button">
                                                     <i class="bx bx-cloud-upload mr-1"></i>
                                                     UPLOAD
                                                     <span>
@@ -350,7 +349,7 @@
             form_data.append("bukti_pembayaran", fileInput.files[0]);
             form_data.append("nama_bank", $(".nama_bank").val());
             form_data.append("atas_nama", $("[name='atas_nama']").val());
-            form_data.append("jumlah_tf", $("[name='jumlah_tf']").val());
+            form_data.append("jumlah_tf", $("[name='jumlah_tf']").val().replace(/[^0-9]+/g, ""));
             form_data.append("waktu_bayar", $("[name='waktu_bayar']").val());
             form_data.append("keterangan", $("[name='keterangan']").val());
             __upSave(form_data)
@@ -468,5 +467,28 @@
         $("#file").change(function() {
             readURL(this);
         });
+
+        /* Tanpa Rupiah */
+        /* Tanpa Rupiah */
+        var tanpa_rupiah = document.getElementById('tanpa-rupiah');
+        tanpa_rupiah.addEventListener('keyup', function(e) {
+            tanpa_rupiah.value = formatRupiah(this.value);
+        });
+        /* Fungsi */
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
     </script>
 @endsection

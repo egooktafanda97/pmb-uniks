@@ -68,7 +68,7 @@
             "type": "string",
             "request": true,
             "migration": 1,
-            "validate": 0,
+            "validate": 2,
             "view": {
                 "table": {
                     "status": true
@@ -88,8 +88,8 @@
             "label": "Tanggal Lahir",
             "type": "date",
             "request": true,
-            "migration": 6,
             "validate": 0,
+            "migration": 6,
             "view": {
                 "table": {
                     "status": true
@@ -109,8 +109,8 @@
             "label": "No Telepon",
             "type": "string",
             "request": true,
-            "migration": 2,
-            "validate": 0,
+            "migration": 3,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -130,8 +130,8 @@
             "label": "No Telepon",
             "type": "string",
             "request": true,
-            "migration": 2,
-            "validate": 0,
+            "migration": 3,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -151,8 +151,8 @@
             "label": "No Telepon",
             "type": "string",
             "request": true,
-            "migration": 2,
-            "validate": 0,
+            "migration": 3,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -189,12 +189,12 @@
             "costum": {}
         },
         "nama_ibu": {
-            "name": "nama_ayah",
+            "name": "nama_ibu",
             "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "validate": 0,
             "migration": 1,
+            "validate": 2,
             "view": {
                 "table": {
                     "status": true
@@ -214,8 +214,8 @@
             "label": "Tempat Lahir",
             "type": "string",
             "request": true,
-            "validate": 0,
             "migration": 1,
+            "validate": 2,
             "view": {
                 "table": {
                     "status": true
@@ -256,8 +256,8 @@
             "label": "No Telepon",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 2,
+            "migration": 3,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -277,8 +277,8 @@
             "label": "No Telepon",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 2,
+            "migration": 3,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -298,8 +298,8 @@
             "label": "No Telepon",
             "type": "string",
             "request": true,
-            "validate": 0,
-            "migration": 2,
+            "migration": 3,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true

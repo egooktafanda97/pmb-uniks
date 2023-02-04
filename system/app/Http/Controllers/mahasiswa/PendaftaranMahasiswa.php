@@ -57,6 +57,62 @@ class PendaftaranMahasiswa extends Controller
         */
         $this->setSource($resources);
     }
+    public function api_register(Request $request)
+    {
+        if (empty($this->resources))
+            return response()->json([
+                "error"  => "data not found",
+                "status" => 501,
+            ], 501);
+        $info_pendaftaran = \Modules\V1\Entities\InformasiPendaftaran::whereStatus('active')->first();
+        if (empty($info_pendaftaran))
+            return response()->json([
+                "error"  => "data not found",
+                "status" => 501,
+            ], 501);
+        $request->merge(["no_resister" => "UNIKS:" . \Str::random(4), "informasi_pendaftaran_id" => $info_pendaftaran->id]);
+        $save =  $this->resources->generate_data_insert($request);
+        if (!empty($save['status']) && $save['status'] == 200) {
+            /*
+            | AKTIFKAN JIKA AKAN MEMBUAT ROLE PADA USER
+            */
+            $this->create_role_users($save, 'mahasiswa');
+            /*
+            | end
+            */
+            $getUs = User::find($save['data']['user_id']);
+            $getUs->nama = $request->email;
+            $getUs->save();
+
+            $getUs = User::find($save['data']['user_id']);
+            $kode = "";
+            do {
+                $kode = Helpers::generatePin(4);
+                $cek = \App\Models\Verify::where("key_reference", $kode)->first();
+            } while (!empty($cek));
+
+            $created_otp = \App\Models\Verify::create([
+                "user_id" => $getUs->id,
+                "key_reference" => $kode,
+                "key_for" => "verifikai"
+            ]);
+
+            $details = [
+                "email" => $getUs->email,
+                "nama" => $getUs->nama,
+                "kode" => $created_otp->key_reference
+            ];
+            dispatch(new \App\Jobs\SendEmailVerify($details));
+            $enc = Crypt::encrypt($getUs->email);
+
+            return response()->json([
+                "result"  => $enc
+            ], 200);
+            // return redirect('auth/verify?s=' . $enc);
+        } else {
+            return response()->json($save, 401);
+        }
+    }
     public function register(Request $request)
     {
         if (empty($this->resources))

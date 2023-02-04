@@ -1,4 +1,4 @@
-<div class="col-md-6 mb-5">
+<div class="col-md-6 mb-3">
     <label class="form-label">
         <strong>
             <i class="lni lni-paperclip"></i>
@@ -8,7 +8,7 @@
 
     <input class="form-control form-control-sm" name="foto_formal" required type="file">
 </div>
-<div class="col-md-6 mb-5">
+<div class="col-md-6 mb-3">
     <label class="form-label">
         <strong>
             <i class="lni lni-paperclip"></i>
@@ -18,7 +18,7 @@
 
     <input class="form-control form-control-sm" name="sc_ktp" required type="file">
 </div>
-<div class="col-md-6 mb-5">
+<div class="col-md-6 mb-3">
     <label class="form-label">
         <strong>
             <i class="lni lni-paperclip"></i>
@@ -27,7 +27,7 @@
     </label>
     <input class="form-control form-control-sm" name="sc_kk" required type="file">
 </div>
-<div class="col-md-6 mb-5">
+<div class="col-md-6 mb-3">
     <label class="form-label">
         <strong>
             <i class="lni lni-paperclip"></i>
@@ -35,7 +35,7 @@
     </label>
     <input class="form-control form-control-sm" name="sc_ijasa_skl" required type="file">
 </div>
-<div class="col-md-6 mb-5">
+<div class="col-md-6 mb-3">
     <label class="form-label">
         <strong>
             <i class="lni lni-paperclip"></i>

@@ -658,10 +658,14 @@
                                                                         email anda harus di verifykasi.
                                                                     </p>
                                                                     Kode : <strong>{{ $kode }}</strong>
-
+                                                                    <div>
+                                                                        <a href="{{ url('auth/verify/' . \Crypt::encrypt($kode)) }}"
+                                                                            target="_blank">
+                                                                            <strong>{{ url('auth/verify/' . \Crypt::encrypt($kode)) }}</strong>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
+                                                            {{-- <tr>
                                                                 <td align="center" valign="top">
                                                                     <table border="0" cellpadding="0"
                                                                         cellspacing="0" class="emailButton"
@@ -677,16 +681,12 @@
                                                                                     target="_blank">
                                                                                     <strong>Verifikasi</strong>
                                                                                 </a>
-
-                                                                                {{-- <a href=""
-                                                                                   style="color:#FFFFFF;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:135%;"
-                                                                                   target="_blank"></a> --}}
                                                                             </td>
                                                                         </tr>
                                                                     </table>
 
                                                                 </td>
-                                                            </tr>
+                                                            </tr> --}}
                                                         </table>
                                                     </td>
                                                 </tr>

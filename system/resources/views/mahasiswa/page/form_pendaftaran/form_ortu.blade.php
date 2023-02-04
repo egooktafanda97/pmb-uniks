@@ -33,33 +33,30 @@
                         <input class="form-control" name="tanggal_lahir_ayah" required type="date" />
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">NO TELEPON (WA) <span class="in-require">*
-                                +62</span></label>
+                        <label class="form-label" for="inputFirstName">NO TELEPON (WA)</label>
                         <input class="form-control" maxlength="16" name="no_telepon_ayah" placeholder="" type="text"
-                            value="+62">
+                            value="">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">PEKERJAAN<span
-                                class="in-require">*</span></label>
-                        <input class="form-control" name="pekerjaan_ayah" placeholder="pekerjaan ayah" required
-                            type="text">
+                        <label class="form-label" for="inputFirstName">PEKERJAAN</label>
+                        <input class="form-control" name="pekerjaan_ayah" placeholder="pekerjaan ayah" type="text">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">PENGHASILAN / BULAN<span
-                                class="in-require">*</span></label>
+                        <label class="form-label" for="inputFirstName">PENGHASILAN / BULAN</label>
                         <select class="form-select form-select-md mb-3" name="penghasilan_ayah">
                             <option value="">Tidak Ada Penghasilan</option>
                             <option value="">
-                                < Rp. 500,000</option>
+                                < {{ \App\Helpers\Helpers::convert_to_rupiah(500000) }}</option>
                             <option value="< 1000000">
-                                < Rp. 1000,000</option>
+                                < {{ \App\Helpers\Helpers::convert_to_rupiah(1000000) }}</option>
                             <option value="< 1500000">
-                                < Rp. 1500,000</option>
+                                < {{ \App\Helpers\Helpers::convert_to_rupiah(1500000) }}</option>
                             <option value="< 2000000">
-                                < Rp. 2000,000</option>
+                                < {{ \App\Helpers\Helpers::convert_to_rupiah(2000000) }}</option>
                             <option value="< 3000000">
                                 < Rp. 3000,000</option>
-                            <option value="> 30000000"> > Rp. 3000,000</option>
+                            <option value="> 30000000"> > {{ \App\Helpers\Helpers::convert_to_rupiah(3000000) }}
+                            </option>
                         </select>
 
                     </div>
@@ -96,14 +93,12 @@
                         <input class="form-control" name="tanggal_lahir_ibu" required type="date" />
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">NO TELEPON (WA) <span class="in-require">*
-                                +62</span></label>
+                        <label class="form-label" for="inputFirstName">NO TELEPON (WA) </label>
                         <input class="form-control" maxlength="16" name="no_telepon_ibu" placeholder=""
-                            type="text" value="+62">
+                            type="text" value="">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">PEKERJAAN<span
-                                class="in-require">*</span></label>
+                        <label class="form-label" for="inputFirstName">PEKERJAAN</label>
                         <input class="form-control" name="pekerjaan_ibu" placeholder="pekerjaan ibu" type="text">
                     </div>
                     <div class="col-md-6">
@@ -130,19 +125,20 @@
                     </div>
                     <hr>
                     <div class="mt-3 space-between">
-                        <button class="btn btn-primary px-5 rounded-0 btn-sm next-card" data-card-id="card-orangtua"
-                            data-next-id="card-alamat" type="button" type="button"> <i
-                                class="fa fa-long-arrow-left"></i>
-                            Kembali</button>
-                        <button class="btn btn-primary px-5 rounded-0 btn-sm btn-loader" id="form-done"
-                            type="button" type="submit">
-                            Selesai <i class="fa fa-long-arrow-right"></i>
+                        <button class="btn btn-secondary rounded-0 btn-sm next-card" data-card-id="card-orangtua"
+                            data-next-id="card-alamat"
+                            style="height: 30px; width: 100px; display: flex; justify-content: center; align-items: center"
+                            type="button"> <i class="fa fa-long-arrow-left"></i>
+                        </button>
+                        <button class="btn btn-primary  rounded-0 btn-sm btn-loader" id="form-done"
+                            style="height: 30px; width: 100px; display: flex; justify-content: center; align-items: center"
+                            type="button" type="button">
+                            <i class="fa fa-long-arrow-right"></i>
                             <span>
                                 <b></b>
                                 <b></b>
                                 <b></b>
-                            </span>
-                        </button>
+                            </span></button>
                     </div>
                 </div>
             </div>

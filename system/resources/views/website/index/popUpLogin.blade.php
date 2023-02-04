@@ -63,14 +63,13 @@
                     <div class="popup-login-items">
                         <div class="popup-login-items-inner">
 
-                            <form action="{{ url('pmb/register') }}" class="form-login" method="post">
-                                @csrf
+                            <form class="form-login" id="formRegSub">
                                 <div class="row">
                                     <div class="col-md-12 hello-text-wrap">
-                                        <div class="alert warning" style="color: #d67545;line-height: normal;">
-                                            <span class="closebtn warning">×</span>
+                                        <div class="alert info" style="line-height: normal;">
+                                            <span class="closebtn info">×</span>
                                             <i class="fa fa-warning fa-1x"></i>
-                                            Sebelum mendaftar buat akun pendaftaran terlebih dahulu!
+                                            Buat akun terlbih dahulu!
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -83,8 +82,8 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">Username</label>
-                                            <input class="form-control" name="username" placeholder="Nama pengguna"
-                                                required type="text">
+                                            <input class="form-control" name="username" placeholder="Username" required
+                                                type="text">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -112,11 +111,21 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div id="btn-regis">
-                                            <button class="btn btn-theme btn-block btn-theme-green btn-reg"
-                                                type="submit">Buat
-                                                Akun</button>
+                                            <button class="btn btn-theme btn-block btn-reg btn-loader"
+                                                style="display: flex;justify-content: center;align-items: center;"
+                                                type="submit">
+                                                Buat Akun
+                                                <span>
+                                                    <b></b>
+                                                    <b></b>
+                                                    <b></b>
+                                                </span>
+                                            </button>
                                         </div>
+                                        <br>
+                                        Sudah punya akun? <a href="{{ url('/login') }}" style="color: blue;">login</a>
                                     </div>
+
                                 </div>
                             </form>
 

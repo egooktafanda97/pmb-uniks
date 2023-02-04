@@ -90,8 +90,6 @@
                 <div class="card-header text-light bg-primary">
                     <div class="space-between">
                         <strong>Informasi Jadwal</strong>
-                        <button class="btn btn-primary btn-sm" data-bs-target="#input-jadwal" data-bs-toggle="modal"><i
-                                class="fa fa-plus"></i> Tambah</button>
                     </div>
                 </div>
                 <div class="card-body">

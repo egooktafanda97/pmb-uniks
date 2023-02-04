@@ -16,19 +16,21 @@
                             @include('mahasiswa.page.lampiran.form_upload')
                             <div class="col-12 mt-3">
                                 <div class="mt-3 space-between">
-                                    <a class="btn btn-primary px-5 rounded-0 btn-sm next-card"
-                                        href="{{ url('mahasiswa/form?edit=mhs') }}"> <i class="fa fa-long-arrow-left"></i>
-                                        Kembali</a>
 
-                                    <button class="btn btn-primary px-5 rounded-0 btn-sm btn-loader" id="submit-lampiran"
-                                        type="submit" type="button">
-                                        Next <i class="fa fa-long-arrow-right"></i>
+                                    <a class="btn btn-secondary rounded-0 btn-sm"
+                                        href="{{ url('mahasiswa/form?edit=mhs') }}"
+                                        style="height:30px; width: 100px; display: flex; justify-content: center; align-items: center"
+                                        type="button"> <i class="fa fa-long-arrow-left"></i>
+                                    </a>
+                                    <button class="btn btn-primary  rounded-0 btn-sm btn-loader" id="submit-lampiran"
+                                        style="height: 30px; width: 100px; display: flex; justify-content: center; align-items: center"
+                                        type="submit">
+                                        <i class="fa fa-long-arrow-right"></i>
                                         <span>
                                             <b></b>
                                             <b></b>
                                             <b></b>
-                                        </span>
-                                    </button>
+                                        </span></button>
                                 </div>
                             </div>
                         </div>

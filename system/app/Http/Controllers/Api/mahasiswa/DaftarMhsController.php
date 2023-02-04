@@ -47,24 +47,26 @@ class DaftarMhsController extends Controller
             $up_prod->prodi_id = $request->prodi_id;
             $up_prod->save();
             \Modules\V1\Entities\PilihanProdi::where("pendaftaran_id", $up_prod->id)->delete();
-            $pilihan = [
-                [
+            $pil  = [];
+            if (!empty($request->prodi_1))
+                array_push($pil, [
                     "no_pilihan" => "1",
                     "pendaftaran_id" => $up_prod->id,
                     "prodi_id" => $request->prodi_1
-                ],
-                [
+                ]);
+            if (!empty($request->prodi_1) && !empty($request->prodi_2))
+                array_push($pil, [
                     "no_pilihan" => "2",
                     "pendaftaran_id" => $up_prod->id,
                     "prodi_id" => $request->prodi_2
-                ],
-                [
+                ]);
+            if (!empty($request->prodi_1) && !empty($request->prodi_2) && !empty($request->prodi_3))
+                array_push($pil,  [
                     "no_pilihan" => "3",
                     "pendaftaran_id" => $up_prod->id,
                     "prodi_id" => $request->prodi_3
-                ]
-            ];
-            foreach ($pilihan as $plp) {
+                ]);
+            foreach ($pil as $plp) {
                 $pp = new ManagementCrud('PilihanProdi');
                 $pathJson =  ManagementServiceProvider::getScemaPath();
                 $pp->instance($pathJson);

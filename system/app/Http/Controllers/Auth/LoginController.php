@@ -137,31 +137,36 @@ class LoginController extends Controller
     {
         if (!$otp)
             return view("auth.verifikasi");
-        $user = User::whereHas('verify', function ($q) use ($otp) {
-            $q->where('key_reference', $otp);
-        })->first();
+        try {
+            $x_otp  = Crypt::decrypt($otp);
+            $user = User::whereHas('verify', function ($q) use ($x_otp) {
+                $q->where('key_reference', $x_otp);
+            })->first();
 
-        if (!$user) {
-            return view("auth.verifikasi");
-        } else {
-            // created email verification
-            $us = User::find($user->id);
-            $us->email_verified_at =  now();
-            $us->save();
-
-            Auth::login($user);
-
-            if (!$token = auth()->guard("api")->login($user)) {
+            if (!$user) {
                 return view("auth.verifikasi");
-            }
-            $genTokenApi = $this->respondWithToken($token);
-            Session::put('token', $genTokenApi);
-            $Query = \Modules\V1\Entities\Pendaftaran::whereuserId(Auth::user()->id)->with("calon_mahasiswa")->first();
-            if ($Query->calon_mahasiswa == null) {
-                return redirect('/mahasiswa/form');
             } else {
-                return redirect('/mahasiswa/profile');
+                // created email verification
+                $us = User::find($user->id);
+                $us->email_verified_at =  now();
+                $us->save();
+
+                Auth::login($user);
+
+                if (!$token = auth()->guard("api")->login($user)) {
+                    return view("auth.verifikasi");
+                }
+                $genTokenApi = $this->respondWithToken($token);
+                Session::put('token', $genTokenApi);
+                $Query = \Modules\V1\Entities\Pendaftaran::whereuserId(Auth::user()->id)->with("calon_mahasiswa")->first();
+                if ($Query->calon_mahasiswa == null) {
+                    return redirect('/mahasiswa/form');
+                } else {
+                    return redirect('/mahasiswa/profile');
+                }
             }
+        } catch (\Throwable $th) {
+            return response()->json(false, 401);
         }
     }
     public function resending_email(Request $request)

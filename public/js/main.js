@@ -27,7 +27,32 @@ async function save(config) {
         response(post);
     }
 }
-
+async function save_inheader(config) {
+    const {
+        data,
+        url,
+        response,
+        errors
+    } = config;
+    const post = await axios.post(url, data).catch((error) => {
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "fatal error entry data.",
+                icon: "error",
+                button: "Oke!",
+            });
+        if (error?.response?.status == 501)
+            swal({
+                title: "Ooops fatal error!",
+                text: "pastikan proses dilakukan dengan benar.",
+                icon: "error",
+                button: "Oke!",
+            });
+        errors(error);
+    });
+    response(post);
+}
 async function getById(config) {
     const {
         id,

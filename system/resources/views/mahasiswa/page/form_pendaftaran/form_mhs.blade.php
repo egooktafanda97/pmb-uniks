@@ -86,12 +86,16 @@
                     </div>
                     <hr>
                     <div class="mt-3 space-between">
-                        <button class="btn btn-primary px-5 rounded-0 btn-sm next-card" data-card-id="card-mhs"
-                            data-next-id="card-prodi" type="button"> <i class="fa fa-long-arrow-left"></i>
-                            Kembali</button>
-                        <button class="btn btn-primary px-5 rounded-0 btn-sm next-card btn-loader"
-                            data-card-id="card-mhs" data-next-id="card-alamat" id="person_data_next" type="button">
-                            Next <i class="fa fa-long-arrow-right"></i>
+                        <button class="btn btn-secondary rounded-0 btn-sm next-card" data-card-id="card-mhs"
+                            data-next-id="card-prodi"
+                            style="height: 30px; width: 100px; display: flex; justify-content: center; align-items: center"
+                            type="button"> <i class="fa fa-long-arrow-left"></i>
+                        </button>
+                        <button class="btn btn-primary  rounded-0 btn-sm btn-loader" data-card-id="card-mhs"
+                            data-next-id="card-alamat" id="data-personal" id="person_data_next"
+                            style="height: 30px; width: 100px; display: flex; justify-content: center; align-items: center"
+                            type="button">
+                            <i class="fa fa-long-arrow-right"></i>
                             <span>
                                 <b></b>
                                 <b></b>

@@ -38,6 +38,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     | END API ROUTER PUBLIC
     |--------------------------------------------------------------------------
     */
+    Route::post('/register', [App\Http\Controllers\mahasiswa\PendaftaranMahasiswa::class, 'api_register']);
 });
 
 /*
