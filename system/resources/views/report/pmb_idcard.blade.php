@@ -87,8 +87,7 @@
             <tbody>
                 <tr>
                     <td style="width:100%;">
-                        <img alt=""
-                            src="https://uniks.ac.id/images/artikel/thumb/Persyaratan-Calon-Rektor-UNIKS.jpg"
+                        <img alt="" src="https://pmb.kaptencode.com/assets/logo/logo.png"
                             style="width:35px; height: 35px; position: absolute;left: 25px; top:25px">
                         <font class="font-kop">
                             YAYASAN PERGURUAN TINGGI ISLAM KUANTAN SINGINGI <br>
