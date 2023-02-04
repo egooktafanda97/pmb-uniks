@@ -246,7 +246,7 @@
                         data-animation="fadeInUp">
                         <div class="media">
                             <a href="#">
-                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/rektor.jpg') }}" />
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/rektor-min.jpg') }}" />
                             </a>
                         </div>
                         <div class="caption">
@@ -262,7 +262,7 @@
                         data-animation="fadeInUp">
                         <div class="media">
                             <a href="#">
-                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr1.jpg') }}" />
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr1-min.jpg') }}" />
                             </a>
                         </div>
                         <div class="caption">
@@ -278,7 +278,7 @@
                         data-animation="fadeInUp">
                         <div class="media">
                             <a href="#">
-                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr2.jpg') }}" />
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr2-min.jpg') }}" />
                             </a>
                         </div>
                         <div class="caption">
@@ -294,7 +294,7 @@
                         data-animation="fadeInUp">
                         <div class="media">
                             <a href="#">
-                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr3.jpg') }}" />
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr3-min.jpg') }}" />
                             </a>
                         </div>
                         <div class="caption">
