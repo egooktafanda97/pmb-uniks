@@ -16,7 +16,7 @@ class DashboardController extends Controller
     }
     public function getter_data()
     {
-        $prodi = \Modules\V1\Entities\Prodi::orderBy("id", "desc")->get();
+        $prodi = \Modules\V1\Entities\Prodi::orderBy("id", "desc")->with("fakultas")->get();
         $pmb = \Modules\V1\Entities\Pendaftaran::whereUserId(Auth::user()->id)->with([
             "users",
             "prodi",

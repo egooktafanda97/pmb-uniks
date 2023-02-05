@@ -35,7 +35,7 @@
                             {{-- <li><a href="about.html">FORM PENDAFTARAN</a></li> --}}
                             {{-- <li><a href="about.html">Sisfo Uniks</a></li> --}}
                             {{-- <li><a href="about.html">FAQ</a></li> --}}
-                            <li><a href="{{ url('kontak') }}">KONTAK</a></li>
+                            {{-- <li><a href="{{ url('kontak') }}">KONTAK</a></li> --}}
                             <li>
                                 <span class="sign-in-button">
                                     <a class="btn btn-theme btn-theme-sm btn-rounded" href="{{ url('login') }}">SIGN

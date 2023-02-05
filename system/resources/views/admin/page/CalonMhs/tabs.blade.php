@@ -52,11 +52,24 @@
                     <strong style="color: #9c9c9c"><i class="fa fa-home"></i> NAMA PROGRAM STUDI YANG DIPILIH</strong>
                 </div>
                 <div class="space-between">
+                    <div class="card border-primary border-bottom border-3 border-0 mb-3 w-100">
+                        <div class="card-body">
+                            @if ($pendaftaran->pilihan_prodi)
+                                @foreach ($pendaftaran->pilihan_prodi as $plp)
+                                    <div class="space-between" style="margin-bottom: 30px">
+                                        <h6 class="text-primary" style="margin: 0;">
+                                            {{ $plp->no_pilihan }} {{ $plp->prodi->nama_prodi }}
+                                        </h6>
 
-                    <h6 class="text-primary" style="margin: 0">{{ $pendaftaran->prodi->nama_prodi ?? '' }}</h6>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    {{-- <h6 class="text-primary" style="margin: 0">{{ $pendaftaran->prodi->nama_prodi ?? '' }}</h6>
                     <a class="text-primary" style="font-size: 1rem" type="button"><i
                             class="fadeIn animated bx bx-navigation"></i>
-                    </a>
+                    </a> --}}
                 </div>
             </div>
             {{--  TABS CALON MAHASISWA --}}

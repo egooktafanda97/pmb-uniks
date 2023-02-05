@@ -98,7 +98,8 @@ class PendaftaranMahasiswa extends Controller
             $getUs = User::find($save['data']['user_id']);
             $kode = "";
             do {
-                $kode = Helpers::generatePin(4);
+                $digits = 4;
+                $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
                 $cek = \App\Models\Verify::where("key_reference", $kode)->first();
             } while (!empty($cek));
 

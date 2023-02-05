@@ -28,7 +28,6 @@ class LoginController extends Controller
 
     protected function login(Request $request)
     {
-        dd($request->all());
         $validator = Validator::make($request->all(), [
             'email' => 'required',
             'password' => 'required',
@@ -133,14 +132,14 @@ class LoginController extends Controller
         $data = $request->otp;
         $cek = \App\Models\Verify::where("key_reference", $data)->first();
         if ($cek)
-            return response()->json([], 200);
+            return response()->json(Crypt::encrypt($cek->key_reference), 200);
         else
             return response()->json([], 401);
     }
     public function verify($otp = null)
     {
         if (!$otp)
-            return view("auth.verifikasi");
+            return view("auth.verifyPage");
         try {
             $x_otp  = Crypt::decrypt($otp);
             $user = User::whereHas('verify', function ($q) use ($x_otp) {
@@ -148,7 +147,7 @@ class LoginController extends Controller
             })->first();
 
             if (!$user) {
-                return view("auth.verifikasi");
+                return view("auth.verifyPage");
             } else {
                 // created email verification
                 $us = User::find($user->id);
@@ -162,6 +161,8 @@ class LoginController extends Controller
                 }
                 $genTokenApi = $this->respondWithToken($token);
                 Session::put('token', $genTokenApi);
+                $user->verify()->delete();
+
                 $Query = \Modules\V1\Entities\Pendaftaran::whereuserId(Auth::user()->id)->with("calon_mahasiswa")->first();
                 if ($Query->calon_mahasiswa == null) {
                     return redirect('/mahasiswa/form');
@@ -186,11 +187,25 @@ class LoginController extends Controller
         }
         $user->email = $req;
         $up = $user->save();
+
+        if (empty($user->verify)) {
+            $kode = "";
+            do {
+                $digits = 4;
+                $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+                $cek = \App\Models\Verify::where("key_reference", $kode)->first();
+            } while (!empty($cek));
+            $created_otp = \App\Models\Verify::create([
+                "user_id" => $user->id,
+                "key_reference" => $kode,
+                "key_for" => "verifikai"
+            ]);
+        }
         if ($up) {
             $details = [
                 "email" => $user->email,
                 "nama" => $user->nama,
-                "kode" => $user->verify->key_reference
+                "kode" => $user->verify->key_reference ?? $kode
             ];
             dispatch(new \App\Jobs\SendEmailVerify($details));
         }

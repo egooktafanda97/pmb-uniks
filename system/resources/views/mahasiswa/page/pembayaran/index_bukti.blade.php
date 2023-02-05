@@ -6,8 +6,8 @@
         @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
         /* ------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Upload button styling
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ------------------------------ */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Upload button styling
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ------------------------------ */
         .upload {
             --color-black-softest: #485461;
             /* softer black */
@@ -205,7 +205,7 @@
                                             <label class="form-label" for="inputFirstName">NAMA BANK / PROVIDER <span
                                                     class="in-require">*</span></label>
                                             <select aria-label="nama bank" class="form-select nama_bank" id="nama_bank">
-                                                <option value="">Pilih Program Studi </option>
+                                                <option value="">PILIH BANK </option>
                                                 <option value="BRI">BRI</option>
                                                 <option value="BNI">BNI</option>
                                                 <option value="BNI">BANK RIAU</option>
@@ -222,7 +222,7 @@
                                             <label class="form-label" data-type='currency' for="inputFirstName">JUMLAH BAYAR
                                                 <span class="in-require">*</span></label>
                                             <input class="form-control" id="tanpa-rupiah" name="jumlah_tf"
-                                                placeholder="Rp.300.000" required type="text" value="">
+                                                placeholder="300.000" required type="text" value="">
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label" for="inputFirstName">WAKTU BAYAR <span

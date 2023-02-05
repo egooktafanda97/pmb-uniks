@@ -201,7 +201,13 @@
         | SELECT PICKER
         |
         */
-        $('.single-select').select2({
+        $('.p1-select').select2({
+            theme: 'bootstrap4',
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            allowClear: Boolean($(this).data('allow-clear')),
+        });
+        $('.p2-select').select2({
             theme: 'bootstrap4',
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
             placeholder: $(this).data('placeholder'),
@@ -311,7 +317,15 @@
                         );
                     }
                 }
+                if (!__empty(main?.data?.pilihan_prodi)) {
+                    main?.data?.pilihan_prodi?.map((easy) => {
+                        if (easy?.no_pilihan == '1')
+                            $('#p1').val(easy?.prodi_id).select2();
+                        if (easy?.no_pilihan == '2')
+                            $('#p2').val(easy?.prodi_id).select2();
+                    })
 
+                }
             }
         }
         _readedCmhs();
@@ -335,8 +349,10 @@
         //     );
         //     _init_alamat_ready();
         // }
-        $("#person_data_next").click(function() {
-            ajax_prov();
+        $(".person_data_next").click(function() {
+            if (__empty($("#provinsi").val())) {
+                ajax_prov();
+            }
         })
         $("input,select,textarea").change(function() {
             const data_ready = JSON.parse(localStorage.getItem("entry"));
@@ -373,7 +389,9 @@
         */
         $("#card-program-studi").click(function() {
             $(this).addClass('btn-loader--loading')
-            const _prod = $(".single-select").val();
+            const _prod = $("#p1").val();
+            console.log($("#p1").val());
+
             const form_data = new FormData();
             if (__empty(_prod)) {
                 $.toast({
@@ -388,9 +406,7 @@
             if (!__empty($("#p1").val()))
                 form_data.append("prodi_1", $("#p1").val());
             if (!__empty($("#p2").val()))
-                form_data.append("prodi_1", $("#p2").val());
-            if (!__empty($("#p3").val()))
-                form_data.append("prodi_1", $("#p3").val());
+                form_data.append("prodi_2", $("#p2").val());
 
             form_data.append("prodi_id", _prod);
             const http_configure = {

@@ -122,6 +122,7 @@ class Pendaftaran extends Seeder
             |
             */
             $id_agent = [];
+
             for ($vv = 0; $vv < 10; $vv++) {
                 $agent = new ManagementCrud("Agent");
                 $agent->instance($pathJson);
@@ -140,7 +141,6 @@ class Pendaftaran extends Seeder
                     "saldo" =>  '0',
                     "referal" => \Str::random(5),
                     'nama' => $na,
-                    'username'    => $faker->userName,
                     'email' => $faker->unique()->safeEmail(),
                     'password' => 'password' // password
                 ]);
@@ -163,7 +163,7 @@ class Pendaftaran extends Seeder
             foreach ($prodi as $v) {
                 array_push($id_prod, $v->id);
             }
-
+            continue;
             for ($i = 0; $i < rand(1, 5); $i++) {
                 $pendaftaran = new ManagementCrud("Pendaftaran");
                 $pathJson =  config('generator_crud_config.scema_path');
@@ -181,7 +181,6 @@ class Pendaftaran extends Seeder
                     "nik" => $nik,
                     "agent_id" => $id_agent[array_rand($id_agent)],
                     'nama' => $faker->name,
-                    'username'    => $faker->userName,
                     'email' => $faker->unique()->safeEmail(),
                     'password' => 'password',
                     "status" => ["pending", "valid", "invalid", "lulus", "tidak_lulus", "daftar_ulang"][array_rand(["pending", "valid", "invalid", "lulus", "tidak_lulus", "daftar_ulang"])]

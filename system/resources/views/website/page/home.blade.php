@@ -110,8 +110,7 @@
                             </h4>
                             <p class="btn-row">
                                 <a class="btn btn-theme btn-rounded btn-theme-lg" data-animation-delay="400"
-                                    data-animation="fadeInLeft" data-target="#popup-sign-up" data-toggle="modal"
-                                    href="#">
+                                    href="{{ url('register') }}">
                                     DAFTAR SEKARANG
                                 </a>
                             </p>
@@ -143,7 +142,9 @@
                             </div>
                             <h5 class="caption-title-sub">{{ $pengumuman->created_at }}</h5>
                             <br>
-                            {!! $pengumuman->keterangan !!}
+                            <div id="reset-this-root">
+                                {!! $pengumuman->keterangan !!}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -168,13 +169,14 @@
                         <div class="thumbnail no-border no-padding">
                             <div class="media">
                                 <img alt=""
-                                    src="{{ asset(config('app.site-assets')) }}/assets/img/preview/portfolio/portfolio-x6.jpg">
+                                    src="{{ asset('assets/prodi/thumbnail/' . ($item->gambar ?? 'default.jpg')) }}"
+                                    style="height: 250px">
                                 <div class="caption hovered">
                                     <div class="caption-border"></div>
                                     <div class="caption-wrapper div-table">
                                         <div class="caption-inner div-cell">
                                             <p class="caption-buttons">
-                                                <a class="btn caption-link" href="themes-single.html">
+                                                <a class="btn caption-link" href="{{ url('detail_prodi/' . $item->id) }}">
                                                     Lihat Prodi
                                                 </a>
                                             </p>
@@ -185,7 +187,8 @@
                             <div class="caption">
                                 <p class="caption-price"
                                     style="background: #fff;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
-                                    <img alt="" src="{{ asset('assets/logo/logo.png') }}" style="width: 100%">
+                                    <img alt="" src="{{ asset('assets/prodi/logo/' . $item->logo) }}"
+                                        style="width: 100%">
                                 </p>
                                 <h3 class="caption-title"><a href="#">{{ $item->nama_prodi }}</a></h3>
                                 <p class="caption-text">Terakreditas {{ $item->akreditas }}</p>
@@ -194,7 +197,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 pcd-shop text-left">
                                         <div style="padding-left: 10px">
-                                            <i class="fa fa-users"></i>-- Mahasiswa
+                                            <i class="fa fa-users"></i>Gelar {{ $item->gelar }}
                                         </div>
                                     </div>
                                 </div>
@@ -246,7 +249,7 @@
                         data-animation="fadeInUp">
                         <div class="media">
                             <a href="#">
-                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/rektor-min.jpg') }}" />
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/rektor-min.png') }}" />
                             </a>
                         </div>
                         <div class="caption">
@@ -262,12 +265,12 @@
                         data-animation="fadeInUp">
                         <div class="media">
                             <a href="#">
-                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr1-min.jpg') }}" />
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/w1-min.png') }}" />
                             </a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
-                                <a href="#">-</a>
+                                <a href="#">M. Irwan SE., MM</a>
                                 <small>Wakil Rektor I</small>
                             </h4>
                         </div>
@@ -278,12 +281,12 @@
                         data-animation="fadeInUp">
                         <div class="media">
                             <a href="#">
-                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr2-min.jpg') }}" />
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/w2-min.png') }}" />
                             </a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
-                                <a href="#">-</a>
+                                <a href="#">Desriadi, S.Sos., M.Si</a>
                                 <small>Wakil Rektor II</small>
                             </h4>
                         </div>
@@ -294,12 +297,13 @@
                         data-animation="fadeInUp">
                         <div class="media">
                             <a href="#">
-                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/wr3-min.jpg') }}" />
+                                <img alt="Rektor" src="{{ asset('assets/images/pimpinan/w3-min.png') }}" />
                             </a>
                         </div>
                         <div class="caption">
                             <h4 class="caption-title">
-                                <a href="#">-</a>
+                                <a href="#">Afrinald Rizhan, SH., MH
+                                </a>
                                 <small>Wakil Rektor III</small>
                             </h4>
                         </div>

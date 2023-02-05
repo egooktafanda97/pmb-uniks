@@ -87,7 +87,7 @@
             <tbody>
                 <tr>
                     <td style="width:100%;">
-                        <img alt="" src="https://pmb.kaptencode.com/assets/logo/logo.png"
+                        <img alt="" src="{{ asset('assets/logo/logo.jpg') }}"
                             style="width:35px; height: 35px; position: absolute;left: 25px; top:25px">
                         <font class="font-kop">
                             YAYASAN PERGURUAN TINGGI ISLAM KUANTAN SINGINGI <br>
@@ -109,7 +109,7 @@
         </div>
         <center>
             <div style="font-family: 'Poppins', sans-serif; font-size: .55em; width:100%; color:#166ecc">
-                <h3>KARTU PESERTA UJIAN PMB GELOMBANG I</h3>
+                <h3>KARTU PESERTA UJIAN PMB {{ $pendaftaran->informasi_pendaftaran->pendaftaran ?? '-' }}</h3>
             </div>
         </center>
 
@@ -117,33 +117,44 @@
             <tr>
                 <td class="t_key">NAMA</td>
                 <td class="sepalator">:</td>
-                <td class="t_val">Ego Oktafanda</td>
+                <td class="t_val">{{ $pendaftaran->calon_mahasiswa->nama_lengkap ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="t_key">NO. PESERTA</td>
                 <td class="sepalator">:</td>
-                <td class="t_val">Ego Oktafanda</td>
+                <td class="t_val">{{ $pendaftaran->no_resister ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="t_key">ALAMAT</td>
                 <td class="sepalator">:</td>
-                <td class="t_val">Ego Oktafanda</td>
+                <td class="t_val">{{ $pendaftaran->calon_mahasiswa->alamat_lengkap ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="t_key">No.Hp</td>
                 <td class="sepalator">:</td>
-                <td class="t_val">Ego Oktafanda</td>
+                <td class="t_val">{{ $pendaftaran->calon_mahasiswa->no_telepon ?? '-' }}</td>
             </tr>
-            <tr>
+            <tr valign="top">
                 <td class="t_key">PILIHAN PRODI</td>
                 <td class="sepalator">:</td>
-                <td class="t_val">Ego Oktafanda</td>
+                <td class="t_val" valign="top">
+                    @php
+                        $no = 1;
+                    @endphp
+                    @foreach ($pendaftaran->pilihan_prodi as $item)
+                        <div style="display: flex">
+                            <strong style="margin-right: 3px">{{ $no++ }}</strong>
+                            {{ $item->prodi->nama_prodi }}
+                        </div>
+                    @endforeach
+                </td>
             </tr>
         </table>
         <table class="tb">
             <tr>
+
                 <td style="width: 60%">
-                    <img alt="" src="https://pmb.kaptencode.com/assets/lampiran/88iSwXO5ywb4dTjC1675279102.jpg"
+                    <img alt="" src="{{ asset('assets/' . $pendaftaran->lampiran_pendaftaran->foto_formal) }}"
                         style="width:50px; height: 70px; margin-top: 10px; margin-left: 15px;">
                 </td>
                 <td align="right">

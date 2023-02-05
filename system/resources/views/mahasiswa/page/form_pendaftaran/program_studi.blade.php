@@ -6,37 +6,36 @@
             </div>
             <div class="card-body">
                 @php
-                    $selected = '';
+                    $p1 = '';
+                    $p2 = '';
                     if (!empty($pendaftaran->prodi)) {
-                        $selected = $pendaftaran->prodi->id;
+                        foreach ($pendaftaran->pilihan_prodi as $plp) {
+                            if ($plp->no_pilihan == '1') {
+                                $p1 = $plp->prodi_id;
+                            }
+                            if ($plp->no_pilihan == '2') {
+                                $p2 = $plp->prodi_id;
+                            }
+                        }
                     }
                 @endphp
                 <div class="mb-2">
                     <label for="">PILIHAN 1</label>
-                    <select aria-label="program studi" class="form-select single-select" id="p1">
-                        <option {{ $selected == '' ? 'selected' : '' }} value="">Pilih Program Studi </option>
+                    <select aria-label="program studi" class="form-select p1-select" id="p1">
+                        <option {{ $p2 == '' ? 'selected' : '' }} value="">Pilih Program Studi </option>
                         @foreach ($prodi as $p)
-                            <option {{ $selected == $p->id ? 'selected' : '' }} value="{{ $p->id }}">
+                            <option {{ $p1 == $p->id ? 'selected' : '' }} value="{{ $p->id }}">
                                 {{ $p->nama_prodi }}</option>
                         @endforeach
                     </select>
                 </div>
+
                 <div class="mb-2">
                     <label for="">PILIHAN 2</label>
-                    <select aria-label="program studi" class="form-select single-select" id="p2">
-                        <option {{ $selected == '' ? 'selected' : '' }} value="">Pilih Program Studi </option>
+                    <select aria-label="program studi" class="form-select p2-select" id="p2">
+                        <option {{ $p2 == '' ? 'selected' : '' }} value="">Pilih Program Studi </option>
                         @foreach ($prodi as $p)
-                            <option {{ $selected == $p->id ? 'selected' : '' }} value="{{ $p->id }}">
-                                {{ $p->nama_prodi }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="mb-2">
-                    <label for="">PILIHAN 3</label>
-                    <select aria-label="program studi" class="form-select single-select" id="p3">
-                        <option {{ $selected == '' ? 'selected' : '' }} value="">Pilih Program Studi </option>
-                        @foreach ($prodi as $p)
-                            <option {{ $selected == $p->id ? 'selected' : '' }} value="{{ $p->id }}">
+                            <option {{ $p2 == $p->id ? 'selected' : '' }} value="{{ $p->id }}">
                                 {{ $p->nama_prodi }}</option>
                         @endforeach
                     </select>

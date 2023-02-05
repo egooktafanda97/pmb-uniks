@@ -17,7 +17,8 @@ use Modules\V1\Providers\ManagementServiceProvider;
 /*
 | end
 */
-
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 /*
 | USE MODEL
 */
@@ -33,7 +34,7 @@ class DaftarMhsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['']]);
+        $this->middleware('auth:api', ['except' => ['api_register']]);
     }
     public function getById($id = null)
     {
@@ -60,12 +61,6 @@ class DaftarMhsController extends Controller
                     "pendaftaran_id" => $up_prod->id,
                     "prodi_id" => $request->prodi_2
                 ]);
-            if (!empty($request->prodi_1) && !empty($request->prodi_2) && !empty($request->prodi_3))
-                array_push($pil,  [
-                    "no_pilihan" => "3",
-                    "pendaftaran_id" => $up_prod->id,
-                    "prodi_id" => $request->prodi_3
-                ]);
             foreach ($pil as $plp) {
                 $pp = new ManagementCrud('PilihanProdi');
                 $pathJson =  ManagementServiceProvider::getScemaPath();
@@ -78,6 +73,80 @@ class DaftarMhsController extends Controller
             return response()->json($up_prod, 200);
         } catch (\Throwable $th) {
             return response()->json(["error" => $th->getMessage()], 401);
+        }
+    }
+    public function api_register(Request $request)
+    {
+        $resources = new ManagementCrud(str_replace('Controller', '', "PendaftaranController"));
+        $pathJson =  ManagementServiceProvider::getScemaPath();
+        $resources->instance($pathJson);
+        $resources->setNameSpaceModel("\Modules\V1\Entities\\");
+
+        if (empty($resources))
+            return response()->json([
+                "error"  => "data not found",
+                "status" => 501,
+            ], 501);
+        $info_pendaftaran = \Modules\V1\Entities\InformasiPendaftaran::whereStatus('active')->first();
+
+        if (empty($info_pendaftaran))
+            return response()->json([
+                "error"  => "data not found",
+                "status" => 501,
+            ], 501);
+        try {
+            $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderBy("no_resister")->first();
+            $noreg = 1;
+            if (!empty($getNum)) {
+                $noreg = (int) $getNum->no_resister + 1;
+            }
+        } catch (\Throwable $th) {
+            $noreg = 1;
+        }
+        $request->merge(["no_resister" =>  $noreg, "informasi_pendaftaran_id" => $info_pendaftaran->id]);
+
+        $save =  $resources->generate_data_insert($request);
+
+        if (!empty($save['status']) && $save['status'] == 200) {
+            /*
+            | AKTIFKAN JIKA AKAN MEMBUAT ROLE PADA USER
+            */
+            $this->create_role_users($save, 'mahasiswa');
+            /*
+            | end
+            */
+            $getUs = User::find($save['data']['user_id']);
+            $getUs->nama = $request->nama;
+            $getUs->foto = "default.jpg";
+            $getUs->save();
+
+            $getUs = User::find($save['data']['user_id']);
+            $kode = "";
+            do {
+                $digits = 4;
+                $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+                $cek = \App\Models\Verify::where("key_reference", $kode)->first();
+            } while (!empty($cek));
+
+            $created_otp = \App\Models\Verify::create([
+                "user_id" => $getUs->id,
+                "key_reference" => $kode,
+                "key_for" => "verifikai"
+            ]);
+
+            $details = [
+                "email" => $getUs->email,
+                "nama" => $getUs->nama,
+                "kode" => $created_otp->key_reference
+            ];
+            dispatch(new \App\Jobs\SendEmailVerify($details));
+            $enc = Crypt::encrypt($getUs->email);
+
+            return response()->json([
+                "result"  => $enc
+            ], 200);
+        } else {
+            return response()->json($save, 401);
         }
     }
     public function ortu($request, $ortu_id = null)
@@ -239,7 +308,7 @@ class DaftarMhsController extends Controller
     }
     public function read()
     {
-        $cmhs = \Modules\V1\Entities\Pendaftaran::where("user_id", auth()->user()->id)->with(["calon_mahasiswa", "calon_mahasiswa.orangtua"])->first();
+        $cmhs = \Modules\V1\Entities\Pendaftaran::where("user_id", auth()->user()->id)->with(["calon_mahasiswa", "calon_mahasiswa.orangtua", "pilihan_prodi"])->first();
         return response()->json($cmhs);
     }
 }

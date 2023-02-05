@@ -22,8 +22,8 @@ class Universitas extends Seeder
         |
         */
         $fakultas = [
-            "PERTANIAN" => ["AGRI BISNIS, AGB", "AGRO TEKNOLOGI, AGT", "PETERNAKAN,PETER"],
-            "TARBIYAH DAN KEGURUAN" => ["PENDIDIKAN ISLAM, PAI", "KIMIA"],
+            "PERTANIAN" => ["AGRIBISNIS, AGB", "AGROTEKNOLOGI, AGT", "PETERNAKAN ,PETER"],
+            "TARBIYAH DAN KEGURUAN" => ["PENDIDIKAN AGAMA ISLAM, PAI", "PENDIDIKAN KIMIA"],
             "SOSIAL" => ["ADMINITRASI NEGARA, ADM", "HUKUM", "PERBANKAN SYARI'AH, PBS"],
             "TEKNIK" => ["PERANCANAAN WILAYAH DAN KOTA, PWK", "SIPIL", "INFORMATIKA, TI"]
         ];

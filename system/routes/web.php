@@ -32,6 +32,7 @@ Route::get('/', [App\Http\Controllers\Home::class, 'index']);
 Route::get('/sign-up', [App\Http\Controllers\Home::class, 'index']);
 Route::get('/programstudi/', [App\Http\Controllers\Home::class, 'prodi']);
 Route::get('/info_pendaftaran', [App\Http\Controllers\Home::class, 'info_pendaftaran']);
+Route::get('/detail_prodi/{slug?}', [App\Http\Controllers\Home::class, 'detail_prodi']);
 
 
 
@@ -78,7 +79,7 @@ Route::group([
 ], function ($router) {
     Route::post('/report_cmhs', [App\Http\Controllers\admin\ReportController::class, 'report_cmhs']);
     Route::get('/report_excel', [App\Http\Controllers\admin\ReportController::class, 'report_excel']);
-    Route::get('/id-card', [App\Http\Controllers\admin\ReportController::class, 'IdCard']);
+    // Route::get('/id-card', [App\Http\Controllers\admin\ReportController::class, 'IdCard']);
 });
 Route::group([
     'middleware' => ['web', 'role:mahasiswa'],

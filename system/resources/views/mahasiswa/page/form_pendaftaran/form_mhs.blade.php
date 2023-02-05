@@ -64,7 +64,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">NO TELEPON (WA) <span class="in-require">*
+                        <label class="form-label" for="inputFirstName">NOMOR HANDPHONE (WA) <span class="in-require">*
                                 +62</span></label>
                         <input class="form-control" name="no_telepon" placeholder="tempat lahir sesuai ktp / ijasah"
                             required type="text" value="+62">
@@ -91,8 +91,8 @@
                             style="height: 30px; width: 100px; display: flex; justify-content: center; align-items: center"
                             type="button"> <i class="fa fa-long-arrow-left"></i>
                         </button>
-                        <button class="btn btn-primary  rounded-0 btn-sm btn-loader" data-card-id="card-mhs"
-                            data-next-id="card-alamat" id="data-personal" id="person_data_next"
+                        <button class="btn btn-primary  rounded-0 btn-sm btn-loader person_data_next"
+                            data-card-id="card-mhs" data-next-id="card-alamat" id="data-personal"
                             style="height: 30px; width: 100px; display: flex; justify-content: center; align-items: center"
                             type="button">
                             <i class="fa fa-long-arrow-right"></i>

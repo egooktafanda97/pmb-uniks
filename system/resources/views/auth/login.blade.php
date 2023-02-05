@@ -105,7 +105,7 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    Belum punya akun? <a href="{{ url('/') }}"
+                                                    Belum punya akun? <a href="{{ url('/register') }}"
                                                         style="color: blue;">Daftar</a>
                                                 </div>
                                             </form>

@@ -179,14 +179,18 @@ class ReportController extends Controller
     public function IdCard(Request $request)
     {
         // try {
-        if (!$pendaftaran = \Modules\V1\Entities\Pendaftaran::whereUserId(auth()->user()->id)->with("calon_mahasiswa")->first())
+        if (!$pendaftaran = \Modules\V1\Entities\Pendaftaran::whereUserId(auth()->user()->id)->with("calon_mahasiswa", "pilihan_prodi", "informasi_pendaftaran", "lampiran_pendaftaran")->first())
             abort(404);
         $data = [
             "pendaftaran" => $pendaftaran,
             "logo" => asset("assets\logo\logo.png")
         ];
         $customPaper = array(0, 0, 250, 290);
-        $pdf = PDF::loadView('report/pmb_idcard', $data)->setPaper($customPaper, 'landscape');
+        $PDFOptions = ['enable_remote' => true, 'isRemoteEnabled', true];
+        $pdf = PDF::setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true
+        ])->loadView('report/pmb_idcard', $data)->setPaper($customPaper, 'landscape');
         return $pdf->stream();
         // return view("report/pmb_idcard", $data);
         // $data = ['title' => 'Welcome to belajarphp.net'];

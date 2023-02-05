@@ -1,17 +1,7 @@
-@extends('website.layout_prodi.index')
+@extends('website.index.index')
 @section('style')
-    <link href="{{ asset('public/node_modules/toastr/build/toastr.css') }}"
-          rel="stylesheet"
-          type="text/css">
+    <link href="{{ asset('public/node_modules/toastr/build/toastr.css') }}" rel="stylesheet" type="text/css">
     <style>
-        /* .bg-trasparant {
-                                                background: transparent;
-                                            }
-                                    
-                                            .bg-home-page {
-                                                margin-top: -100px;
-                                            } */
-
         @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
         @import url('https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css');
 
@@ -115,21 +105,18 @@
 @section('content')
     <!-- PAGE -->
     <section class="page-section jumbotron-section jb1 with-overlay"
-             style="background-image: url('{{ asset('assets/' . $prodi->gambar) }}')">
+        style="background-image: url('{{ asset('assets/prodi/thumbnail/' . $prodi->gambar) }}')">
         <div class="container">
             <div class="div-table">
                 <div class="div-cell">
                     <div class="jumbotron text-center">
-                        <h5 class="jumbotron-title-sub"
-                            data-animation-delay="700"
-                            data-animation="fadeIn">
+                        <h5 class="jumbotron-title-sub" data-animation-delay="700" data-animation="fadeIn">
                             PROGRAM STUDI
                         </h5>
-                        <h1 class="jumbotron-title"
-                            data-animation-delay="500"
-                            data-animation="fadeIn">
+                        <h1 class="jumbotron-title" data-animation-delay="500" data-animation="fadeIn">
                             {{ $prodi->nama_prodi }}
-                            </span>
+                            <br>
+                            {{ $prodi->gelar }}
                         </h1>
                         {{-- <h4 class="jumbotron-title-sub"
                             data-animation-delay="700"
@@ -138,13 +125,17 @@
                                 <strong>FAKULTAS {{ $prodi->fakultas()->nama_fakultas ?? '-' }}</strong>
                             </span>
                         </h4> --}}
-                        <h4 class="jumbotron-title-sub"
-                            data-animation-delay="700"
-                            data-animation="fadeIn">
+                        <h4 class="jumbotron-title-sub" data-animation-delay="700" data-animation="fadeIn">
                             <span class="text-color">
                                 <strong>UNIVERSITAS ISLAM KUANTAN SINGINGI</strong>
                             </span>
                         </h4>
+                        <h4 class="jumbotron-title-sub" data-animation-delay="700" data-animation="fadeIn">
+                            <span class="text-color">
+                                <strong>BIAYA / SMESTER : 3000000</strong>
+                            </span>
+                        </h4>
+
                     </div>
                 </div>
             </div>
@@ -154,82 +145,66 @@
     <!-- /PAGE -->
 
     <!-- /BREADCRUMBS -->
-    <div id="tsum-tabs"
-         style="display: flex;justify-content: center;align-items: center; width: 100%;">
+    {{-- <div id="tsum-tabs" style="display: flex;justify-content: center;align-items: center; width: 100%;">
         <main style="width: 100% ;"">
-           <input checked
-                       id="tab1"
-                       name="tabs"
-                       type="radio">
-                <label for="tab1">Gallery</label>
+            <input checked id="tab1" name="tabs" type="radio">
+            <label for="tab1">Gallery</label>
 
-                <input id="tab2"
-                       name="tabs"
-                       type="radio">
-                <label for="tab2">Tentang</label>
+            <input id="tab2" name="tabs" type="radio">
+            <label for="tab2">Tentang</label>
 
-                <input id="tab3"
-                       name="tabs"
-                       type="radio">
-                <label for="tab3">Biaya Kuliah</label>
+            <input checked id="tab3" name="tabs" type="radio">
+            <label for="tab3">Biaya Kuliah</label>
 
-            {{-- <input id="tab4"
-                   name="tabs"
-                   type="radio">
-            <label for="tab4">Drupal</label> --}}
+            <input id="tab4" name="tabs" type="radio">
+            <label for="tab4">Drupal</label>
 
-            <section class="content"
-                     id="content1">
+            <section class="content" id="content1">
                 <p>
                     CONTENT FIR TAB 1
                 </p>
             </section>
 
-            <section class="content"
-                     id="content2">
+            <section class="content" id="content2">
                 <p>
                     CONTENT FIR TAB 2
                 </p>
             </section>
 
-            <section class="content"
-                     id="content3">
-                <p>
-                    CONTENT FIR TAB 3
-                </p>
+            <section class="content" id="content3">
+                <br>
+                <br>
+                <h4 class="card">
+                    Biaya / Smester: 300000
+                </h4>
             </section>
 
-            <section class="content"
-                     id="content4">
+            <section class="content" id="content4">
                 <p>
                     CONTENT FIR TAB 4
                 </p>
             </section>
 
         </main>
-    </div>
-    <!-- PAGE -->
-    <section class="page-section">
+    </div> --}}
+    <!-- PAGE GALERY -->
+    {{-- <section class="page-section">
         <div class="container">
 
             <div class="row thumbnails portfolio">
                 @foreach ($prodi->gallery_prodi as $item)
-                    <div class="col-md-4 col-sm-6"
-                         data-animation-delay="200"
-                         data-animation="fadeInUp">
+                    <div class="col-md-4 col-sm-6" data-animation-delay="200" data-animation="fadeInUp">
                         <div class="thumbnail no-border no-padding">
                             <div class="media">
-                                <img alt=""
-                                     src="assets/img/preview/portfolio/portfolio-x1.jpg">
+                                <img alt="" src="assets/img/preview/portfolio/portfolio-x1.jpg">
                                 <div class="caption hovered">
                                     <div class="caption-border"></div>
                                     <div class="caption-wrapper div-table">
                                         <div class="caption-inner div-cell">
                                             <p class="caption-buttons">
-                                                <a class="btn caption-zoom"
-                                                   data-gal="prettyPhoto"
-                                                   href="{{ asset('asset/' . $item->gambar) }}"><i
-                                                       class="fa fa-eye"></i></a>
+                                                <a class="btn caption-zoom" data-gal="prettyPhoto"
+                                                    href="{{ asset('asset/' . $item->gambar) }}"><i
+                                                        class="fa fa-eye"></i></a>
                                             </p>
                                         </div>
                                     </div>
@@ -250,8 +225,11 @@
             </div>
 
         </div>
-    </section>
+    </section> --}}
     <!-- /PAGE -->
+
+
+
     <!-- /PAGE -->
     <!-- PAGE -->
     {{-- <section class="page-section lg-padding-top xl-padding-bottom">
@@ -337,8 +315,7 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript"
-            src="{{ asset('public/node_modules/toastr/build/toastr.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/node_modules/toastr/build/toastr.min.js') }}"></script>
     @if ($errors->any() && $errors->first('status') == 201)
         <script>
             const errors = JSON.parse(`{{ $errors->first() }}`.replace(/&quot;/g, '"'));

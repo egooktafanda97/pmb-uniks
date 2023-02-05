@@ -31,7 +31,7 @@
     <label class="form-label">
         <strong>
             <i class="lni lni-paperclip"></i>
-            SCAN IJASA / SKL (JPG / PDF) <span class="in-require">*</span></strong>
+            SCAN IJAZAH / SKL (JPG / PDF) <span class="in-require">*</span></strong>
     </label>
     <input class="form-control form-control-sm" name="sc_ijasa_skl" required type="file">
 </div>

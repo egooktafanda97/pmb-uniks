@@ -30,7 +30,7 @@ class Home extends Controller
     {
         return view($this->page . ".sign_up");
     }
-    public function data_detail($id)
+    public function data_detail($id = null)
     {
         $prodi = \Modules\V1\Entities\Prodi::whereId($id)->orWhere('nama_prodi', 'like', '%' . $id . '%')->first();
         if (!$prodi) {
@@ -45,7 +45,7 @@ class Home extends Controller
         $data = $this->getter_data();
         return view($this->page . ".list_prodi", $data);
     }
-    public function detail_prodi($id)
+    public function detail_prodi($id = null)
     {
         $data = $this->data_detail($id);
         return view($this->page . ".prodi", $data);

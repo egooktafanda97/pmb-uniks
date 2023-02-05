@@ -33,7 +33,7 @@
                         <input class="form-control" name="tanggal_lahir_ayah" required type="date" />
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">NO TELEPON (WA)</label>
+                        <label class="form-label" for="inputFirstName">NOMOR HANDPHONE (WA)</label>
                         <input class="form-control" maxlength="16" name="no_telepon_ayah" placeholder="" type="text"
                             value="">
                     </div>
@@ -93,7 +93,7 @@
                         <input class="form-control" name="tanggal_lahir_ibu" required type="date" />
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">NO TELEPON (WA) </label>
+                        <label class="form-label" for="inputFirstName">NOMOR HANDPHONE (WA) </label>
                         <input class="form-control" maxlength="16" name="no_telepon_ibu" placeholder=""
                             type="text" value="">
                     </div>

@@ -93,9 +93,7 @@
                     </div>
                     </p>
                     @if ($pendaftaran->status == 'valid')
-                        <a class="btn btn-primary btn-sm w-100"
-                            href="{{ url('report/id-card?us=' . \Crypt::encryptString($pendaftaran->id)) }}"
-                            target="_blank">
+                        <a class="btn btn-primary btn-sm w-100" href="{{ url('report/id-card') }}" target="_blank">
                             <i class="fa fa-print"></i>
                             CETAK KARTU UJIAN
                         </a>

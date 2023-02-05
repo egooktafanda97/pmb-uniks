@@ -18,12 +18,19 @@
         <div class="col-md-4">
             <div class="card border-primary border-bottom border-3 border-0">
                 <input class="id-hide" id="img-update-profile" type="file">
-                <img alt="" class="card-img-top" id="img-profile"
-                    src="{{ !empty(auth()->user()->foto) ? asset('assets/' . auth()->user()->foto) : asset('assets/logo/logo.png') }}"
+                @php
+                    $img = 'assets/logo/logo.png';
+                    if ($pendaftaran->lampiran_pendaftaran->foto_formal) {
+                        $img = 'assets/' . $pendaftaran->lampiran_pendaftaran->foto_formal;
+                    }
+                @endphp
+                <img alt="" class="card-img-top" id="img-profile" src="{{ asset($img) }}"
                     style="max-height: 300px; cursor:pointer" />
                 <div class="card-body">
                     <h5 class="card-title text-primary">{{ $pendaftaran->calon_mahasiswa->nama_lengkap ?? '-' }}</h5>
-                    <strong>KODE PENDAFTARAN: <span class="text-danger">{{ $pendaftaran->no_resister }}</span></strong>
+                    <strong style="font-size: .8em">No. PENDAFTARAN ONLINE:
+                        <span
+                            class="text-danger">{{ $num_padded = sprintf('%03d', $pendaftaran->no_resister) ?? '-' }}</span></strong>
                     <p class="card-text">
                         @php
                             $bg = $pendaftaran->status == 'pending' ? 'bg-warning' : ($pendaftaran->status == 'invalid' ? 'bg-danger' : 'bg-success');

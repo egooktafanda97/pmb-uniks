@@ -24,7 +24,6 @@ class UsersTableSeeder extends Seeder
         $_admin = Role::create(['guard_name' => 'api', 'name' => 'admin']);
         $s_admin = User::create([
             'nama' => 'super admin',
-            'username'    => "super_admin",
             'email' => "super_admin@gmail.com",
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
@@ -32,7 +31,6 @@ class UsersTableSeeder extends Seeder
 
         $admin = User::create([
             'nama' => '',
-            'username'    => "admin",
             'email' => "admin@gmail.com",
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);

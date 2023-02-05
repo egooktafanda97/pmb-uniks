@@ -46,7 +46,7 @@
                             <div class="card-body">
                                 <div class="border p-4 rounded">
                                     <div class="text-center">
-                                        <p>Apakah Sudah Punya Akun? <a href="authentication-signin.html">Login
+                                        <p>Apakah Sudah Punya Akun? <a href="{{ url('login') }}">Login
                                                 Sekarang!</a>
                                         </p>
                                     </div>
@@ -101,8 +101,16 @@
                                             </div> --}}
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button class="btn btn-primary" type="submit"><i
-                                                            class='bx bx-user'></i>Daftar</button>
+                                                    <button class="btn btn-primary btn-loader text-center"
+                                                        style="height: 40px;display: flex;align-items: center;justify-content: center"
+                                                        type="submit">
+                                                        <i class='bx bx-user'></i>Daftar
+                                                        <span>
+                                                            <b></b>
+                                                            <b></b>
+                                                            <b></b>
+                                                        </span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -192,7 +200,6 @@
                             }
                         }
                     }
-
                     save_inheader(http_configure);
                 }
             });

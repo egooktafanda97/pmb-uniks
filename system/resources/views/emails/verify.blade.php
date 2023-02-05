@@ -655,28 +655,26 @@
                                                                     <h5>Hi {{ $nama ?? '-' }}</h5>
                                                                     <p>
                                                                         Untuk melanjutkan pendaftaran,
-                                                                        email anda harus di verifykasi.
+                                                                        email anda harus di verifikasi.
                                                                     </p>
                                                                     Kode : <strong>{{ $kode }}</strong>
-                                                                    <div>
+                                                                    {{-- <div>
                                                                         <a href="{{ url('auth/verify/' . \Crypt::encrypt($kode)) }}"
                                                                             target="_blank">
                                                                             <strong>{{ url('auth/verify/' . \Crypt::encrypt($kode)) }}</strong>
-                                                                    </div>
+                                                                    </div> --}}
                                                                 </td>
                                                             </tr>
-                                                            {{-- <tr>
+                                                            <tr>
                                                                 <td align="center" valign="top">
                                                                     <table border="0" cellpadding="0"
                                                                         cellspacing="0" class="emailButton"
                                                                         style="background-color: #fff;"
                                                                         width="50%">
                                                                         <tr>
-
-
                                                                             <td align="center" class="buttonContent"
                                                                                 valign="middle">
-                                                                                <a href="{{ url('auth/verify/' . $kode) }}"
+                                                                                <a href="{{ url('auth/verify/' . \Crypt::encrypt($kode)) }}"
                                                                                     style="color:#fff;padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px; background: #349eeb"
                                                                                     target="_blank">
                                                                                     <strong>Verifikasi</strong>
@@ -686,7 +684,7 @@
                                                                     </table>
 
                                                                 </td>
-                                                            </tr> --}}
+                                                            </tr>
                                                         </table>
                                                     </td>
                                                 </tr>
