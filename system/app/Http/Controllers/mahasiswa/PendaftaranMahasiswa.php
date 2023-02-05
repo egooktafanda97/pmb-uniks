@@ -65,12 +65,22 @@ class PendaftaranMahasiswa extends Controller
                 "status" => 501,
             ], 501);
         $info_pendaftaran = \Modules\V1\Entities\InformasiPendaftaran::whereStatus('active')->first();
+
         if (empty($info_pendaftaran))
             return response()->json([
                 "error"  => "data not found",
                 "status" => 501,
             ], 501);
-        $request->merge(["no_resister" => "UNIKS:" . \Str::random(4), "informasi_pendaftaran_id" => $info_pendaftaran->id]);
+        try {
+            $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderBy("no_resister")->first();
+            $noreg = 0;
+            if (empty($getNum)) {
+                $noreg = (int) $getNum->no_resister + 1;
+            }
+        } catch (\Throwable $th) {
+            $noreg = 0;
+        }
+        $request->merge(["no_resister" =>  $noreg, "informasi_pendaftaran_id" => $info_pendaftaran->id]);
         $save =  $this->resources->generate_data_insert($request);
         if (!empty($save['status']) && $save['status'] == 200) {
             /*
@@ -81,7 +91,8 @@ class PendaftaranMahasiswa extends Controller
             | end
             */
             $getUs = User::find($save['data']['user_id']);
-            $getUs->nama = $request->email;
+            $getUs->nama = $request->nama;
+            $getUs->foto = "default.jpg";
             $getUs->save();
 
             $getUs = User::find($save['data']['user_id']);

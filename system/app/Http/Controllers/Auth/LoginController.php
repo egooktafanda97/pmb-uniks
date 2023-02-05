@@ -28,10 +28,12 @@ class LoginController extends Controller
 
     protected function login(Request $request)
     {
+        dd($request->all());
         $validator = Validator::make($request->all(), [
-            'username' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ]);
+
 
         if ($validator->fails()) {
             return redirect("/login")->withErrors(['msg' => "username & password tidak valid", "status" => 501]);
@@ -111,6 +113,7 @@ class LoginController extends Controller
                     return redirect('/mahasiswa/profile');
                 }
             } else {
+                dd($user_google);
                 // $create = User::Create([
                 //     'email'             => $user_google->getEmail(),
                 //     'name'              => $user_google->getName(),
@@ -118,10 +121,11 @@ class LoginController extends Controller
                 //     'email_verified_at' => now()
                 // ]);
 
-                return redirect()->route('login');
+                // return redirect()->route('login');
             }
         } catch (\Exception $e) {
-            return redirect()->route('login');
+            dd($e);
+            // return redirect()->route('login');
         }
     }
     public function otp(Request $request)

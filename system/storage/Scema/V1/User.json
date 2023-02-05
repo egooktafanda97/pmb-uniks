@@ -45,28 +45,6 @@
                 "form": "text"
             }
         },
-        "username": {
-            "validate": 3,
-            "validate_unique": {
-                "validate": 3,
-                "index_id": "users"
-            },
-            "type": "string",
-            "request": true,
-            "migration": 1,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            }
-        },
         "email": {
             "validate": 5,
             "validate_unique": {

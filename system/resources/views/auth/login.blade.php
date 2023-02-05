@@ -52,7 +52,7 @@
                                                     <img alt="Image Description" class="me-2"
                                                         src="{{ asset(config('app.adm-assets')) }}/assets/images/icons/search.svg"
                                                         width="16">
-                                                    <span>Sign in with Google</span>
+                                                    <span>Login Dengan Google</span>
                                                 </span>
                                             </a>
                                         </div>
@@ -68,10 +68,10 @@
                                                 @csrf
                                                 <div class="col-12">
                                                     <label class="form-label" for="inputEmailAddress">
-                                                        Username
+                                                        Email
                                                     </label>
-                                                    <input class="form-control" id="username" name="username"
-                                                        placeholder="username" type="username">
+                                                    <input class="form-control" id="email" name="email"
+                                                        placeholder="email" type="email">
 
                                                 </div>
                                                 <div class="col-12">

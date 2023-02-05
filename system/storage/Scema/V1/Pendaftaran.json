@@ -39,11 +39,11 @@
         },
         "no_resister": {
             "name": "no_resister",
-            "label": "Nama Lengkap",
+            "label": "",
             "type": "string",
             "request": true,
-            "migration": 5,
-            "validate": 9,
+            "migration": 2,
+            "validate": 2,
             "view": {
                 "table": {
                     "status": true

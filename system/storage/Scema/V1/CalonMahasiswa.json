@@ -90,10 +90,6 @@
             "request": true,
             "migration": 2,
             "validate": 6,
-            "validate_unique": {
-                "validate": 18,
-                "index_id": "npwp"
-            },
             "view": {
                 "table": {
                     "status": true

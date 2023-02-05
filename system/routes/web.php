@@ -46,6 +46,7 @@ Route::group([
 Auth::routes();
 Route::get('/auth/verifikasi', [App\Http\Controllers\mahasiswa\PendaftaranMahasiswa::class, 'verifikasi']);
 Route::get('/auth/redirect', [App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider']);
+Route::get('/auth/google-reg', [App\Http\Controllers\Auth\LoginController::class, 'redirectToProviderRegister']);
 Route::get('/auth/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback']);
 // Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'Logout']);
 
