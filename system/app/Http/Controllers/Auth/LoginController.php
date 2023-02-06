@@ -124,7 +124,7 @@ class LoginController extends Controller
                     return redirect('/mahasiswa/profile');
                 }
             } else {
-                $this->register($user_google);
+                return $this->register($user_google);
                 // $create = User::Create([
                 //     'email'             => $user_google->getEmail(),
                 //     'name'              => $user_google->getName(),
