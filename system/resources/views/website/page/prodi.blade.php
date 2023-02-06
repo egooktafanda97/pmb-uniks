@@ -130,11 +130,11 @@
                                 <strong>UNIVERSITAS ISLAM KUANTAN SINGINGI</strong>
                             </span>
                         </h4>
-                        <h4 class="jumbotron-title-sub" data-animation-delay="700" data-animation="fadeIn">
+                        {{-- <h4 class="jumbotron-title-sub" data-animation-delay="700" data-animation="fadeIn">
                             <span class="text-color">
                                 <strong>BIAYA / SMESTER : 3000000</strong>
                             </span>
-                        </h4>
+                        </h4> --}}
 
                     </div>
                 </div>
