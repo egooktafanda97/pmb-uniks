@@ -183,12 +183,12 @@ class DaftarMhsController extends Controller
             try {
                 $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderby('created_at', 'desc')->first();
                 if (!empty($getNum)) {
-                    $getNums = explode("-", $getNum);
+                    $getNums = explode("-", $getNum->no_resister);
                     $noRegPad = 1;
                     if (count($getNums) == 2) {
                         $inc = (int) $getNums[1];
                         $counter = $inc + 1;
-                        $noRegPad = str_pad($counter, 3, '0', STR_PAD_LEFT);
+                        $noRegPad = str_pad($counter, 4, '0', STR_PAD_LEFT);
                         $noreg = "on-" . $noRegPad;
                     } else {
                         $noreg = "on-0001";
