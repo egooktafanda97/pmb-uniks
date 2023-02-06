@@ -55,7 +55,7 @@
                                 < {{ \App\Helpers\Helpers::convert_to_rupiah(2000000) }}</option>
                             <option value="< 3000000">
                                 < Rp. 3000,000</option>
-                            <option value="> 30000000"> > {{ \App\Helpers\Helpers::convert_to_rupiah(3000000) }}
+                            <option value="> 3000000"> > {{ \App\Helpers\Helpers::convert_to_rupiah(3000000) }}
                             </option>
                         </select>
 
