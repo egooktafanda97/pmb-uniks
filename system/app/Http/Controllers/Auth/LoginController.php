@@ -60,6 +60,18 @@ class LoginController extends Controller
             return redirect($this->redirectPath());
         }
     }
+    protected function register($google = null)
+    {
+        $data = [];
+        if (!empty($google) && $google != null) {
+            $data = [
+                "nama" =>  $google->getName(),
+                "email" =>  $google->getEmail()
+            ];
+        }
+        return view("auth.register", $data);
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
@@ -112,7 +124,7 @@ class LoginController extends Controller
                     return redirect('/mahasiswa/profile');
                 }
             } else {
-                dd($user_google);
+                $this->register($user_google);
                 // $create = User::Create([
                 //     'email'             => $user_google->getEmail(),
                 //     'name'              => $user_google->getName(),

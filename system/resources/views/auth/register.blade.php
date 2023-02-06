@@ -71,16 +71,31 @@
                                                     id="inputFirstName"onKeyPress="if(this.value.length==16) return false;"
                                                     name="nik" placeholder="16 digit nik" required type="number">
                                             </div>
-                                            <div class="col-sm-6">
-                                                <label class="form-label" for="inputFirstName">Nama Lengkap</label>
-                                                <input class="form-control" name="nama" placeholder="Nama lengkap"
-                                                    required type="text">
-                                            </div>
-                                            <div class="col-12">
-                                                <label class="form-label" for="inputEmailAddress">Email</label>
-                                                <input class="form-control" id="inputEmailAddress" name="email"
-                                                    placeholder="example@user.com" required type="email">
-                                            </div>
+                                            @if (!empty($email))
+                                                <div class="col-sm-6">
+                                                    <label class="form-label" for="inputFirstName">Nama Lengkap</label>
+                                                    <input class="form-control" name="nama"
+                                                        placeholder="Nama lengkap" required type="text"
+                                                        value="{{ $nama ?? '' }}">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label" for="inputEmailAddress">Email</label>
+                                                    <input class="form-control" id="inputEmailAddress" name="email"
+                                                        placeholder="example@user.com" readonly required type="email"
+                                                        value="{{ $email }}">
+                                                </div>
+                                            @else
+                                                <div class="col-sm-6">
+                                                    <label class="form-label" for="inputFirstName">Nama Lengkap</label>
+                                                    <input class="form-control" name="nama"
+                                                        placeholder="Nama lengkap" required type="text">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label" for="inputEmailAddress">Email</label>
+                                                    <input class="form-control" id="inputEmailAddress" name="email"
+                                                        placeholder="example@user.com" required type="email">
+                                                </div>
+                                            @endif
                                             <div class="col-12">
                                                 <label class="form-label" for="inputChoosePassword">Password</label>
                                                 <div class="input-group" id="show_hide_password">
