@@ -95,7 +95,7 @@ class DaftarMhsController extends Controller
                 "status" => 501,
             ], 501);
         try {
-            $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderBy("id", "DESC")->first();
+            $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderby('created_at', 'desc')->first();
             if (!empty($getNum)) {
                 $getNums = explode("-", $getNum->no_resister);
                 $noRegPad = 1;
@@ -181,7 +181,7 @@ class DaftarMhsController extends Controller
                     "status" => 501,
                 ], 501);
             try {
-                $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderBy("no_resister")->first();
+                $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderby('created_at', 'desc')->first();
                 if (!empty($getNum)) {
                     $getNums = explode("-", $getNum);
                     $noRegPad = 1;
