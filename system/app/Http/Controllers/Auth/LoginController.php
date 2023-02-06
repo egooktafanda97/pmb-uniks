@@ -134,18 +134,9 @@ class LoginController extends Controller
                     $cek = \App\Models\Verify::where("key_reference", $kode)->first();
                 } while (!empty($cek));
                 return $this->register($user_google);
-                // $create = User::Create([
-                //     'email'             => $user_google->getEmail(),
-                //     'name'              => $user_google->getName(),
-                //     'password'          => 0,
-                //     'email_verified_at' => now()
-                // ]);
-
-                // return redirect()->route('login');
             }
         } catch (\Exception $e) {
-            dd($e);
-            // return redirect()->route('login');
+            return redirect()->route('login');
         }
     }
     public function otp(Request $request)
