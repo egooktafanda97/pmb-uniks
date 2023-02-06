@@ -107,57 +107,13 @@
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $item->kegiatan }}</td>
-                                    <td>{{ $item->mulai }}</td>
-                                    <td>{{ $item->selesai }}</td>
+                                    <td>{{ tgl_i(Carbon::parse($item->mulai)->format('Y-m-d')) }}</td>
+                                    <td>{{ !empty($item->selesai) ? tgl_i(Carbon::parse($item->selesai)->format('Y-m-d')) : '' }}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
-            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="input-jadwal"
-                style="display: none;" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <strong>Scheduler</strong>
-                            <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"
-                                type="button"></button>
-                        </div>
-                        <form id="addJawal">
-                            <input name="id" type="hidden">
-                            <div class="modal-body">
-                                <div class="form-group mb-3">
-                                    <label>Kegiatan <span class="in-require">*</span></label>
-                                    <input class="form-control form-control-sm validationTooltip03" name="kegiatan"
-                                        placeholder="nama fakultas" required="" type="text">
-                                    <div class="invalid-tooltip">Input wajib di isi.</div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Mulai <span class="in-require">*</span></label>
-                                    <input class="form-control form-control-sm validationTooltip03" name="mulai"
-                                        placeholder="nama fakultas" required="" type="datetime-local">
-                                    <div class="invalid-tooltip">Input wajib di isi.</div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Selesai <span class="in-require">*</span></label>
-                                    <input class="form-control form-control-sm validationTooltip03" name="selesai"
-                                        placeholder="nama fakultas" required="" type="datetime-local">
-                                    <div class="invalid-tooltip">Input wajib di isi.</div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="form-label" for="inputFirstName">Keterangan</label>
-                                    <textarea class="form-control" id="alamat_lengkap" name="keterangan" placeholder="Alamat lengkap" rows="3"></textarea>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal"
-                                    type="button">Batal</button>
-                                <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>

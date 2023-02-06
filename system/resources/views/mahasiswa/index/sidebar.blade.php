@@ -57,7 +57,7 @@
                 <div class="parent-icon">
                     <i class='fadeIn animated bx bx-info-circle'></i>
                 </div>
-                <div class="menu-title">BIAYA KULIAH</div>
+                <div class="menu-title">PRODI & BIAYA</div>
             </a>
         </li>
         {{-- <li>
