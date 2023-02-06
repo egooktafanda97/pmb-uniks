@@ -309,7 +309,7 @@
                      data-bs-toggle="dropdown" href="#" role="button">
                      <img alt="user avatar" class="user-img" src="{{ asset('assets/logo/logo.png') }}">
                      <div class="user-info ps-3">
-                         <p class="user-name mb-0">{{ auth()->user()->username }}</p>
+                         <p class="user-name mb-0">{{ auth()->user()->nama }}</p>
                          <p class="designattion mb-0">-</p>
                      </div>
                  </a>
