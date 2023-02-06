@@ -170,7 +170,7 @@
                             <div class="media">
                                 <img alt=""
                                     src="{{ asset('assets/prodi/thumbnail/' . ($item->gambar ?? 'default.jpg')) }}"
-                                    style="height: 250px">
+                                    style="height: 200px">
                                 <div class="caption hovered">
                                     <div class="caption-border"></div>
                                     <div class="caption-wrapper div-table">

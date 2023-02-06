@@ -19,13 +19,15 @@
                             <div class="thumbnail no-border no-padding">
                                 <div class="media">
                                     <img alt=""
-                                        src="{{ asset(config('app.site-assets')) }}/assets/img/preview/portfolio/portfolio-x6.jpg">
+                                        src="{{ asset('assets/prodi/thumbnail/' . ($item->gambar ?? 'default.jpg')) }}"
+                                        style="height: 200px">
                                     <div class="caption hovered">
                                         <div class="caption-border"></div>
                                         <div class="caption-wrapper div-table">
                                             <div class="caption-inner div-cell">
                                                 <p class="caption-buttons">
-                                                    <a class="btn caption-link" href="themes-single.html">
+                                                    <a class="btn caption-link"
+                                                        href="{{ url('detail_prodi/' . $item->id) }}">
                                                         Lihat Prodi
                                                     </a>
                                                 </p>
@@ -36,16 +38,17 @@
                                 <div class="caption">
                                     <p class="caption-price"
                                         style="background: #fff;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
-                                        <img alt="" src="{{ asset('assets/logo/logo.png') }}" style="width: 100%">
+                                        <img alt="" src="{{ asset('assets/prodi/logo/' . $item->logo) }}"
+                                            style="width: 100%">
                                     </p>
                                     <h3 class="caption-title"><a href="#">{{ $item->nama_prodi }}</a></h3>
-                                    <p class="caption-text">Terakreditas {{ $item->akreditas }}</p>
+                                    <p class="caption-text">Terakreditasi {{ $item->akreditas }}</p>
                                 </div>
                                 <div class="caption-details">
                                     <div class="row">
                                         <div class="col-xs-12 pcd-shop text-left">
                                             <div style="padding-left: 10px">
-                                                <i class="fa fa-users"></i>-- Mahasiswa
+                                                <i class="fa fa-users"></i>Gelar {{ $item->gelar }}
                                             </div>
                                         </div>
                                     </div>

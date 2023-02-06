@@ -69,7 +69,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ url('admin') }}">
+            <a href="https://uniks.ac.id/">
                 <div class="parent-icon" style="display: flex;justify-content: center;align-items: center">
                     <img alt="" src="{{ asset('assets/logo/logo.png') }}" style="width: 20px">
                 </div>
