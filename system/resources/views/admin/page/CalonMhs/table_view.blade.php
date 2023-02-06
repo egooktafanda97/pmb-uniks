@@ -66,7 +66,7 @@
                     </td>
                     <td class="tb-acton">
                         <a class="btn btn-primary btn-sm radius-30 px-4"
-                            href="{{ url('admin/mhs/getById/' . $items?->pendaftaran?->id ?? null) }}" type="button">
+                            href="{{ url('admin/mhs/getById/' . $items->pendaftaran->id ?? null) }}" type="button">
                             Details
                         </a>
                     </td>
