@@ -89,7 +89,7 @@
         },
         "nama_alias": {
             "name": "nama_alias",
-            "label": "Nama Prodi",
+            "label": "",
             "type": "string",
             "request": true,
             "migration": 1,
@@ -110,7 +110,7 @@
         },
         "jenjang": {
             "name": "jenjang",
-            "label": "Nama Prodi",
+            "label": "",
             "type": "string",
             "request": true,
             "migration": 2,
@@ -131,7 +131,7 @@
         },
         "gelar": {
             "name": "gelar",
-            "label": "Nama Prodi",
+            "label": "",
             "type": "string",
             "request": true,
             "migration": 1,
@@ -150,9 +150,9 @@
             },
             "costum": {}
         },
-        "biaya_kuliah": {
-            "name": "biaya_kuliah",
-            "label": "Nama Prodi",
+        "biaya": {
+            "name": "biaya",
+            "label": "",
             "type": "string",
             "request": true,
             "migration": 1,
