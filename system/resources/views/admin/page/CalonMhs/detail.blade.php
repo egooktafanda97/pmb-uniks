@@ -28,9 +28,8 @@
                     style="max-height: 300px; cursor:pointer" />
                 <div class="card-body">
                     <h5 class="card-title text-primary">{{ $pendaftaran->calon_mahasiswa->nama_lengkap ?? '-' }}</h5>
-                    <strong style="font-size: .8em">No. PENDAFTARAN ONLINE:
-                        <span
-                            class="text-danger">{{ $num_padded = sprintf('%03d', $pendaftaran->no_resister) ?? '-' }}</span></strong>
+                    <strong style="font-size: .8em">No. PENDAFTARAN:
+                        <span class="text-danger">{{ $num_padded = $pendaftaran->no_resister }}</span></strong>
                     <p class="card-text">
                         @php
                             $bg = $pendaftaran->status == 'pending' ? 'bg-warning' : ($pendaftaran->status == 'invalid' ? 'bg-danger' : 'bg-success');
