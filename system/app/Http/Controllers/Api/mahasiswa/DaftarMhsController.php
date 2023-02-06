@@ -110,7 +110,7 @@ class DaftarMhsController extends Controller
         } else {
             $noreg = "on-0001";
         }
-        dd($noreg);
+        dd($getNum);
         // } catch (\Throwable $th) {
         //     $noreg = "on-0001";
         // }
