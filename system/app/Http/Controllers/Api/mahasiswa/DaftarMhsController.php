@@ -94,26 +94,25 @@ class DaftarMhsController extends Controller
                 "error"  => "data not found",
                 "status" => 501,
             ], 501);
-        // try {
-        $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderBy("no_resister")->first();
-        if (!empty($getNum)) {
-            $getNums = explode("-", $getNum);
-            $noRegPad = 1;
-            if (count($getNums) == 2) {
-                $inc = (int) $getNums[1];
-                $counter = $inc + 1;
-                $noRegPad = str_pad($counter, 3, '0', STR_PAD_LEFT);
-                $noreg = "on-" . $noRegPad;
+        try {
+            $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderBy("no_resister")->first();
+            if (!empty($getNum)) {
+                $getNums = explode("-", $getNum->no_resister);
+                $noRegPad = 1;
+                if (count($getNums) == 2) {
+                    $inc = (int) $getNums[1];
+                    $counter = $inc + 1;
+                    $noRegPad = str_pad($counter, 3, '0', STR_PAD_LEFT);
+                    $noreg = "on-" . $noRegPad;
+                } else {
+                    $noreg = "on-0001";
+                }
             } else {
                 $noreg = "on-0001";
             }
-        } else {
+        } catch (\Throwable $th) {
             $noreg = "on-0001";
         }
-        dd($getNum);
-        // } catch (\Throwable $th) {
-        //     $noreg = "on-0001";
-        // }
         $request->merge(["no_resister" =>  $noreg, "informasi_pendaftaran_id" => $info_pendaftaran->id]);
 
         $save =  $resources->generate_data_insert($request);
