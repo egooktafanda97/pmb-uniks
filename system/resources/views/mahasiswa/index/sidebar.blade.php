@@ -52,6 +52,14 @@
                 <div class="menu-title">INFO PENDAFTARAN</div>
             </a>
         </li>
+        <li>
+            <a href="{{ url('mahasiswa/info_prodi') }}">
+                <div class="parent-icon">
+                    <i class='fadeIn animated bx bx-info-circle'></i>
+                </div>
+                <div class="menu-title">BIAYA KULIAH</div>
+            </a>
+        </li>
         {{-- <li>
             <a href="{{ url('admin') }}">
                 <div class="parent-icon">

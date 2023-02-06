@@ -56,4 +56,8 @@ class MhsContoller extends Controller
     {
         return view("mahasiswa.page.FAQ.index");
     }
+    public function info_prodi()
+    {
+        return view("mahasiswa.page.Prodi.index");
+    }
 }

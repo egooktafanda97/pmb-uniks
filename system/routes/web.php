@@ -99,6 +99,7 @@ Route::group([
     Route::get('/upload-bukti', [App\Http\Controllers\mahasiswa\DashboardController::class, 'upload_bukti_pendaftaran']);
     Route::get('/store', [App\Http\Controllers\mahasiswa\MhsContoller::class, 'store']);
     Route::get('/faq', [App\Http\Controllers\mahasiswa\MhsContoller::class, 'faq']);
+    Route::get('/info_prodi', [App\Http\Controllers\mahasiswa\MhsContoller::class, 'info_prodi']);
 });
 
 Route::get('send-email-queue', function () {
