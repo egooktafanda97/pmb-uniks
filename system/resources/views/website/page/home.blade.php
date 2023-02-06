@@ -132,8 +132,8 @@
                     <div class="featured-product-label">PENGUMUMAN</div>
                     <div class="row">
                         <div class="col-md-7">
-                            <a class="featured-product-image" href="#"><img alt=""
-                                    src="{{ asset('assets/' . $pengumuman->poster) }}"></a>
+                            <a class="featured-product-image" href="{{ asset('assets/' . $pengumuman->poster) }}"><img
+                                    alt="" src="{{ asset('assets/' . $pengumuman->poster) }}"></a>
                         </div>
                         <div class="col-md-5">
                             <div class="overflowed">
