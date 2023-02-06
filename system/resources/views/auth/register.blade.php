@@ -220,7 +220,7 @@
                         response: (res) => {
                             if (res?.data?.result) {
                                 const _sc = `{{ $otp ?? '' }}`;
-                                const build_sc = __sc != "" ? `{{ url('auth/verify') }}/${_sc}` :
+                                const build_sc = __sc != "" ? `{{ url('auth/verify') }}/${res?.data?.result}` :
                                     `{{ url('auth/verify?s=') }}${res?.data?.result}`;
                                 window.location.href = build_sc;
                             }

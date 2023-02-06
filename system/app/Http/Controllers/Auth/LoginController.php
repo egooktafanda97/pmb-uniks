@@ -60,14 +60,13 @@ class LoginController extends Controller
             return redirect($this->redirectPath());
         }
     }
-    protected function register($google = null, $otp = null)
+    protected function register($google = null)
     {
         $data = [];
-        if (!empty($google) && $google != null && $otp != null) {
+        if (!empty($google) && $google != null) {
             $data = [
                 "nama" =>  $google->getName(),
                 "email" =>  $google->getEmail(),
-                "otp" => Crypt::encrypt($otp)
             ];
         }
         return view("auth.register", $data);
@@ -130,12 +129,7 @@ class LoginController extends Controller
                     $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
                     $cek = \App\Models\Verify::where("key_reference", $kode)->first();
                 } while (!empty($cek));
-                $created_otp = \App\Models\Verify::create([
-                    "user_id" => $user->id,
-                    "key_reference" => $kode,
-                    "key_for" => "verifikai"
-                ]);
-                return $this->register($user_google, $kode);
+                return $this->register($user_google);
                 // $create = User::Create([
                 //     'email'             => $user_google->getEmail(),
                 //     'name'              => $user_google->getName(),

@@ -197,7 +197,21 @@ class DaftarMhsController extends Controller
                 $getUs->email_verified_at =  now();
                 $getUs->save();
 
-                return response()->json(true, 200);
+                $kode = "";
+                do {
+                    $digits = 4;
+                    $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+                    $cek = \App\Models\Verify::where("key_reference", $kode)->first();
+                } while (!empty($cek));
+                \App\Models\Verify::create([
+                    "user_id" => $getUs->id,
+                    "key_reference" => $kode,
+                    "key_for" => "verifikai"
+                ]);
+
+                return response()->json([
+                    "result" => Crypt::encrypt($kode)
+                ], 200);
             } else {
                 return response()->json($save, 401);
             }
