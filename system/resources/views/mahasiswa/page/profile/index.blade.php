@@ -57,7 +57,7 @@
                     style="cursor:pointer" />
                 <div class="card-body">
                     <h5 class="card-title text-primary">{{ $pendaftaran->calon_mahasiswa->nama_lengkap ?? '-' }}</h5>
-                    <strong>KODE PENDAFTARAN: <span class="text-danger">{{ $pendaftaran->no_resister }}</span></strong>
+                    <strong>No. PENDAFATARAN: <span class="text-danger">{{ $pendaftaran->no_resister }}</span></strong>
                     <p class="card-text">
                         @php
                             if ($pendaftaran->status == 'pending') {

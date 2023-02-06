@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <!--favicon-->
-    <link href="{{ asset('public/admin/rocker/vertical') }}/assets/images/favicon-32x32.png" rel="icon"
-        type="image/png" />
+    <link href="{{ asset('assets/logo/logo.ico') }}" rel="shortcut icon" rel="apple-touch-icon-precomposed" sizes="144x144">
     <!--plugins-->
     <link href="{{ asset('public/admin/rocker/vertical') }}/assets/plugins/simplebar/css/simplebar.css"
         rel="stylesheet" />
