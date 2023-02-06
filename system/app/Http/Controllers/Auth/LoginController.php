@@ -188,43 +188,43 @@ class LoginController extends Controller
     }
     public function resending_email(Request $request)
     {
-        // try {
-        $req = $request->email;
-        $user = User::where("email", $request->oldEmail)->first();
-        $validator = Validator::make($request->all(), [
-            'email' =>  'unique:users,email,' . $user->id
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-        $user->email = $req;
-        $up = $user->save();
-
-        if (empty($user->verify)) {
-            $kode = "";
-            do {
-                $digits = 4;
-                $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
-                $cek = \App\Models\Verify::where("key_reference", $kode)->first();
-            } while (!empty($cek));
-            $created_otp = \App\Models\Verify::create([
-                "user_id" => $user->id,
-                "key_reference" => $kode,
-                "key_for" => "verifikai"
+        try {
+            $req = $request->email;
+            $user = User::where("email", $request->oldEmail)->first();
+            $validator = Validator::make($request->all(), [
+                'email' =>  'unique:users,email,' . $user->id
             ]);
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+            $user->email = $req;
+            $up = $user->save();
+
+            if (empty($user->verify)) {
+                $kode = "";
+                do {
+                    $digits = 4;
+                    $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+                    $cek = \App\Models\Verify::where("key_reference", $kode)->first();
+                } while (!empty($cek));
+                $created_otp = \App\Models\Verify::create([
+                    "user_id" => $user->id,
+                    "key_reference" => $kode,
+                    "key_for" => "verifikai"
+                ]);
+            }
+            if ($up) {
+                $details = [
+                    "email" => $user->email,
+                    "nama" => $user->nama,
+                    "kode" => $user->verify->key_reference ?? $kode
+                ];
+                dispatch(new \App\Jobs\SendEmailVerify($details));
+            }
+            return response()->json(true, 200);
+        } catch (\Throwable $th) {
+            return response()->json(["error" => "server error, try again!"], 401);
         }
-        if ($up) {
-            $details = [
-                "email" => $user->email,
-                "nama" => $user->nama,
-                "kode" => $user->verify->key_reference ?? $kode
-            ];
-            dispatch(new \App\Jobs\SendEmailVerify($details));
-        }
-        return response()->json(true, 200);
-        // } catch (\Throwable $th) {
-        //     return response()->json(["error" => "server error, try again!"], 401);
-        // }
     }
     public function reset_password()
     {

@@ -75,89 +75,78 @@ class DaftarMhsController extends Controller
             return response()->json(["error" => $th->getMessage()], 401);
         }
     }
+
     public function api_register(Request $request)
     {
-        $resources = new ManagementCrud(str_replace('Controller', '', "PendaftaranController"));
-        $pathJson =  ManagementServiceProvider::getScemaPath();
-        $resources->instance($pathJson);
-        $resources->setNameSpaceModel("\Modules\V1\Entities\\");
-
-        if (empty($resources))
-            return response()->json([
-                "error"  => "data not found",
-                "status" => 501,
-            ], 501);
-        $info_pendaftaran = \Modules\V1\Entities\InformasiPendaftaran::whereStatus('active')->first();
-
-        if (empty($info_pendaftaran))
-            return response()->json([
-                "error"  => "data not found",
-                "status" => 501,
-            ], 501);
         try {
-            $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderby('created_at', 'desc')->first();
-            if (!empty($getNum)) {
-                $getNums = explode("-", $getNum->no_resister);
-                $noRegPad = 1;
-                if (count($getNums) == 2) {
-                    $inc = (int) $getNums[1];
-                    $counter = $inc + 1;
-                    $noRegPad = str_pad($counter, 4, '0', STR_PAD_LEFT);
-                    $noreg = "on-" . $noRegPad;
-                } else {
-                    $noreg = "on-0001";
-                }
-            } else {
-                $noreg = "on-0001";
-            }
-        } catch (\Throwable $th) {
-            $noreg = "on-0001";
-        }
-        $request->merge(["no_resister" =>  $noreg, "informasi_pendaftaran_id" => $info_pendaftaran->id]);
+            $resources = new ManagementCrud(str_replace('Controller', '', "PendaftaranController"));
+            $pathJson =  ManagementServiceProvider::getScemaPath();
+            $resources->instance($pathJson);
+            $resources->setNameSpaceModel("\Modules\V1\Entities\\");
 
-        $save =  $resources->generate_data_insert($request);
+            if (empty($resources))
+                return response()->json([
+                    "error"  => "data not found",
+                    "status" => 501,
+                ], 501);
+            $info_pendaftaran = \Modules\V1\Entities\InformasiPendaftaran::whereStatus('active')->first();
 
-        if (!empty($save['status']) && $save['status'] == 200) {
-            /*
+            if (empty($info_pendaftaran))
+                return response()->json([
+                    "error"  => "data not found",
+                    "status" => 501,
+                ], 501);
+
+            $request->merge(["informasi_pendaftaran_id" => $info_pendaftaran->id]);
+
+            $save =  $resources->generate_data_insert($request);
+
+            if (!empty($save['status']) && $save['status'] == 200) {
+                /*
             | AKTIFKAN JIKA AKAN MEMBUAT ROLE PADA USER
             */
-            $this->create_role_users($save, 'mahasiswa');
-            /*
+                $this->create_role_users($save, 'mahasiswa');
+                /*
             | end
             */
-            $getUs = User::find($save['data']['user_id']);
-            $getUs->nama = $request->nama;
-            $getUs->foto = "default.jpg";
+                $getUs = User::find($save['data']['user_id']);
+                $getUs->nama = $request->nama;
+                $getUs->foto = "default.jpg";
 
-            $getUs->save();
+                $getUs->save();
 
-            $getUs = User::find($save['data']['user_id']);
-            $kode = "";
-            do {
-                $digits = 4;
-                $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
-                $cek = \App\Models\Verify::where("key_reference", $kode)->first();
-            } while (!empty($cek));
+                $getUs = User::find($save['data']['user_id']);
+                $kode = "";
+                do {
+                    $digits = 4;
+                    $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+                    $cek = \App\Models\Verify::where("key_reference", $kode)->first();
+                } while (!empty($cek));
 
-            $created_otp = \App\Models\Verify::create([
-                "user_id" => $getUs->id,
-                "key_reference" => $kode,
-                "key_for" => "verifikai"
-            ]);
+                $created_otp = \App\Models\Verify::create([
+                    "user_id" => $getUs->id,
+                    "key_reference" => $kode,
+                    "key_for" => "verifikai"
+                ]);
 
-            $details = [
-                "email" => $getUs->email,
-                "nama" => $getUs->nama,
-                "kode" => $created_otp->key_reference
-            ];
-            dispatch(new \App\Jobs\SendEmailVerify($details));
-            $enc = Crypt::encrypt($getUs->email);
+                $details = [
+                    "email" => $getUs->email,
+                    "nama" => $getUs->nama,
+                    "kode" => $created_otp->key_reference
+                ];
+                dispatch(new \App\Jobs\SendEmailVerify($details));
+                $enc = Crypt::encrypt($getUs->email);
 
-            return response()->json([
-                "result"  => $enc
-            ], 200);
-        } else {
-            return response()->json($save, 401);
+                return response()->json([
+                    "result"  => $enc
+                ], 200);
+            } else {
+                return response()->json($save, 401);
+            }
+        } catch (\Throwable $th) {
+            $getUs = User::whereEmail($request->email)->first();
+            $getUs->delete();
+            return response()->json([], 401);
         }
     }
     public function api_register_valids(Request $request)
@@ -180,26 +169,8 @@ class DaftarMhsController extends Controller
                     "error"  => "data not found",
                     "status" => 501,
                 ], 501);
-            try {
-                $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderby('created_at', 'desc')->first();
-                if (!empty($getNum)) {
-                    $getNums = explode("-", $getNum->no_resister);
-                    $noRegPad = 1;
-                    if (count($getNums) == 2) {
-                        $inc = (int) $getNums[1];
-                        $counter = $inc + 1;
-                        $noRegPad = str_pad($counter, 4, '0', STR_PAD_LEFT);
-                        $noreg = "on-" . $noRegPad;
-                    } else {
-                        $noreg = "on-0001";
-                    }
-                } else {
-                    $noreg = "on-0001";
-                }
-            } catch (\Throwable $th) {
-                $noreg = "on-0001";
-            }
-            $request->merge(["no_resister" =>  $noreg, "informasi_pendaftaran_id" => $info_pendaftaran->id]);
+
+            $request->merge(["informasi_pendaftaran_id" => $info_pendaftaran->id]);
 
             $save =  $resources->generate_data_insert($request);
 

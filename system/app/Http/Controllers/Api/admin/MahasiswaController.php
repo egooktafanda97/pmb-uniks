@@ -12,13 +12,43 @@ class MahasiswaController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['']]);
     }
+    public function createdNoUjian($id)
+    {
+        try {
+            $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $id)->where("status", "!=", "pending")->orderby('created_at', 'desc')->first();
+            if (!empty($getNum)) {
+                $getNums = explode("-", $getNum->no_resister);
+                $noRegPad = 1;
+                if (count($getNums) == 2) {
+                    $inc = (int) $getNums[1];
+                    $counter = $inc + 1;
+                    $noRegPad = str_pad($counter, 4, '0', STR_PAD_LEFT);
+                    $noreg = "on-" . $noRegPad;
+                } else {
+                    $noreg = "on-0001";
+                }
+            } else {
+                $noreg = "on-0001";
+            }
+        } catch (\Throwable $th) {
+            $noreg = "on-0001";
+        }
+        return $noreg;
+    }
     public function verifikasi_pendaftaran(Request $request, $id)
     {
         try {
             $upMhs = \Modules\V1\Entities\Pendaftaran::find($id);
+
             $upMhs->status = $request->status;
-            $message = $request->message;
+
+            // add no ujian ==============
+            $noUjian = $this->createdNoUjian($upMhs->informasi_pendaftaran_id);
+            $upMhs->no_resister =  $noUjian;
+            // ===========================
+
             $upMhs->save();
+            $message = $request->message;
             $msg = $request->msg;
             if ($message)
                 $msg .= '<br> <strong>' . $message . '</strong>';

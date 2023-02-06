@@ -43,7 +43,7 @@
             "type": "string",
             "request": true,
             "migration": 2,
-            "validate": 2,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
