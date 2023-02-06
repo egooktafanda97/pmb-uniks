@@ -28,7 +28,7 @@
                                     <td scope="col">{{ $item->nama_prodi ?? '' }}</td>
                                     <td scope="col">{{ $item->akreditas ?? '' }}</td>
                                     <td scope="col">{{ $item->gelar ?? '' }}</td>
-                                    <td scope="col">{{ $item->biaya ?? '' }}</td>
+                                    <td scope="col">{{ \App\Helpers\Helpers::convert_to_rupiah($item->biaya ?? 0) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
