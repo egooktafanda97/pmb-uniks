@@ -129,6 +129,48 @@
             },
             "costum": {}
         },
+        "gelar": {
+            "name": "gelar",
+            "label": "Nama Prodi",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "biaya_kuliah": {
+            "name": "biaya_kuliah",
+            "label": "Nama Prodi",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
         "akreditas": {
             "name": "akreditas",
             "label": "Nama Prodi",
@@ -277,7 +319,27 @@
         },
         "gambar": {
             "type": "image",
-            "path": "images/prodi",
+            "path": "images/prodi/thumbnail",
+            "request": true,
+            "migration": 3,
+            "validate": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "time"
+            },
+            "costum": {}
+        },
+        "logo": {
+            "type": "image",
+            "path": "images/prodi/logo",
             "request": true,
             "migration": 3,
             "validate": 1,
