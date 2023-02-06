@@ -102,7 +102,7 @@ class DaftarMhsController extends Controller
                 if (count($getNums) == 2) {
                     $inc = (int) $getNums[1];
                     $counter = $inc + 1;
-                    $noRegPad = str_pad($counter, 3, '0', STR_PAD_LEFT);
+                    $noRegPad = str_pad($counter, 4, '0', STR_PAD_LEFT);
                     $noreg = "on-" . $noRegPad;
                 } else {
                     $noreg = "on-0001";
