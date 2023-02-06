@@ -58,7 +58,7 @@ class MhsContoller extends Controller
     }
     public function info_prodi()
     {
-        $prodi = \Modules\V1\Entities\Prodi::orderBy("id", "desc")->with("fakultas")->select(["*", "prodi.biaya_kuliah as biaya"])->get();
+        $prodi = \Modules\V1\Entities\Prodi::orderBy("id", "desc")->with("fakultas")->get();
         $data["prod"] = $prodi;
         return view("mahasiswa.page.Prodi.index", $data);
     }
