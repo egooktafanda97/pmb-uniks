@@ -10,7 +10,7 @@
 
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html">
+                <a href="{{ url('') }}">
                     <img alt="uniks" id="logo-header" src="{{ asset('assets/logo/logo-header.png') }}" />
                 </a>
             </div>
