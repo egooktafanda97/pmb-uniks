@@ -118,6 +118,7 @@ class DaftarMhsController extends Controller
             $getUs = User::find($save['data']['user_id']);
             $getUs->nama = $request->nama;
             $getUs->foto = "default.jpg";
+
             $getUs->save();
 
             $getUs = User::find($save['data']['user_id']);
@@ -147,6 +148,61 @@ class DaftarMhsController extends Controller
             ], 200);
         } else {
             return response()->json($save, 401);
+        }
+    }
+    public function api_register_valids(Request $request)
+    {
+        try {
+            $resources = new ManagementCrud(str_replace('Controller', '', "PendaftaranController"));
+            $pathJson =  ManagementServiceProvider::getScemaPath();
+            $resources->instance($pathJson);
+            $resources->setNameSpaceModel("\Modules\V1\Entities\\");
+
+            if (empty($resources))
+                return response()->json([
+                    "error"  => "data not found",
+                    "status" => 501,
+                ], 501);
+            $info_pendaftaran = \Modules\V1\Entities\InformasiPendaftaran::whereStatus('active')->first();
+
+            if (empty($info_pendaftaran))
+                return response()->json([
+                    "error"  => "data not found",
+                    "status" => 501,
+                ], 501);
+            try {
+                $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderBy("no_resister")->first();
+                $noreg = 1;
+                if (!empty($getNum)) {
+                    $noreg = (int) $getNum->no_resister + 1;
+                }
+            } catch (\Throwable $th) {
+                $noreg = 1;
+            }
+            $request->merge(["no_resister" =>  $noreg, "informasi_pendaftaran_id" => $info_pendaftaran->id]);
+
+            $save =  $resources->generate_data_insert($request);
+
+            if (!empty($save['status']) && $save['status'] == 200) {
+                /*
+            | AKTIFKAN JIKA AKAN MEMBUAT ROLE PADA USER
+            */
+                $this->create_role_users($save, 'mahasiswa');
+                /*
+            | end
+            */
+                $getUs = User::find($save['data']['user_id']);
+                $getUs->nama = $request->nama;
+                $getUs->foto = "default.jpg";
+                $getUs->email_verified_at =  now();
+                $getUs->save();
+
+                return response()->json(true, 200);
+            } else {
+                return response()->json($save, 401);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(false, 501);
         }
     }
     public function ortu($request, $ortu_id = null)

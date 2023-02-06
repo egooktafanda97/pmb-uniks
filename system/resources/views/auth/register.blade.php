@@ -45,30 +45,34 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="border p-4 rounded">
-                                    <div class="text-center">
-                                        <p>Apakah Sudah Punya Akun? <a href="{{ url('login') }}">Login
-                                                Sekarang!</a>
-                                        </p>
-                                    </div>
-                                    <div class="d-grid">
-                                        <a class="btn my-4 shadow-sm btn-white" href="{{ url('/auth/redirect') }}">
-                                            <span class="d-flex justify-content-center align-items-center">
-                                                <img alt="Image Description" class="me-2"
-                                                    src="{{ asset(config('app.adm-assets')) }}/assets/images/icons/search.svg"
-                                                    width="16">
-                                                <span>Daftar Melalui Google</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="login-separater text-center mb-4"> <span>OR SIGN UP WITH EMAIL</span>
-                                        <hr />
-                                    </div>
+                                    @if (empty($email))
+                                        <div class="text-center">
+                                            <p>Apakah Sudah Punya Akun? <a href="{{ url('login') }}">Login
+                                                    Sekarang!</a>
+                                            </p>
+                                        </div>
+                                        <div class="d-grid">
+                                            <a class="btn my-4 shadow-sm btn-white" href="{{ url('/auth/redirect') }}">
+                                                <span class="d-flex justify-content-center align-items-center">
+                                                    <img alt="Image Description" class="me-2"
+                                                        src="{{ asset(config('app.adm-assets')) }}/assets/images/icons/search.svg"
+                                                        width="16">
+                                                    <span>Daftar Melalui Google</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div class="login-separater text-center mb-4"> <span>OR SIGN UP WITH
+                                                EMAIL</span>
+                                            <hr />
+                                        </div>
+                                    @endif
+
                                     <div class="form-body">
                                         <form class="row g-3" id="formRegSub">
                                             <div class="col-sm-6">
                                                 <label class="form-label" for="inputFirstName">Nik</label>
                                                 <input class="form-control"
-                                                    id="inputFirstName"onKeyPress="if(this.value.length==16) return false;"
+                                                    id="nik"onKeyPress="if(this.value.length==16) return false;"
                                                     name="nik" placeholder="16 digit nik" required type="number">
                                             </div>
                                             @if (!empty($email))
@@ -153,7 +157,11 @@
         <script src="{{ asset('public/node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
         <script src="{{ asset('public/js/site.js') }}"></script>
         <!--Password show & hide js -->
+        @php
+            $urls = empty($email) ? url('api/register') : url('api/register_valids');
+        @endphp
         <script>
+            $("#nik").focus();
             $(document).ready(function() {
                 $("#show_hide_password a").on('click', function(event) {
                     event.preventDefault();
@@ -180,7 +188,7 @@
 
                     const http_configure = {
                         data: data,
-                        url: `{{ url('api/register') }}`,
+                        url: `{{ $urls }}`,
                         errors: (error) => {
                             $(".btn-loader").removeClass("btn-loader--loading")
                             const {
@@ -211,7 +219,10 @@
                         },
                         response: (res) => {
                             if (res?.data?.result) {
-                                window.location.href = `{{ url('auth/verify?s=') }}${res?.data?.result}`
+                                const _sc = `{{ $otp ?? '' }}`;
+                                const build_sc = __sc != "" ? `{{ url('auth/verify') }}/${_sc}` :
+                                    `{{ url('auth/verify?s=') }}${res?.data?.result}`;
+                                window.location.href = build_sc;
                             }
                         }
                     }

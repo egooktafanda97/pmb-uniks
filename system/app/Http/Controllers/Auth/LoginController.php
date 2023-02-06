@@ -60,13 +60,14 @@ class LoginController extends Controller
             return redirect($this->redirectPath());
         }
     }
-    protected function register($google = null)
+    protected function register($google = null, $otp = null)
     {
         $data = [];
-        if (!empty($google) && $google != null) {
+        if (!empty($google) && $google != null && $otp != null) {
             $data = [
                 "nama" =>  $google->getName(),
-                "email" =>  $google->getEmail()
+                "email" =>  $google->getEmail(),
+                "otp" => Crypt::encrypt($otp)
             ];
         }
         return view("auth.register", $data);
@@ -124,7 +125,17 @@ class LoginController extends Controller
                     return redirect('/mahasiswa/profile');
                 }
             } else {
-                return $this->register($user_google);
+                do {
+                    $digits = 4;
+                    $kode = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+                    $cek = \App\Models\Verify::where("key_reference", $kode)->first();
+                } while (!empty($cek));
+                $created_otp = \App\Models\Verify::create([
+                    "user_id" => $user->id,
+                    "key_reference" => $kode,
+                    "key_for" => "verifikai"
+                ]);
+                return $this->register($user_google, $kode);
                 // $create = User::Create([
                 //     'email'             => $user_google->getEmail(),
                 //     'name'              => $user_google->getName(),

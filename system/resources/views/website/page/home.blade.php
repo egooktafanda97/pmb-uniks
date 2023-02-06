@@ -191,7 +191,7 @@
                                         style="width: 100%">
                                 </p>
                                 <h3 class="caption-title"><a href="#">{{ $item->nama_prodi }}</a></h3>
-                                <p class="caption-text">Terakreditas {{ $item->akreditas }}</p>
+                                <p class="caption-text">Terakreditasi {{ $item->akreditas }}</p>
                             </div>
                             <div class="caption-details">
                                 <div class="row">
