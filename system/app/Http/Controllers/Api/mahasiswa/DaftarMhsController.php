@@ -34,7 +34,7 @@ class DaftarMhsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['api_register']]);
+        $this->middleware('auth:api', ['except' => ['api_register', 'api_register_valids']]);
     }
     public function getById($id = null)
     {
