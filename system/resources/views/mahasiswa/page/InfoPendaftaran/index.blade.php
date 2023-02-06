@@ -11,7 +11,9 @@
                         $url = !empty($queryes->brosur) ? $queryes->brosur : false;
                     @endphp
                     @if ($url)
-                        <img alt="" src="{{ asset('assets/' . $queryes->brosur) }}" width="100%">
+                        <a href="{{ asset('assets/' . $queryes->brosur) }}">
+                            <img alt="" src="{{ asset('assets/' . $queryes->brosur) }}" width="100%">
+                        </a>
                     @endif
 
                 </div>
@@ -93,27 +95,29 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table mb-0">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Kegiatan</th>
-                                <th scope="col">Mulai</th>
-                                <th scope="col">Selesai</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($queryes->jadwal as $item)
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
                                 <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $item->kegiatan }}</td>
-                                    <td>{{ tgl_i(Carbon::parse($item->mulai)->format('Y-m-d')) }}</td>
-                                    <td>{{ !empty($item->selesai) ? tgl_i(Carbon::parse($item->selesai)->format('Y-m-d')) : '' }}
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Kegiatan</th>
+                                    <th scope="col">Mulai</th>
+                                    <th scope="col">Selesai</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($queryes->jadwal as $item)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $item->kegiatan }}</td>
+                                        <td>{{ tgl_i(Carbon::parse($item->mulai)->format('Y-m-d')) }}</td>
+                                        <td>{{ !empty($item->selesai) ? tgl_i(Carbon::parse($item->selesai)->format('Y-m-d')) : '' }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
