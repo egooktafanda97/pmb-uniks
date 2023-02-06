@@ -182,12 +182,22 @@ class DaftarMhsController extends Controller
                 ], 501);
             try {
                 $getNum = \Modules\V1\Entities\Pendaftaran::where("informasi_pendaftaran_id", $info_pendaftaran->id)->orderBy("no_resister")->first();
-                $noreg = 1;
                 if (!empty($getNum)) {
-                    $noreg = (int) $getNum->no_resister + 1;
+                    $getNums = explode("-", $getNum);
+                    $noRegPad = 1;
+                    if (count($getNums) == 2) {
+                        $inc = (int) $getNums[1];
+                        $counter = $inc + 1;
+                        $noRegPad = str_pad($counter, 3, '0', STR_PAD_LEFT);
+                        $noreg = "on-" . $noRegPad;
+                    } else {
+                        $noreg = "on-0001";
+                    }
+                } else {
+                    $noreg = "on-0001";
                 }
             } catch (\Throwable $th) {
-                $noreg = 1;
+                $noreg = "on-0001";
             }
             $request->merge(["no_resister" =>  $noreg, "informasi_pendaftaran_id" => $info_pendaftaran->id]);
 
