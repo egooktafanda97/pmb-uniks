@@ -62,14 +62,18 @@ class LoginController extends Controller
     }
     protected function register($google = null)
     {
-        $data = [];
-        if (!empty($google) && $google != null) {
-            $data = [
-                "nama" =>  $google->getName(),
-                "email" =>  $google->getEmail(),
-            ];
+        try {
+            $data = [];
+            if (!empty($google) && $google != null) {
+                $data = [
+                    "nama" =>  $google->getName(),
+                    "email" =>  $google->getEmail(),
+                ];
+            }
+            return view("auth.register", $data);
+        } catch (\Throwable $th) {
+            return view("auth.register");
         }
-        return view("auth.register", $data);
     }
 
     public function logout(Request $request)
