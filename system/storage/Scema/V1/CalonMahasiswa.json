@@ -37,17 +37,13 @@
                 }
             }
         },
-        "nik": {
-            "name": "nik",
-            "label": "NIK",
+        "nama_lengkap": {
+            "name": "nama_lengkap",
+            "label": "Nama Lengkap",
             "type": "string",
             "request": true,
-            "migration": 18,
-            "validate": 15,
-            "validate_unique": {
-                "validate": 15,
-                "index_id": "nik"
-            },
+            "validate": 0,
+            "migration": 1,
             "view": {
                 "table": {
                     "status": true
@@ -83,13 +79,17 @@
             },
             "costum": {}
         },
-        "npwp": {
+        "nik": {
             "name": "nik",
-            "label": "Nama Lengkap",
+            "label": "NIK",
             "type": "string",
             "request": true,
-            "migration": 2,
-            "validate": 6,
+            "migration": 18,
+            "validate": 15,
+            "validate_unique": {
+                "validate": 15,
+                "index_id": "nik"
+            },
             "view": {
                 "table": {
                     "status": true
@@ -104,9 +104,9 @@
             },
             "costum": {}
         },
-        "nama_lengkap": {
-            "name": "nama_lengkap",
-            "label": "Nama Lengkap",
+        "jenis_kelamin": {
+            "name": "jenis_kelamin",
+            "label": "Jenis Kelamin",
             "type": "string",
             "request": true,
             "validate": 0,
@@ -125,8 +125,29 @@
             },
             "costum": {}
         },
-        "jenis_kelamin": {
-            "name": "jenis_kelamin",
+        "status_perkawinan": {
+            "name": "status_perkawinan",
+            "label": "Jenis Kelamin",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 1,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "kewarga_negaraan": {
+            "name": "kewarga_negaraan",
             "label": "Jenis Kelamin",
             "type": "string",
             "request": true,
@@ -230,8 +251,8 @@
             },
             "costum": {}
         },
-        "asal_sekolah": {
-            "name": "asal_sekolah",
+        "jenis_slta": {
+            "name": "jenis_slta",
             "label": "",
             "type": "string",
             "request": true,
@@ -251,13 +272,244 @@
             },
             "costum": {}
         },
-        "tahun_lulus": {
-            "name": "asal_sekolah",
+        "asal_slta": {
+            "name": "asal_slta",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "tahun_ijazah": {
+            "name": "tahun_ijazah",
             "label": "",
             "type": "string",
             "request": true,
             "validate": 0,
             "migration": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "no_ijazah": {
+            "name": "no_ijazah",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "validate": 0,
+            "migration": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "sumber_biaya_kuliah": {
+            "name": "sumber_biaya_kuliah",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 0,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "penghasilan_orangtua": {
+            "name": "penghasilan_orangtua",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "pekerjaan_orangtua": {
+            "name": "pekerjaan_orangtua",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "jalur_pendaftaran": {
+            "name": "jalur_pendafataran",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 1,
+            "validate": 2,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "memiliki_kartu": {
+            "name": "memiliki_kartu",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "kategori_pt": {
+            "name": "kategori_pt",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "pt_sebelumnya": {
+            "name": "pt_sebelumnya",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "ijazah_diperolah": {
+            "name": "ijazah_diperolah",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 6,
+            "view": {
+                "table": {
+                    "status": true
+                },
+                "input": {
+                    "status": true
+                },
+                "update": {
+                    "status": true
+                },
+                "form": "text"
+            },
+            "costum": {}
+        },
+        "jml_sks": {
+            "name": "jml_sks",
+            "label": "",
+            "type": "string",
+            "request": true,
+            "migration": 3,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -363,27 +615,6 @@
             "request": true,
             "migration": 3,
             "validate": 10,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "kode_pos": {
-            "name": "nik",
-            "label": "Nama Lengkap",
-            "type": "string",
-            "request": true,
-            "migration": 12,
-            "validate": 6,
             "view": {
                 "table": {
                     "status": true

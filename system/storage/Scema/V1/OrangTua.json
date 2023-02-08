@@ -125,48 +125,6 @@
             },
             "costum": {}
         },
-        "pekerjaan_ayah": {
-            "name": "no_telepon",
-            "label": "No Telepon",
-            "type": "string",
-            "request": true,
-            "migration": 3,
-            "validate": 6,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "penghasilan_ayah": {
-            "name": "no_telepon",
-            "label": "No Telepon",
-            "type": "string",
-            "request": true,
-            "migration": 3,
-            "validate": 6,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
         "alamat_lengkap_ayah": {
             "name": "alamat_lengkap",
             "label": "Alamat Lengkap",
@@ -252,48 +210,6 @@
             "costum": {}
         },
         "no_telepon_ibu": {
-            "name": "no_telepon",
-            "label": "No Telepon",
-            "type": "string",
-            "request": true,
-            "migration": 3,
-            "validate": 6,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "pekerjaan_ibu": {
-            "name": "no_telepon",
-            "label": "No Telepon",
-            "type": "string",
-            "request": true,
-            "migration": 3,
-            "validate": 6,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "penghasilan_ibu": {
             "name": "no_telepon",
             "label": "No Telepon",
             "type": "string",

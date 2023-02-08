@@ -23,8 +23,8 @@ class Pendaftaran extends Seeder
     {
         $pathJson =  config('generator_crud_config.scema_path');
         $faker = \Faker\Factory::create();
-        $th = ["2020-2021,I", "2022-2023,I", "2022-2023,II", "2023-2024,I", "2023-2024,II"];
-        for ($xx = 0; $xx < 4; $xx++) {
+        $th = ["2023-2024,I", "2023-2024,II"];
+        for ($xx = 0; $xx < count($th); $xx++) {
             /*
             | BUAT DATA PENDAFTARAN
             |
@@ -43,40 +43,12 @@ class Pendaftaran extends Seeder
                 "pendaftaran" => "GELOMBANG " . explode(",", $terpilih)[1],
                 "tahun" => explode("-", explode(",", $terpilih)[0])[0],
                 "tahun_ajaran" => explode(",", $terpilih)[0],
-                "informasi_umum" => "
-                <ul>
-                    <li>Untuk pendaftaran, silakan akses laman berikut:</li>
-                    <li>Isi data dengan lengkap dan benar.</li>
-                    <li>Penulisan email harap tidak diakhiri dengan spasi dan wajib menggunakan email dengan domain <strong>Gmail</strong></li>
-                    <li>Setelah berhasil melakukan pendaftaran, Anda akan menerima email <strong>Konfirmasi Pendaftaran</strong> yang memuat informasi mengenai biaya pembayaran seleksi.</li>
-                </ul>
-                ",
-                "brosur" => "imags/brosur/B0h4i9Q58aiVwB5L1674284271.jpg",
-                "buka" => date("Y-m-d"),
-                "tutup" => "2023-04-02",
-                "biaya_pendaftaran" => '
-                <p>Biaya pendaftaran sebesar <strong><span style="color: rgb(209, 72, 65);">Rp.</span></strong><strong><span style="color: rgb(209, 72, 65);">300.000</span></strong>&nbsp;dapat di trasfer ke rekening sbb</p>
-                <table style="width: 100%;">
-                    <tbody>
-                        <tr>
-                            <td style="width: 5.8751%;">1</td>
-                            <td style="width: 38.7369%;">BNI</td>
-                            <td style="width: 55.3262%;">0000000000000</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 5.8751%;">2</td>
-                            <td style="width: 38.7369%;">BRI</td>
-                            <td style="width: 55.3262%;">0000000000000</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 5.8751%;">3</td>
-                            <td style="width: 38.7369%;">Mandiri</td>
-                            <td style="width: 55.3262%;">0000000000000</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p>Setelah trasfer upload bukti pembayaran ke form yang disediakan</p>
+                'informasi_umum" => "<div><span style="font-weight: bolder;">Syarat Pendaftaran Offline</span></div><ol><li>Fotokopi Ijasah SLTA/Sederajat</li><li>Photo ukuran 2x3 dan 4x6 masing-masing 2 lembar</li><li>Fotokopi KTP 2 lembar</li><li>Fotokopi kartu keluarga 2 lembar</li><li>Mengisi formulir pendaftaran</li><li>Fotokopi KIP/KKS/PKH (Jika ada)</li><li>Membayar uang pendaftaran sebesar Rp.300,000,- ke Bank RiauKepri Syariah (BRKS) dengan nomor rekening 8251122222 an. Universitas Islam Kuantan Singingi&nbsp;</li><li>Map Tulang warna orange 2 buah</li></ol><p><br></p><div><span style="font-weight: bolder;">Biaya Daftar Ulang</span></div><div>(Dibayar setelah lulus seleksi) Dengan rincian:</div><ol><li>Sarana dan Prasarana Rp. 1.700.000</li><li>Kemahasiswaan, Jas Almamater, Buku Panduan Akademik, KTM Rp.300.000</li><li>PKKMB Rp.400.000</li><li>Pendidikan persmester (Sesuai Program Studi).</li></ol>
                 ',
+                "brosur" => "imags/brosur/B0h4i9Q58aiVwB5L1674284271.jpg",
+                "buka" => "2023-02-06",
+                "tutup" => "2023-05-12",
+                "biaya_pendaftaran" => '<p>Biaya pendafataran sebesar <b><u>Rp.300.000</u>,-</b></p><p>Kirm ke Bank RiauKepri Syariah (BRKS)&nbsp;</p><p>No. Rekening : <b><font color="#000000" style="background-color: rgb(255, 255, 0);">8251122222 </font></b>an. Universitas Islam Kuantan Singingi</p>',
                 "kuota" => 10000,
             ]);
             // ---- exekusi

@@ -45,7 +45,6 @@ class Universitas extends Seeder
                 'kepala_fakultas' => "Z",
                 'situs_web' => "http:://testing.com",
                 'nama' => $ky,
-                'username'    => $faker->userName,
                 'email' => $faker->unique()->safeEmail(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             ]);
@@ -81,7 +80,9 @@ class Universitas extends Seeder
                     "nama_prodi" => $p_nama,
                     "nama_alias" => $alias,
                     'jenjang' => "S-1",
-                    'akreditas' => ["A", "B", "C"][array_rand(["A", "B", "C"])],
+                    "gelar" => "S...",
+                    'akreditas' => ["A", "B", "C"][array_rand(["A", "B", "BAIK"])],
+                    "biaya" => "1000000",
                     "latar_belakang" => $faker->realText(500),
                     "visi_misi" => $faker->realText(500),
                     'tujuan' =>  $faker->realText(500),
@@ -89,7 +90,6 @@ class Universitas extends Seeder
                     'kepala_prodi' => "I",
                     'situs_web' => "http:://testing.com",
                     'nama' => $value,
-                    'username'    => $faker->userName,
                     'email' => $faker->unique()->safeEmail(),
                     'password' => 'password' // password
                 ]);

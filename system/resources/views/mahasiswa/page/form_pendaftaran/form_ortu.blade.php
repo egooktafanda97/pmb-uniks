@@ -9,6 +9,31 @@
                 </div>
                 <hr>
                 <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label" for="inputFirstName">PEKERJAAN ORANTUA</label>
+                        @php
+                            $pekerjaan = ['Peg. Negeri', 'Peg. BUMN', 'Peg. Swasta', 'Wiraswasta', 'ABRI', 'PETANI', 'PEDAGANG', 'Pensiunan'];
+                        @endphp
+                        <select class="form-select form-select-md mb-3" name="pekerjaan_orangtua">
+                            <option value="">Pekerjaan Orangtua</option>
+                            @foreach ($pekerjaan as $item)
+                                <option value="{{ $item }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="inputFirstName">PENGHASILAN ORANGTUA / BULAN</label>
+                        <select class="form-select form-select-md mb-3" name="penghasilan_orangtua">
+                            <option value="">Tidak Ada Penghasilan</option>
+                            <option value="< 3000000">
+                                < {{ \App\Helpers\Helpers::convert_to_rupiah(3000000) }}</option>
+                            <option value="3000000 - 6000000">
+                                {{ \App\Helpers\Helpers::convert_to_rupiah(3000000) }} -
+                                {{ \App\Helpers\Helpers::convert_to_rupiah(6000000) }}</option>
+                            <option value="> 6000000">
+                                > {{ \App\Helpers\Helpers::convert_to_rupiah(6000000) }}</option>
+                        </select>
+                    </div>
                     <div class="col-12">
                         <div class="form-group">
                             <br>
@@ -36,29 +61,6 @@
                         <label class="form-label" for="inputFirstName">NOMOR HANDPHONE (WA)</label>
                         <input class="form-control" maxlength="16" name="no_telepon_ayah" placeholder="" type="text"
                             value="">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">PEKERJAAN</label>
-                        <input class="form-control" name="pekerjaan_ayah" placeholder="pekerjaan ayah" type="text">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">PENGHASILAN / BULAN</label>
-                        <select class="form-select form-select-md mb-3" name="penghasilan_ayah">
-                            <option value="">Tidak Ada Penghasilan</option>
-                            <option value="">
-                                < {{ \App\Helpers\Helpers::convert_to_rupiah(500000) }}</option>
-                            <option value="< 1000000">
-                                < {{ \App\Helpers\Helpers::convert_to_rupiah(1000000) }}</option>
-                            <option value="< 1500000">
-                                < {{ \App\Helpers\Helpers::convert_to_rupiah(1500000) }}</option>
-                            <option value="< 2000000">
-                                < {{ \App\Helpers\Helpers::convert_to_rupiah(2000000) }}</option>
-                            <option value="< 3000000">
-                                < Rp. 3000,000</option>
-                            <option value="> 3000000"> > {{ \App\Helpers\Helpers::convert_to_rupiah(3000000) }}
-                            </option>
-                        </select>
-
                     </div>
                     <div class="col-md-12">
                         <label class="form-label" for="inputFirstName">ALAMAT LENGKAP</label>
@@ -94,29 +96,8 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="inputFirstName">NOMOR HANDPHONE (WA) </label>
-                        <input class="form-control" maxlength="16" name="no_telepon_ibu" placeholder=""
-                            type="text" value="">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">PEKERJAAN</label>
-                        <input class="form-control" name="pekerjaan_ibu" placeholder="pekerjaan ibu" type="text">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="inputFirstName">PENGHASILAN / BULAN</label>
-                        <select class="form-select form-select-md mb-3" name="penghasilan_ibu">
-                            <option value="">Tidak Ada Penghasilan</option>
-                            <option value="">
-                                < Rp. 500,000</option>
-                            <option value="< 1000000">
-                                < Rp. 1000,000</option>
-                            <option value="< 1500000">
-                                < Rp. 1500,000</option>
-                            <option value="< 2000000">
-                                < Rp. 2000,000</option>
-                            <option value="< 3000000">
-                                < Rp. 3000,000</option>
-                            <option value="> 30000000"> > Rp. 3000,000</option>
-                        </select>
+                        <input class="form-control" maxlength="16" name="no_telepon_ibu"
+                            placeholder="+628 (jika ada)" type="text" value="">
                     </div>
                     <div class="col-md-12">
                         <label class="form-label" for="inputFirstName">ALAMAT LENGKAP</label>

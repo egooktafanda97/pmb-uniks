@@ -1,10 +1,77 @@
+<style>
+    .form_alih_jenjang {
+        display: none;
+    }
+
+    .form_kip {
+        display: none;
+    }
+</style>
 <div class="row id-hide" id="card-prodi">
     <div class="col col-lg-9 mx-auto">
         <div class="card">
             <div class="card-header bg-primary text-white">
-                PILIH PROGRA STUDI <span class="in-require">*</span>
+                FORM PENDAFATRAN <span class="in-require">*</span>
             </div>
             <div class="card-body">
+                <div class="mb-2">
+                    <div style="display: flex;justify-content: space-between">
+                        <label for="">JALUR PENDAFATARAN</label>
+                        <span data-bs-target="#exampleModal" data-bs-toggle="modal">
+                            <i class="fa fa-question-circle"></i>
+                        </span>
+                    </div>
+                    <select aria-label="" class="form-select jalur-select" id="jalur_pendaftaran"
+                        name="jalur_pendaftaran">
+                        <option selected value="">Pilih Jalur Pendafataran</option>
+                        <option value="regular">Regular</option>
+                        <option value="alih_jenjang">Alih Jenjang</option>
+                        <option value="transfer">Transfer</option>
+                        <option value="kipk">KIPK</option>
+                    </select>
+                </div>
+                <div class="form_kip">
+                    <div class="mb-2">
+                        <label for="">KARTU YANG DIMILIKI (opsional)</label>
+                        <select aria-label="" class="form-select jalur-select" id="memiliki_kartu"
+                            name="memiliki_kartu">
+                            <option selected value="">Pilih Kartu</option>
+                            <option value="kipk">KIPK</option>
+                            <option value="pkh">PKH</option>
+                            <option value="kks">KKS</option>
+                            <option value="kis">KIS</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form_alih_jenjang">
+                    <div class="mb-2">
+                        <label class="form-label" for="inputFirstName">NAMA PERGURUSN TINGGI</label>
+                        <input class="form-control" name="pt_sebelumnya" placeholder="nama perguruan tinggi sebelumnya"
+                            type="text" value="">
+                    </div>
+                    <div class="mb-2">
+                        <label for="">KATEGORI PERGURUAN TINGGI</label>
+                        <select aria-label="" class="form-select jalur-select" id="kategori_pt" name="kategori_pt">
+                            <option selected value="">Pilih PTN / PTS</option>
+                            <option value="ptn">PTN</option>
+                            <option value="pts">PTS</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="inputFirstName">JENIS IJAZAH DIPEROLEH</label>
+                        <select aria-label="" class="form-select jalur-select" id="ijazah_diperolah"
+                            name="ijazah_diperolah">
+                            <option selected value="">Pilih Jenis Ijazah</option>
+                            <option value="Tidak Ada">Tidak Ada</option>
+                            <option value="Diploma">Diploma</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="inputFirstName">JUMLAH SKS</label>
+                        <input class="form-control" name="jml_sks" placeholder="100" type="number" value="">
+                    </div>
+                </div>
+                <hr>
                 @php
                     $p1 = '';
                     $p2 = '';
@@ -205,6 +272,38 @@
                         Next <i class="fa fa-long-arrow-right"></i>
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+    style="display: none;" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Bantuan</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <p>Keteranagan jalur pendafataran:</p>
+
+                <ol>
+                    <li>Regular&nbsp;<br />
+                        yaitu jalur pendafataran seperti pada umum nya dan tidak ada penambahan syarat.</li>
+                    <li>Alih jenjang&nbsp;<br />
+                        yaitu bagi mahasiswa yang akan alih jenjang dari D1,D2,D3,D4 ke S1 dengan syarat ijazah
+                        sesebelum nya &amp; traskip nilai&nbsp;yang di upload pada lampiran.</li>
+                    <li>Trasfer<br />
+                        yaitu bagi calon mahasiswa pindahan dengan syarat tambahan surat keterangan pindah &amp; traskip
+                        nilai pada universitas sebelum nya&nbsp;yang di upload pada lampiran.</li>
+                    <li>KIP-K (Kartu Indonesia Pintar - Kuliah)<br />
+                        bagi calon mahasiswa dengan jalur KIP-K wajib menyertakan bukti KIP-K yang di upload pada
+                        lampiran.<br />
+                        &nbsp;</li>
+                </ol>
+
             </div>
         </div>
     </div>

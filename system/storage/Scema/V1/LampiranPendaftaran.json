@@ -117,7 +117,7 @@
             },
             "costum": {}
         },
-        "sc_kip_kks_pkh": {
+        "sc_kip": {
             "type": "image",
             "path": "lampiran",
             "request": true,
@@ -137,7 +137,7 @@
             },
             "costum": {}
         },
-        "lain_lain": {
+        "surat_pindah": {
             "type": "image",
             "path": "lampiran",
             "request": true,

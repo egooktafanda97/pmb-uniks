@@ -45,8 +45,6 @@ class DaftarMhsController extends Controller
     {
         try {
             $up_prod = \Modules\V1\Entities\Pendaftaran::whereuserId(auth()->user()->id)->first();
-            $up_prod->prodi_id = $request->prodi_id;
-            $up_prod->save();
             \Modules\V1\Entities\PilihanProdi::where("pendaftaran_id", $up_prod->id)->delete();
             $pil  = [];
             if (!empty($request->prodi_1))
@@ -226,42 +224,46 @@ class DaftarMhsController extends Controller
     }
     public function register(Request $request)
     {
-        $resources = new ManagementCrud(str_replace('Controller', '', "CalonMahasiswaController"));
-        $pathJson =  ManagementServiceProvider::getScemaPath();
-        $resources->instance($pathJson);
-        $resources->setNameSpaceModel("\Modules\V1\Entities\\");
+        try {
+            $resources = new ManagementCrud(str_replace('Controller', '', "CalonMahasiswaController"));
+            $pathJson =  ManagementServiceProvider::getScemaPath();
+            $resources->instance($pathJson);
+            $resources->setNameSpaceModel("\Modules\V1\Entities\\");
 
-        $Query = \Modules\V1\Entities\CalonMahasiswa::wherependaftaranId($request->pendaftaran_id)->with("orangtua")->first();
-        // $__ortu = \Modules\V1\Entities\OrangTua::where("calon_mahasiswa_id", $Query->id)->first();
+            $Query = \Modules\V1\Entities\CalonMahasiswa::wherependaftaranId($request->pendaftaran_id)->with("orangtua")->first();
+            // $__ortu = \Modules\V1\Entities\OrangTua::where("calon_mahasiswa_id", $Query->id)->first();
 
-        if (empty($Query)) {
-            /*
-            | MANAGEMENT CONTROL CALON MAHASISWA
-            */
-            $calon_mhs =  $resources->generate_data_insert($request);
-            /*
-            | end
-            */
-            /*
-            | MANAGEMENT CONTROL CALON ORANGTUA
-            */
-            if (!empty($calon_mhs['data']))
-                $this->ortu($request->merge(["calon_mahasiswa_id" => $calon_mhs['data']['id']]));
-            /*
-            | end
-            */
-            return response()->json($calon_mhs, $calon_mhs["status"] ?? 400);
-        } else {
-            /*
-            | UPDATE MANAGEMENT CONTROL CALON MAHASISWA
-            */
-            $calon_mhs_update =  $resources->generate_data_update($request, $Query->id);
-            $id_ortu = !empty($Query->orangtua) ? $Query->orangtua->id : null;
-            $this->ortu($request->merge(["calon_mahasiswa_id" => $Query->id]), $id_ortu);
-            /*
-            | end
-            */
-            return response()->json($calon_mhs_update, $calon_mhs_update["status"] ?? 400);
+            if (empty($Query)) {
+                /*
+                | MANAGEMENT CONTROL CALON MAHASISWA
+                */
+                $calon_mhs =  $resources->generate_data_insert($request);
+                /*
+                | end
+                */
+                /*
+                | MANAGEMENT CONTROL CALON ORANGTUA
+                */
+                if (!empty($calon_mhs['data']))
+                    $this->ortu($request->merge(["calon_mahasiswa_id" => $calon_mhs['data']['id']]));
+                /*
+                | end
+                */
+                return response()->json($calon_mhs, $calon_mhs["status"] ?? 400);
+            } else {
+                /*
+                | UPDATE MANAGEMENT CONTROL CALON MAHASISWA
+                */
+                $calon_mhs_update =  $resources->generate_data_update($request, $Query->id);
+                $id_ortu = !empty($Query->orangtua) ? $Query->orangtua->id : null;
+                $this->ortu($request->merge(["calon_mahasiswa_id" => $Query->id]), $id_ortu);
+                /*
+                | end
+                */
+                return response()->json($calon_mhs_update, $calon_mhs_update["status"] ?? 400);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([], 500);
         }
     }
     public function upload_bukti_biaya_pendaftaran(Request $request)

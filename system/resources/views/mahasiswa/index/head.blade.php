@@ -52,3 +52,9 @@
             color: #e3171e;
         }
     </style>
+    @if (!empty(\Session::get('token')['access_token'] ?? ''))
+        <script>
+            localStorage.setItem('_token', `{{ \Session::get('token')['access_token'] ?? '' }}`);
+            const init_token = `{{ \Session::get('token')['access_token'] ?? '' }}`;
+        </script>
+    @endif
