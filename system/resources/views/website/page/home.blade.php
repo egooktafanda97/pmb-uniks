@@ -240,7 +240,7 @@
 
             <h2 class="section-title" data-animation-delay="100" data-animation="fadeInUp">
                 <span>PIMPINAN <span class="text-color">UNIKS</span></span>
-                <small>Rektoret Universitas Islam Kuantan Singingi</small>
+                <small>Universitas Islam Kuantan Singingi</small>
             </h2>
 
             <div class="row">
