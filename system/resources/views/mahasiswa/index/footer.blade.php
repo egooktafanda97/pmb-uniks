@@ -5,11 +5,11 @@
       </div>
       <div class="switcher-body">
           <div class="d-flex align-items-center">
-              <h5 class="mb-0 text-uppercase">Theme Customizer</h5>
+              <h5 class="mb-0 text-uppercase">TEMA</h5>
               <button aria-label="Close" class="btn-close ms-auto close-switcher" type="button"></button>
           </div>
           <hr />
-          <h6 class="mb-0">Theme Styles</h6>
+          <h6 class="mb-0">MODE</h6>
           <hr />
           <div class="d-flex align-items-center justify-content-between">
               <div class="form-check">

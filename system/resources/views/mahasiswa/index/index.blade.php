@@ -28,7 +28,7 @@
         <a class="back-to-top" href="javaScript:;"><i class='bx bxs-up-arrow-alt'></i></a>
         <!--End Back To Top Button-->
         <footer class="page-footer">
-            <p class="mb-0">uniks.ac.id</p>
+            <p class="mb-0"><a href="https://www.uniks.ac.id/">@uniks {{ date('Y') }}</a></p>
         </footer>
     </div>
     @include('mahasiswa.index.footer')
