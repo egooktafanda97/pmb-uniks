@@ -27,7 +27,7 @@
                         <option value="regular">Regular</option>
                         <option value="alih_jenjang">Alih Jenjang</option>
                         <option value="transfer">Transfer</option>
-                        <option value="kipk">KIPK</option>
+                        <option value="kip-k">KIP-K</option>
                     </select>
                 </div>
                 <div class="form_kip">

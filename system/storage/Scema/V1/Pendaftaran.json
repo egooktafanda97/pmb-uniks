@@ -98,6 +98,25 @@
             },
             "costum": {}
         },
+        "prodi_id": {
+            "name": "prodi_id",
+            "control_insert": "after",
+            "label": "prodi",
+            "type": "integer",
+            "migration": 8,
+            "validate": 7,
+            "request": true,
+            "relation": {
+                "table": "prodi",
+                "function": "prodi",
+                "relation_index": "prodi_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "prodi",
+                    "auto_delete_relation": false
+                }
+            }
+        },
         "agent_id": {
             "name": "agent_id",
             "control_insert": "after",

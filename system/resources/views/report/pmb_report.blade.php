@@ -92,7 +92,8 @@
     <div style="width: 100%; display: flex; justify-content: center;align-items: center; flex-direction: column">
         <h4 style="margin: 3px; margin-top: 15px">Daftar Rekapitulasi Penerimaan Mahasiswa Baru</h4>
         <h4 style="margin: 3px">Universitas Islam Kuantan Singingi</h4>
-        <h5 style="margin: 3px">Gelombang II , TA. 2020</h5>
+        <h5 style="margin: 3px">{{ $info_pendaftaran->pendaftaran ?? '-' }}, TA.
+            {{ $info_pendaftaran->tahun_ajaran ?? '-' }}</h5>
     </div>
     <table class="table">
         <tr>

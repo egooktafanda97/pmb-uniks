@@ -17,14 +17,16 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
-        <li>
-            <a href="{{ url('mahasiswa/form') }}">
-                <div class="parent-icon">
-                    <i class='fadeIn animated bx bx-notepad'></i>
-                </div>
-                <div class="menu-title">FORM PENDAFTARAN</div>
-            </a>
-        </li>
+        @if ($pmb->status == 'pending')
+            <li>
+                <a href="{{ url('mahasiswa/form') }}">
+                    <div class="parent-icon">
+                        <i class='fadeIn animated bx bx-notepad'></i>
+                    </div>
+                    <div class="menu-title">FORM PENDAFTARAN</div>
+                </a>
+            </li>
+        @endif
         @if ($pmb->calon_mahasiswa)
             <li>
                 <a href="{{ url('mahasiswa/profile') }}">

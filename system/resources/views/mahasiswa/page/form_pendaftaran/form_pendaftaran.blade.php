@@ -28,6 +28,7 @@
     <script>
         window.api_wilayah = "{{ url('api/wilayah') }}";
         window.uri = "{{ url('api') }}";
+        window.base_url = "{{ url('') }}";
         const token = `Bearer {{ \Session::get('token')['access_token'] ?? '' }}`;
         const pendaftaran_id = `{{ $pendaftaran->id ?? '' }}`;
     </script>

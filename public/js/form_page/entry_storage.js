@@ -20,6 +20,9 @@ async function _readedCmhs() {
         ...ortu,
       }
       $('input, select, textarea').each(function (index) {
+        data_ready['tanggal_lahir'] = moment(
+          data_ready['tanggal_lahir'],
+        ).format('DD/MM/YYYY')
         $(this).val(data_ready[$(this).attr('name')])
         localStorage.setItem('entry', JSON.stringify(data_ready))
       })
@@ -62,7 +65,12 @@ _readedCmhs()
 $('input,select,textarea').change(function () {
   const data_ready = JSON.parse(localStorage.getItem('entry'))
   if (!__empty($(this).val()) && !__empty(data_ready)) {
+    $(this).removeClass('is-invalid')
     data_ready[$(this).attr('name')] = $(this).val()
+    localStorage.setItem('entry', JSON.stringify(data_ready))
+  } else {
+    const data_ready = JSON.parse(localStorage.getItem('entry'))
+    delete data_ready[$(this).attr('name')]
     localStorage.setItem('entry', JSON.stringify(data_ready))
   }
 })

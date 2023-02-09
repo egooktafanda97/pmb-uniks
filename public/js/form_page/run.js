@@ -1,6 +1,6 @@
-if ($('#jalur_pendaftaran').val() == '') {
-  sessionStorage.setItem('card-active', 'card-prodi')
-}
+// if ($('#jalur_pendaftaran').val() == '') {
+//   sessionStorage.setItem('card-active', 'card-prodi')
+// }
 /*
 | TAB CARD ENTRY
 |

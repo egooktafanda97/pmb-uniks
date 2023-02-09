@@ -30,8 +30,11 @@
             <div class="card-header text-light bg-primary">
                 <div class="space-between">
                     <strong>DATA PENDAFTARAN</strong>
-                    <a class="text-light fadeIn animated bx bx-message-square-edit"
-                        href="{{ url('mahasiswa/form?edit=mhs') }}">Edit</a>
+                    @if ($pendaftaran->status == 'pending' || $pendaftaran->status == 'invalid')
+                        <a class="text-light fadeIn animated bx bx-message-square-edit"
+                            href="{{ url('mahasiswa/form?edit=mhs') }}">Edit</a>
+                    @endif
+
                 </div>
             </div>
             <div class="card-body">
@@ -42,17 +45,30 @@
                         @if ($pendaftaran->pilihan_prodi)
                             @foreach ($pendaftaran->pilihan_prodi as $plp)
                                 <div class="space-between" style="margin-bottom: 5px">
-                                    <h6 class="text-primary" style="margin: 0;">
-                                        {{ $plp->no_pilihan }} {{ $plp->prodi->nama_prodi }}
-                                    </h6>
+                                    <strong class="text-primary" style="margin: 0;    font-size: .8em;">
+                                        {{ $plp->no_pilihan }}. {{ $plp->prodi->nama_prodi }}
+                                    </strong>
 
                                 </div>
                             @endforeach
                         @endif
-
                     </div>
                 </div>
-
+                <div class="card border-primary border-bottom border-3 border-0 mb-3">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            @foreach ($informasi_pendaftaran['jalur'] as $k => $v)
+                                @if ($v)
+                                    <li
+                                        class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                        <strong class="mb-0" style="font-size: .8em">{{ $k }}</strong>
+                                        <span class="text-secondary" style="font-size: .8em">{{ $v }}</span>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
                 <ul class="list-group list-group-flush">
                     @foreach ($informasi_pendaftaran['c_mhs'] as $k => $v)
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -105,16 +121,18 @@
             <div class="card-header text-light bg-primary">
                 <div class="space-between">
                     <strong>LAMPIRAN</strong>
-                    <a class="text-light fadeIn animated bx bx-message-square-edit"
-                        href="{{ url('mahasiswa/form?edit=lampiran') }}">Edit</a>
+                    @if ($pendaftaran->status == 'pending' || $pendaftaran->status == 'invalid')
+                        <a class="text-light fadeIn animated bx bx-message-square-edit"
+                            href="{{ url('mahasiswa/form?edit=lampiran') }}">Edit</a>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
                 <ul class="nav nav-pills mb-3 border-primary border-top border-3 border-0" role="tablist"
                     style="display: flex;justify-content: space-evenly; background: #fff; padding-bottom: 10px;padding-top: 10px; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                     <li class="nav-item" role="presentation">
-                        <a aria-selected="false" class="n-tab active" data-bs-toggle="pill" href="#primary-pills-foto"
-                            role="tab" tabindex="-1">
+                        <a aria-selected="false" class="n-tab active" data-bs-toggle="pill"
+                            href="#primary-pills-foto" role="tab" tabindex="-1">
                             <div class="d-flex align-items-center">
                                 <div class="tab-title">FOTO</div>
                             </div>
@@ -143,13 +161,26 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <a aria-selected="true" class="n-tab" data-bs-toggle="pill" href="#kip" role="tab">
-                            <div class="d-flex align-items-center">
-                                <div class="tab-title">KIP</div>
-                            </div>
-                        </a>
-                    </li>
+                    @if ($pendaftaran->calon_mahasiswa->jalur_pendaftaran == 'kip-k')
+                        <li class="nav-item" role="presentation">
+                            <a aria-selected="true" class="n-tab" data-bs-toggle="pill" href="#kip"
+                                role="tab">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">KIP</div>
+                                </div>
+                            </a>
+                        </li>
+                    @endif
+                    @if ($pendaftaran->calon_mahasiswa->jalur_pendaftaran == 'transfer')
+                        <li class="nav-item" role="presentation">
+                            <a aria-selected="true" class="n-tab" data-bs-toggle="pill" href="#surat_pindah"
+                                role="tab">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">SURAT PINDAH</div>
+                                </div>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade active show" id="primary-pills-foto" role="tabpanel">
@@ -236,9 +267,9 @@
                         @endif
                     </div>
                     <div class="tab-pane fade" id="kip" role="tabpanel">
-                        @if ($pendaftaran->lampiran_pendaftaran->sc_kip_kks_pkh ?? false)
+                        @if ($pendaftaran->lampiran_pendaftaran->sc_kip ?? false)
                             @php
-                                $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_kip_kks_pkh);
+                                $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_kip);
                                 $extensinon = \File::extension($urls);
                             @endphp
                             @if ($extensinon == 'pdf' || $extensinon == 'PDF')
@@ -261,6 +292,34 @@
                             </div>
                         @endif
                     </div>
+
+                    <div class="tab-pane fade" id="surat_pindah" role="tabpanel">
+                        @if ($pendaftaran->lampiran_pendaftaran->surat_pindah ?? false)
+                            @php
+                                $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->surat_pindah);
+                                $extensinon = \File::extension($urls);
+                            @endphp
+                            @if ($extensinon == 'pdf' || $extensinon == 'PDF')
+                                <canvas class="canvas-pdf" data-url="{{ $urls }}"
+                                    id="the-canvas-surat"></canvas>
+                            @else
+                                <img alt="" src="{{ $urls }}" width="100%">
+                            @endif
+                        @else
+                            <div
+                                class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-warning">Warning</h6>
+                                        <div>Tidak ada file yang diupload</div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -270,8 +329,10 @@
             <div class="card-header text-light bg-primary">
                 <div class="space-between">
                     <strong>BUKTI PEMBAYARAN</strong>
-                    <a class="text-light fadeIn animated bx bx-message-square-edit"
-                        href="{{ url('mahasiswa/form?edit=biaya') }}">Edit</a>
+                    @if ($pendaftaran->status == 'pending' || $pendaftaran->status == 'invalid')
+                        <a class="text-light fadeIn animated bx bx-message-square-edit"
+                            href="{{ url('mahasiswa/form?edit=biaya') }}">Edit</a>
+                    @endif
                 </div>
             </div>
             <div class="card-body">

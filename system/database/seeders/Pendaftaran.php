@@ -52,7 +52,7 @@ class Pendaftaran extends Seeder
                 "kuota" => 10000,
             ]);
             // ---- exekusi
-            $save =  $info_daftar->generate_data_insert($request);
+            $save = $info_daftar->generate_data_insert($request);
             if (empty($save['data']))
                 dd($save);
             /*
@@ -60,10 +60,6 @@ class Pendaftaran extends Seeder
             | END DATA PENDAFTARAN
             */
             // ******************************************************
-            /*
-            | BUAT JADWAL
-            |
-            */
             $kegiatan = ["pendaftaran", "seleksi", "pendaftaran ulang", "pkkmb", "mulai kuliah"];
             foreach ($kegiatan as $jad) {
                 $JADWAL = new ManagementCrud("Jadwal");
@@ -74,7 +70,7 @@ class Pendaftaran extends Seeder
                 $JADWAL->setSeed();
                 $gender = $faker->randomElement(['L', 'P']);
                 $request->replace([
-                    "informasi_pendaftaran_id" => $save['data']['id'],
+                    "informasi_pendaftaran_id" => $save['data']["id"],
                     "kegiatan" => $jad,
                     "mulai" => date("Y-m-d H:s:i"),
                     "selesai" => date("Y-m-d H:s:i"),
@@ -85,14 +81,14 @@ class Pendaftaran extends Seeder
                     dd($J_save);
             }
             /*
-            | 
-            | END JADWAL
-            */
+                | 
+                | END JADWAL
+                */
             // ******************************************************
             /*
-            | BUAT AGENT
-            |
-            */
+                | BUAT AGENT
+                |
+                */
             $id_agent = [];
 
             for ($vv = 0; $vv < 10; $vv++) {
@@ -121,22 +117,22 @@ class Pendaftaran extends Seeder
                     dd($agent_save);
                 array_push($id_agent, $agent_save['data']["id"]);
             }
+
             /*
-            | 
-            | END AGENT
-            */
+                | 
+                | END AGENT
+                */
             // ******************************************************
             /*
-            | DAFTARKAN AKUN
-            |
-            */
+                | DAFTARKAN AKUN
+                |
+                */
             $prodi = \Modules\V1\Entities\Prodi::all();
             $id_prod = [];
             foreach ($prodi as $v) {
                 array_push($id_prod, $v->id);
             }
-            continue;
-            for ($i = 0; $i < rand(1, 5); $i++) {
+            for ($i = 0; $i < rand(50, 100); $i++) {
                 $pendaftaran = new ManagementCrud("Pendaftaran");
                 $pathJson =  config('generator_crud_config.scema_path');
                 $pendaftaran->instance($pathJson);
@@ -147,9 +143,9 @@ class Pendaftaran extends Seeder
 
                 $nik = (string) $this->n_digit_random(16);
                 $request->replace([
-                    "no_resister" => "UNIKS:" . \Str::random(5),
-                    "informasi_pendaftaran_id" => $save['data']['id'],
-                    "prodi_id" =>  $id_prod[array_rand($id_prod)],
+                    "no_resister" => null,
+                    "informasi_pendaftaran_id" => $save['data']["id"],
+                    "prodi_id" => null,
                     "nik" => $nik,
                     "agent_id" => $id_agent[array_rand($id_agent)],
                     'nama' => $faker->name,
@@ -164,10 +160,21 @@ class Pendaftaran extends Seeder
                     return false;
                 $m = User::find($pen_save['data']['user_id']);
                 $this->createRole($m, $roler);
+
+                \Modules\V1\Entities\PilihanProdi::create([
+                    "no_pilihan" => "1",
+                    "pendaftaran_id" => $pen_save['data']['id'],
+                    "prodi_id" =>  \Modules\V1\Entities\Prodi::inRandomOrder()->first()->id
+                ]);
+                \Modules\V1\Entities\PilihanProdi::create([
+                    "no_pilihan" => "2",
+                    "pendaftaran_id" => $pen_save['data']['id'],
+                    "prodi_id" =>  \Modules\V1\Entities\Prodi::inRandomOrder()->first()->id
+                ]);
                 /*
-                | DAFTARKAN DATA MAHASISWA
-                |
-                */
+                    | DAFTARKAN DATA MAHASISWA
+                    |
+                    */
                 $C_MHS = new ManagementCrud("CalonMahasiswa");
                 $pathJson =  config('generator_crud_config.scema_path');
                 $C_MHS->instance($pathJson);
@@ -180,15 +187,27 @@ class Pendaftaran extends Seeder
                     "pendaftaran_id" => $pen_save['data']['id'],
                     "nik"           => $nik,
                     "nis"           => $faker->numerify('################'),
-                    "npwp"          => $faker->numerify('################'),
                     "nama_lengkap" => $nama_csiswa,
+                    "status_perkawinan" => ["Belum Menikah", "Menikah"][array_rand(["Belum Menikah", "Menikah"])],
+                    "kewarga_negaraan" => ["wni", "wna"][array_rand(["wni", "wna"])],
                     "jenis_kelamin" => $gender,
                     "tempat_lahir" => 'sungai langsat',
                     "tanggal_lahir" => date("Y-m-d"),
                     "agama" => "islam",
                     "no_telepon" => "082284733404",
-                    "asal_sekolah" => "SMK N 1 Teluk Kuantan",
-                    "tahun_lulus" => "2016",
+                    "jenis_slta" => ["sma", "smk"][array_rand(["sma", "smk"])],
+                    "asal_slta" => "test",
+                    "tahun_ijazah" => "test",
+                    "no_ijazah" => "test",
+                    "sumber_biaya_kuliah" => "test",
+                    "penghasilan_orangtua" => "test",
+                    "pekerjaan_orangtua" => "test",
+                    "jalur_pendaftaran" => ["regular", "alih_jenjang", "transfer", "kip-k"][array_rand(["regular", "alih_jenjang", "transfer", "kip-k"])],
+                    "memiliki_kartu" => "test",
+                    "kategori_pt" => "test",
+                    "pt_sebelumnya" => "test",
+                    "ijazah_diperolah" => "Tidak ada",
+                    "jml_sks" => "100",
                     "alamat_lengkap" => $faker->address,
                     "provinsi" => "14",
                     "kabupaten" => "1401",
@@ -200,14 +219,14 @@ class Pendaftaran extends Seeder
                 if (empty($c_save['data']))
                     dd($c_save);
                 /*
-                | 
-                | END DATA MAHASISWA
-                */
+                    | 
+                    | END DATA MAHASISWA
+                    */
                 // |||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                 /*
-                | DATA LAMPIRAN
-                |
-                */
+                    | DATA LAMPIRAN
+                    |
+                    */
                 $C_LAMPIRAN = new ManagementCrud("LampiranPendaftaran");
                 $pathJson =  config('generator_crud_config.scema_path');
                 $C_LAMPIRAN->instance($pathJson);
@@ -227,14 +246,14 @@ class Pendaftaran extends Seeder
                 if (empty($l_save['data']))
                     dd($l_save);
                 /*
-                | END DATA LAMPIRAN
-                |
-                */
+                    | END DATA LAMPIRAN
+                    |
+                    */
                 // |||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                 /*
-                | DATA ORANGTUA
-                |
-                */
+                    | DATA ORANGTUA
+                    |
+                    */
                 $C_ORTU = new ManagementCrud("OrangTua");
                 $pathJson =  config('generator_crud_config.scema_path');
                 $C_ORTU->instance($pathJson);
@@ -247,29 +266,25 @@ class Pendaftaran extends Seeder
                     "tempat_lahir_ayah"     => $faker->address,
                     "tanggal_lahir_ayah"        => date("Y-m-d"),
                     "no_telepon_ayah"       => "082200000000",
-                    "pekerjaan_ayah"        => "pekerjaan",
-                    "penghasilan_ayah"      => "6000000",
                     "alamat_lengkap_ayah"       => $faker->address,
                     "nama_ibu"      => $faker->name,
                     "tempat_lahir_ibu"      => $faker->address,
                     "tanggal_lahir_ibu"     => date("Y-m-d"),
                     "no_telepon_ibu"        => "0822",
-                    "pekerjaan_ibu"     => "ibu rumah tangga",
-                    "penghasilan_ibu"       => "0",
                     "alamat_lengkap_ibu"        =>  $faker->address,
                 ]);
                 $o_save =  $C_ORTU->generate_data_insert($request);
                 if (empty($o_save['data']))
                     dd($o_save);
                 /*
-                | END DATA ORTU
-                |
-                */
+                    | END DATA ORTU
+                    |
+                    */
                 // |||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                 /*
-                | DATA BUKTI BAYAR
-                |
-                */
+                    | DATA BUKTI BAYAR
+                    |
+                    */
                 $C_BUKTI = new ManagementCrud("BuktiPembayaran");
                 $pathJson =  config('generator_crud_config.scema_path');
                 $C_BUKTI->instance($pathJson);
@@ -289,15 +304,11 @@ class Pendaftaran extends Seeder
                 if (empty($b_save['data']))
                     dd($o_save);
                 /*
-                /*
-                | END BUKTI BAYAR
-                |
-                */
+                    /*
+                    | END BUKTI BAYAR
+                    |
+                    */
             }
-            /*
-            | 
-            | END DAFTARKAN AKUN
-            */
         }
     }
 }

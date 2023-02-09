@@ -3,9 +3,10 @@
 | STORE ENTRY DATA
 |
 */
-$('#form-done').click(function () {
+function validate() {
   if (alr(__empty($("[name='nama_ayah']").val()), 'nama ayah harus di isi')) {
-    return
+    $("[name='nama_ayah']").addClass('is-invalid')
+    return true
   }
   if (
     alr(
@@ -13,7 +14,8 @@ $('#form-done').click(function () {
       'tempat lahir ayah harus di isi',
     )
   ) {
-    return
+    $("[name='tempat_lahir_ayah']").addClass('is-invalid')
+    return true
   }
   if (
     alr(
@@ -21,11 +23,13 @@ $('#form-done').click(function () {
       'tanggal lahir ayah harus di isi',
     )
   ) {
-    return
+    $("[name='tanggal_lahir_ayah']").addClass('is-invalid')
+    return true
   }
 
   if (alr(__empty($("[name='nama_ibu']").val()), 'nama ibu harus di isi')) {
-    return
+    $("[name='nama_ibu']").addClass('is-invalid')
+    return true
   }
   if (
     alr(
@@ -33,7 +37,8 @@ $('#form-done').click(function () {
       'tempat lahir ibu harus di isi',
     )
   ) {
-    return
+    $("[name='tempat_lahir_ibu']").addClass('is-invalid')
+    return true
   }
   if (
     alr(
@@ -41,7 +46,8 @@ $('#form-done').click(function () {
       'tanggal lahir ibu harus di isi',
     )
   ) {
-    return
+    $("[name='tanggal_lahir_ibu']").addClass('is-invalid')
+    return true
   }
   if (
     alr(
@@ -49,6 +55,19 @@ $('#form-done').click(function () {
       'jenis kelamin wajib di isi',
     )
   ) {
+    $("[name='jenis_kelamin']").addClass('is-invalid')
+    return true
+  }
+  if (
+    alr(__empty($("[name='no_ijazah']").val()), 'No Ijazah tidak boleh kosong')
+  ) {
+    $("[name='no_ijazah']").addClass('is-invalid')
+    return true
+  }
+  return false
+}
+$('#form-done').click(function () {
+  if (validate()) {
     return
   }
   const Btn = $(this)
@@ -57,7 +76,6 @@ $('#form-done').click(function () {
     // localStorage.removeItem('entry')
   })
 })
-
 function store(load, callback) {
   const data = JSON.parse(localStorage.getItem('entry'))
   if (alr(__empty(pendaftaran_id), 'Kesalalhan fatal.')) {
@@ -65,7 +83,10 @@ function store(load, callback) {
   }
   data['pendaftaran_id'] = pendaftaran_id
   data['nik'] = $("[name='nik']").val() ?? ''
-  data['tanggal_lahir'] = moment(data['tanggal_lahir']).format('YYYY-MM-DD')
+  data['tanggal_lahir'] = moment(data['tanggal_lahir'], 'DD/MM/YYYY').format(
+    'YYYY-MM-DD',
+  )
+  console.log(data['tanggal_lahir'])
   const http_configure = {
     data: data,
     url: `${window.uri}/mahasiswa/register`,
@@ -120,7 +141,7 @@ function store(load, callback) {
         button: 'Oke!',
       }).then((willDelete) => {
         if (willDelete) {
-          window.location.reload()
+          window.location.href = `${window.base_url}/mahasiswa/form`
         }
       })
     },

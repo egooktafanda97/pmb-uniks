@@ -4,17 +4,17 @@
             <tr>
                 <th>
                     <div>
-                        <input aria-label="..." class="form-check-input me-3" type="checkbox" value="">
+                        {{-- <input aria-label="..." class="form-check-input me-3" type="checkbox" value=""> --}}
                         No
                     </div>
                 </th>
-                <th>Pendaftaran</th>
-                <th>Tahun Ajaran</th>
-                <th>Prodi</th>
-                <th>Nik</th>
-                <th>Nama</th>
-                <th>Status</th>
-                <th></th>
+                <th>PENDAFATARAN</th>
+                <th>TAHUN AJARAN</th>
+                <th>JALUR PENDAFATARAN</th>
+                <th>NIK</th>
+                <th>NAMA LENGKAP</th>
+                <th>STATUS</th>
+                <th>#</th>
             </tr>
         </thead>
         <tbody>
@@ -23,9 +23,9 @@
                     <td class="">
 
                         <div class="d-flex align-items-center">
-                            <div>
+                            {{-- <div>
                                 <input aria-label="..." class="form-check-input me-3" type="checkbox" value="">
-                            </div>
+                            </div> --}}
                             <div class="ms-2">
                                 <h6 class="mb-0 font-14">
                                     {{ ($mhs->currentPage() - 1) * $mhs->perPage() + $loop->iteration }}
@@ -47,7 +47,7 @@
                     </td>
                     <td class="">
                         <h6 class="mb-0 font-14">
-                            {{ $items->pendaftaran->prodi->nama_prodi ?? '-' }}
+                            {{ strtoupper($items->jalur_pendaftaran ?? '-') }}
                         </h6>
                     </td>
                     <td class="">{{ $items->nik }}</td>
@@ -66,7 +66,8 @@
                     </td>
                     <td class="tb-acton">
                         <a class="btn btn-primary btn-sm radius-30 px-4"
-                            href="{{ url('admin/mhs/getById/' . $items->pendaftaran->id ?? null) }}" type="button">
+                            href="{{ url('admin/mhs/getById/' . \App\Helpers\Crypto::encrypt($items->pendaftaran->id) ?? null) }}"
+                            type="button">
                             Details
                         </a>
                     </td>

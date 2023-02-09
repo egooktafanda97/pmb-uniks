@@ -6,7 +6,7 @@
 $('#jalur_pendaftaran').change(function () {
   if ($(this).val() == 'alih_jenjang') {
     $('.form_alih_jenjang').show()
-  } else if ($(this).val() == 'kipk') {
+  } else if ($(this).val() == 'kip-k') {
     $('.form_kip').show()
   } else {
     $('.form_alih_jenjang').hide()

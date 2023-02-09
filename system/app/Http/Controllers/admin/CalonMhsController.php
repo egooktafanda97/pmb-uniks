@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 | USE COSTIM BY CONTROLLER
 */
 use App\Clases\CalonMahasiswa;
+use App\Helpers\Crypto;
 use App\Traits\ManagementControlGetData;
 
 /*
@@ -56,9 +57,14 @@ class CalonMhsController extends Controller
     }
     public function getById($id)
     {
-        $mhs = new CalonMahasiswa();
-        $data = $this->details_data($id);
-        $data["informasi_pendaftaran"] = $mhs->info_description($data);
-        return view($this->view . 'detail', $data);
+        try {
+            $id = Crypto::decrypt($id);
+            $mhs = new CalonMahasiswa();
+            $data = $this->details_data($id);
+            $data["informasi_pendaftaran"] = $mhs->info_description($data);
+            return view($this->view . 'detail', $data);
+        } catch (\Throwable $th) {
+            return view('errors.404');
+        }
     }
 }

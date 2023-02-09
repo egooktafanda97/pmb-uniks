@@ -11,21 +11,25 @@
             direction: ltr;
             width: 100%;
         }
+
+        .n-tab.active {
+            color: orange;
+            font-weight: bold;
+        }
     </style>
 @endsection
 @section('content')
     <div class="row">
         <div class="col-md-4">
             <div class="card border-primary border-bottom border-3 border-0">
-                <input class="id-hide" id="img-update-profile" type="file">
+                {{-- <input class="id-hide" id="img-update-profile" type="file"> --}}
                 @php
                     $img = 'assets/logo/logo.png';
                     if ($pendaftaran->lampiran_pendaftaran->foto_formal) {
                         $img = 'assets/' . $pendaftaran->lampiran_pendaftaran->foto_formal;
                     }
                 @endphp
-                <img alt="" class="card-img-top" id="img-profile" src="{{ asset($img) }}"
-                    style="max-height: 300px; cursor:pointer" />
+                <img alt="" class="card-img-top" id="img-profile" src="{{ asset($img) }}" />
                 <div class="card-body">
                     <h5 class="card-title text-primary">{{ $pendaftaran->calon_mahasiswa->nama_lengkap ?? '-' }}</h5>
                     <strong style="font-size: .8em">No. PENDAFTARAN:
@@ -50,7 +54,7 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="alert bg-white border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+            {{-- <div class="alert bg-white border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
                 <div class="d-flex align-items-center">
                     <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
                     </div>
@@ -63,7 +67,7 @@
                     </div>
                 </div>
                 <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
-            </div>
+            </div> --}}
             <div class="card ">
                 <div class="card-body">
                     <div class="space-between">

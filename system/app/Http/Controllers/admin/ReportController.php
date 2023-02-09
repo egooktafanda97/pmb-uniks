@@ -31,14 +31,14 @@ class ReportController extends Controller
             })
             ->with([
                 "orangtua", "pendaftaran" => function ($query) {
-                    return $query->with(["prodi", "informasi_pendaftaran"]);
+                    return $query->with(["prodi", "informasi_pendaftaran", "pilihan_prodi"]);
                 }
             ])
             ->whereHas('pendaftaran', function ($query) use ($request) {
                 $Q = $query;
-                if (!empty($request->get("prodi"))) {
-                    $Q = $Q->where("prodi_id", $request->get("prodi"));
-                }
+                // if (!empty($request->get("prodi"))) {
+                //     $Q = $Q->where("prodi_id", $request->get("prodi"));
+                // }
                 if (!empty($request->status)) {
                     $Q = $Q->where("status", $request->get("status"));
                 }
@@ -61,61 +61,83 @@ class ReportController extends Controller
 
         $pmb = $pmb->get();
 
-
-
-
-        $infoPendaftaran = \Modules\V1\Entities\InformasiPendaftaran::orderBy("created_at", "DESC")->get();
-
-        $thn_ajaran = [];
-        foreach ($infoPendaftaran as $ta) {
-            $thn_ajaran[$ta->tahun_ajaran] = $ta->tahun_ajaran;
+        $status = [
+            "all" => "Daftar",
+            "pending" => "Belum Diproses",
+            "valid" => "Valid",
+            "invalid" => "Invalid",
+            "lulus" => "Lulus",
+            "tidak_lulus" => "Tidak Lulus",
+            "daftar_ulang" => "Daftar Ulang",
+        ];
+        $prod = $request->cluster;
+        $x = $pmb->groupBy("pendaftaran.status")->map(function ($U) use ($prod) {
+            return $U->map(function ($y) use ($prod) {
+                return $y->pendaftaran->pilihan_prodi()->where("no_pilihan", $prod)->with("prodi")->first();
+            })->groupBy("prodi.nama_prodi")->map->count();
+        });
+        $dd = [];
+        $head = [];
+        $prr =  \Modules\V1\Entities\Prodi::all();
+        foreach ($prr as $pxx) {
+            $dd[$pxx->nama_prodi] = [];
         }
-        if (!empty($thn_ajaran))
-            $thn_ajaran = array_keys($thn_ajaran);
-
-        if ($request->prodi) {
-            $status = [
-                "all" => "Daftar",
-                "pending" => "Belum Diproses",
-                "valid" => "Valid",
-                "invalid" => "Invalid",
-                "lulus" => "Lulus",
-                "tidak_lulus" => "Tidak Lulus",
-                "daftar_ulang" => "Daftar Ulang",
-            ];
-            $head = [];
-            $xy = new stdClass();
-            foreach ($status as $st => $v) {
-                if (!$request->{$st})
-                    continue;
-                $head[$st] = $v;
-                $xy->{$st} =  $pmb->map(function ($z) {
-                    return $z->pendaftaran;
-                })->groupBy("prodi.nama_prodi")->map(function ($x, $key) use ($st) {
-                    return $x->map(function ($cmhs) use ($st) {
-                        if ($st == "all")
-                            return "all";
-                        if ($cmhs->status == $st)
-                            return $cmhs->status;
-                        return false;
-                    })->reject(function ($value) {
-                        return $value === false;
-                    })->count();
-                });
-            }
-            $U = [];
-            foreach ($xy as $ky => $sts) {
-                foreach ($sts as $_ky => $_sts) {
-                    $U[$_ky][$ky] = $_sts;
+        foreach ($x as $claster_status => $val) {
+            if (!$request->{$claster_status})
+                continue;
+            $head[$claster_status] =  $status[$claster_status];
+            foreach ($prr  as $p) {
+                $st = $claster_status;
+                $prd = $p->nama_prodi;
+                if (!empty($val[$p->nama_prodi])) {
+                    $vals = $val[$p->nama_prodi];
+                    $dd[$prd] += [$st => $vals];
+                } else {
+                    $dd[$prd] += [$st => 0];
                 }
             }
-            // dd($U);
-            $data = [
-                "result" => $U,
-                "head" => $head
-            ];
-            return view("report.pmb_report", $data);
         }
+        // $head = [];
+        // $xy = new stdClass();
+
+        // foreach ($status as $st => $v) {
+        //     if (!$request->{$st})
+        //         continue;
+        //     $head[$st] = $v;
+        //     $xy->{$st} = $pmb->map(function ($z) {
+        //         return $z->pendaftaran->pilihan_prodi()->where('no_pilihan', '1')->with("prodi")->get();
+        //     });
+        //     $_x = $pmb->map(function ($z) {
+        //         return $z->pendaftaran->pilihan_prodi()->where('no_pilihan', '1')->with("prodi")->get();
+        //     })->map->groupBy("prodi.nama_prodi")->map(function ($x, $key) use ($st) {
+
+        //     });
+        //     return response()->json($_x);
+
+        //     // ->groupBy("pilihan_prodi")->map(function ($x, $key) use ($st) {
+        //     //     return $x->map(function ($cmhs) use ($st) {
+        //     //         if ($st == "all")
+        //     //             return "all";
+        //     //         if ($cmhs->status == $st)
+        //     //             return $cmhs->status;
+        //     //         return false;
+        //     //     })->reject(function ($value) {
+        //     //         return $value === false;
+        //     //     })->count();
+        //     // });
+        // }
+        // $U = [];
+        // foreach ($xy as $ky => $sts) {
+        //     foreach ($sts as $_ky => $_sts) {
+        //         $U[$_ky][$ky] = $_sts;
+        //     }
+        // }
+        $data = [
+            "result" => $dd,
+            "head" => $head,
+            "info_pendaftaran" => $pendaftaran_active
+        ];
+        return view("report.pmb_report", $data);
 
         // return [
         //     "prodi" => $prodi,
@@ -138,39 +160,47 @@ class ReportController extends Controller
             return $x;
         });
         $mdata = [];
-        foreach ($resData as $key => $colec) {
+        foreach ($resData as $key => $daftar) {
+            $ortu = $daftar->orangtua;
             $def = [
-                'nik' => $colec->nik,
-                'nis' => $colec->nis,
-                'npwp' => $colec->npwp,
-                'nama_lengkap' => $colec->nama_lengkap,
-                'jenis_kelamin' => $colec->jenis_kelamin,
-                'tempat_lahir' => $colec->tempat_lahir,
-                'tanggal_lahir' => $colec->tanggal_lahir,
-                'agama' => $colec->agama,
-                'no_telepon' => $colec->no_telepon,
-                'asal_sekolah' => $colec->asal_sekolah,
-                'tahun_lulus' => $colec->tahun_lulus,
-                'alamat_lengkap' => $colec->alamat_lengkap,
-                'provinsi' => $colec->provinsi,
-                'kabupaten' => $colec->kabupaten,
-                'kecamatan' => $colec->kecamatan,
-                'kelurahan' => $colec->kelurahan,
-                'kode_pos' => $colec->kode_pos,
-                'nama_ayah' => $colec->orangtua->nama_ayah,
-                'tempat_lahir_ayah' => $colec->orangtua->tempat_lahir_ayah,
-                'tanggal_lahir_ayah' => $colec->orangtua->tanggal_lahir_ayah,
-                'no_telepon_ayah' => $colec->orangtua->no_telepon_ayah,
-                'pekerjaan_ayah' => $colec->orangtua->pekerjaan_ayah,
-                'penghasilan_ayah' => $colec->orangtua->penghasilan_ayah,
-                'alamat_lengkap_ayah' => $colec->orangtua->alamat_lengkap_ayah,
-                'nama_ibu' => $colec->orangtua->nama_ibu,
-                'tempat_lahir_ibu' => $colec->orangtua->tempat_lahir_ibu,
-                'tanggal_lahir_ibu' => $colec->orangtua->tanggal_lahir_ibu,
-                'no_telepon_ibu' => $colec->orangtua->no_telepon_ibu,
-                'pekerjaan_ibu' => $colec->orangtua->pekerjaan_ibu,
-                'penghasilan_ibu' => $colec->orangtua->penghasilan_ibu,
-                'alamat_lengkap_ibu' => $colec->orangtua->alamat_lengkap_ibu,
+                "NIK" =>  $daftar->nik,
+                "NIS" =>  $daftar->nis,
+                "NAMA LENGKAP" =>  $daftar->nama_lengkap,
+                "JENIS KELAMIN" =>  $daftar->jenis_kelamin == "L" ? "Laki-Laki" : "Perempuan" ?? "",
+                "TEMPAT LAHIR" =>  $daftar->tempat_lahir,
+                "TANGGAL LAHIR" =>  tgl_i($daftar->tanggal_lahir),
+                "STATUS PERKAWINAN" =>  $daftar->status_perkawinan,
+                "KEWARGA NEGARAAAN" =>  $daftar->kewarga_negaraan,
+                "AGAMA" =>  $daftar->agama,
+                "NO TELEPON" =>  $daftar->no_telepon,
+                "JENIS SLTA" => $daftar->jenis_slta,
+                "ASAL SLTA" => $daftar->asal_slta,
+                "TAHUN IJAZAH" => $daftar->tahun_ijazah,
+                "NOMOR IJAZAH" => $daftar->no_ijazah,
+                "SUMBER BIAYA KULIAH TERBESAR" => $daftar->sumber_biaya_kuliah,
+                "PENGHASILAN ORANGTUA / BULAN" => $daftar->penghasilan_orangtua,
+                "ALAMAT LENGKAP" =>  $daftar->alamat_lengkap,
+                "PROVINSI" =>  \App\Models\wilayah_provinsi::find($daftar->provinsi)->nama ?? "-",
+                "KABUPATEN" =>  \App\Models\wilayah_kabupaten::find($daftar->kabupaten)->nama ?? "-",
+                "KECAMATAN" =>  \App\Models\wilayah_kecamatan::find($daftar->kecamatan)->nama ?? "",
+                "KELURAHAN / DESA" =>  \App\Models\wilayah_kelurahan::find($daftar->kelurahan)->nama ?? "",
+                "KODE POS" =>  $daftar->kode_pos,
+                "JALUR PENDAFTARAN" => $daftar->jalur_pendaftaran,
+                "MEMILIKI KARTU" => $daftar->jalur_pendaftaran == 'kip-k' ? $daftar->memiliki_kartu : "",
+                "KATEGORI PERGURUAN TINGGI" => $daftar->jalur_pendaftaran == 'alih_jenjang' ? $daftar->kategori_pt : "",
+                "PERGURUA TINGGI SEBELUMNYA" => $daftar->jalur_pendaftaran == 'alih_jenjang' ? $daftar->pt_sebelumnya : "",
+                "IJAZAH YANG DI PEROLEH" => $daftar->jalur_pendaftaran == 'alih_jenjang' ? $daftar->ijazah_diperolah : "",
+                "JUMLAH SKS" => $daftar->jalur_pendaftaran == 'alih_jenjang' ? $daftar->jml_sks : "",
+                "NAMA AYAH" => $ortu->nama_ayah ?? "",
+                "TEMPAT LAHIR AYAH" => $ortu->tempat_lahir_ayah ?? "",
+                "TANGGAL LAHIR AYAH" => $ortu->tanggal_lahir_ayah ?? "",
+                "NO TELEPON AYAH" => $ortu->no_telepon_ayah ?? "",
+                "ALAMAT LENGKAP AYAH" => $ortu->alamat_lengkap_ayah ?? "",
+                "NAMA IBU" => $ortu->nama_ibu ?? "",
+                "TEMPAT LAHIR IBU" => $ortu->tempat_lahir_ibu ?? "",
+                "TANGGAL LAHIR IBU" => $ortu->tanggal_lahir_ibu ?? "",
+                "NO TELEPON IBU" => $ortu->no_telepon_ibu ?? "",
+                "ALAMAT LENGKAP IBU" => $ortu->alamat_lengkap_ibu ?? "",
             ];
             array_push($mdata, $def);
         }

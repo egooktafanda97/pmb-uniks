@@ -10,23 +10,29 @@ trait ManagementControlGetData
         $prodi = \Modules\V1\Entities\Prodi::all();
         $Infopendaftaran =  \Modules\V1\Entities\InformasiPendaftaran::whereStatus('active')->first();
 
-        $pendaftaran_pending = [];
-        $pendaftaran_valid = [];
-        $pendaftaran_invalid = [];
+        $p1 = [];
+        $p2 = [];
         $count_prodi = [];
         foreach ($prodi as  $value) {
             if ($Infopendaftaran) {
-                $pendaftar1 = \Modules\V1\Entities\Pendaftaran::where('prodi_id', $value->id)->where("status", 'pending')->where('informasi_pendaftaran_id', $Infopendaftaran->id)->with("prodi")->get()->count() ?? 0;
-                $pendaftar2 = \Modules\V1\Entities\Pendaftaran::where('prodi_id', $value->id)->where("status", 'valid')->where('informasi_pendaftaran_id', $Infopendaftaran->id)->with("prodi")->get()->count() ?? 0;
-                $pendaftar3 = \Modules\V1\Entities\Pendaftaran::where('prodi_id', $value->id)->where("status", 'invalid')->where('informasi_pendaftaran_id', $Infopendaftaran->id)->with("prodi")->get()->count() ?? 0;
-                $pendaftaran_pending[] = $pendaftar1;
-                $pendaftaran_valid[] = $pendaftar2;
-                $pendaftaran_invalid[] =  $pendaftar3;
+                $_p1 = \Modules\V1\Entities\Pendaftaran::whereHas('pilihan_prodi', function ($q) use ($value) {
+                    $q->where('no_pilihan', '1');
+                    $q->where("prodi_id", $value->id);
+                })->get()->count();
+                $_p2 = \Modules\V1\Entities\Pendaftaran::whereHas('pilihan_prodi', function ($q) use ($value) {
+                    $q->where('no_pilihan', '2');
+                    $q->where("prodi_id", $value->id);
+                })->get()->count();
+                // $pendaftar2 = \Modules\V1\Entities\Pendaftaran::where('prodi_id', $value->id)->where("status", 'valid')->where('informasi_pendaftaran_id', $Infopendaftaran->id)->with("prodi")->get()->count() ?? 0;
+                // $pendaftar3 = \Modules\V1\Entities\Pendaftaran::where('prodi_id', $value->id)->where("status", 'invalid')->where('informasi_pendaftaran_id', $Infopendaftaran->id)->with("prodi")->get()->count() ?? 0;
+                $p1[] = $_p1;
+                $p2[] = $_p2;
+                // $pendaftaran_valid[] = $pendaftar2;
+                // $pendaftaran_invalid[] =  $pendaftar3;
+
                 $count_prodi[] = $value->nama_alias;
             } else {
-                $pendaftaran_pending[] = 0;
-                $pendaftaran_valid[] = 0;
-                $pendaftaran_invalid[] =  0;
+                $p1[] = 0;
                 $count_prodi[] = $value->nama_alias;
             }
         }
@@ -41,12 +47,9 @@ trait ManagementControlGetData
                 "pendaftar_valid" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'valid')->get()->count() : 0,
                 "pendaftar_invalid" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'invalid')->get()->count() : 0,
                 "group_prodi" => [
-                    "data" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->with("prodi")->get()->groupBy('prodi.nama_prodi') : [],
-                    "count" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->with("prodi")->get()->groupBy('prodi.nama_prodi')->map->count() : 0,
                     "prodi" => $count_prodi,
-                    "data_pending" =>  $pendaftaran_pending,
-                    "data_valid" => $pendaftaran_valid,
-                    "data_invalid" =>  $pendaftaran_invalid
+                    "pilihan_1" =>  $p1,
+                    "pilihan_2" => $p2
                 ]
             ]
         ];

@@ -50,7 +50,18 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group mb-3">
+                    {{-- <div class="form-group mb-3">
+                        <label for="">Jalur Pendafataran</label>
+                        <select aria-label="Default select example" class="form-select" name="tahun_ajaran">
+                            <option {{ !request()->tahun_ajaran ? 'selected' : '' }} value="">Seluruh Data
+                            </option>
+                            @foreach ($tahun_ajaran as $item)
+                                <option {{ request()->tahun_ajaran == $item ? 'selected' : '' }}
+                                    value="{{ $item }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+                    {{-- <div class="form-group mb-3">
                         <label for="">Program Studi</label>
                         <select aria-label="Default select example" class="form-select" name="prodi">
                             <option {{ !request()->prodi ? 'selected' : '' }} value="">Seluruh Data</option>
@@ -59,7 +70,7 @@
                                     value="{{ $item->id }}">{{ $item->nama_prodi }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Batal</button>
@@ -83,6 +94,15 @@
                     <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <label for="">PENGELOMPOKAN</label>
+                        <select aria-label="Default select example" class="form-select" name="cluster">
+                            <option value="1">PRODI PILIHAN 1</option>
+                            <option value="2">PRODI PILIHAN 2</option>
+                            {{-- <option value="prodi">PRODI LULUS</option> --}}
+                        </select>
+                    </div>
+                    <hr>
                     <div class="form-group mb-3">
                         <strong for="">STATUS</strong>
                         <br>
@@ -120,18 +140,6 @@
                             <label for="">Daftar Ulang</label>
                             <div class="form-check-danger form-check form-switch">
                                 <input class="form-check-input checked-status" name="daftar_ulang" type="checkbox">
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="form-group mb-3">
-                        <strong for="">KLASTER LAPORAN</strong>
-
-                        <div class="d-flex space-between" style="margin-top: 5px; margin-bottom: 5px">
-                            <label for="">Jumlah / Prodi</label>
-                            <div class="form-check-danger form-check form-switch">
-                                <input checked class="form-check-input checked-status" name="prodi"
-                                    type="checkbox">
                             </div>
                         </div>
                     </div>
