@@ -47,17 +47,19 @@
         </li> --}}
         <li class="menu-label">Studi</li>
         <li>
-            <a href="{{ url('admin/fakultas') }}">
+            {{-- {{ url('admin/fakultas') }} --}}
+            <a href="#">
                 <div class="parent-icon">
-                    <i class='bx bx-circle'></i>
+                    <i class='fa fa-lock'></i>
                 </div>
                 <div class="menu-title">Fakultas</div>
             </a>
         </li>
         <li>
-            <a href="{{ url('admin/prodi') }}">
+            {{-- {{ url('admin/prodi') }} --}}
+            <a href="#">
                 <div class="parent-icon">
-                    <i class='bx bx-circle'></i>
+                    <i class='fa fa-lock'></i>
                 </div>
                 <div class="menu-title">PROGRAM STUDI</div>
             </a>
@@ -72,9 +74,10 @@
             </a>
         </li>
         <li>
-            <a href="{{ url('admin/agent') }}">
+            {{-- {{ url('admin/agent') }} --}}
+            <a href="#">
                 <div class="parent-icon">
-                    <i class='bx bx-circle'></i>
+                    <i class='fa fa-lock'></i>
                 </div>
                 <div class="menu-title">Agen</div>
             </a>
@@ -82,7 +85,7 @@
         <li>
             <a href="javascript:;">
                 <div class="parent-icon">
-                    <i class='bx bx-circle'></i>
+                    <i class='fa fa-lock'></i>
                 </div>
                 <div class="menu-title">Management Akun</div>
             </a>
