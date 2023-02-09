@@ -85,6 +85,7 @@
                                 class="in-require">*</span></label>
                         <select class="form-select form-select-md mb-3" id="kewarga_negaraan" name="kewarga_negaraan"
                             required>
+                            <option value="">Pilih Kewarganegaraan</option>
                             <option value="wni">Warga Negara Indonesia</option>
                             <option value="wna">Warga Negara Asing</option>
                         </select>
