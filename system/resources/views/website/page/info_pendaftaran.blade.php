@@ -52,7 +52,7 @@
                                 <tbody>
                                     @foreach ($pendaftaran->jadwal as $item)
                                         <tr>
-                                            <th scope="row">1</th>
+                                            <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $item->kegiatan }}</td>
                                             <td>{{ $item->mulai }}</td>
                                             <td>{{ $item->selesai }}</td>
