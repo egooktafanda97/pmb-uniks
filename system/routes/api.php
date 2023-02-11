@@ -152,42 +152,20 @@ Route::group([
 | END PUBLIC
 |--------------------------------------------------------------------------
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*
 |--------------------------------------------------------------------------
-| API ROUTER GENERATOR BY FILE JSON
+| API AGENT
 */
-// require("Registry.php");
-// foreach ($RouterFormat as $v_r) {
-//     foreach ($v_r as $key_s => $v_source) {
-//         Route::group([
-//             'middleware' => $v_source['middleware'], //$v_source['middleware']
-//             'prefix' => $v_source['prefix'],
-//         ], function ($router) use ($v_source) {
-//             foreach ($v_source['rute'] as $x => $y) {
-//                 Route::{$y['method']}($y['rout'], [$y['class'], $y['function']]);
-//             }
-//         });
-//     }
-// }
+Route::group([
+    'prefix' => 'agent',
+], function ($router) {
+    Route::post(
+        '/pencairan',
+        [\App\Http\Controllers\Api\admin\AgentController::class, 'api_pencairan']
+    );
+});
 /*
-| end router auth
+| END PUBLIC
 |--------------------------------------------------------------------------
 */

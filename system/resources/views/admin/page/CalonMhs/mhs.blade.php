@@ -39,42 +39,53 @@
         <div class="col-12">
             <div class="card border-primary border-bottom border-3 border-0">
                 <div class="card-body">
-                    <strong class="card-title text-primary">CALON MAHASISWA</strong>
-                    <hr>
-                    <div class="card-body">
-                        <div class="d-lg-flex align-items-center space-between mb-4 gap-3">
-                            <div style="display: flex; justify-content: center; align-content: center; align-items: center">
-                                <div class="position-relative">
-                                    <input class="form-control form-control-sm" id="search" name="search"
-                                        placeholder="cari nama / nik" type="text"
-                                        value="{{ request()->get('search') ?? '' }}">
-                                </div>
-                            </div>
-                            <div class="d-flex order-actions">
-                                {{-- <a class="ms-3 bt-icon text-primary toggel_view" data-hide="chart" data-show="table"
-                                    title="lihat grafik"><i class="fadeIn animated bx bx-line-chart-down"></i></a> --}}
-
-                                <a class="ms-3 bt-icon text-primary" data-bs-target="#filter" data-bs-toggle="modal"
-                                    title="filter"><i class="fadeIn animated bx bx-filter"></i></a>
-
-                                {{-- <a class="ms-3 bt-icon text-secondary" data-bs-target="#print_filter" data-bs-toggle="modal"
-                                    title="cetak kartu"><i class="fa fa-id-card"></i></a> --}}
-
-                                <a class="ms-3 bt-icon text-secondary" data-bs-target="#print_filter" data-bs-toggle="modal"
-                                    title="print"><i class="fadeIn animated bx bx-printer"></i></a>
-
-                                <a class="ms-3 bt-icon text-success" href="#" id="exp" title="export excel">
-                                    <i class="fa fa-file-excel"></i>
-                                </a>
-                            </div>
+                    <div style="display: flex; justify-content: space-between">
+                        <strong class="card-title text-primary">CALON MAHASISWA</strong>
+                        <div class="d-flex order-actions">
+                            <a class="ms-3 bt-icon text-primary" data-bs-target="#filter" data-bs-toggle="modal"
+                                title="filter"><i class="fadeIn animated bx bx-filter"></i></a>
                         </div>
-
-                        <div class="viwers">
+                    </div>
+                    <hr>
+                    <ul class="nav nav-tabs nav-primary" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a aria-selected="true" class="nav-link active tabs-cards" data-bs-toggle="tab"
+                                data-idactive="tab-mhs" href="#tab-mhs" role="tab">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">Calon Mahasiswa</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a aria-selected="false" class="nav-link tabs-cards" data-bs-toggle="tab"
+                                data-idactive="tab-agent" href="#tab-agent" role="tab" tabindex="-1">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">Agent</div>
+                                </div>
+                            </a>
+                        </li>
+                        {{-- <li class="nav-item" role="presentation">
+                            <a aria-selected="false" class="nav-link" data-bs-toggle="tab" href="#primarycontact"
+                                role="tab" tabindex="-1">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-icon"><i class="bx bx-microphone font-18 me-1"></i>
+                                    </div>
+                                    <div class="tab-title">Contact</div>
+                                </div>
+                            </a>
+                        </li> --}}
+                    </ul>
+                    <div class="tab-content py-3">
+                        <div class="tab-pane fade tab-views-cmhs active show" id="tab-mhs" role="tabpanel">
+                            <br>
                             @include('admin.page.CalonMhs.table_view')
                         </div>
-                        <div class="viwers">
-                            {{-- @include('admin.page.CalonMhs.chart') --}}
+                        <div class="tab-pane fade tab-views-cmhs" id="tab-agent" role="tabpanel">
+                            @include('admin.page.CalonMhs.agent')
                         </div>
+                        {{-- <div class="tab-pane fade" id="primarycontact" role="tabpanel">
+                          
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -94,6 +105,14 @@
     <script src="{{ asset('public/js/chart_plugin.js') }}"></script>
     {{-- |||||||||||||||||||||||||||| --}}
     <script>
+        const id = sessionStorage.getItem("tabs-cards");
+        $(".tab-views-cmhs").removeClass("active show");
+        $(".tabs-cards").removeClass("active")
+        $(`[data-idactive=${id}]`).addClass("active")
+        $(`#${id}`).addClass("active show");
+        $(".tabs-cards").click(function() {
+            sessionStorage.setItem("tabs-cards", $(this).data("idactive"));
+        })
         $(document).ready(function() {
             $('#example').DataTable({
                 searching: false,
@@ -155,20 +174,19 @@
             }
             return url;
         }
+
+        function replaceQueryParam(param, newval, search) {
+            var regex = new RegExp("([?;&])" + param + "[^&;]*[;&]?");
+            var query = search.replace(regex, "$1").replace(/&$/, '');
+
+            return (query.length > 2 ? query + "&" : "?") + (newval ? param + "=" + newval : '');
+        }
         $("#search").keypress(function() {
             const d = $(this).val();
             var code = event.keyCode ? event.keyCode : event.which;
             if (code == 13) {
-                var _search = ``;
-
-                if (__empty(window.location.search)) {
-                    _search = `?search=${d}`;
-                } else if (!__empty(window.location.search) && __empty(search?.search)) {
-                    _search = removeURLParameter(`${window.location.search}`, "search") + `&search=${d}`
-                } else {
-                    _search = removeURLParameter(`${window.location.search}`, "search") + `&search=${d}`
-                }
-                window.location.href = `{{ url('admin/mhs') }}${_search}`;
+                window.location =
+                    `{{ url('admin/mhs') }}${replaceQueryParam('search', d, window.location.search)}`;
             }
         })
         /*

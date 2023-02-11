@@ -26,6 +26,12 @@ if (!function_exists("from_camel_case")) {
     }
 }
 
+if (!function_exists("convert_to_rupiah")) {
+    function convert_to_rupiah($angka)
+    {
+        return 'Rp. ' . strrev(implode('.', str_split(strrev(strval($angka)), 3)));
+    }
+}
 
 if (!function_exists("table_roler")) {
     function table_roler($item, $items, $ky)

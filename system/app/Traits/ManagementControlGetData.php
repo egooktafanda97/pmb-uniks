@@ -2,8 +2,15 @@
 
 namespace App\Traits;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+
 trait ManagementControlGetData
 {
+    private static $incam = [
+        "validasi" => 50000,
+        "daftar_ulang" => 100000
+    ];
     public static function result_query_dump_data()
     {
         $fakultas = \Modules\V1\Entities\Fakultas::all();
@@ -53,6 +60,46 @@ trait ManagementControlGetData
                 ]
             ]
         ];
+    }
+    public static function result_query_dump_agent($request = null)
+    {
+        $Agent = \Modules\V1\Entities\Agent::orderBy("id", "DESC")
+            ->whereHas("pendaftaran", function ($q) use ($request) {
+                $q->whereHas("informasi_pendaftaran", function ($query) use ($request) {
+                    if (empty($request->informasi_pendaftaran)) {
+                        $query->where("status", "active");
+                    } else {
+                        $query->where("id", $request->informasi_pendaftaran);
+                    }
+                });
+            })
+            ->with("pendaftaran")
+            ->with("riwayat_pencairan_agent")
+            ->get();
+        $results = $Agent
+            ->map(function ($q) {
+                $QR = $q;
+                $__logik = $q->pendaftaran->map(function ($qq) {
+                    $Q = $qq;
+                    $Q->group_status = $Q->status != 'pending' && $Q->status != 'daftar_ulang' ? 'adminitrasi' : ($Q->status == 'daftar_ulang' ? 'daftar_ulang' : false);
+                    return $Q->group_status == false ? false : $Q;
+                })->reject(function ($value) {
+                    return $value === false;
+                })->groupBy('group_status');
+                $QR->claster = $__logik;
+                $QR->count_cmhs = $__logik->map->count();
+                return $QR;
+            })
+            ->map(function ($inc) {
+                $iQ = $inc;
+                $iQ->penarikan = (int)$inc->riwayat_pencairan_agent->sum('jml_pencairan') ?? 0;
+                $v = (!empty($iQ->count_cmhs['adminitrasi']) ? (int)$iQ->count_cmhs['adminitrasi'] : 0) * self::$incam['validasi'];
+                $du = (!empty($iQ->count_cmhs['daftar_ulang']) ? (int)$iQ->count_cmhs['daftar_ulang'] : 0) * self::$incam['daftar_ulang'];
+                $iQ->total_income = (int)($v + $du);
+                $iQ->income = (int)($v + $du) - (int)$iQ->penarikan;
+                return $iQ;
+            });
+        return  $results;
     }
     public static function result_query_dump_pmb($request, $paging = true)
     {

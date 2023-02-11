@@ -54,14 +54,15 @@
                                                 <div class="form-group">
                                                     <label for="">EMAIL</label>
                                                     <input class="form-control form-control-sm" id="email"
-                                                        name="email" type="email">
+                                                        name="email" type="email"
+                                                        value="{{ $agents->users->email ?? '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">PASSWORD</label>
                                                     <input class="form-control form-control-sm" id="password"
-                                                        name="password" type="password">
+                                                        name="password" placeholder="password" type="password">
                                                 </div>
                                             </div>
                                         </div>
@@ -71,34 +72,49 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" for="inputFirstName">NIK <span class="in-require">*</span></label>
                                 <input class="form-control" maxlength="16" minlength="16" name="nik"
-                                    placeholder="nik 16 digit" required type="text" value="">
+                                    placeholder="nik 16 digit" required type="text" value="{{ $agents->nik ?? '' }}">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" for="inputFirstName">NAMA LENGKAP <span
                                         class="in-require">*</span></label>
-                                <input class="form-control" name="nama_lengkap" required type="text">
+                                <input class="form-control" name="nama_lengkap" required type="text"
+                                    value="{{ $agents->nama_lengkap ?? '' }}">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" for="inputFirstName">JENIS KELAMIN <span
                                         class="in-require">*</span></label>
                                 <select class="form-select form-select-md mb-3" id="jenis_kelamin" name="jenis_kelamin"
                                     required>
-                                    <option value="L">Laki-Laki</option>
-                                    <option value="P">Perempuan</option>
+                                    <option {{ $agents->jenis_kelamin ?? '' == 'L' ? 'selected' : '' }} value="L">
+                                        Laki-Laki
+                                    </option>
+                                    <option {{ $agents->jenis_kelamin ?? '' == 'P' ? 'selected' : '' }} value="P">
+                                        Perempuan
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" for="inputFirstName">NO REKENING <span
                                         class="in-require">*</span></label>
-                                <input class="form-control" name="no_rekening"required type="text">
+                                <input class="form-control" name="no_rekening"required type="text"
+                                    value="{{ $agents->no_rekening ?? '' }}">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" for="inputFirstName">NAMA BANK <span
                                         class="in-require">*</span></label>
                                 <select class="form-select form-select-md mb-3" id="nama_bank" name="nama_bank" required>
-                                    <option value="bri">BRI</option>
-                                    <option value="bni">BNI</option>
-                                    <option value="brk">BRK</option>
+                                    <option {{ $agents->nama_bank ?? '' == 'bri' ? 'selected' : '' }} value="bri">BRI
+                                    </option>
+                                    <option {{ $agents->nama_bank ?? '' == 'bca' ? 'selected' : '' }} value="bca">BCA
+                                    </option>
+                                    <option {{ $agents->nama_bank ?? '' == 'bni' ? 'selected' : '' }} value="bni">BNI
+                                    </option>
+                                    <option {{ $agents->nama_bank ?? '' == 'brk' ? 'selected' : '' }} value="brk">BRK
+                                    </option>
+                                    <option {{ $agents->nama_bank ?? '' == 'bsi' ? 'selected' : '' }} value="bsi">BSI
+                                    </option>
+                                    <option {{ $agents->nama_bank ?? '' == 'brks' ? 'selected' : '' }} value="brks">BRKS
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -106,8 +122,12 @@
                                         class="in-require">*</span></label>
                                 <select class="form-select form-select-md mb-3" id="status_area" name="status_area"
                                     required>
-                                    <option value="dalam kampus">DALAM KAMPUS</option>
-                                    <option value="luar kampus">LUAR KAMPUS</option>
+                                    <option {{ $agents->status_area ?? '' == 'dalam kampus' ? 'selected' : '' }}
+                                        value="dalam kampus">DALAM
+                                        KAMPUS</option>
+                                    <option {{ $agents->status_area ?? '' == 'luar kampus' ? 'selected' : '' }}
+                                        value="luar kampus">LUAR
+                                        KAMPUS</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -115,8 +135,8 @@
                                     <label class="form-label" for="inputFirstName">KODE REFERAL <span
                                             class="in-require">*</span></label>
                                     <div style="display: flex">
-                                        <input class="form-control" name="referal" required type="text">
-                                        <button class="btn btn-primary btn-sm" type="button">Generate</button>
+                                        <input class="form-control" name="referal" readonly required type="text"
+                                            value="{{ $referal }}">
                                     </div>
                                 </div>
                             </div>
@@ -203,5 +223,8 @@
         | END API ACTION
         |
         */
+        $("#generate").click(function() {
+            console.log("ok");
+        })
     </script>
 @endsection

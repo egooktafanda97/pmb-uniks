@@ -221,6 +221,28 @@
                 "file": "User"
             },
             "data": []
+        },
+        "pendaftaran": {
+            "hirarky": "after",
+            "model": "Pendaftaran",
+            "foreign": "agent_id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "Pendaftaran",
+                "file": "Pendaftaran"
+            },
+            "data": []
+        },
+        "riwayat_pencairan_agent": {
+            "hirarky": "after",
+            "model": "RiwayatPencairanAgent",
+            "foreign": "agent_id",
+            "relation": "hasMany",
+            "file_relation": {
+                "name": "RiwayatPencairanAgent",
+                "file": "RiwayatPencairanAgent"
+            },
+            "data": []
         }
     },
     "Query": {

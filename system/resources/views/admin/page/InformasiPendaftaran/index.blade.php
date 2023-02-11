@@ -1,8 +1,6 @@
 @extends('admin.index.index')
 @section('style')
-    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}"
-          rel="stylesheet"
-          type="text/css">
+    <link href="{{ asset('public/plugis/Toast-master/dist/toast.min.css') }}" rel="stylesheet" type="text/css">
     <style>
         .tb-title {
             width: 85%;
@@ -29,14 +27,13 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item">
                         </li>
-                        <li aria-current="page"
-                            class="breadcrumb-item active">{{ $sub_title ?? '' }}</li>
+                        <li aria-current="page" class="breadcrumb-item active">{{ $sub_title ?? '' }}</li>
                     </ol>
                 </nav>
             </div>
             <div class="ms-auto">
-                <a class="btn btn-inverse-primary"
-                   href="{{ url($uri['store']['prefix'] . $uri['store']['router']) }}"><i class="fa fa-plus"></i> Tambah
+                <a class="btn btn-inverse-primary" href="{{ url($uri['store']['prefix'] . $uri['store']['router']) }}"><i
+                        class="fa fa-plus"></i> Tambah
                     Data</a>
             </div>
         </div>
@@ -46,9 +43,7 @@
                     <h5 class="card-title text-primary">PENDAFTARAN MAHASISWA BARU</h5>
                     <hr>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered"
-                               id="example"
-                               style="width:100%">
+                        <table class="table table-striped table-bordered" id="example" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>PENDAFTARAN</th>
@@ -68,30 +63,25 @@
                                         <td style="width: 10%">
                                             <div class="form-check-danger form-check form-switch">
                                                 <input {{ $item->status == 'active' ? 'checked' : '' }}
-                                                       class="form-check-input checked-status"
-                                                       data-id="{{ $item->id }}"
-                                                       name="status"
-                                                       type="checkbox">
+                                                    class="form-check-input checked-status" data-id="{{ $item->id }}"
+                                                    name="status" type="checkbox">
                                             </div>
                                         </td>
                                         <td class="tb-acton">
                                             <div class="div-action-container">
-                                                <div aria-label="Basic example"
-                                                     class="btn-group btn-sm"
-                                                     role="group">
+                                                <div aria-label="Basic example" class="btn-group btn-sm" role="group">
                                                     <a class="btn btn-sm btn-outline-primary"
-                                                       href="{{ url('admin/info-pendaftaran/show/' . $item->id) }}"
-                                                       type="button">
+                                                        href="{{ url('admin/info-pendaftaran/show/' . $item->id) }}"
+                                                        type="button">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     <a class="btn btn-sm btn-outline-success"
-                                                       href="{{ url('admin/info-pendaftaran/update/' . $item->id) }}"
-                                                       type="button">
+                                                        href="{{ url('admin/info-pendaftaran/update/' . $item->id) }}"
+                                                        type="button">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <button class="btn btn-sm btn-outline-danger delete"
-                                                            data-id="{{ $item->id }}"
-                                                            type="button">
+                                                        data-id="{{ $item->id }}" type="button">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -120,8 +110,7 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript"
-            src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/plugis/Toast-master/dist/toast.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
@@ -210,7 +199,7 @@
                 result: (response) => {
                     swal({
                         title: "Berhasil!",
-                        text: "Jadwal berhasil dihapus",
+                        text: "berhasil dihapus",
                         icon: "success",
                         button: "Oke!",
                     }).then((willDelete) => {

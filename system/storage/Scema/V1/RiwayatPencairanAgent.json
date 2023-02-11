@@ -37,51 +37,28 @@
                 }
             }
         },
-        "saldo_awal": {
-            "name": "saldo",
-            "label": "Nama Lengkap",
-            "type": "string",
+        "informasi_pendaftaran_id": {
+            "name": "informasi_pendaftaran_id",
+            "control_insert": "after",
+            "label": "informasi_pendaftaran",
+            "type": "integer",
+            "migration": 0,
+            "validate": 6,
             "request": true,
-            "validate": 0,
-            "migration": 1,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
+            "relation": {
+                "table": "informasi_pendaftaran",
+                "function": "informasi_pendaftaran",
+                "relation_index": "informasi_pendaftaran_id",
+                "foreign": {
+                    "key": "id",
+                    "table": "informasi_pendaftaran",
+                    "auto_delete_relation": false
+                }
+            }
         },
-        "jumlah": {
-            "name": "saldo",
-            "label": "Nama Lengkap",
-            "type": "string",
-            "request": true,
-            "validate": 0,
-            "migration": 1,
-            "view": {
-                "table": {
-                    "status": true
-                },
-                "input": {
-                    "status": true
-                },
-                "update": {
-                    "status": true
-                },
-                "form": "text"
-            },
-            "costum": {}
-        },
-        "saldo": {
-            "name": "saldo",
-            "label": "Nama Lengkap",
+        "jml_pencairan": {
+            "name": "jml_pencairan",
+            "label": "",
             "type": "string",
             "request": true,
             "validate": 0,
@@ -122,7 +99,19 @@
             "costum": {}
         }
     },
-    "Relation": {},
+    "Relation": {
+        "informasi_pendaftaran": {
+            "hirarky": "after",
+            "model": "InformasiPendaftaran",
+            "foreign": "informasi_pendaftaran_id",
+            "relation": "belongsTo",
+            "file_relation": {
+                "name": "InformasiPendaftaran",
+                "file": "InformasiPendaftaran"
+            },
+            "data": []
+        }
+    },
     "Query": {
         "get": {
             "model": "",

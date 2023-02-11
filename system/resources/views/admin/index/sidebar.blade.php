@@ -48,18 +48,18 @@
         <li class="menu-label">Studi</li>
         <li>
             {{-- {{ url('admin/fakultas') }} --}}
-            <a href="#">
+            {{-- <a href="#">
                 <div class="parent-icon">
                     <i class='fa fa-lock'></i>
                 </div>
                 <div class="menu-title">Fakultas</div>
-            </a>
+            </a> --}}
         </li>
         <li>
-            {{-- {{ url('admin/prodi') }} --}}
-            <a href="#">
+            {{--  --}}
+            <a href="{{ url('admin/prodi') }}">
                 <div class="parent-icon">
-                    <i class='fa fa-lock'></i>
+                    <i class='bx bx-circle'></i>
                 </div>
                 <div class="menu-title">PROGRAM STUDI</div>
             </a>
@@ -68,28 +68,28 @@
         <li>
             <a href="{{ url('admin/pengumuman') }}">
                 <div class="parent-icon">
-                    <i class='bx bx-circle'></i>
+                    <i class='fa fa-info-circle'></i>
                 </div>
                 <div class="menu-title">Pengumuman</div>
             </a>
         </li>
         <li>
             {{-- {{ url('admin/agent') }} --}}
-            <a href="#">
+            <a href="{{ url('admin/agent') }}">
                 <div class="parent-icon">
-                    <i class='fa fa-lock'></i>
+                    <i class='fa fa-users'></i>
                 </div>
                 <div class="menu-title">Agen</div>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="javascript:;">
                 <div class="parent-icon">
-                    <i class='fa fa-lock'></i>
+                    <i class='fa fa-user'></i>
                 </div>
                 <div class="menu-title">Management Akun</div>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </div>
 <!--end sidebar -->

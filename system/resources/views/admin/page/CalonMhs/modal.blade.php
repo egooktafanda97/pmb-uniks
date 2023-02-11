@@ -50,6 +50,17 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="form-group mb-3">
+                        <label for="">Jalur Pendafataran</label>
+                        <select aria-label="Default select example" class="form-select" name="tahun_ajaran">
+                            <option value="">Semua Jalur</option>
+                            <option value="regular">Regular</option>
+                            <option value="alih_jenjang">Alih Jenjang</option>
+                            <option value="transfer">Transfer</option>
+                            <option value="kip-k">KIP-K</option>
+                        </select>
+                    </div>
                     {{-- <div class="form-group mb-3">
                         <label for="">Jalur Pendafataran</label>
                         <select aria-label="Default select example" class="form-select" name="tahun_ajaran">

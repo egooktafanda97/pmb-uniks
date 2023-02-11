@@ -73,4 +73,18 @@ class Prodi extends Model
 
         Model::__construct($attributes);
     }
+    public static function item_priodi($items)
+    {
+        return  [
+            "FAKULTAS" => $items->fakultas->nama_fakultas,
+            "NAMA PRODI" => $items->nama_prodi,
+            "SINGKATAN" => $items->nama_alias,
+            "JENJANG" => $items->jenjang,
+            "GELAR" => $items->gelar,
+            "BIAYA" => convert_to_rupiah($items->biaya ?? 0),
+            "AKREDITAS" => $items->akreditas,
+            "KETUA PRODI" => $items->kepala_prodi,
+            "SITUS WEB" => $items->situs_web,
+        ];
+    }
 }

@@ -1,78 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Api\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Service\Control\ManagementCrud;
+use Modules\V1\Providers\ManagementServiceProvider;
 
 class AgentController extends Controller
 {
-    public $data;
     private static $incam = [
         "validasi" => 50000,
         "daftar_ulang" => 100000
     ];
-    private $view = "admin.page.Agent.";
     public function __construct()
     {
-        $this->middleware('auth:web', ['except' => []]);
-        $data = new ManagementCrud("Agent");
-        $pathJson =  config('generator_crud_config.scema_path');
-        $data->instance($pathJson);
-        $data->setNameSpaceModel("\Modules\V1\Entities\\");
-        $this->data = $data;
+        $this->middleware('auth:api', ['except' => ['']]);
     }
-    public function generate_referal()
-    {
-        $referal = \Modules\V1\Entities\Agent::orderBy("id", "DESC")->first();
-        if (!empty($referal)) {
-            $x = explode("-", $referal->referal);
-            $y =  (int)$x[1] + 1;
-            $res = "AG-" . str_pad($y, 3, '0', STR_PAD_LEFT);
-        } else {
-            $res = "AG-0001";
-        }
-        return $res;
-    }
-    public function getData()
-    {
-        $agent = \Modules\V1\Entities\Agent::orderBy('id', 'desc')->paginate(10);
-        return [
-            "agent" => $agent,
-            "sub_title"    => "Data Agent",
-            "title" => "Tables",
-            "uri" => $this->data->getRouterWeb() ?? []
-        ];
-    }
-    public function show()
-    {
-        $data =  $this->getData();
-        return view($this->view . 'index', $data);
-    }
-    public function store()
-    {
-        $data = [
-            "title" => "Input",
-            "sub_title" => "Buat Pendaftran Baru",
-            "fakultas" => \Modules\V1\Entities\Agent::all(),
-            "referal" => $this->generate_referal(),
-            "uri" => $this->data->getRouterWeb() ?? []
-        ];
-        return view($this->view . 'input', $data);
-    }
-    public function update($id)
-    {
-        $d = \Modules\V1\Entities\Agent::whereId($id)->with("users")->first();
-        $data = [
-            "title" => "Input",
-            "sub_title" => "Pengumuman",
-            "agents" => $d,
-            "referal" => $d->referal,
-            "uri" => $this->data->getRouterWeb() ?? [],
-        ];
-        return view($this->view . 'input', $data);
-    }
+
     public static function data_detail_agent($status, $id)
     {
         try {
@@ -127,21 +72,31 @@ class AgentController extends Controller
             return $Agent;
         }
     }
-    public function detail(Request $request, $id)
+    public function api_pencairan(Request $request)
     {
-        $i = $request->informasi_pendaftaran ?? \Modules\V1\Entities\InformasiPendaftaran::where('status', 'active')->first()->id;
-        $xi = \Modules\V1\Entities\InformasiPendaftaran::whereId($i)->first();
-        $inf_p = \Modules\V1\Entities\InformasiPendaftaran::all();
-        $data = [
-            "queryes" => $this->data_detail_agent($i, $id) ?? false,
-            "info_pendaftaran_id" => $i,
-            "info_pendaftaran" => $xi,
-            "info_pendaftaran_all" => $inf_p,
-            "sub_title"    => "Pendaftaran",
-            "title" => "Tables",
-            "uri" => $this->data->getRouterWeb() ?? []
-        ];
-        // return response()->json($data);
-        return view($this->view . 'detail', $data);
+        $resources = new ManagementCrud('RiwayatPencairanAgent');
+        $pathJson =  ManagementServiceProvider::getScemaPath();
+        $resources->instance($pathJson);
+        $resources->setNameSpaceModel("\Modules\V1\Entities\\");
+
+        $i = $request->info_pendaftaran_id ?? \Modules\V1\Entities\InformasiPendaftaran::where('status', 'active')->first()->id;
+
+        $ag = $this->data_detail_agent($i, $request->agent_id);
+
+        if ((int)$request->jumlah > (int)$ag->income) {
+            return response()->json(["error" => "jumlah yang dicairkan lebih dari yang pendapatan"], 402);
+        }
+
+        $req = new \Illuminate\Http\Request();
+        $req->replace([
+            "agent_id" => $request->agent_id,
+            "informasi_pendaftaran_id" => $request->info_pendaftaran_id,
+            "jml_pencairan" => $request->jumlah,
+            "catatan" => ""
+        ]);
+
+        $save =  $resources->generate_data_insert($req);
+
+        return response()->json($save);
     }
 }

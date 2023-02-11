@@ -302,7 +302,7 @@
             "type": "string",
             "request": true,
             "migration": 2,
-            "validate": 2,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -363,7 +363,7 @@
             "type": "string",
             "request": true,
             "migration": 2,
-            "validate": 2,
+            "validate": 6,
             "view": {
                 "table": {
                     "status": true
@@ -397,8 +397,8 @@
             "foreign": "fakultas_id",
             "relation": "belongsTo",
             "file_relation": {
-                "name": "Instansi",
-                "file": "Instansi"
+                "name": "Fakultas",
+                "file": "Fakultas"
             },
             "data": []
         },
@@ -506,7 +506,7 @@
             },
             "update": {
                 "method": "post",
-                "router": "/update/{id}",
+                "router": "/updates/{id}",
                 "prefix": "prodi",
                 "middleware": 1,
                 "controller": ""

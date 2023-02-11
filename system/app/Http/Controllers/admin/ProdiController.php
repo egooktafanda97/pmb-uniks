@@ -45,15 +45,26 @@ class ProdiController extends Controller
         ];
         return view($this->view . 'input', $data);
     }
-    public function get_data_detail()
+    public function update($id)
     {
+        $d = \Modules\V1\Entities\Prodi::whereId($id)->with("users")->first();
+        $data = [
+            "title" => "Input",
+            "sub_title" => "Program Studi",
+            "prodi" => $d,
+            "fakultas" => \Modules\V1\Entities\Fakultas::all(),
+            "uri" => $this->data->getRouterWeb() ?? [],
+        ];
+        return view($this->view . 'input', $data);
     }
     public function detail($id)
     {
+        $prod = \Modules\V1\Entities\Prodi::whereId($id)->with('fakultas')->first();
         $data = [
             "title" => "Detal",
             "sub_title" => "Detail Program Studi",
-            "prodi" => \Modules\V1\Entities\Prodi::whereId($id)->first(),
+            "prodi" =>  $prod,
+            "items" => \Modules\V1\Entities\Prodi::item_priodi($prod),
             "uri" => $this->data->getRouterWeb() ?? []
         ];
         return view($this->view . 'detail', $data);

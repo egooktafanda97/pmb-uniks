@@ -74,16 +74,18 @@ class AgentController extends Controller
                     return ["error" => "role instansi could not be created"];
                 $m = \App\Models\User::find($save['data']['user_id']);
                 $this->createRole($m, $roler);
-                $data = [
-                    "email" => $m->email,
-                    'pesan' => "Anda telah di daftarkan sebagai agent penerimaan mahasiswa baru, 
+                try {
+                    $data = [
+                        "email" => $m->email,
+                        'pesan' => "Anda telah di daftarkan sebagai agent penerimaan mahasiswa baru, 
                                 <br>
-                                <div><strong>Username : " . $request->username . "</strong></div>
                                 <div><strong>Password : " . $request->password . "</strong></div>
                                 <div><strong>Referal  : " . $request->referal . "</strong></div>
                                 <p>Berikan kode referal anda kepada calon mahasiswa baru.</p>",
-                ];
-                dispatch(new \App\Jobs\JobMessage($data));
+                    ];
+                    dispatch(new \App\Jobs\JobMessage($data));
+                } catch (\Throwable $th) {
+                }
                 // /*
                 // | end
                 // */
@@ -100,6 +102,23 @@ class AgentController extends Controller
         }
     }
 
+    /**
+     * .
+     * FUNCTION UPDATE DATA
+     * @return void
+     */
+    public function generate_referal($nums)
+    {
+        $referal = \Modules\V1\Entities\Agent::orderBy("id", "DESC")->first();
+        if (!empty($referal)) {
+            $x = explode("-", $referal->referal);
+            $y =  (int)$x[1] + 1;
+            $res = "AG-" . str_pad($y, 3, '0', STR_PAD_LEFT);
+        } else {
+            $res = "AG-0001";
+        }
+        return response()->json($res);
+    }
     /**
      * .
      * FUNCTION UPDATE DATA

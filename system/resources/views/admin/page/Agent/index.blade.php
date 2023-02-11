@@ -49,20 +49,16 @@
                                     <th style="width: 20px">NO</th>
                                     <th>NAMA LENGKAP</th>
                                     <th>REFERAL</th>
-                                    <th>JML PENDAFTAR</th>
-                                    <th>SALDO</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($agent as $item)
                                     <tr>
-                                        <td style="width: 20px">#</td>
+                                        <td style="width: 20px">{{ $loop->iteration }}</td>
                                         <td>{{ $item->nama_lengkap }}</td>
-                                        <td>{{ $item->referal }}</td>
-                                        <td>{{ $item->saldo }}</td>
-                                        <td>{{ $item->saldo }}</td>
-                                        <td>
+                                        <td style="width: 200px">{{ $item->referal }}</td>
+                                        <td style="width: 100px">
                                             <div class="div-action-container">
                                                 <div aria-label="Basic example" class="btn-group btn-sm" role="group">
                                                     <a class="btn btn-sm btn-outline-primary"
@@ -91,7 +87,7 @@
                     </div>
                     <div class="horizontal-line"></div>
                     <div class="paging">
-                        {{-- {!! $data->links('pagination::bootstrap-4') !!} --}}
+                        {!! $agent->links('pagination::bootstrap-4') !!}
                     </div>
                 </div>
             </div>

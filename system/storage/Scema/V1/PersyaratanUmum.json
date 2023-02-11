@@ -86,8 +86,8 @@
             "foreign": "id",
             "relation": "hasMany",
             "file_relation": {
-                "name": "Instansi",
-                "file": "Instansi"
+                "name": "Fakultas",
+                "file": "Fakultas"
             },
             "data": []
         }
