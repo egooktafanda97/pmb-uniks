@@ -152,6 +152,18 @@
     @include('website.index.script')
 
     @yield('script')
+    <script>
+        window.replainSettings = {
+            id: '398b9867-d8db-44f5-996f-1bc4800c7db4'
+        };
+        (function(u) {
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = u;
+            var x = document.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+        })('https://widget.replain.cc/dist/client.js');
+    </script>
 </body>
 
 </html>

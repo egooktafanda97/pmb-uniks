@@ -13,6 +13,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "i-rocky/eloquent-dynamic-relation": "^1.0",
+        "irazasyed/telegram-bot-sdk": "^3.9",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/socialite": "^5.6",
