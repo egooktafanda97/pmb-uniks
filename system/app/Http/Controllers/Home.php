@@ -33,11 +33,13 @@ class Home extends Controller
     public function data_detail($id = null)
     {
         $prodi = \Modules\V1\Entities\Prodi::whereId($id)->orWhere('nama_prodi', 'like', '%' . $id . '%')->first();
+        $pmb = \Modules\V1\Entities\InformasiPendaftaran::whereStatus('active')->with("jadwal")->first();
         if (!$prodi) {
             abort(404);
         }
         return [
-            "prodi" => $prodi
+            "prodi" => $prodi,
+            "pendaftaran" => $pmb
         ];
     }
     public function prodi()

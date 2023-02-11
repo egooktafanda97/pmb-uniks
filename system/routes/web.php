@@ -33,6 +33,9 @@ Route::get('/sign-up', [App\Http\Controllers\Home::class, 'index']);
 Route::get('/programstudi/', [App\Http\Controllers\Home::class, 'prodi']);
 Route::get('/info_pendaftaran', [App\Http\Controllers\Home::class, 'info_pendaftaran']);
 Route::get('/detail_prodi/{slug?}', [App\Http\Controllers\Home::class, 'detail_prodi']);
+Route::get('/kontak', function () {
+    return view("website.page.kontak");
+});
 
 
 
