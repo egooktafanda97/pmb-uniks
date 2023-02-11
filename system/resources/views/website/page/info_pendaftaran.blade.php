@@ -54,8 +54,9 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $item->kegiatan }}</td>
-                                            <td>{{ $item->mulai }}</td>
-                                            <td>{{ $item->selesai }}</td>
+                                            <td>{{ tgl_i(Carbon::parse($item->mulai)->format('Y-m-d')) }}</td>
+                                            <td>{{ !empty($item->selesai) ? tgl_i(Carbon::parse($item->selesai)->format('Y-m-d')) : '' }}
+                                            </td>
                                         </tr>
                                     @endforeach
 
