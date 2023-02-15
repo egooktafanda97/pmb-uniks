@@ -38,7 +38,7 @@ class CalonMhsController extends Controller
     {
         $data = ManagementControlGetData::result_query_dump_pmb($request);
         $data["agent"] = ManagementControlGetData::result_query_dump_agent($request);
-        // return response()->json(ManagementControlGetData::result_query_dump_agent());
+        // return response()->json($data);
         return view($this->view . 'mhs', $data);
     }
     public function details_data($id)

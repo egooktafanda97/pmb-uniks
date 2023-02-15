@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>
-                                <p class="mb-0 text-secondary">Pendaftar Valid</p>
+                                <p class="mb-0 text-secondary">Pendaftar</p>
                                 <h4 class="my-1 text-success">{{ $pendaftaran['pendaftar'] ?? 0 }}</h4>
                                 <p class="mb-0 font-13"></p>
                             </div>

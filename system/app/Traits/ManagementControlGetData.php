@@ -49,10 +49,10 @@ trait ManagementControlGetData
             "prodi" => $prodi,
             "pendaftaran" => [
                 "info_pendaftaran" => !empty($Infopendaftaran) ? $Infopendaftaran : [],
-                "pendaftar" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar->count() : 0,
-                "pendaftar_pending" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'pending')->get()->count() : 0,
-                "pendaftar_valid" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'valid')->get()->count() : 0,
-                "pendaftar_invalid" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'invalid')->get()->count() : 0,
+                "pendaftar" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->whereHas('calon_mahasiswa')->count() : 0,
+                "pendaftar_pending" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'pending')->whereHas('calon_mahasiswa')->get()->count() : 0,
+                "pendaftar_valid" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'valid')->whereHas('calon_mahasiswa')->get()->count() : 0,
+                "pendaftar_invalid" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'invalid')->whereHas('calon_mahasiswa')->get()->count() : 0,
                 "group_prodi" => [
                     "prodi" => $count_prodi,
                     "pilihan_1" =>  $p1,
