@@ -106,6 +106,10 @@ Route::group([
         '/read',
         [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'read']
     );
+    Route::get(
+        '/sending',
+        [\App\Http\Controllers\Api\mahasiswa\DaftarMhsController::class, 'sending']
+    );
 });
 /*
 | END ROUTER MAHASISWA

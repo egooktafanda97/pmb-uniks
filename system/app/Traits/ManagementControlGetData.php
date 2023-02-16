@@ -22,11 +22,11 @@ trait ManagementControlGetData
         $count_prodi = [];
         foreach ($prodi as  $value) {
             if ($Infopendaftaran) {
-                $_p1 = \Modules\V1\Entities\Pendaftaran::whereHas('pilihan_prodi', function ($q) use ($value) {
+                $_p1 = \Modules\V1\Entities\Pendaftaran::where('status', '!=', 'draft')->whereHas('pilihan_prodi', function ($q) use ($value) {
                     $q->where('no_pilihan', '1');
                     $q->where("prodi_id", $value->id);
                 })->get()->count();
-                $_p2 = \Modules\V1\Entities\Pendaftaran::whereHas('pilihan_prodi', function ($q) use ($value) {
+                $_p2 = \Modules\V1\Entities\Pendaftaran::where('status', '!=', 'draft')->whereHas('pilihan_prodi', function ($q) use ($value) {
                     $q->where('no_pilihan', '2');
                     $q->where("prodi_id", $value->id);
                 })->get()->count();
@@ -126,6 +126,7 @@ trait ManagementControlGetData
                 if (!empty($request->status)) {
                     $Q = $Q->where("status", $request->status);
                 }
+                $Q = $Q->where("status", '!=', 'draft');
             })
             ->whereHas('pendaftaran.informasi_pendaftaran', function ($query) use ($request) {
                 $Q = $query;

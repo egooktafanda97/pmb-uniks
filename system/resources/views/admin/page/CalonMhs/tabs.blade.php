@@ -216,142 +216,155 @@
                     @endif
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade active show" id="primary-pills-foto" role="tabpanel">
-                        <img alt=""
-                            src="{{ asset('assets/' . $pendaftaran->lampiran_pendaftaran->foto_formal) }}"
-                            width="100%">
-                    </div>
-                    <div class="tab-pane fade" id="primary-pills-ktp" role="tabpanel">
-                        @if ($pendaftaran->lampiran_pendaftaran->sc_ktp ?? false)
-                            @php
-                                $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_ktp);
-                                $extensinon = \File::extension($urls);
-                            @endphp
-                            @if ($extensinon == 'pdf' || $extensinon == 'PDF')
-                                <canvas class="canvas-pdf" data-url="{{ $urls }}"
-                                    id="the-canvas-ktp"></canvas>
+                    @if ($pendaftaran->lampiran_pendaftaran)
+                        <div class="tab-pane fade active show" id="primary-pills-foto" role="tabpanel">
+                            <img alt=""
+                                src="{{ asset('assets/' . $pendaftaran->lampiran_pendaftaran->foto_formal) }}"
+                                width="100%">
+                        </div>
+                        <div class="tab-pane fade" id="primary-pills-ktp" role="tabpanel">
+                            @if ($pendaftaran->lampiran_pendaftaran->sc_ktp ?? false)
+                                @php
+                                    $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_ktp);
+                                    $extensinon = \File::extension($urls);
+                                @endphp
+                                @if ($extensinon == 'pdf' || $extensinon == 'PDF')
+                                    <canvas class="canvas-pdf" data-url="{{ $urls }}"
+                                        id="the-canvas-ktp"></canvas>
+                                @else
+                                    <img alt="" src="{{ $urls }}" width="100%">
+                                @endif
                             @else
-                                <img alt="" src="{{ $urls }}" width="100%">
-                            @endif
-                        @else
-                            <div
-                                class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="mb-0 text-warning">Warning</h6>
-                                        <div>Tidak ada file yang diupload</div>
+                                <div
+                                    class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-warning">Warning</h6>
+                                            <div>Tidak ada file yang diupload</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="tab-pane fade " id="primary-pills-kk" role="tabpanel">
-                        @if ($pendaftaran->lampiran_pendaftaran->sc_kk ?? false)
-                            @php
-                                $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_kk);
-                                $extensinon = \File::extension($urls);
-                            @endphp
-                            @if ($extensinon == 'pdf' || $extensinon == 'PDF')
-                                <canvas class="canvas-pdf" data-url="{{ $urls }}"
-                                    id="the-canvas-kk"></canvas>
-                            @else
-                                <img alt="" src="{{ $urls }}" width="100%">
                             @endif
-                        @else
-                            <div
-                                class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="mb-0 text-warning">Warning</h6>
-                                        <div>Tidak ada file yang diupload</div>
+                        </div>
+                        <div class="tab-pane fade " id="primary-pills-kk" role="tabpanel">
+                            @if ($pendaftaran->lampiran_pendaftaran->sc_kk ?? false)
+                                @php
+                                    $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_kk);
+                                    $extensinon = \File::extension($urls);
+                                @endphp
+                                @if ($extensinon == 'pdf' || $extensinon == 'PDF')
+                                    <canvas class="canvas-pdf" data-url="{{ $urls }}"
+                                        id="the-canvas-kk"></canvas>
+                                @else
+                                    <img alt="" src="{{ $urls }}" width="100%">
+                                @endif
+                            @else
+                                <div
+                                    class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-warning">Warning</h6>
+                                            <div>Tidak ada file yang diupload</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="tab-pane fade" id="ijasa" role="tabpanel">
-                        @if ($pendaftaran->lampiran_pendaftaran->sc_ijasa_skl ?? false)
-                            @php
-                                $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_ijasa_skl);
-                                $extensinon = \File::extension($urls);
-                            @endphp
-                            @if ($extensinon == 'pdf' || $extensinon == 'PDF')
-                                <canvas class="canvas-pdf" data-url="{{ $urls }}"
-                                    id="the-canvas-ijasa"></canvas>
-                            @else
-                                <img alt="" src="{{ $urls }}" width="100%">
                             @endif
-                        @else
-                            <div
-                                class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="mb-0 text-warning">Warning</h6>
-                                        <div>Tidak ada file yang diupload</div>
+                        </div>
+                        <div class="tab-pane fade" id="ijasa" role="tabpanel">
+                            @if ($pendaftaran->lampiran_pendaftaran->sc_ijasa_skl ?? false)
+                                @php
+                                    $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_ijasa_skl);
+                                    $extensinon = \File::extension($urls);
+                                @endphp
+                                @if ($extensinon == 'pdf' || $extensinon == 'PDF')
+                                    <canvas class="canvas-pdf" data-url="{{ $urls }}"
+                                        id="the-canvas-ijasa"></canvas>
+                                @else
+                                    <img alt="" src="{{ $urls }}" width="100%">
+                                @endif
+                            @else
+                                <div
+                                    class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-warning">Warning</h6>
+                                            <div>Tidak ada file yang diupload</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="tab-pane fade" id="kip" role="tabpanel">
-                        @if ($pendaftaran->lampiran_pendaftaran->sc_kip ?? false)
-                            @php
-                                $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_kip);
-                                $extensinon = \File::extension($urls);
-                            @endphp
-                            @if ($extensinon == 'pdf' || $extensinon == 'PDF')
-                                <canvas class="canvas-pdf" data-url="{{ $urls }}"
-                                    id="the-canvas-kip"></canvas>
-                            @else
-                                <img alt="" src="{{ $urls }}" width="100%">
                             @endif
-                        @else
-                            <div
-                                class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="mb-0 text-warning">Warning</h6>
-                                        <div>Tidak ada file yang diupload</div>
+                        </div>
+                        <div class="tab-pane fade" id="kip" role="tabpanel">
+                            @if ($pendaftaran->lampiran_pendaftaran->sc_kip ?? false)
+                                @php
+                                    $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->sc_kip);
+                                    $extensinon = \File::extension($urls);
+                                @endphp
+                                @if ($extensinon == 'pdf' || $extensinon == 'PDF')
+                                    <canvas class="canvas-pdf" data-url="{{ $urls }}"
+                                        id="the-canvas-kip"></canvas>
+                                @else
+                                    <img alt="" src="{{ $urls }}" width="100%">
+                                @endif
+                            @else
+                                <div
+                                    class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-warning">Warning</h6>
+                                            <div>Tidak ada file yang diupload</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="tab-pane fade" id="surat_pindah" role="tabpanel">
-                        @if ($pendaftaran->lampiran_pendaftaran->surat_pindah ?? false)
-                            @php
-                                $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->surat_pindah);
-                                $extensinon = \File::extension($urls);
-                            @endphp
-                            @if ($extensinon == 'pdf' || $extensinon == 'PDF')
-                                <canvas class="canvas-pdf" data-url="{{ $urls }}"
-                                    id="the-canvas-surat"></canvas>
-                            @else
-                                <img alt="" src="{{ $urls }}" width="100%">
                             @endif
-                        @else
-                            <div
-                                class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="mb-0 text-warning">Warning</h6>
-                                        <div>Tidak ada file yang diupload</div>
+                        </div>
+                        <div class="tab-pane fade" id="surat_pindah" role="tabpanel">
+                            @if ($pendaftaran->lampiran_pendaftaran->surat_pindah ?? false)
+                                @php
+                                    $urls = asset('assets/' . $pendaftaran->lampiran_pendaftaran->surat_pindah);
+                                    $extensinon = \File::extension($urls);
+                                @endphp
+                                @if ($extensinon == 'pdf' || $extensinon == 'PDF')
+                                    <canvas class="canvas-pdf" data-url="{{ $urls }}"
+                                        id="the-canvas-surat"></canvas>
+                                @else
+                                    <img alt="" src="{{ $urls }}" width="100%">
+                                @endif
+                            @else
+                                <div
+                                    class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-warning">Warning</h6>
+                                            <div>Tidak ada file yang diupload</div>
+                                        </div>
                                     </div>
                                 </div>
+                            @endif
+                        </div>
+                    @else
+                        <div
+                            class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-warning">Warning</h6>
+                                    <div>Tidak ada file yang diupload</div>
+                                </div>
                             </div>
-                        @endif
-                    </div>
+                        </div>
+                    @endif
 
                 </div>
             </div>
@@ -413,13 +426,15 @@
                 </div>
             </div>
         @else
-            <div class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
-                <div class="d-flex align-items-center">
-                    <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
-                    </div>
-                    <div class="ms-3">
-                        <h6 class="mb-0 text-warning">Warning</h6>
-                        <div>Tidak ada file yang diupload</div>
+            <div class="bg-white">
+                <div class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+                    <div class="d-flex align-items-center">
+                        <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 text-warning">Warning</h6>
+                            <div>Tidak ada file yang diupload</div>
+                        </div>
                     </div>
                 </div>
             </div>

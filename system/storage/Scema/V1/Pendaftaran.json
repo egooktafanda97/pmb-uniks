@@ -146,7 +146,7 @@
         "status": {
             "validate": 0,
             "type": "static",
-            "value": "pending",
+            "value": "draft",
             "request": false,
             "migration": 2
         }

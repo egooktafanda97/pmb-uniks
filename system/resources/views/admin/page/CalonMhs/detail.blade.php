@@ -25,7 +25,7 @@
                 {{-- <input class="id-hide" id="img-update-profile" type="file"> --}}
                 @php
                     $img = 'assets/logo/logo.png';
-                    if ($pendaftaran->lampiran_pendaftaran->foto_formal) {
+                    if ($pendaftaran->lampiran_pendaftaran) {
                         $img = 'assets/' . $pendaftaran->lampiran_pendaftaran->foto_formal;
                     }
                 @endphp

@@ -43,7 +43,7 @@ class DashboardController extends Controller
         } else if (!$biaya_pendaftaran || $biaya_pendaftaran != null &&  $req == 'biaya') {
             return view("mahasiswa.page.pembayaran.index_bukti", $data);
         } else {
-            return view("mahasiswa.page.done.index");
+            return view("mahasiswa.page.done.index", $data);
         }
     }
 }

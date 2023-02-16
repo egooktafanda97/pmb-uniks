@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Session;
 | USE MODEL
 */
 use App\Models\User;
+
+
 /*
 | end
 */
@@ -146,6 +148,19 @@ class DaftarMhsController extends Controller
             $getUs->delete();
             return response()->json([], 401);
         }
+    }
+    public function sending()
+    {
+        $pendafataran = \Modules\V1\Entities\Pendaftaran::whereuserId(auth()->user()->id)->first();
+        if (!empty($pendafataran) &&  $pendafataran->status == 'draft') {
+            $pendafataran->status = 'pending';
+            $pendafataran->save();
+        }
+        if ($pendafataran) {
+            $pendafataran = \Modules\V1\Entities\Pendaftaran::whereuserId(auth()->user()->id)->first();
+            return response()->json($pendafataran, 200);
+        }
+        return response()->json(false, 503);
     }
     public function api_register_valids(Request $request)
     {

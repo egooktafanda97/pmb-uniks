@@ -78,6 +78,9 @@
                             } elseif ($pendaftaran->status == 'daftar_ulang') {
                                 $bg = 'info-bg-danger';
                                 $msg = 'anda sudah melakukan daftar ulang.<br/> selesai.';
+                            } else {
+                                $bg = 'info-bg-light';
+                                $msg = 'data anda belum dikirim ke admisi.<br/> selesai.';
                             }
                         @endphp
                     <div

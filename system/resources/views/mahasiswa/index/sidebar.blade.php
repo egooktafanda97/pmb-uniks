@@ -17,7 +17,7 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
-        @if ($pmb->status == 'pending')
+        @if ($pmb->status == 'pending' || $pmb->status == 'draft')
             <li>
                 <a href="{{ url('mahasiswa/form') }}">
                     <div class="parent-icon">
