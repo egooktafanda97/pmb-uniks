@@ -106,13 +106,16 @@
     {{-- |||||||||||||||||||||||||||| --}}
     <script>
         const id = sessionStorage.getItem("tabs-cards");
-        $(".tab-views-cmhs").removeClass("active show");
-        $(".tabs-cards").removeClass("active")
-        $(`[data-idactive=${id}]`).addClass("active")
-        $(`#${id}`).addClass("active show");
-        $(".tabs-cards").click(function() {
-            sessionStorage.setItem("tabs-cards", $(this).data("idactive"));
-        })
+        if (!__empty(id)) {
+            $(".tab-views-cmhs").removeClass("active show");
+            $(".tabs-cards").removeClass("active")
+            $(`[data-idactive=${id}]`).addClass("active")
+            $(`#${id}`).addClass("active show");
+            $(".tabs-cards").click(function() {
+                sessionStorage.setItem("tabs-cards", $(this).data("idactive"));
+            })
+        }
+
         $(document).ready(function() {
             $('#example').DataTable({
                 searching: false,

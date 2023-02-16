@@ -51,7 +51,7 @@ class LoginController extends Controller
 
         if (Auth::user()->hasRole('mahasiswa')) {
             $Query = \Modules\V1\Entities\Pendaftaran::whereuserId(Auth::user()->id)->with("calon_mahasiswa")->first();
-            if ($Query->calon_mahasiswa == null) {
+            if ($Query->calon_mahasiswa == null || $Query->lampiran_pendaftaran == null || $Query->bukti_pembayaran == null) {
                 return redirect('/mahasiswa/form');
             } else {
                 return redirect('/mahasiswa/profile');

@@ -27,7 +27,7 @@
                 </a>
             </li>
         @endif
-        @if ($pmb->calon_mahasiswa)
+        @if ($pmb->calon_mahasiswa != null && $pmb->lampiran_pendaftaran != null && $pmb->bukti_pembayaran != null)
             <li>
                 <a href="{{ url('mahasiswa/profile') }}">
                     <div class="parent-icon">

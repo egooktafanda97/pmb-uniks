@@ -279,42 +279,60 @@
             </div>
             {{-- TABS BUKTI PEMBAYARAN  --}}
             <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                <div class="row">
-                    <div class="col-md-6">
-                        <img alt=""
-                            src="{{ asset('assets/' . $pendaftaran->bukti_pembayaran->bukti_pembayaran) }}"
-                            width="100%">
+                @if ($pendaftaran->bukti_pembayaran)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img alt=""
+                                src="{{ asset('assets/' . $pendaftaran->bukti_pembayaran->bukti_pembayaran) }}"
+                                width="100%">
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <strong class="mb-0" style="font-size: .8em">Nama Bank / Provider</strong>
+                                    <span class="text-secondary"
+                                        style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->nama_bank ?? '-' }}</span>
+                                </li>
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <strong class="mb-0" style="font-size: .8em">Atas Nama</strong>
+                                    <span class="text-secondary"
+                                        style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->atas_nama ?? '-' }}</span>
+                                </li>
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <strong class="mb-0" style="font-size: .8em">Waktu Bayar</strong>
+                                    <span class="text-secondary"
+                                        style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->waktu_bayar ? date('Y-m-d h:i:s', strtotime($pendaftaran->bukti_pembayaran->waktu_bayar ?? '-')) : '-' }}</span>
+                                </li>
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <strong class="mb-0" style="font-size: .8em">Jumlah Trasfer</strong>
+                                    <span class="text-secondary"
+                                        style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->jumlah_tf ?? '-' }}</span>
+                                </li>
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <strong class="mb-0" style="font-size: .8em">Keterangan</strong>
+                                    <span class="text-secondary"
+                                        style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->keterangan ?? '-' }}</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <strong class="mb-0" style="font-size: .8em">Nama Bank / Provider</strong>
-                                <span class="text-secondary"
-                                    style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->nama_bank ?? '-' }}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <strong class="mb-0" style="font-size: .8em">Atas Nama</strong>
-                                <span class="text-secondary"
-                                    style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->atas_nama ?? '-' }}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <strong class="mb-0" style="font-size: .8em">Waktu Bayar</strong>
-                                <span class="text-secondary"
-                                    style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->waktu_bayar ? date('Y-m-d h:i:s', strtotime($pendaftaran->bukti_pembayaran->waktu_bayar ?? '-')) : '-' }}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <strong class="mb-0" style="font-size: .8em">Jumlah Trasfer</strong>
-                                <span class="text-secondary"
-                                    style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->jumlah_tf ?? '-' }}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <strong class="mb-0" style="font-size: .8em">Keterangan</strong>
-                                <span class="text-secondary"
-                                    style="font-size: .8em">{{ $pendaftaran->bukti_pembayaran->keterangan ?? '-' }}</span>
-                            </li>
-                        </ul>
+                @else
+                    <div class="alert border-0 border-start border-5 border-warning alert-dismissible fade show py-2">
+                        <div class="d-flex align-items-center">
+                            <div class="font-35 text-warning"><i class="bx bx-info-circle"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0 text-warning">Warning</h6>
+                                <div>Tidak ada file yang diupload</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
