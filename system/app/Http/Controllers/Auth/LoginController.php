@@ -150,8 +150,13 @@ class LoginController extends Controller
     }
     public function verify($otp = null)
     {
-        if (!$otp)
-            return view("auth.verifyPage");
+        if (!$otp) {
+            $data = [
+                "email" => !empty(request()->get('s')) ? request()->get('s') : false
+            ];
+            return view("auth.verifyPage", $data);
+        }
+
         try {
             $x_otp  = Crypt::decrypt($otp);
             $user = User::whereHas('verify', function ($q) use ($x_otp) {

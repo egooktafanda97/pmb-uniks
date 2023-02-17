@@ -43,9 +43,11 @@
                                     <div class="text-center">
                                         <span>Verifikasi <span class="text-color">Email</span></span>
                                         <small>Cek email anda dan masukkan kode verifikasi dibawah ini</small>
-                                        <small>Tidak mendapatkan email, <button class="btn btn-sm btn-secondary"
-                                                id="kirim-ulang">kirim
-                                                ulang</button>
+                                        <small>Tidak mendapatkan email,
+                                            @if ($email)
+                                                <button class="btn btn-sm btn-secondary" id="kirim-ulang">kirim
+                                                    ulang</button>
+                                            @endif
                                         </small>
                                     </div>
                                     <div class="login-separater text-center mb-4"> <span>OTP</span>
@@ -121,11 +123,16 @@
                     $("#sub-verifikasi").removeAttr("disabled")
                 }
             });
+            $("#verifikasi").change(function() {
+                var d = $("#verifikasi").val();
+                if (d.length == 4) {
+                    $("#sub-verifikasi").removeAttr("disabled")
+                }
+            });
             $("#verifikasi").keypress(function() {
-
                 var d = $("#verifikasi").val();
                 var code = event.keyCode ? event.keyCode : event.which;
-                if (d.length == 4) {
+                if (d.length > 3) {
                     $("#sub-verifikasi").removeAttr("disabled")
                 }
                 if (code == 13) {
@@ -178,7 +185,7 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Oke',
                     input: 'text',
-                    inputValue: `{{ decrypt(request()->get('s')) }}`,
+                    inputValue: `{{ !empty(request()->get('s')) ? decrypt(request()->get('s')) : '' }}`,
                     inputAttributes: {
                         autocapitalize: 'off'
                     },
@@ -187,7 +194,7 @@
                         const Y = async () => {
                             const x = await axios.post(`{{ url('auth/resending_email') }}`, {
                                 "email": xdata,
-                                "oldEmail": `{{ decrypt(request()->get('s')) }}`
+                                "oldEmail": `{{ !empty(request()->get('s')) ? decrypt(request()->get('s')) : '' }}`
                             }).catch((err) => {
                                 const {
                                     response
