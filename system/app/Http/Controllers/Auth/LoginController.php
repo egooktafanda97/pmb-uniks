@@ -122,7 +122,8 @@ class LoginController extends Controller
                 $genTokenApi = $this->respondWithToken($token);
                 Session::put('token', $genTokenApi);
                 $Query = \Modules\V1\Entities\Pendaftaran::whereuserId(Auth::user()->id)->with("calon_mahasiswa")->first();
-                if ($Query->calon_mahasiswa == null) {
+
+                if ($Query->calon_mahasiswa == null || $Query->lampiran_pendaftaran == null || $Query->bukti_pembayaran == null) {
                     return redirect('/mahasiswa/form');
                 } else {
                     return redirect('/mahasiswa/profile');
@@ -181,7 +182,9 @@ class LoginController extends Controller
                 $user->verify()->delete();
 
                 $Query = \Modules\V1\Entities\Pendaftaran::whereuserId(Auth::user()->id)->with("calon_mahasiswa")->first();
-                if ($Query->calon_mahasiswa == null) {
+                $Query = \Modules\V1\Entities\Pendaftaran::whereuserId(Auth::user()->id)->with("calon_mahasiswa")->first();
+
+                if ($Query->calon_mahasiswa == null || $Query->lampiran_pendaftaran == null || $Query->bukti_pembayaran == null) {
                     return redirect('/mahasiswa/form');
                 } else {
                     return redirect('/mahasiswa/profile');
