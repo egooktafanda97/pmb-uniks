@@ -64,6 +64,7 @@ Route::group([
     Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
     Route::get('/verify/{slug?}', [App\Http\Controllers\Auth\LoginController::class, 'verify']);
     Route::post('/resending_email', [App\Http\Controllers\Auth\LoginController::class, 'resending_email']);
+    Route::post('/resending_wa', [App\Http\Controllers\Auth\LoginController::class, 'resending_wa']);
     Route::get('/reset_password', [App\Http\Controllers\Auth\LoginController::class, 'reset_password']);
     Route::post('/email_check', [App\Http\Controllers\Auth\LoginController::class, 'email_check']);
     Route::get('/reset', [App\Http\Controllers\Auth\LoginController::class, 'resets']);

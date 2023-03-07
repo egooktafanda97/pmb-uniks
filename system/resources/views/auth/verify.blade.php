@@ -33,9 +33,7 @@
         <!-- /PAGE PRICE -->
     </div>
 @endsection
-@php
-    $emails = !$email ? $email : false;
-@endphp
+
 @section('script')
     <script src="{{ asset('public/node_modules/axios/dist/axios.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

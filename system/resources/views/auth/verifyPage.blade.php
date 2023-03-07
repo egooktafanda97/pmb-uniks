@@ -49,7 +49,13 @@
                                                     ulang</button>
                                             @endif
                                         </small>
+                                        <br>
+                                        <br>
+                                        <button class="btn btn-success btn-sm" data-bs-target="#exampleModal"
+                                            data-bs-toggle="modal"><i class="lni lni-whatsapp"></i> kirim ke
+                                            whatsapp</button>
                                     </div>
+
                                     <div class="login-separater text-center mb-4"> <span>OTP</span>
                                         <hr />
                                     </div>
@@ -102,6 +108,34 @@
             </div>
         </div>
         <!--end wrapper-->
+
+        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+            style="display: none;" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Kirim Kode OTP</h5>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Email yang didaftarkan:</label>
+                            <input class="form-control" id="oldEmails" type="text" type="email"
+                                value="{{ !empty($email) ? decrypt($email) : '' }}">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="">No Telepon</label>
+                            <input class="form-control" id="noWa" placeholder="62822" type="text"
+                                type="email">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Batal</button>
+                        <button class="btn btn-primary" id="sendWa" type="button">Kirim</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <!-- Bootstrap JS -->
@@ -216,6 +250,37 @@
                     },
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {})
+            }
+
+
+            $("#sendWa").click(function() {
+                sendWa();
+            })
+
+            function sendWa() {
+                const Z = async () => {
+                    const x = await axios.post(`{{ url('auth/resending_wa') }}`, {
+                        "email": $("#oldEmails").val(),
+                    }).catch((err) => {});
+                    if (x) {
+                        const Sender = async () => {
+                            const wa = await axios.post(`http://wa.kaptencode.com/api/sendtext`, {
+                                "sessions": "session_1",
+                                "target": $("#noWa").val(),
+                                "message": x?.kode
+                            }).catch((err) => {
+                                console.log(err.response);
+                            });
+                            if (wa) {
+                                console.log(wa);
+                            }
+                        }
+                        Sender();
+                    }
+
+                }
+                Z();
+
             }
             $("#kirim-ulang").click(function() {
                 sendEmail();
