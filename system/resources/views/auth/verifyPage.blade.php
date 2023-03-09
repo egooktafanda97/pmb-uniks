@@ -50,10 +50,10 @@
                                             @endif
                                         </small>
                                         <br>
-                                        <br>
-                                        <button class="btn btn-success btn-sm" data-bs-target="#exampleModal"
+                                        {{-- <br>
+                                        <button class="btn btn-warning btn-sm" data-bs-target="#exampleModal"
                                             data-bs-toggle="modal"><i class="lni lni-whatsapp"></i> kirim ke
-                                            whatsapp</button>
+                                            whatsapp</button> --}}
                                     </div>
 
                                     <div class="login-separater text-center mb-4"> <span>OTP</span>

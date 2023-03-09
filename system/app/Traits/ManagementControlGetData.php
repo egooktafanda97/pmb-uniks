@@ -49,7 +49,8 @@ trait ManagementControlGetData
             "prodi" => $prodi,
             "pendaftaran" => [
                 "info_pendaftaran" => !empty($Infopendaftaran) ? $Infopendaftaran : [],
-                "pendaftar" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->whereHas('calon_mahasiswa')->count() : 0,
+                "pendaftar" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->whereHas('calon_mahasiswa')->where("status", "draft")->count() : 0,
+                "c_pendaftar" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->whereHas('calon_mahasiswa')->where("status", "!=", "draft")->count() : 0,
                 "pendaftar_pending" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'pending')->whereHas('calon_mahasiswa')->get()->count() : 0,
                 "pendaftar_valid" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'valid')->whereHas('calon_mahasiswa')->get()->count() : 0,
                 "pendaftar_invalid" => !empty($Infopendaftaran) ? $Infopendaftaran->pendaftar()->where("status", 'invalid')->whereHas('calon_mahasiswa')->get()->count() : 0,
